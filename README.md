@@ -6,6 +6,9 @@ a contrast audit, per-app pins and an in-browser theme editor.
 
 ![Every theme as a tile, sorted by accent colour, with filters on the left and the live theme across the top](docs/screenshots/themes.png)
 
+*Sorted by accent colour. Any sort other than the default "By section" merges
+Official, Community and Custom into one "All themes" list.*
+
 > **Status: early.** It needs Traefik with its file provider and the
 > [`traefik-themepark`](https://github.com/packruler/traefik-themepark) plugin;
 > it writes the plugin's middleware config itself. Official and community
