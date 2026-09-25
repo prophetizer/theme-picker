@@ -82,29 +82,22 @@ are listed next to each key in `picker.example.yml`.
 
 ## 3. Run it
 
-There is no published image yet: the picker runs from a checkout on the stock
-`python:3.12-slim` image and installs its one dependency at start.
-
-```bash
-git clone https://github.com/prophetizer/theme-picker.git /opt/theme-picker
-```
+Use the published image, `ghcr.io/prophetizer/theme-picker`. It's built for
+`linux/amd64` and `linux/arm64` and tagged by version: `1.0.0`, `1.0`, `1`
+and `latest`. It runs as UID 1000 by default and reads everything from
+`/data`, so `picker.yml` goes at `/data/picker.yml`.
 
 ```yaml
 services:
   theme-picker:
-    image: python:3.12-slim
+    image: ghcr.io/prophetizer/theme-picker:1
     container_name: theme-picker
     restart: unless-stopped
-    user: "1000:1000"                  # must be able to write the data dir and output file
-    working_dir: /app
-    command: ["sh", "-c", "pip install --no-cache-dir --target=/tmp/pylibs pyyaml >/dev/null && python3 server.py"]
+    user: "1000:1000"                  # must be able to write the data dir and the output file
     environment:
-      - PYTHONPATH=/tmp/pylibs
-      - PICKER_CONFIG=/data/picker.yml
       - TZ=Europe/London               # history timestamps and the day/night schedule
     volumes:
-      - /opt/theme-picker:/app:ro
-      - ./theme-picker-data:/data
+      - ./theme-picker-data:/data      # picker.yml, apps.yml and the picker's state
       - ./traefik/dynamic:/traefik-dynamic   # the directory Traefik watches
     networks:
       - proxy
@@ -116,6 +109,15 @@ services:
       - "traefik.http.routers.theme-picker.middlewares=your-auth@docker"
       - "traefik.http.services.theme-picker.loadbalancer.server.port=8090"
 ```
+
+The image has a health check, `/api/current` on port 8090.
+
+**From a checkout instead:** clone the repo and use the stock
+`python:3.12-slim` image. Mount the checkout at `/app` read-only, set
+`working_dir: /app` and `PICKER_CONFIG=/data/picker.yml`, and run
+`pip install --target=/tmp/pylibs --require-hashes -r requirements.txt &&
+python3 server.py` with `PYTHONPATH=/tmp/pylibs`. That's how the author runs
+it, to edit the code live.
 
 The first theme you pick creates `themes.yml`. Until then the `<name>-theme`
 middlewares don't exist, and Traefik logs "middleware does not exist" for any
@@ -292,11 +294,12 @@ job, as in the author's own setup.
 ## Updating
 
 ```bash
-git -C /opt/theme-picker pull
-docker restart theme-picker
+docker compose pull theme-picker && docker compose up -d theme-picker
 ```
 
-Your data directory is never touched by an update.
+`:1` follows every 1.x release; pin `:1.0.0` to choose when you update. From
+a checkout, `git pull` and restart the container instead. Your data directory
+is never touched by an update.
 
 ## Removing it
 

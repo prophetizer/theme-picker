@@ -16,8 +16,9 @@ Official, Community and Custom into one "All themes" list.*
 > self-hosted theme.park: 100 are ready-made in
 > [theme-park-themes](https://github.com/prophetizer/theme-park-themes).
 >
-> **[Deployment guide → DEPLOY.md](DEPLOY.md)**. Every setting is documented
-> in `picker.example.yml`.
+> **[Deployment guide → DEPLOY.md](DEPLOY.md)**. The image is
+> `ghcr.io/prophetizer/theme-picker`, and every setting is documented in
+> `picker.example.yml`.
 
 ## Features
 

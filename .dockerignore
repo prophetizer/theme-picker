@@ -1,0 +1,7 @@
+# Only server.py, picker/, LICENSE and requirements.txt go into the image.
+*
+!server.py
+!picker/
+!LICENSE
+!requirements.txt
+**/__pycache__
