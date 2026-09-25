@@ -39,9 +39,10 @@ a contrast audit, per-app pins and an in-browser theme editor.
 ## Screenshots
 
 The picker wears the live theme itself. Here it is in Catppuccin Latte, with
-the list narrowed to light themes:
+*Show every theme as* set to **Light**. Every dark theme appears as its
+generated light twin, so you can browse all of them in the mode you want:
 
-![The picker in a light theme, filtered to light themes only](docs/screenshots/light.png)
+![The picker in a light theme, with every theme shown in its light form](docs/screenshots/light.png)
 
 The editor starts from any theme or from an image. It previews the result on a
 mock app panel and checks every text role's contrast as you go:
