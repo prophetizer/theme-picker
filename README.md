@@ -39,18 +39,79 @@ Official, Community and Custom into one "All themes" list.*
 - A token-protected hook so Home Assistant or any automation can set the theme
 - Day/night schedule, undo, side-by-side screenshot compare
 
-## Screenshots
+## A tour of the tabs
 
-The picker wears the live theme itself. Here it is in Catppuccin Latte, with
-*Show every theme as* set to **Light**. Every dark theme appears as its
-generated light twin, so you can browse all of them in the mode you want:
+Every tab shares the header strip:
+- the live theme and its colours
+- **Undo**, which puts back the previous theme
+- **Surprise me · N**, which applies a random theme from the N that the
+  current filters show
+- the most recent themes, one click each
+
+The picker wears the live theme itself.
+
+### Themes
+
+Every official, community and custom theme is a tile with a colour-band
+preview. The sidebar narrows the list:
+- search
+- light or dark background
+- readable only, high contrast, gradients, favourites, new
+- accent colour
+
+It also sorts the list by section, name, lightness, accent colour or date
+added. Click a tile to apply it everywhere. The ☀/☾ switch on a tile flips
+that theme between its original and its generated light or dark twin.
+
+*Show every theme as* **Light** or **Dark** flips every theme at once. Here
+it is set to **Light** in Catppuccin Latte:
 
 ![The picker in a light theme, with every theme shown in its light form](docs/screenshots/light.png)
 
-The editor starts from any theme or from an image. It previews the result on a
-mock app panel and checks every text role's contrast as you go:
+Badges come from a real contrast audit of each theme's CSS:
+- **low contrast**: body text under 4.5:1, or muted text or button labels
+  under 3:1.
+- **high contrast**: every text role at WCAG AAA, 7:1.
+
+### Apps & coverage
+
+Every themed app, the theme it should get, and whether it actually gets it.
+The check requests each app's page the way a browser would and reads which
+stylesheet was injected, so a router that lost its middleware shows up as
+**missing**. It runs on a schedule too and can alert through ntfy. Pin an
+app to keep it on one theme whatever the live theme is; Grafana is pinned
+to Nord here.
+
+![Apps and coverage: six apps, five themed, one pinned, one missing its theme](docs/screenshots/apps.png)
+
+*Sample apps and sample coverage results.*
+
+### Schedule
+
+A day theme and a night theme, switched at the times you set. A theme picked
+by hand holds until the next switch, then the schedule takes over again.
+
+![Day/night schedule: Catppuccin Latte from 07:00, Catppuccin Mocha from 19:30](docs/screenshots/schedule.png)
+
+### Editor
+
+Build a theme from any existing one, or from an image. The colours are
+extracted in the browser and the image never leaves it. The preview panel
+updates as you edit, with a contrast ratio for each text role against its
+target. *Save & deploy* hands the theme to a host-side job that verifies it,
+commits it and deploys it. See [DEPLOY.md](DEPLOY.md#not-portable-yet) for
+what that needs.
 
 ![The theme editor with colour fields, a live preview and contrast ratios](docs/screenshots/editor.png)
+
+### Stats
+
+Which themes spent the most time on screen and which were applied most,
+counted from changes made in the picker.
+
+![Usage stats: most time on screen and most applied, over three weeks](docs/screenshots/stats.png)
+
+*Sample three-week history.*
 
 ## License
 
