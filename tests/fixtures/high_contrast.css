@@ -1,0 +1,10 @@
+:root {
+  --main-bg-color: #000000;
+  --modal-bg-color: #000000;
+  --button-color: #ffffff;
+  --button-text: #000000;
+  --accent-color: 0, 144, 255;
+  --link-color: #ffff00;
+  --text: #ffffff;
+  --text-muted: #dddddd;
+}

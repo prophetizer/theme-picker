@@ -1,0 +1,12 @@
+/* A dark translucent overlay painted over an opaque, bright gradient, the
+   way theme.park's Blackberry community themes do it. On screen: dark. */
+:root {
+  --main-bg-color: linear-gradient(rgba(10, 10, 20, 0.85), rgba(10, 10, 20, 0.85)), linear-gradient(135deg, #ff5fa2 0%, #ffd166 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --button-color: #ff5fa2;
+  --button-text: #ffffff;
+  --accent-color: 255, 95, 162;
+  --link-color: #ffd166;
+  --text: #ffffff;
+  --text-muted: #cfcfcf;
+}

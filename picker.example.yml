@@ -1,0 +1,67 @@
+# Theme picker settings. Copy to picker.yml (gitignored) and change what you
+# need; every key is optional and a missing file is fine. An environment
+# variable, where listed, overrides the file. PICKER_CONFIG points at a file
+# elsewhere.
+#
+# The picker and the screenshot capture script both read this file.
+
+# The theme-switcher directory: set-theme.sh, apps.yml, themes-src/, state
+# files. Relative to this checkout. Default: the checkout's parent.
+# Env: THEME_SWITCHER_DIR
+theme_switcher_dir: ..
+
+# The self-hosted theme.park instance. Default: BASE_URL from config.env in
+# the theme-switcher directory. Env: THEME_PARK_URL
+theme_park_url: https://theme-park.example.com
+
+# Apps are reached at https://<host>.<domain>/ (host from apps.yml).
+# Env: DOMAIN
+domain: example.com
+
+# The picker's own URL, linked from the dashboard widget JSON.
+# Default: https://theme-picker.<domain>/  Env: PICKER_URL
+picker_url: https://theme-picker.example.com/
+
+listen:
+  host: 0.0.0.0        # Env: LISTEN_HOST
+  port: 8090           # Env: LISTEN_PORT
+
+screenshots:
+  # Apps the capture script photographs in every theme, in lightbox order.
+  # Pick apps whose themed page shows without a login wall.
+  # Env: APPS (space-separated)
+  apps: [dozzle, nzbhydra2, forgejo, grafana, portainer, jellyfin, emby, sabnzbd, tautulli, guacamole]
+
+coverage:
+  # Seconds between scheduled checks that every themed app is served its
+  # theme; 0 turns the check (and its alerts) off. Env: COVERAGE_INTERVAL
+  interval: 900
+
+backend:
+  # How a theme is applied. traefik-file (default) needs nothing else: it
+  # writes one traefik-themepark middleware per app into a file Traefik's
+  # file provider watches. script runs set-theme.sh / generate-themes-yml.py
+  # from the theme-switcher directory instead. Env: THEME_BACKEND
+  type: traefik-file
+  # traefik-file: where to write. Default: OUTPUT_FILE from config.env in the
+  # theme-switcher directory, else dynamic/themes.yml there. Relative paths
+  # are relative to the theme-switcher directory. Env: THEME_OUTPUT_FILE
+  output_file: /path/to/traefik/dynamic/themes.yml
+  # Which apps are themed: name, theme_app, optional host and addons.
+  # Default: apps.yml in the theme-switcher directory. Env: THEME_APPS_FILE
+  apps_file: apps.yml
+  # Written before any theme has been picked. Env: THEME_DEFAULT
+  default_theme: dark
+
+hooks:
+  # A file holding a token that lets automations (e.g. Home Assistant) set
+  # the theme: POST /api/hook/theme with "Authorization: Bearer <token>" and
+  # {"theme": "<name>" | "random-favourite"}. Empty = the hook is off.
+  # Env: HOOK_TOKEN_FILE
+  token_file: ""
+
+ntfy:
+  # Theme-change notices and coverage alerts. Leave url empty for none.
+  url: ""              # Env: NTFY_URL,   e.g. http://ntfy:80
+  topic: ""            # Env: NTFY_TOPIC
+  token_file: ""       # Env: NTFY_TOKEN_FILE, a file holding the access token

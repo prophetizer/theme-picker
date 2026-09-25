@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theme Picker</title>
+{theme_link}
+<link rel="icon" type="image/svg+xml" href="/static/icon.svg?v={icon_v}">
+<link rel="stylesheet" href="/static/style.css?v={style_v}">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="#themes"><img src="/static/icon.svg?v={icon_v}" alt="" width="28" height="28"><span>Theme Picker</span></a>
+  <nav class="tabs" aria-label="Sections">
+    <a class="tab" href="#themes" data-tab="themes">Themes</a>
+    <a class="tab" href="#apps" data-tab="apps">Apps &amp; coverage</a>
+    <a class="tab" href="#schedule" data-tab="schedule">Schedule</a>
+    <a class="tab" href="#editor" data-tab="editor">Editor</a>
+    <a class="tab" href="#stats" data-tab="stats">Stats</a>
+  </nav>
+  <a class="cov-pill" id="cov-pill" href="#apps" title="Apps served their theme -- details in Apps &amp; coverage">Coverage &#8230;</a>
+</header>
+<div class="live">
+  <div class="live-name"><span class="live-label">Live now</span><p class="current"><b>{active}</b></p></div>
+  <span class="live-swatch" id="live-swatch">{live_swatch}</span>
+  {undo}
+  <button type="button" id="surprise" title="Apply a random theme from those shown (R)">Surprise me</button>
+  <div class="history"><span class="live-label">Recent</span> <span id="history">{history}</span></div>
+</div>
+<p class="message" id="msg"{msg_hidden}>{msg_text}</p>
+
+<section class="tab-panel" id="tab-themes" data-tab="themes">
+ <div class="themes-layout">
+  <aside class="side" aria-label="Filters">
+    <label class="side-field"><span>Search</span><input type="search" id="filter" placeholder="Filter by name  ( / )" autocomplete="off"></label>
+    <div class="side-field"><span id="view-label">Show every theme as</span>
+      <div class="seg" id="view" role="group" aria-labelledby="view-label">
+        <button type="button" data-view="designed" title="Each theme as its author made it">As is</button><button type="button" data-view="light">Light</button><button type="button" data-view="dark">Dark</button></div>
+      <small>Themes without a generated light/dark twin stay as designed.</small></div>
+    <label class="side-field"><span>Background</span><select id="mode">
+      <option value="">Light &amp; dark</option><option value="light">Light only</option>
+      <option value="dark">Dark only</option></select></label>
+    <fieldset class="side-field checks"><legend>Only</legend>
+      <label><input type="checkbox" id="only-readable"> Readable (no low-contrast badge)</label>
+      <label><input type="checkbox" id="only-hc"> High contrast</label>
+      <label><input type="checkbox" id="only-gradient"> Gradients</label>
+      <label><input type="checkbox" id="only-fav"> Favourites</label>
+      <label><input type="checkbox" id="only-new"> New</label></fieldset>
+    <div class="side-field"><span>Accent colour</span>
+      <div class="fams"><button type="button" class="fam" id="fam-any">any</button>{fams}</div></div>
+    <label class="side-field"><span>Sort</span><select id="sort">
+      <option value="section">By section</option><option value="name">Name</option>
+      <option value="light">Lightest first</option><option value="dark">Darkest first</option>
+      <option value="hue">Accent colour</option><option value="newest">Newest</option></select></label>
+    <label class="side-field"><span>Tiles show</span><select id="preview">
+      <option value="">Colour bands</option>{app_opts}</select></label>
+    <p class="keys"><kbd>/</kbd> search &#183; <kbd>&larr;&uarr;&darr;&rarr;</kbd> move &#183; <kbd>Enter</kbd> apply<br>
+      <kbd>P</kbd> preview &#183; <kbd>F</kbd> favourite &#183; <kbd>L</kbd> light/dark<br>
+      <kbd>R</kbd> random &#183; <kbd>U</kbd> undo &#183; <kbd>Esc</kbd> close</p>
+  </aside>
+  <div class="themes-main">
+    <p class="count"><span id="count"></span></p>
+    <form method="post" id="picker">
+      <details class="sect" data-sect="official" open><summary><h2>Official</h2> <span class="sect-count"></span></summary>
+        <div class="grid" id="grid-official">{grid_official}</div></details>
+      <details class="sect" data-sect="community" open><summary><h2>Community</h2> <span class="sect-count"></span></summary>
+        <div class="grid" id="grid-community">{grid_community}</div></details>
+      <details class="sect" data-sect="custom" open><summary><h2>Custom (built for this homelab)</h2> <span class="sect-count"></span></summary>
+        <div class="grid" id="grid-custom">{grid_custom}</div></details>
+      <details class="sect" data-sect="all" open hidden><summary><h2>All themes</h2> <span class="sect-count"></span></summary>
+        <div class="grid" id="grid-all"></div></details>
+    </form>
+  </div>
+ </div>
+</section>
+
+<section class="tab-panel" id="tab-apps" data-tab="apps">
+  <div class="tab-head"><h2 class="tab-title">Apps &amp; coverage</h2>
+    <p class="count">Every themed app, the theme it should get, and whether it actually does. Pin an app to keep it on one theme.</p>
+    <button type="button" id="cov-run">Check now</button></div>
+  <p class="coverage" id="cov-summary">Checking which apps received the theme...</p>
+  <div class="app-grid">{apps}</div>
+</section>
+
+<section class="tab-panel" id="tab-schedule" data-tab="schedule">
+  {schedule}
+</section>
+
+<section class="tab-panel" id="tab-editor" data-tab="editor">
+  <h2 class="tab-title">Theme editor</h2>
+    <div class="ed">
+      <div class="ed-form">
+        <div class="ed-row"><label>Start from <select id="ed-base">{base_opts}</select></label>
+          <button type="button" id="ed-load">Load its colours</button></div>
+        <div class="ed-row"><label>Or from an image <input type="file" id="ed-image" accept="image/*"></label>
+          <span id="ed-image-status" class="count">A wallpaper or photo; it stays in your browser.</span></div>
+        <div class="ed-grid"><label class="ed-f"><span>Page background</span><input type="color" data-f="page_bg"><input type="text" class="hex" data-f="page_bg" maxlength="7" spellcheck="false"></label><label class="ed-f"><span>Panel background</span><input type="color" data-f="panel_bg"><input type="text" class="hex" data-f="panel_bg" maxlength="7" spellcheck="false"></label><label class="ed-f"><span>Button</span><input type="color" data-f="button"><input type="text" class="hex" data-f="button" maxlength="7" spellcheck="false"></label><label class="ed-f"><span>Button hover</span><input type="color" data-f="button_hover"><input type="text" class="hex" data-f="button_hover" maxlength="7" spellcheck="false"></label><label class="ed-f"><span>Button text</span><input type="color" data-f="button_text"><input type="text" class="hex" data-f="button_text" maxlength="7" spellcheck="false"></label><label class="ed-f"><span>Link</span><input type="color" data-f="link"><input type="text" class="hex" data-f="link" maxlength="7" spellcheck="false"></label><label class="ed-f"><span>Link hover</span><input type="color" data-f="link_hover"><input type="text" class="hex" data-f="link_hover" maxlength="7" spellcheck="false"></label><label class="ed-f"><span>Text</span><input type="color" data-f="text"><input type="text" class="hex" data-f="text" maxlength="7" spellcheck="false"></label><label class="ed-f"><span>Text hover</span><input type="color" data-f="text_hover"><input type="text" class="hex" data-f="text_hover" maxlength="7" spellcheck="false"></label><label class="ed-f"><span>Muted text</span><input type="color" data-f="muted"><input type="text" class="hex" data-f="muted" maxlength="7" spellcheck="false"></label><label class="ed-f"><span>Queue colour (*arr)</span><input type="color" data-f="queue"><input type="text" class="hex" data-f="queue" maxlength="7" spellcheck="false"></label></div>
+        <div class="ed-row"><label><input type="checkbox" id="ed-gradient"> Gradient page background</label>
+          <input type="color" id="ed-bg2" value="#000000" title="Second gradient colour">
+          <label>angle <input type="range" id="ed-angle" min="0" max="359" value="160"></label></div>
+        <div class="ed-row"><label>Name <input id="ed-name" placeholder="my-theme" maxlength="40"></label>
+          <label>Title <input id="ed-title" placeholder="My Theme" maxlength="40"></label></div>
+        <div class="ed-row"><button type="button" id="ed-save">Save &amp; deploy</button>
+          <span id="ed-status" class="count"></span></div>
+      </div>
+      <div>
+        <div class="ed-preview" id="ed-preview">
+          <div class="pv-panel"><div class="pv-head">Series settings <span class="pv-q">3 queued</span></div>
+            <p>Body text sits on the panel colour like this.</p>
+            <p class="pv-muted">Muted text: timestamps, hints, secondary labels.</p>
+            <p><a href="#" class="pv-link">A themed link</a></p>
+            <button type="button" class="pv-btn">Save changes</button></div>
+        </div>
+        <ul id="ed-contrast" class="ed-contrast"></ul>
+      </div>
+    </div>
+</section>
+
+<section class="tab-panel" id="tab-stats" data-tab="stats">
+  <h2 class="tab-title">Usage stats</h2>
+  {stats}
+</section>
+
+  <div class="lb" id="lightbox" hidden>
+    <div class="lb-panel" role="dialog" aria-modal="true" aria-labelledby="lb-title">
+      <div class="lb-head"><h3 id="lb-title"></h3><span id="lb-meta"></span>
+        <select id="lb-compare" title="Show another theme's screenshots alongside"><option value="">Compare with...</option></select>
+        <button type="button" id="lb-apply">Apply this theme</button>
+        <button type="button" id="lb-close" aria-label="Close">Close</button></div>
+      <p id="lb-warn" hidden></p>
+      <div id="lb-body"></div>
+    </div>
+  </div>
+<script src="/static/app.js?v={script_v}"></script>
+</body>
+</html>
