@@ -159,12 +159,33 @@
   .ed input:not([type=range]):not([type=checkbox]):not([type=color]), .ed select { border-radius: 6px; padding: 5px 9px;
          border: 1px solid var(--line); background: var(--main-bg-color, #14181a); color: var(--text, #e6ecec); }
 
+  .filters-toggle { display: none; }
+  .preview-banner { margin: 10px 24px 0; padding: 10px 14px; border-radius: 8px; border: 1px solid var(--accent);
+         background: var(--modal-bg-color, #1b2123); display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .preview-banner button { cursor: pointer; border-radius: 6px; padding: 5px 12px; border: 1px solid var(--accent);
+         background: var(--button-color, #173029); color: var(--button-text, #fff); font-weight: 600; }
   @media (max-width: 900px) {
+    .filters-toggle { display: inline-flex; cursor: pointer; border-radius: 8px; padding: 6px 12px; margin-right: 8px;
+         border: 1px solid var(--line); background: var(--main-bg-color, #14181a); color: var(--text, #e6ecec); }
+    .filters-toggle[aria-expanded="true"] { border-color: var(--accent); }
+    html.js .side:not(.open) { display: none; }
     .top { overflow-x: auto; gap: 14px; }
     .brand span { display: none; }
     .themes-layout { grid-template-columns: 1fr; }
     .side { position: static; height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
     .history { margin-left: 0; }
+  }
+  /* Phones: the live strip took half the screen, one control per line. Name
+     and swatch share a row, the two buttons share a row, and recent themes
+     scroll sideways instead of wrapping. */
+  @media (max-width: 600px) {
+    .live { gap: 10px 12px; padding: 12px 16px; }
+    .live-name { min-width: 0; }
+    .live-swatch .swatch { width: 120px; height: 24px; }
+    .history { flex-basis: 100%; min-width: 0; }
+    #history { flex-wrap: nowrap; overflow-x: auto; }
+    .chip { white-space: nowrap; }
+    .themes-main { padding: 6px 16px 40px; }
   }
   .stats { display: flex; gap: 40px; flex-wrap: wrap; }
   .stats h4 { margin: 8px 0 4px; font-size: .85rem; color: var(--text-muted, #93a3a3); }

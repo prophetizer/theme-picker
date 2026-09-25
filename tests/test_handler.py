@@ -302,8 +302,44 @@ class Template(unittest.TestCase):
         self.assertEqual(fields, {"theme_link", "style_v", "icon_v", "active", "history", "app_opts", "fams",
                                   "grid_official", "grid_community", "grid_custom", "live_swatch", "msg_hidden",
                                   "msg_text", "apps", "stats", "base_opts", "script_v", "undo",
-                                  "schedule"})
+                                  "schedule", "preview_banner", "early_v"})
 
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class PreviewLink(ServerCase):
+    """/?preview=<theme>: the page dressed in a theme without applying it."""
+
+    def test_known_theme_dresses_the_page_without_applying(self):
+        from picker import themes
+        with mock.patch.object(themes, "base_url", return_value="https://tp.example"):
+            status, _, body = self.request("GET", "/?preview=dracula")
+        page = body.decode()
+        self.assertEqual(status, 200)
+        self.assertIn('id="preview-banner"', page)
+        self.assertIn("Previewing <b>dracula</b>", page)
+        self.assertRegex(page, r'id="theme-css" href="[^"]*dracula\.css')
+        self.assertEqual(self.backend.applied, [])
+
+    def test_unknown_or_hostile_names_are_ignored(self):
+        for bad in ("zzz-nope", "<script>x</script>", "../nord", "nord\n"):
+            with self.subTest(preview=bad):
+                from urllib.parse import quote
+                _, _, body = self.request("GET", "/?preview=" + quote(bad))
+                page = body.decode()
+                self.assertNotIn('id="preview-banner"', page)
+                self.assertNotIn("<script>x", page)
+
+    def test_no_banner_for_the_live_theme(self):
+        config.CONFIG_FILE.write_text("CURRENT_THEME=nord\n")
+        _, _, body = self.request("GET", "/?preview=nord")
+        self.assertNotIn('id="preview-banner"', body.decode())
+
+    def test_early_script_is_served(self):
+        status, ctype, body = self.request("GET", "/static/early.js")
+        self.assertEqual(status, 200)
+        self.assertIn("javascript", ctype)
+        self.assertIn(b"classList.add('js')", body)
+

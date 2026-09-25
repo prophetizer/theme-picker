@@ -17,7 +17,7 @@ import colorsys
 import re
 from datetime import date, datetime
 
-from . import colour as c, config, state, themes
+from . import deploy, colour as c, config, state, themes
 
 QUEUE_DIR = config.THEME_DIR / "editor-queue"
 EDITOR_STATUS = config.THEME_DIR / "editor-status.json"
@@ -132,6 +132,8 @@ def editor_save(data):
         return False, ("Queue colour is orange/yellow, which collides with the *arr "
                        "queue-error colour. Pick a green, teal or blue.")
     css = build_theme_css(name, title, base, fields, gradient, angle, spinner)
+    if deploy.enabled():
+        return _save_and_deploy(name, title, css)
     QUEUE_DIR.mkdir(exist_ok=True)
     tmp = QUEUE_DIR / f".{name}.tmp"
     tmp.write_text(css)
@@ -142,6 +144,26 @@ def editor_save(data):
                     "detail": "waiting for the deploy job (runs every minute)"}
         state.write_json(EDITOR_STATUS, st)
     return True, f"Saved '{title}' as {name}. Deploying within a minute..."
+
+
+def _save_and_deploy(name, title, css):
+    """Portable mode (custom_themes.theme_park_www set): no queue and no host
+    job. The CSS was built from validated primitives just above, so it goes
+    straight into the custom themes directory and is deployed now."""
+    dst = themes.CUSTOM_THEMES_DIR / f"{name}.css"
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    tmp = dst.parent / f".{name}.tmp"
+    tmp.write_text(css)
+    tmp.replace(dst)
+    result = deploy.deploy()
+    ok = result["ok"] and name not in result["refused"]
+    detail = "saved and deployed" if ok else f"saved, but deploy failed: {result['error'] or 'refused'}"
+    with state.STATE_LOCK:
+        st = state.read_json(EDITOR_STATUS, {})
+        st[name] = {"state": "deployed" if ok else "failed", "detail": detail,
+                    "at": datetime.now().astimezone().isoformat(timespec="seconds")}
+        state.write_json(EDITOR_STATUS, st)
+    return ok, (f"Saved '{title}' as {name} and deployed it." if ok else f"Saved '{title}' as {name}; {detail}.")
 
 
 def editor_status(name):

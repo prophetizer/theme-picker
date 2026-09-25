@@ -8,7 +8,7 @@ import re
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlsplit
 
-from . import apply, config, dashboards, editor, hooks, monitor, ntfy, schedule, shots, state, themes
+from . import apply, config, dashboards, deploy, editor, hooks, monitor, ntfy, schedule, shots, state, themes
 from .coverage import cached_coverage
 from .prom import render_metrics
 from .render import STATIC, STATIC_TYPES, render_page
@@ -119,7 +119,8 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = urlsplit(self.path).path
         if path in ("/", ""):
-            self._send_html(render_page())
+            preview = (parse_qs(urlsplit(self.path).query).get("preview") or [""])[0]
+            self._send_html(render_page(preview=preview))
         elif path.startswith("/static/") and path[len("/static/"):] in STATIC:
             name = path[len("/static/"):]
             data = STATIC[name]
@@ -155,6 +156,8 @@ class Handler(BaseHTTPRequestHandler):
             self.wfile.write(data)
         elif path.startswith("/shots/"):
             self._send_shot(path)
+        elif path == "/api/custom-themes":
+            self._send_json({"enabled": deploy.enabled(), "last": dict(deploy.LAST)})
         elif path == "/api/current":
             # Read-only, for the Glance/Homepage widgets, which call it over the
             # Docker network (http://theme-picker:8090) and never meet Authelia.
@@ -323,4 +326,5 @@ def main(host=None, port=None):
     port = port or config.SETTINGS["listen.port"]
     monitor.start()
     schedule.start()
+    deploy.start()
     ThreadingHTTPServer((host, port), Handler).serve_forever()

@@ -12,8 +12,9 @@ Official, Community and Custom into one "All themes" list.*
 > **Status: early.** It needs Traefik with its file provider and the
 > [`traefik-themepark`](https://github.com/packruler/traefik-themepark) plugin;
 > it writes the plugin's middleware config itself. Official and community
-> themes work out of the box. Custom themes and the in-browser editor still
-> depend on a companion pipeline that isn't in this repository yet.
+> themes work out of the box. It can also deploy your own themes into a
+> self-hosted theme.park: 100 are ready-made in
+> [theme-park-themes](https://github.com/prophetizer/theme-park-themes).
 >
 > **[Deployment guide → DEPLOY.md](DEPLOY.md)**. Every setting is documented
 > in `picker.example.yml`.
@@ -98,9 +99,8 @@ by hand holds until the next switch, then the schedule takes over again.
 Build a theme from any existing one, or from an image. The colours are
 extracted in the browser and the image never leaves it. The preview panel
 updates as you edit, with a contrast ratio for each text role against its
-target. *Save & deploy* hands the theme to a host-side job that verifies it,
-commits it and deploys it. See [DEPLOY.md](DEPLOY.md#not-portable-yet) for
-what that needs.
+target. *Save & deploy* adds it to your custom themes and deploys it to
+theme.park. See [DEPLOY.md](DEPLOY.md#custom-themes).
 
 ![The theme editor with colour fields, a live preview and contrast ratios](docs/screenshots/editor.png)
 

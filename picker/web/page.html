@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Theme Picker</title>
 {theme_link}
+<script src="/static/early.js?v={early_v}"></script>
 <link rel="icon" type="image/svg+xml" href="/static/icon.svg?v={icon_v}">
 <link rel="stylesheet" href="/static/style.css?v={style_v}">
 </head>
@@ -28,10 +29,11 @@
   <div class="history"><span class="live-label">Recent</span> <span id="history">{history}</span></div>
 </div>
 <p class="message" id="msg"{msg_hidden}>{msg_text}</p>
+{preview_banner}
 
 <section class="tab-panel" id="tab-themes" data-tab="themes">
  <div class="themes-layout">
-  <aside class="side" aria-label="Filters">
+  <aside class="side" id="filters" aria-label="Filters">
     <label class="side-field"><span>Search</span><input type="search" id="filter" placeholder="Filter by name  ( / )" autocomplete="off"></label>
     <div class="side-field"><span id="view-label">Show every theme as</span>
       <div class="seg" id="view" role="group" aria-labelledby="view-label">
@@ -59,7 +61,7 @@
       <kbd>R</kbd> random &#183; <kbd>U</kbd> undo &#183; <kbd>Esc</kbd> close</p>
   </aside>
   <div class="themes-main">
-    <p class="count"><span id="count"></span></p>
+    <p class="count"><button type="button" id="filters-toggle" class="filters-toggle" aria-controls="filters" aria-expanded="false">Filters</button> <span id="count"></span></p>
     <form method="post" id="picker">
       <details class="sect" data-sect="official" open><summary><h2>Official</h2> <span class="sect-count"></span></summary>
         <div class="grid" id="grid-official">{grid_official}</div></details>
@@ -126,6 +128,7 @@
       <div class="lb-head"><h3 id="lb-title"></h3><span id="lb-meta"></span>
         <select id="lb-compare" title="Show another theme's screenshots alongside"><option value="">Compare with...</option></select>
         <button type="button" id="lb-apply">Apply this theme</button>
+        <button type="button" id="lb-share" title="Copy a link that shows the picker in this theme without applying it">Copy link</button>
         <button type="button" id="lb-close" aria-label="Close">Close</button></div>
       <p id="lb-warn" hidden></p>
       <div id="lb-body"></div>

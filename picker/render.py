@@ -29,8 +29,9 @@ NEW_DAYS = 14
 # file's contents, so browsers may cache them and still never run a stale one.
 WEB_DIR = Path(__file__).resolve().parent / "web"
 PAGE_TEMPLATE = (WEB_DIR / "page.html").read_text()
-STATIC = {name: (WEB_DIR / name).read_bytes() for name in ("style.css", "app.js", "icon.svg")}
+STATIC = {name: (WEB_DIR / name).read_bytes() for name in ("style.css", "app.js", "early.js", "icon.svg")}
 STATIC_TYPES = {"style.css": "text/css; charset=utf-8", "app.js": "text/javascript; charset=utf-8",
+                "early.js": "text/javascript; charset=utf-8",
                 "icon.svg": "image/svg+xml"}
 VERSION = {name: hashlib.sha256(data).hexdigest()[:12] for name, data in STATIC.items()}
 
@@ -217,9 +218,12 @@ def stats_html():
             f"<div><h4>Most applied</h4><ol>{rows_c}</ol></div></div>")
 
 
-def render_page(message=""):
+def render_page(message="", preview=""):
+    """preview: a theme to dress the page in WITHOUT applying it (/?preview=,
+    the shareable link). Ignored unless it exactly matches a known theme."""
     active = themes.current_theme()
-    sheet = themes.theme_css_url(active)
+    preview = preview if preview and preview != active and preview in themes.allowed_themes() else ""
+    sheet = themes.theme_css_url(preview or active)
     # The picker dresses itself in whatever theme is currently live, loading
     # the same variable sheet the per-app stylesheets import (theme_css_url
     # picks the right directory). Every value in style.css has a fallback so
@@ -229,6 +233,12 @@ def render_page(message=""):
         if sheet else '<link rel="stylesheet" id="theme-css" href="">'
     )
     msg_hidden = "" if message else ' hidden'
+    preview_banner = (
+        f'<form class="preview-banner" id="preview-banner" method="post" action="/set-theme">'
+        f'Previewing <b>{html.escape(preview)}</b>. It is not applied; the live theme is still '
+        f'<b>{html.escape(active)}</b>. '
+        f'<button name="theme" value="{html.escape(preview, quote=True)}">Apply it</button> '
+        f'<a href="/#themes">Back to live</a></form>') if preview else ""
     msg_text = html.escape(message)
     shot_idx, dates, today = shots.screenshot_index(), state.theme_dates(), date.today()
     favs = frozenset(state.read_favourites())
@@ -247,6 +257,7 @@ def render_page(message=""):
         grid_community=grid(themes.community_themes(), "community"),
         grid_custom=grid(themes.own_themes(), "custom"),
         live_swatch=swatch_html(active),
-        msg_hidden=msg_hidden, msg_text=msg_text, apps=apps_html(active),
+        msg_hidden=msg_hidden, msg_text=msg_text, preview_banner=preview_banner,
+        early_v=VERSION["early.js"], apps=apps_html(active),
         stats=stats_html(), schedule=schedule_html(), base_opts=base_opts,
         script_v=VERSION["app.js"])

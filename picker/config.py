@@ -48,6 +48,8 @@ KEYS = {
     ("backend", "apps_file"): ("THEME_APPS_FILE", None),
     ("backend", "default_theme"): ("THEME_DEFAULT", "dark"),
     ("hooks", "token_file"): ("HOOK_TOKEN_FILE", ""),
+    ("custom_themes", "dir"): ("CUSTOM_THEMES_DIR", None),
+    ("custom_themes", "theme_park_www"): ("THEME_PARK_WWW", None),
 }
 BACKENDS = ("traefik-file", "script")
 
@@ -142,7 +144,10 @@ def resolve(env, data, repo_dir=REPO_DIR):
         fail("backend.type", f"expected one of: {', '.join(BACKENDS)}")
     if not isinstance(out["backend.default_theme"], str) or not SAFE_NAME.match(out["backend.default_theme"]):
         fail("backend.default_theme", "expected a plain theme name")
-    for name in ("backend.output_file", "backend.apps_file"):
+    for name in ("custom_themes.dir", "custom_themes.theme_park_www"):
+        if out[name] == "":                          # the example file's "unset"
+            out[name] = None
+    for name in ("backend.output_file", "backend.apps_file", "custom_themes.dir", "custom_themes.theme_park_www"):
         if out[name] is not None:
             if not isinstance(out[name], str) or not out[name].strip():
                 fail(name, "expected a file path")
@@ -165,6 +170,15 @@ CONFIG_FILE = THEME_DIR / "current-theme.env"
 SETTINGS_FILE = THEME_DIR / "config.env"
 
 SET_THEME_SCRIPT = THEME_DIR / "set-theme.sh"
+
+# Custom themes: one <name>.css per theme. Default: the homelab's clone of its
+# themes repo. Anyone else can point this at a checkout of theme-park-themes.
+CUSTOM_DIR = SETTINGS["custom_themes.dir"] or THEME_DIR / "themes-src" / "themes"
+# theme.park's served www/ directory (its container's /config/www), mounted
+# into the picker. Set, the picker deploys CUSTOM_DIR into it itself (see
+# deploy.py) and the editor saves straight to CUSTOM_DIR. Unset, deploying is
+# someone else's job -- in the homelab, sync-themes.sh and theme-worker.sh.
+THEME_PARK_WWW = SETTINGS["custom_themes.theme_park_www"]
 
 DOMAIN = SETTINGS["domain"]
 THEME_PARK_URL = SETTINGS["theme_park_url"]

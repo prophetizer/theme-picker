@@ -236,20 +236,58 @@ higher priority:
 `/metrics` reports the last scheduled coverage check. A scrape never runs a
 check itself.
 
-## Not portable yet
+## Custom themes
 
-**Custom themes and the in-browser editor.** The picker lists custom themes
-from `themes-src/themes/*.css` inside the data directory. Deploying them into
-theme.park, and saving from the editor, both rely on a companion pipeline
-that isn't in this repository yet:
+The picker can manage your own themes too: it lists them, deploys them into
+your self-hosted theme.park, and saves new ones from the editor. It needs
+two things:
 
-- a git repository of theme files;
-- a script that copies them into a self-hosted theme.park and regenerates its
-  per-app CSS;
-- `theme-worker.sh`, which picks up editor saves from `editor-queue/`.
+1. **A folder of themes**, one `<name>.css` per theme. For 100 ready-made
+   ones, clone [theme-park-themes](https://github.com/prophetizer/theme-park-themes)
+   and use its `themes/` folder.
+2. **theme.park's `www` directory mounted into the picker, read-write.** This
+   is theme.park's served folder, `/config/www` inside its container. Run
+   both containers as the same user (theme.park's `PUID`/`PGID`) so the
+   picker can write there.
 
-Without that pipeline, the editor's *Save & deploy* queues a file that nothing
-collects. Official and community themes work fully without any of it.
+```yaml
+# picker.yml
+custom_themes:
+  dir: /data/custom-themes          # e.g. a clone of theme-park-themes/themes
+  theme_park_www: /theme-park-www   # theme.park's /config/www, mounted here
+```
+
+```yaml
+# the picker's compose service, in addition to step 3's volumes
+    volumes:
+      - ./theme-park-themes/themes:/data/custom-themes
+      - ./theme-park/config/www:/theme-park-www
+```
+
+With that set, the picker keeps theme.park in step with the folder. It checks
+at start and every minute:
+
+- It copies new or changed themes into `css/theme-options/`.
+- It runs theme.park's own `themes.py`, which builds the per-app CSS.
+- It removes themes you've deleted.
+- It puts back anything a theme.park restart or a new volume lost.
+
+Adding a theme means dropping a file into the folder. The editor's *Save &
+deploy* writes straight into the folder and deploys immediately.
+`/api/custom-themes` reports the last run.
+
+What it refuses, and why:
+- **A name theme.park already uses** (e.g. `nord.css`). theme.park copies its
+  own files over `www` on every start, so the two would fight. The one
+  exception is a file you copied in by hand earlier, identical byte for
+  byte, which the picker adopts.
+- **Names with capitals or dots.** theme.park lowercases names and splits
+  them at dots, so they would only half-deploy.
+- **Symlinks, and files over 64 KB.**
+
+Leave `theme_park_www` unset if something else deploys your themes. The
+picker then only lists them, and the editor queues saves for an external
+job, as in the author's own setup.
 
 ## Updating
 

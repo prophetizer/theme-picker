@@ -50,7 +50,7 @@ FALLBACK_COMMUNITY = [
 # sync-themes.sh. Discovered from that directory at request time rather
 # than listed here, so adding a theme to that repo is enough -- this list
 # can't drift from what's actually deployed.
-CUSTOM_THEMES_DIR = config.THEME_DIR / "themes-src" / "themes"
+CUSTOM_THEMES_DIR = config.CUSTOM_DIR
 
 # Re-fetched every MANIFEST_TTL seconds. It changes when sync-themes.sh
 # deploys a theme or theme-park restarts, and its ?sha= cache-busters are what

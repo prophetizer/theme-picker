@@ -101,6 +101,9 @@ function refresh() {
     : `${shown} of ${total}`;
   $$('#view [data-view]').forEach(v => v.classList.toggle('on', v.dataset.view === state.view));
   $$('.fam').forEach(f => f.classList.toggle('on', f.dataset.family === state.family));
+  const active = [state.q, state.mode, state.grad, state.readable, state.fresh, state.fav, state.hc, state.family]
+    .filter(Boolean).length;
+  $('#filters-toggle').textContent = active ? `Filters (${active})` : 'Filters';
   updateSurprise();
   save();
 }
@@ -124,6 +127,12 @@ $$('.fam').forEach(f => f.addEventListener('click', () => {
 }));
 $('#fam-any').addEventListener('click', () => { state.family = ''; refresh(); });
 $('#surprise').addEventListener('click', surprise);
+// Phones: the sidebar folds behind a "Filters" button (CSS hides it below
+// 900px unless .open), so the tiles are the first thing on screen.
+$('#filters-toggle').addEventListener('click', () => {
+  const open = $('#filters').classList.toggle('open');
+  $('#filters-toggle').setAttribute('aria-expanded', String(open));
+});
 $$('#view [data-view]').forEach(v => v.addEventListener('click', () => {
   state.view = v.dataset.view; seedPick(); refresh();
 }));
@@ -312,6 +321,33 @@ lbBody.addEventListener('click', ev => {
 });
 $('#lb-close').addEventListener('click', closeLightbox);
 $('#lb-apply').addEventListener('click', () => { applyTheme(lbTile.dataset.theme); closeLightbox(); });
+// A link that opens the picker dressed in this theme without applying it.
+$('#lb-share').addEventListener('click', async () => {
+  const url = `${location.origin}/?preview=${encodeURIComponent(lbTile.dataset.theme)}#themes`;
+  const btn = $('#lb-share');
+  try {
+    await navigator.clipboard.writeText(url);
+    btn.textContent = 'Copied';
+  } catch (e) {                                  // no clipboard access: show the link instead
+    const msg = $('#msg'); msg.textContent = `Link: ${url}`; msg.hidden = false;
+    btn.textContent = 'See link above';
+  }
+  setTimeout(() => { btn.textContent = 'Copy link'; }, 1600);
+});
+
+// /?preview=<theme>: the banner's "Apply it" is a plain form (works without
+// JavaScript); here it applies in place and drops the preview from the URL.
+const previewForm = $('#preview-banner');
+if (previewForm) previewForm.addEventListener('submit', async ev => {
+  ev.preventDefault();
+  const theme = previewForm.querySelector('button[name=theme]').value;
+  await applyTheme(theme);
+  // Only once it is really live: on a failure the page still wears the
+  // previewed theme, and the banner is what says it isn't applied.
+  if ($('.current b').textContent !== theme) return;
+  previewForm.remove();
+  history.replaceState(null, '', '/' + location.hash);
+});
 lb.addEventListener('click', ev => { if (ev.target === lb) closeLightbox(); });
 
 // --- keyboard -------------------------------------------------------------

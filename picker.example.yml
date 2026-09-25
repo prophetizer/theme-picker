@@ -65,3 +65,17 @@ ntfy:
   url: ""              # Env: NTFY_URL,   e.g. http://ntfy:80
   topic: ""            # Env: NTFY_TOPIC
   token_file: ""       # Env: NTFY_TOKEN_FILE, a file holding the access token
+
+custom_themes:
+  # Your own themes, one <name>.css each -- e.g. a checkout of
+  # https://github.com/prophetizer/theme-park-themes (its themes/ folder).
+  # Relative to the theme-switcher directory.
+  # Default: themes-src/themes there. Env: CUSTOM_THEMES_DIR
+  dir: ""
+  # theme.park's served www directory (its container's /config/www), mounted
+  # into the picker read-write. Set, the picker deploys the themes in `dir`
+  # into it by itself: copies them to css/theme-options/, runs theme.park's
+  # own themes.py, removes ones you deleted, and redeploys whenever `dir`
+  # changes. The editor then saves straight into `dir`. Leave empty when
+  # something else deploys your themes. Env: THEME_PARK_WWW
+  theme_park_www: ""
