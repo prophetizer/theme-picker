@@ -180,7 +180,11 @@ def current_theme():
         return "unknown"
     for line in config.CONFIG_FILE.read_text().splitlines():
         if line.startswith("CURRENT_THEME="):
-            return line.split("=", 1)[1].strip()
+            # Re-checked here because the value is echoed into pages, JSON and
+            # the unauthenticated /dashboards/ stylesheets (inside a CSS
+            # comment, where a "*/" would end it).
+            name = line.split("=", 1)[1].strip()
+            return name if SAFE_NAME.match(name) else "unknown"
     return "unknown"
 
 

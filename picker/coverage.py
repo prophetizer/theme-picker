@@ -55,6 +55,10 @@ def check_coverage():
         url = f"https://{a['host']}.{config.DOMAIN}/"
         out = {"app": a["name"], "url": url, "expected": expected,
                "pinned": a["name"] in overrides}
+        # apps.yml is writable from the picker's container; a host with "/",
+        # "@" or "#" in it would point the request somewhere else entirely.
+        if not config._HOST.match(str(a["host"])):
+            return {**out, "state": "error", "detail": "host in apps.yml is not a plain hostname"}
         try:
             status, body = fetch(url)
         except Exception as err:

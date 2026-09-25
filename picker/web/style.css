@@ -41,6 +41,7 @@
   #undo[hidden] { display: none; }
   #surprise, .tab-head button { background: var(--button-color, #173029); color: var(--button-text, #fff);
                                 border-color: var(--accent); font-weight: 600; }
+  #surprise:disabled { opacity: .5; cursor: not-allowed; }
   #undo:hover, .chip:hover, .fam:hover { border-color: var(--accent); }
   .history { display: flex; align-items: center; gap: 8px; margin-left: auto; }
   #history { display: flex; flex-wrap: wrap; gap: 6px; }

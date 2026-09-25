@@ -25,11 +25,14 @@ if [[ "${1:-}" == "--remove" ]]; then
   echo "Removed theme-switcher cron jobs."; exit 0
 fi
 
-mkdir -p "$TS/logs"
+# Logs go somewhere the picker's container cannot write: in theme-switcher/
+# (mounted into it) a planted symlink would have cron append to any file.
+LOGS="${XDG_STATE_HOME:-$HOME/.local/state}/theme-picker"
+mkdir -p -m 700 "$LOGS"
 block="$BEGIN
 PATH=/usr/local/bin:/usr/bin:/bin
-* * * * *  $DIR/theme-worker.sh >> $TS/logs/theme-worker.log 2>&1
-30 4 * * * $DIR/capture-theme-screenshots.sh >> $TS/logs/capture-nightly.log 2>&1
+* * * * *  $DIR/theme-worker.sh >> $LOGS/theme-worker.log 2>&1
+30 4 * * * $DIR/capture-theme-screenshots.sh >> $LOGS/capture-nightly.log 2>&1
 $END"
 { [[ -n "${others//[$'\n ']/}" ]] && printf '%s\n\n' "$others"; printf '%s\n' "$block"; } | crontab -
 echo "Installed. Current crontab:"; crontab -l

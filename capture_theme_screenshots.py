@@ -34,6 +34,7 @@ import json
 import os
 import signal
 import sys
+import tempfile
 import time
 import urllib.request
 from pathlib import Path
@@ -102,10 +103,26 @@ def needs_shot(app, theme, force=False):
     return src.exists() and src.stat().st_mtime > shot.stat().st_mtime
 
 
+def save_atomic(dst, write):
+    """write(tmp_path), then rename it over dst. screenshots/ is writable from
+    the picker's container and this runs on the HOST: saving straight to dst
+    follows a symlink planted there and overwrites its target. os.replace()
+    swaps the directory entry itself, link or not."""
+    dst = Path(dst)
+    fd, tmp = tempfile.mkstemp(dir=dst.parent, prefix=f".{dst.stem}-", suffix=dst.suffix)
+    os.close(fd)
+    try:
+        write(tmp)
+        os.replace(tmp, dst)
+    except BaseException:
+        Path(tmp).unlink(missing_ok=True)
+        raise
+
+
 def make_thumb(src, dst):
     im = Image.open(src).convert("RGB")
-    im.resize((THUMB_W, round(im.height * THUMB_W / im.width)), Image.LANCZOS).save(
-        dst, "JPEG", quality=82, optimize=True)
+    thumb = im.resize((THUMB_W, round(im.height * THUMB_W / im.width)), Image.LANCZOS)
+    save_atomic(dst, lambda p: thumb.save(p, "JPEG", quality=82, optimize=True))
 
 
 def main():
@@ -189,7 +206,7 @@ def main():
                             mismatched.append(f"{app}_{theme}")
                             print(f"    {app:11} SKIPPED (page has {href.rsplit('/', 1)[-1] or 'no theme link'})")
                             continue
-                        page.screenshot(path=str(out))
+                        save_atomic(out, lambda p: page.screenshot(path=p))
                         make_thumb(out, THUMBS / f"{app}_{theme}.jpg")
                         print(f"    {app:11} ok")
                     except Exception as e:

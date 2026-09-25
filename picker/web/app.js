@@ -101,6 +101,7 @@ function refresh() {
     : `${shown} of ${total}`;
   $$('#view [data-view]').forEach(v => v.classList.toggle('on', v.dataset.view === state.view));
   $$('.fam').forEach(f => f.classList.toggle('on', f.dataset.family === state.family));
+  updateSurprise();
   save();
 }
 
@@ -197,12 +198,31 @@ function visibleTiles() {
   return $$('.theme-btn').filter(b => !b.hidden && b.offsetParent && !b.closest('details.sect:not([open])'));
 }
 
+// "Surprise me" picks from what the filters show, minus the live theme. Worked
+// out from the filters and folded sections, not from layout like
+// visibleTiles(): the button sits in the live strip on every tab, and on any
+// tab but Themes no tile has an offsetParent, so it used to do nothing there.
+function surprisePool() {
+  return tiles.filter(b => !b.hidden && !b.classList.contains('active')
+                           && !b.closest('.sect[hidden], details.sect:not([open])'));
+}
+
+// The count is on the button so it's plain that the filters apply to it.
+function updateSurprise() {
+  const n = surprisePool().length, btn = $('#surprise');
+  btn.textContent = `Surprise me · ${n}`;
+  btn.disabled = !n;
+  btn.title = n ? `Apply a random theme from the ${n} shown (R)` : 'No other theme matches the filters';
+}
+
 function surprise() {
-  const pool = visibleTiles().filter(b => !b.classList.contains('active'));
+  const pool = surprisePool();
   if (!pool.length) return;
   const b = pool[Math.floor(Math.random() * pool.length)];
-  b.scrollIntoView({block: 'center', behavior: 'smooth'});
-  b.focus({preventScroll: true});
+  if (b.offsetParent) {
+    b.scrollIntoView({block: 'center', behavior: 'smooth'});
+    b.focus({preventScroll: true});
+  }
   applyTheme(b.dataset.theme);
 }
 
@@ -699,6 +719,7 @@ for (const sec of $$('.sect')) {
   sec.addEventListener('toggle', () => {
     folded[sec.dataset.sect] = !sec.open;
     try { localStorage.setItem('picker-folded', JSON.stringify(folded)); } catch (e) {}
+    updateSurprise();                         // a folded section's themes leave the pool
   });
 }
 

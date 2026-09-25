@@ -22,10 +22,10 @@ REPO_DIR = Path(__file__).resolve().parent.parent
 
 # Defensive: only plain theme names ever reach the allowlist, so a stray
 # filename in that directory can't become an odd subprocess argument.
-SAFE_NAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*$")
-_APP = re.compile(r"^[a-z0-9-]+$")
-_URL = re.compile(r"^https?://[^\s/]+(/\S*)?$")
-_HOST = re.compile(r"^[A-Za-z0-9.-]{1,253}$")
+SAFE_NAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*\Z")
+_APP = re.compile(r"^[a-z0-9-]+\Z")
+_URL = re.compile(r"^https?://[^\s/]+(/\S*)?\Z")
+_HOST = re.compile(r"^[A-Za-z0-9.-]{1,253}\Z")
 
 DEFAULT_SCREENSHOT_APPS = ["dozzle", "nzbhydra2", "forgejo", "grafana", "portainer",
                            "jellyfin", "emby", "sabnzbd", "tautulli", "guacamole"]
@@ -208,9 +208,16 @@ def output_file():
     OUTPUT_FILE from config.env (where the generator writes), else
     dynamic/themes.yml in the theme-switcher directory."""
     if SETTINGS["backend.output_file"]:
-        return SETTINGS["backend.output_file"]
-    env = config_env().get("OUTPUT_FILE")
-    return Path(env).expanduser() if env else THEME_DIR / "dynamic" / "themes.yml"
+        out = Path(SETTINGS["backend.output_file"])
+    else:
+        env = config_env().get("OUTPUT_FILE")
+        out = Path(env).expanduser() if env else THEME_DIR / "dynamic" / "themes.yml"
+    # config.env is writable from the picker's container and the nightly
+    # capture writes this file on the HOST: never let it name a shell rc or
+    # a cron file. Traefik's file provider only reads .yml/.yaml/.toml anyway.
+    if out.suffix not in (".yml", ".yaml"):
+        raise ValueError(f"the theme output file must be a .yml file, not {out}")
+    return out
 
 
 def apps_file():

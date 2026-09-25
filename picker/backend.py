@@ -21,6 +21,7 @@ loads.
 """
 
 import os
+import stat
 import subprocess
 import sys
 import tempfile
@@ -61,14 +62,35 @@ def _atomic_write(path, text):
         raise
 
 
+STATE_MAX = 64 * 1024
+
+
+def _read_state(path):
+    """The state file's text, or None if it is missing or not a plain file.
+
+    The file sits in a directory the picker's container can write, and the
+    nightly capture calls write_current() on the HOST. A plain read followed
+    a symlink planted there, and write_current() then wrote the target's
+    content back as a regular file the container could read -- a copy of any
+    host file (a secret, ~/.ssh/...). O_NOFOLLOW refuses a link, O_NONBLOCK
+    keeps a FIFO from hanging the job, and the size cap bounds the read."""
+    try:
+        fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    except FileNotFoundError:
+        return None
+    except OSError:                                  # ELOOP: a symlink
+        return None
+    with os.fdopen(fd, "rb") as f:
+        if not stat.S_ISREG(os.fstat(f.fileno()).st_mode):
+            return None
+        return f.read(STATE_MAX).decode("utf-8", "replace")
+
+
 def read_current(state_file):
     """CURRENT_THEME from the state file, or "" if absent."""
-    try:
-        for line in Path(state_file).read_text().splitlines():
-            if line.startswith("CURRENT_THEME="):
-                return line.split("=", 1)[1].strip()
-    except OSError:
-        pass
+    for line in (_read_state(state_file) or "").splitlines():
+        if line.startswith("CURRENT_THEME="):
+            return line.split("=", 1)[1].strip()
     return ""
 
 
@@ -76,10 +98,7 @@ def write_current(state_file, theme):
     """Set CURRENT_THEME, keeping any other lines (comments) as they are --
     what set-theme.sh does with sed."""
     path = Path(state_file)
-    try:
-        lines = path.read_text().splitlines()
-    except FileNotFoundError:
-        lines = []
+    lines = (_read_state(path) or "").splitlines()
     for i, line in enumerate(lines):
         if line.startswith("CURRENT_THEME="):
             lines[i] = f"CURRENT_THEME={theme}"
@@ -175,6 +194,10 @@ def get():
     s = config.SETTINGS
     if s["backend.type"] == "script":
         return Script(config.SET_THEME_SCRIPT, config.THEME_DIR / "generate-themes-yml.py", config.THEME_DIR)
-    return TraefikFile(output_file=config.output_file(), state_file=config.CONFIG_FILE,
+    try:
+        output_file = config.output_file()
+    except ValueError as e:                        # refused, e.g. not a .yml file
+        raise ApplyError(str(e)) from None
+    return TraefikFile(output_file=output_file, state_file=config.CONFIG_FILE,
                        default_theme=s["backend.default_theme"], apps=state.load_apps,
                        pins=state.read_overrides, base_url=config.base_url)

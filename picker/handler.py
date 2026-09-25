@@ -2,6 +2,7 @@
 through apply.apply_theme(), which holds the allowlist check."""
 
 import ipaddress
+import sys
 import json
 import re
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -41,10 +42,29 @@ def content_security_policy():
 
 
 class Handler(BaseHTTPRequestHandler):
+    # Seconds a connection may sit idle mid-request. Without it every stalled
+    # client (a half-sent header or POST body) held a server thread forever,
+    # and ThreadingHTTPServer starts one per connection -- LAN clients and
+    # containers on the proxy network reach :8090 without Traefik's timeouts.
+    timeout = 30
+    # The default "BaseHTTP/0.6 Python/3.12.x" names the exact interpreter.
+    server_version = "theme-picker"
+    sys_version = ""
+
+    def send_header(self, keyword, value):
+        if keyword.lower() == "cache-control":
+            self._cache_set = True
+        super().send_header(keyword, value)
+
     def end_headers(self):
         for k, v in SECURITY_HEADERS.items():
             self.send_header(k, v)
         self.send_header("Content-Security-Policy", content_security_policy())
+        # Pages and API answers carry who changed the theme and per-app pins:
+        # nothing may keep them unless a route chose its own caching.
+        if not getattr(self, "_cache_set", False):
+            self.send_header("Cache-Control", "no-store")
+        self._cache_set = False                     # keep-alive reuses this object
         super().end_headers()
 
     def _same_origin(self):
@@ -117,7 +137,15 @@ class Handler(BaseHTTPRequestHandler):
             # has no way to revalidate (restored tabs, back/forward, some
             # reloads), and Homarr showed a theme hours old that way. The
             # sheet is tiny; never keeping it costs nothing.
-            css = dashboards.STYLESHEETS[path[len("/dashboards/"):]](themes.current_theme())
+            live = themes.current_theme()
+            css = dashboards.STYLESHEETS[path[len("/dashboards/"):]](live)
+            # One line per fetch, so "the dashboard didn't change" can be told
+            # apart from "the browser never asked" (see docker logs).
+            ua = self.headers.get("User-Agent") or ""
+            browser = next((b for b in ("Firefox", "Edg", "Chrome", "Safari", "curl") if b in ua), "other")
+            print(f"dashboards: {path} -> {live} for {browser} "
+                  f"({self.headers.get('X-Forwarded-For') or self.client_address[0]})",
+                  file=sys.stderr, flush=True)
             data = css.encode("utf-8")
             self.send_response(200)
             self.send_header("Content-Type", "text/css; charset=utf-8")
@@ -170,9 +198,12 @@ class Handler(BaseHTTPRequestHandler):
         if length is None:
             return None
         try:
-            return json.loads(self.rfile.read(length).decode("utf-8") or "{}")
+            data = json.loads(self.rfile.read(length).decode("utf-8") or "{}")
         except (ValueError, UnicodeDecodeError):
             return None
+        # Every endpoint reads fields with .get(): a list, string or number
+        # raised AttributeError and dropped the connection with a traceback.
+        return data if isinstance(data, dict) else None
 
     def _length(self, limit):
         """The declared body size if it is a whole number from 0 to `limit`,
@@ -195,7 +226,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_response(200)
         self.send_header("Content-Type", ctype)
         self.send_header("Content-Length", str(len(data)))
-        self.send_header("Cache-Control", "max-age=600")
+        self.send_header("Cache-Control", "private, max-age=600")
         self.end_headers()
         self.wfile.write(data)
 

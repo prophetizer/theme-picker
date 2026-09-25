@@ -21,7 +21,7 @@ from pathlib import Path
 
 from . import apply, config, ntfy, state, themes
 
-_SOURCE = re.compile(r"^[\w .'-]{1,40}$")
+_SOURCE = re.compile(r"^[\w .'-]{1,40}\Z")
 RANDOM_FAVOURITE = "random-favourite"
 
 

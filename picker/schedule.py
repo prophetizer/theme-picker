@@ -23,7 +23,7 @@ from . import apply, config, state, themes
 
 SCHEDULE_FILE = config.THEME_DIR / "theme-schedule.json"
 TICK = 30
-_HHMM = re.compile(r"^([01]\d|2[0-3]):([0-5]\d)$")
+_HHMM = re.compile(r"^([01][0-9]|2[0-3]):([0-5][0-9])\Z")
 DEFAULTS = {"enabled": False, "day": "", "night": "", "day_at": "07:00", "night_at": "19:00",
             "handled": ""}
 _LOCK = threading.Lock()

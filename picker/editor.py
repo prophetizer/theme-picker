@@ -22,11 +22,11 @@ from . import colour as c, config, state, themes
 QUEUE_DIR = config.THEME_DIR / "editor-queue"
 EDITOR_STATUS = config.THEME_DIR / "editor-status.json"
 EDITOR_MARKER = "Created in the theme picker's editor"
-HEX6 = re.compile(r"^#[0-9a-fA-F]{6}$")
-NEWNAME = re.compile(r"^[a-z0-9][a-z0-9-]{1,39}$")
-TITLE = re.compile(r"^[A-Za-z0-9 ._'()&+-]{1,40}$")
-SPINNER = re.compile(r"^invert\(\d{1,3}%\) sepia\(\d{1,3}%\) saturate\(\d{1,4}%\) "
-                     r"hue-rotate\(\d{1,3}deg\) brightness\(\d{1,3}%\) contrast\(\d{1,3}%\)$")
+HEX6 = re.compile(r"^#[0-9a-fA-F]{6}\Z")
+NEWNAME = re.compile(r"^[a-z0-9][a-z0-9-]{1,39}\Z")
+TITLE = re.compile(r"^[A-Za-z0-9 ._'()&+-]{1,40}\Z")
+SPINNER = re.compile(r"^invert\([0-9]{1,3}%\) sepia\([0-9]{1,3}%\) saturate\([0-9]{1,4}%\) "
+                     r"hue-rotate\([0-9]{1,3}deg\) brightness\([0-9]{1,3}%\) contrast\([0-9]{1,3}%\)\Z")
 EDITOR_FIELDS = ("page_bg", "panel_bg", "button", "button_hover", "button_text",
                  "link", "link_hover", "text", "text_hover", "muted", "queue")
 

@@ -7,7 +7,7 @@ import re
 from . import config
 
 SHOT_DIR = config.THEME_DIR / "screenshots"
-SHOT_NAME = re.compile(r"^([a-z0-9-]+)_([a-z0-9.-]+)$")
+SHOT_NAME = re.compile(r"^([a-z0-9-]+)_([a-z0-9.-]+)\Z")
 # Screenshot apps, in lightbox order: picker.yml's screenshots.apps.
 APP_ORDER = config.SCREENSHOT_APPS
 KINDS = {"thumb": ("thumbs", ".jpg", "image/jpeg"),

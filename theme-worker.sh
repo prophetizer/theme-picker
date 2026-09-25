@@ -25,7 +25,12 @@ QUEUE="$DIR/editor-queue"
 SRC="$DIR/themes-src"
 STATUS="$DIR/editor-status.json"
 
-exec 9>"$DIR/.theme-worker.lock"
+# Lock (and, via install-cron.sh, the log) live where the container cannot
+# reach: in theme-switcher/ it could replace the lock with a symlink, and the
+# `exec 9>` below would truncate whatever file that points at, every minute.
+HOST_STATE="${XDG_STATE_HOME:-$HOME/.local/state}/theme-picker"
+mkdir -p -m 700 "$HOST_STATE"
+exec 9>"$HOST_STATE/theme-worker.lock"
 flock -n 9 || exit 0                       # a previous run is still going
 
 shopt -s nullglob
@@ -33,16 +38,53 @@ queued=("$QUEUE"/*.css)
 (( ${#queued[@]} )) || exit 0
 
 status() {   # status <name> <state> <detail>
+  # editor-status.json is container-writable, so: read it without following a
+  # link, keep only well-formed entries, and write through a fresh temp file
+  # (a fixed "editor-status.tmp" could be a planted symlink to any host file).
   python3 - "$STATUS" "$1" "$2" "$3" <<'PY'
-import json, sys, datetime, pathlib
-p, name, state, detail = pathlib.Path(sys.argv[1]), *sys.argv[2:]
+import datetime, json, os, re, stat, sys, tempfile
+path, name, state, detail = sys.argv[1:]
+st = {}
 try:
-    st = json.loads(p.read_text())
-except Exception:
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    with os.fdopen(fd, "rb") as f:
+        if stat.S_ISREG(os.fstat(f.fileno()).st_mode):
+            st = json.loads(f.read(256 * 1024) or b"{}")
+except (OSError, ValueError):
     st = {}
+ok = lambda k, v: (isinstance(k, str) and re.fullmatch(r"[a-z0-9][a-z0-9-]{1,39}", k)
+                   and isinstance(v, dict) and all(isinstance(x, str) for x in v.values()))
+st = {k: v for k, v in st.items() if ok(k, v)} if isinstance(st, dict) else {}
 st[name] = {"state": state, "detail": detail,
             "at": datetime.datetime.now().astimezone().isoformat(timespec="seconds")}
-tmp = p.with_suffix(".tmp"); tmp.write_text(json.dumps(st, indent=1, sort_keys=True) + "\n"); tmp.replace(p)
+fd, tmp = tempfile.mkstemp(dir=os.path.dirname(path), prefix=".editor-status-", suffix=".tmp")
+with os.fdopen(fd, "w") as f:
+    f.write(json.dumps(st, indent=1, sort_keys=True) + "\n")
+os.chmod(tmp, 0o644)                     # mkstemp's 0600 would lock the picker out
+os.replace(tmp, path)
+PY
+}
+
+# take <queued file> <dest>: copy one queue entry somewhere host-only, refusing
+# anything that is not a small regular file. The queue is container-writable:
+# a symlink could point at /dev/zero (filling /tmp, which is RAM here) or at
+# any host file, and a FIFO would hang this job while it holds the lock.
+take() {
+  python3 - "$1" "$2" <<'PY'
+import os, stat, sys
+src, dst = sys.argv[1:]
+try:
+    fd = os.open(src, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+except OSError as e:
+    sys.exit(f"cannot open safely ({e.strerror})")
+with os.fdopen(fd, "rb") as f:
+    if not stat.S_ISREG(os.fstat(f.fileno()).st_mode):
+        sys.exit("not a regular file")
+    data = f.read(16 * 1024 + 1)
+if len(data) > 16 * 1024:
+    sys.exit("larger than 16 KB")
+with open(dst, "xb") as out:
+    out.write(data)
 PY
 }
 
@@ -55,10 +97,15 @@ trap 'rm -rf "$PRIVATE"' EXIT
 names=()
 for f in "${queued[@]}"; do
   name="$(basename "$f" .css)"
-  if [[ ! "$name" =~ ^[a-z0-9][a-z0-9-]{1,39}$ ]]; then
-    echo "    rejecting bad name: $name"; rm -f -- "$f"; continue
+  # The file must be exactly <name>.css: $(...) drops trailing newlines, so
+  # "nord<newline>.css" came out as "nord" and was committed as nord.css.
+  if [[ ! "$name" =~ ^[a-z0-9][a-z0-9-]{1,39}$ || "$f" != "$QUEUE/$name.css" ]]; then
+    printf '    rejecting bad name: %q\n' "$(basename "$f")"; rm -f -- "$f"; continue
   fi
-  cp -- "$f" "$PRIVATE/$name.css" && rm -f -- "$f"
+  if ! why="$(take "$f" "$PRIVATE/$name.css" 2>&1)"; then
+    rm -f -- "$f"; echo "    rejecting $name: $why"; status "$name" failed "rejected: $why"; continue
+  fi
+  rm -f -- "$f"
   if ! why="$(cd "$HERE" && python3 -m picker.editor --verify "$name" "$PRIVATE/$name.css" 2>&1)"; then
     echo "    rejecting $name: $why"; status "$name" failed "rejected: $why"; continue
   fi
@@ -74,7 +121,11 @@ done
 fail() { for n in "${names[@]}"; do status "$n" failed "$1"; done; echo "!! $1" >&2; exit 1; }
 
 ( cd "$SRC" && python3 build_previews.py >/dev/null ) || fail "preview build failed"
-git -C "$SRC" add themes previews
+# Only what this run verified: "add themes previews" also committed -- and
+# sync-themes.sh then deployed -- any file placed in themes-src/ by other means.
+paths=(previews/index.html)
+for n in "${names[@]}"; do paths+=("themes/$n.css" "previews/$n-preview.html"); done
+git -C "$SRC" add -- "${paths[@]}" || fail "git add failed"
 if ! git -C "$SRC" diff --cached --quiet; then
   git -C "$SRC" commit -q -m "Add/update ${names[*]} from the theme picker editor" \
     -m "Saved in the theme picker's editor and deployed by theme-worker.sh." \
