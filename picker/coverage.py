@@ -71,7 +71,33 @@ def check_coverage():
                 time.sleep(2.5)
                 return one(a, retry=False)
             return {**out, "state": "wrong", "detail": f"serving {m.group(2)}"}
+        # The link being there is not the theme arriving: the file it points at
+        # has to exist. theme.park generates no per-theme files for apps it has
+        # deprecated, so Grafana's link 404'd for every theme while this check
+        # said "ok". Only the path comes from the page; the host is ours.
+        base = config.base_url()
+        if base:
+            path = f"/css/base/{m.group(1)}/{m.group(2)}.css"
+            sheet_status = sheet(base + path)
+            if sheet_status != 200:
+                return {**out, "state": "broken",
+                        "detail": f"theme stylesheet {path} answers {sheet_status}"}
         return {**out, "state": "ok", "detail": ""}
+
+    sheets, sheets_lock = {}, threading.Lock()
+
+    def sheet(url):
+        """HTTP status of a stylesheet, fetched once per check run."""
+        with sheets_lock:
+            if url in sheets:
+                return sheets[url]
+        try:
+            status = fetch(url)[0]
+        except Exception:
+            status = "unreachable"
+        with sheets_lock:
+            sheets[url] = status
+        return status
 
     with ThreadPoolExecutor(max_workers=10) as ex:
         results = list(ex.map(one, apps))
