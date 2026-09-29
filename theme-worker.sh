@@ -7,9 +7,11 @@
 # CSS to editor-queue/<name>.css and this picks it up:
 #
 #   1. move it into themes-src/themes/ (the homelab-themes clone)
-#   2. rebuild previews, commit, push to Forgejo
-#   3. ./sync-themes.sh -- deploy into theme-park, regenerate, record dates
-#   4. record the outcome in editor-status.json, which the picker polls
+#   2. generate its light/dark twin (tools/make_variants.py): every theme
+#      ships with one
+#   3. rebuild previews, commit, push to Forgejo
+#   4. ./sync-themes.sh -- deploy into theme-park, regenerate, record dates
+#   5. record the outcome in editor-status.json, which the picker polls
 #
 # The queue is NOT trusted: editor-queue/ is writable from inside the picker's
 # container, and this job runs on the host with push access and deploys the
@@ -120,15 +122,29 @@ done
 
 fail() { for n in "${names[@]}"; do status "$n" failed "$1"; done; echo "!! $1" >&2; exit 1; }
 
+# The opposite-mode twin of each theme, built here from the verified file by
+# the repo's own generator (no numpy on the host: it falls back to its stdlib
+# spinner solver). It skips a name that already has a hand-made twin.
+( cd "$SRC" && python3 tools/make_variants.py "${names[@]}" >/dev/null ) || fail "twin generation failed"
+twins=()
+for n in "${names[@]}"; do
+  for t in "$n-light" "$n-dark"; do
+    f="$SRC/themes/$t.css"
+    if [[ -f "$f" && ! -L "$f" ]] && head -c 1200 "$f" | grep -q "Generated variant: [a-z]* of '$n',"; then
+      twins+=("$t")
+    fi
+  done
+done
 ( cd "$SRC" && python3 build_previews.py >/dev/null ) || fail "preview build failed"
-# Only what this run verified: "add themes previews" also committed -- and
-# sync-themes.sh then deployed -- any file placed in themes-src/ by other means.
+# Only what this run verified or generated: "add themes previews" also
+# committed -- and sync-themes.sh then deployed -- any file placed in
+# themes-src/ by other means.
 paths=(previews/index.html)
-for n in "${names[@]}"; do paths+=("themes/$n.css" "previews/$n-preview.html"); done
+for n in "${names[@]}" "${twins[@]}"; do paths+=("themes/$n.css" "previews/$n-preview.html"); done
 git -C "$SRC" add -- "${paths[@]}" || fail "git add failed"
 if ! git -C "$SRC" diff --cached --quiet; then
   git -C "$SRC" commit -q -m "Add/update ${names[*]} from the theme picker editor" \
-    -m "Saved in the theme picker's editor and deployed by theme-worker.sh." \
+    -m "Saved in the theme picker's editor and deployed by theme-worker.sh${twins[*]:+, with generated twins: ${twins[*]}}." \
     || fail "git commit failed"
   git -C "$SRC" push -q origin HEAD || fail "git push failed (theme is committed locally)"
 fi

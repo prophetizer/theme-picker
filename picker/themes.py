@@ -146,16 +146,55 @@ def variant_themes():
     return [t for t in custom_themes() if VARIANT_MARK in theme_css(t)[:1200]]
 
 
+def mode_counterparts(name):
+    """Names that would be `name`'s opposite-mode counterpart: "dark" and
+    "light" swapped at any one position (github-dark-high-contrast ->
+    github-light-high-contrast), a trailing one dropped (gruvbox-light ->
+    gruvbox), or one appended (gruvbox -> gruvbox-light). homelab-themes'
+    tools/make_variants.py uses the same rule to decide a real twin exists."""
+    toks = name.split("-")
+    out = []
+    for i, tok in enumerate(toks):
+        if tok in ("dark", "light"):
+            out.append("-".join(toks[:i] + ["light" if tok == "dark" else "dark"] + toks[i + 1:]))
+            if i == len(toks) - 1 and i:
+                out.append("-".join(toks[:i]))
+    return out + [f"{name}-light", f"{name}-dark"]
+
+
 def variant_pairs():
-    """{theme: its generated twin} -- "nord" -> "nord-light". The picker shows
-    each pair as one tile with a light/dark switch."""
-    own = set(custom_themes()) - set(variant_themes())
-    sources = set(official_themes()) | set(community_themes()) | own
+    """{theme: its twin}. The picker shows each pair as one tile with a
+    light/dark switch; the twin follows its theme and never stands alone.
+
+    A generated twin pairs with its source ("nord" -> "nord-light"). Two
+    hand-made themes whose authors published both modes pair too
+    ("gruvbox" -> "gruvbox-light", "ayu-dark" -> "ayu-light"), provided one
+    is light and the other dark. Of those, the one without "dark"/"light" in
+    its name leads, else the dark one."""
+    from .metrics import theme_metrics                 # metrics imports this module
+    own = own_themes()
+    sources = set(official_themes()) | set(community_themes()) | set(own)
     out = {}
     for v in variant_themes():
         for suffix in ("-light", "-dark"):
             if v.endswith(suffix) and v[:-len(suffix)] in sources:
                 out[v[:-len(suffix)]] = v
+    taken = set(out) | set(out.values())
+    own_set = set(own)
+    for a in own:
+        if a in taken:
+            continue
+        for b in mode_counterparts(a):
+            if b not in own_set or b in taken:
+                continue
+            ma, mb = theme_metrics(a)["mode"], theme_metrics(b)["mode"]
+            if {ma, mb} != {"light", "dark"}:
+                continue
+            plain = [t for t in (a, b) if not {"dark", "light"} & set(t.split("-"))]
+            lead = plain[0] if len(plain) == 1 else (a if ma == "dark" else b)
+            out[lead] = b if lead == a else a
+            taken |= {a, b}
+            break
     return out
 
 

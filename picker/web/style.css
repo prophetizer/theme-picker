@@ -11,7 +11,12 @@
   kbd { font: inherit; padding: 0 5px; border-radius: 4px; border: 1px solid var(--line); }
 
   /* --- header: brand, tabs, coverage ------------------------------------- */
-  .top { position: sticky; top: 0; z-index: 5; height: 56px; box-sizing: border-box;
+  /* Header + live strip: always on screen. The backdrop behind them is the
+     page's own background, so a translucent panel colour can't show the
+     grid scrolling underneath. */
+  .topbar { position: sticky; top: 0; z-index: 5; background: var(--main-bg-color, #14181a); }
+  html { scroll-padding-top: var(--topbar-h, 56px); }
+  .top { height: 56px; box-sizing: border-box;
          display: flex; align-items: center; gap: 24px; padding: 0 24px;
          background: var(--drop-down-menu-bg, var(--panel)); border-bottom: 1px solid var(--line); }
   .brand { display: flex; align-items: center; gap: 10px; text-decoration: none;
@@ -30,9 +35,11 @@
   /* --- live strip ---------------------------------------------------------- */
   .live { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; padding: 14px 24px;
           background: var(--panel); border-bottom: 1px solid var(--line); }
-  .live-name { min-width: 170px; }
+  /* Fixed width, so Surprise me (next to it) never moves when the live
+     theme's name changes -- clicking it again hits the button again. */
+  .live-name { flex: 0 0 260px; min-width: 0; }
   .live-label { display: block; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-  .current { margin: 2px 0 0; }
+  .current { margin: 2px 0 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .current b { font-size: 1.3rem; color: var(--text-hover, #fff); }
   .live-swatch .swatch { width: 240px; height: 30px; border-radius: 7px; }
   #undo, #surprise, .chip, .fam, .seg button, .side select, .side input[type=search],
@@ -43,8 +50,11 @@
                                 border-color: var(--accent); font-weight: 600; }
   #surprise:disabled { opacity: .5; cursor: not-allowed; }
   #undo:hover, .chip:hover, .fam:hover { border-color: var(--accent); }
-  .history { display: flex; align-items: center; gap: 8px; margin-left: auto; }
-  #history { display: flex; flex-wrap: wrap; gap: 6px; }
+  /* Recent stays on the strip's one line and scrolls sideways: the strip is
+     always on screen, so every wrapped line would cost the grid a line too. */
+  .history { display: flex; align-items: center; gap: 8px; flex: 1 1 0; min-width: 220px; }
+  #history { display: flex; flex-wrap: nowrap; gap: 6px; overflow-x: auto; scrollbar-width: thin; }
+  #history .chip { white-space: nowrap; }
   .chip { border-radius: 999px; padding: 3px 10px; font-size: .8rem; }
   .message { margin: 12px 24px 0; padding: 10px 14px; border-radius: 8px; background: var(--panel); }
   .message[hidden] { display: none; }
@@ -52,7 +62,7 @@
   /* --- themes tab: sidebar + grid ------------------------------------------ */
   .tab-panel[hidden] { display: none; }
   .themes-layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); }
-  .side { position: sticky; top: 56px; align-self: start; height: calc(100vh - 56px); overflow: auto;
+  .side { position: sticky; top: var(--topbar-h, 56px); align-self: start; height: calc(100vh - var(--topbar-h, 56px)); overflow: auto;
           box-sizing: border-box; padding: 18px; display: flex; flex-direction: column; gap: 18px;
           border-right: 1px solid var(--line); }
   .side-field { display: flex; flex-direction: column; gap: 6px; margin: 0; padding: 0; border: 0;
@@ -179,12 +189,19 @@
      and swatch share a row, the two buttons share a row, and recent themes
      scroll sideways instead of wrapping. */
   @media (max-width: 600px) {
-    .live { gap: 10px 12px; padding: 12px 16px; }
-    .live-name { min-width: 0; }
-    .live-swatch .swatch { width: 120px; height: 24px; }
+    .live { gap: 8px 10px; padding: 8px 16px 10px; }
+    .live-name { min-width: 0; flex: 1 1 60%; }      /* name + swatch fill row 1; the buttons wrap to row 2 */
+    .live-swatch { order: 1; }
+    #surprise { order: 2; }                          /* row 2 starts with it, Undo after: it stays put */
+    #undo { order: 3; }
+    .history { order: 4; }
+    .live-name .live-label { display: none; }
+    .current { margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .current b { font-size: 1.05rem; }
+    .live-swatch .swatch { width: 96px; height: 22px; }
+    #undo, #surprise { padding: 6px 10px; font-size: .88rem; white-space: nowrap; }
+    #undo { flex: 1 1 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
     .history { flex-basis: 100%; min-width: 0; }
-    #history { flex-wrap: nowrap; overflow-x: auto; }
-    .chip { white-space: nowrap; }
     .themes-main { padding: 6px 16px 40px; }
   }
   .stats { display: flex; gap: 40px; flex-wrap: wrap; }

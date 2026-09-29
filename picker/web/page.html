@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/static/style.css?v={style_v}">
 </head>
 <body>
+<div class="topbar" id="topbar">
 <header class="top">
   <a class="brand" href="#themes"><img src="/static/icon.svg?v={icon_v}" alt="" width="28" height="28"><span>Theme Picker</span></a>
   <nav class="tabs" aria-label="Sections">
@@ -22,11 +23,12 @@
   <a class="cov-pill" id="cov-pill" href="#apps" title="Apps served their theme -- details in Apps &amp; coverage">Coverage &#8230;</a>
 </header>
 <div class="live">
-  <div class="live-name"><span class="live-label">Live now</span><p class="current"><b>{active}</b></p></div>
+  <div class="live-name"><span class="live-label">Live now</span><p class="current" title="{active}"><b>{active}</b></p></div>
+  <button type="button" id="surprise" title="Apply a random theme from those shown (R)">Surprise me</button>
   <span class="live-swatch" id="live-swatch">{live_swatch}</span>
   {undo}
-  <button type="button" id="surprise" title="Apply a random theme from those shown (R)">Surprise me</button>
   <div class="history"><span class="live-label">Recent</span> <span id="history">{history}</span></div>
+</div>
 </div>
 <p class="message" id="msg"{msg_hidden}>{msg_text}</p>
 {preview_banner}

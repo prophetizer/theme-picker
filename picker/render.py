@@ -48,7 +48,7 @@ def swatch_html(theme):
 
 
 def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin="", twin_of=""):
-    """One theme tile. A theme with a generated twin carries data-twin; the
+    """One theme tile. A theme with a light/dark twin carries data-twin; the
     twin itself data-twin-of, and sits right after it in the same section.
     The page shows one form of each pair at a time (the sun/moon switch, or
     the sidebar's "show every theme as"); without JavaScript both show."""
@@ -108,10 +108,14 @@ def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin
 
 
 def theme_grid(names, section, active, shot_idx, dates, today, favs=frozenset(), pairs=None):
-    """Tiles for a section; with `pairs`, each theme's generated twin follows it."""
+    """Tiles for a section; with `pairs`, each theme's twin follows it (and a
+    twin in `names` is skipped where it stands)."""
     pairs = pairs or {}
+    twins = set(pairs.values())
     entries = []
     for t in names:
+        if t in twins:
+            continue
         entries.append((t, pairs.get(t, ""), ""))
         if t in pairs:
             entries.append((pairs[t], "", t))

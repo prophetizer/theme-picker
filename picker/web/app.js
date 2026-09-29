@@ -127,6 +127,11 @@ $$('.fam').forEach(f => f.addEventListener('click', () => {
 }));
 $('#fam-any').addEventListener('click', () => { state.family = ''; refresh(); });
 $('#surprise').addEventListener('click', surprise);
+// The header and live strip stay at the top while the page scrolls. Their
+// height varies (the strip wraps), so the sticky sidebar and scroll-into-view
+// read it from --topbar-h rather than a fixed number.
+new ResizeObserver(([e]) => document.documentElement.style.setProperty(
+  '--topbar-h', `${Math.ceil(e.target.getBoundingClientRect().height)}px`)).observe($('#topbar'));
 // Phones: the sidebar folds behind a "Filters" button (CSS hides it below
 // 900px unless .open), so the tiles are the first thing on screen.
 $('#filters-toggle').addEventListener('click', () => {
@@ -164,6 +169,7 @@ async function applyTheme(theme) {
 function markApplied(prev, theme, css) {
   tiles.forEach(b => b.classList.toggle('active', b.dataset.theme === theme));
   $('.current b').textContent = theme;
+  $('.current').title = theme;
   const now = byName[theme];
   if (now) {
     if (now.dataset.twinOf) pick[now.dataset.twinOf] = 'twin';
@@ -207,25 +213,28 @@ function visibleTiles() {
   return $$('.theme-btn').filter(b => !b.hidden && b.offsetParent && !b.closest('details.sect:not([open])'));
 }
 
-// "Surprise me" picks from what the filters show, minus the live theme. Worked
+// "Surprise me" picks from what the filters show, never the live theme. Worked
 // out from the filters and folded sections, not from layout like
 // visibleTiles(): the button sits in the live strip on every tab, and on any
 // tab but Themes no tile has an offsetParent, so it used to do nothing there.
 function surprisePool() {
-  return tiles.filter(b => !b.hidden && !b.classList.contains('active')
-                           && !b.closest('.sect[hidden], details.sect:not([open])'));
+  return tiles.filter(b => !b.hidden && !b.closest('.sect[hidden], details.sect:not([open])'));
 }
+const surpriseCandidates = () => surprisePool().filter(b => !b.classList.contains('active'));
 
-// The count is on the button so it's plain that the filters apply to it.
+// The count is on the button so it's plain that the filters apply to it. It
+// counts every theme shown, the live one included, so it matches the count
+// above the grid; the live one is just never the pick.
 function updateSurprise() {
   const n = surprisePool().length, btn = $('#surprise');
   btn.textContent = `Surprise me · ${n}`;
-  btn.disabled = !n;
-  btn.title = n ? `Apply a random theme from the ${n} shown (R)` : 'No other theme matches the filters';
+  btn.disabled = !surpriseCandidates().length;
+  btn.title = btn.disabled ? 'No other theme matches the filters'
+    : `Apply a random theme from the ${n} shown, never the live one (R)`;
 }
 
 function surprise() {
-  const pool = surprisePool();
+  const pool = surpriseCandidates();
   if (!pool.length) return;
   const b = pool[Math.floor(Math.random() * pool.length)];
   if (b.offsetParent) {

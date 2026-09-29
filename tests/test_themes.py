@@ -203,3 +203,43 @@ class Variants(SandboxCase):
         source = grid[nord:grid.index("</button>", nord)]
         self.assertIn('data-twin="nord-light"', source)
         self.assertNotIn('id="grid-variants"', page)
+
+
+class RealPairs(SandboxCase):
+    """Hand-made themes published in both modes pair like generated twins."""
+    DARK = "/*\n * theme.park custom theme: X\n */\n:root {\n  --main-bg-color: #101418;\n}\n"
+    LIGHT = "/*\n * theme.park custom theme: X\n */\n:root {\n  --main-bg-color: #f4f4f0;\n}\n"
+
+    def test_counterpart_names(self):
+        self.assertEqual(themes.mode_counterparts("gruvbox-light"),
+                         ["gruvbox-dark", "gruvbox", "gruvbox-light-light", "gruvbox-light-dark"])
+        self.assertIn("github-light-high-contrast", themes.mode_counterparts("github-dark-high-contrast"))
+        self.assertNotIn("", themes.mode_counterparts("dark"))
+
+    def test_pairs_and_which_leads(self):
+        for name, css in [("gruvbox", self.DARK), ("gruvbox-light", self.LIGHT),
+                          ("ayu-light", self.LIGHT), ("ayu-dark", self.DARK),
+                          ("gh-dark-hc", self.DARK), ("gh-light-hc", self.LIGHT),
+                          ("both-dark", self.DARK), ("both", self.DARK)]:   # same mode: no pair
+            self.add_custom(name, css)
+        self.assertEqual(themes.variant_pairs(), {"gruvbox": "gruvbox-light", "ayu-dark": "ayu-light",
+                                                  "gh-dark-hc": "gh-light-hc"})
+
+    def test_a_generated_twin_wins(self):
+        self.add_custom("sol", self.DARK)
+        self.add_custom("sol-light", Variants.VARIANT.replace("'nord'", "'sol'"))
+        self.add_custom("sol-dark", self.LIGHT)      # hand-made, but sol already has its twin
+        self.assertEqual(themes.variant_pairs(), {"sol": "sol-light"})
+
+    def test_real_twin_follows_its_lead_once(self):
+        from picker import render
+        self.add_custom("zeta-light", self.LIGHT)
+        self.add_custom("alpha", self.DARK)
+        self.add_custom("zeta", self.DARK)
+        page = render.render_page()
+        grid = page[page.index('id="grid-custom"'):]
+        grid = grid[:grid.index("</details>")]
+        self.assertEqual(grid.count('data-theme="zeta-light"'), 1)
+        self.assertLess(grid.index('data-theme="zeta"'), grid.index('data-theme="zeta-light"'))
+        self.assertIn('data-twin-of="zeta"', grid)
+        self.assertIn('data-twin="zeta-light"', grid)
