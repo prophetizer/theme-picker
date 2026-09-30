@@ -37,13 +37,9 @@
  <div class="themes-layout">
   <aside class="side" id="filters" aria-label="Filters">
     <label class="side-field"><span>Search</span><input type="search" id="filter" placeholder="Filter by name  ( / )" autocomplete="off"></label>
-    <div class="side-field"><span id="view-label">Show every theme as</span>
+    <div class="side-field"><span id="view-label">Show themes as</span>
       <div class="seg" id="view" role="group" aria-labelledby="view-label">
-        <button type="button" data-view="designed" title="Each theme as its author made it">As is</button><button type="button" data-view="light">Light</button><button type="button" data-view="dark">Dark</button></div>
-      <small>Themes without a generated light/dark twin stay as designed.</small></div>
-    <label class="side-field"><span>Background</span><select id="mode">
-      <option value="">Light &amp; dark</option><option value="light">Light only</option>
-      <option value="dark">Dark only</option></select></label>
+        <button type="button" data-view="designed" title="Each theme as its author made it">Original</button><button type="button" data-view="light" title="Every theme in its light form">Light</button><button type="button" data-view="dark" title="Every theme in its dark form">Dark</button></div></div>
     <fieldset class="side-field checks"><legend>Only</legend>
       <label><input type="checkbox" id="only-readable"> Readable (no low-contrast badge)</label>
       <label><input type="checkbox" id="only-hc"> High contrast</label>
@@ -65,14 +61,20 @@
   <div class="themes-main">
     <p class="count"><button type="button" id="filters-toggle" class="filters-toggle" aria-controls="filters" aria-expanded="false">Filters</button> <span id="count"></span></p>
     <form method="post" id="picker">
-      <details class="sect" data-sect="official" open><summary><h2>Official</h2> <span class="sect-count"></span></summary>
-        <div class="grid" id="grid-official">{grid_official}</div></details>
+      <details class="sect" data-sect="custom-dark" open><summary><h2>Custom &middot; dark</h2> <span class="sect-count"></span></summary>
+        <div class="grid" id="grid-custom-dark" data-grid="custom-dark">{grid_custom_dark}</div></details>
+      <details class="sect" data-sect="custom-light" open><summary><h2>Custom &middot; light</h2> <span class="sect-count"></span></summary>
+        <div class="grid" id="grid-custom-light" data-grid="custom-light">{grid_custom_light}</div></details>
+      <details class="sect" data-sect="custom-gradient" open><summary><h2>Custom &middot; gradients</h2> <span class="sect-count"></span></summary>
+        <div class="grid" id="grid-custom-gradient" data-grid="custom-gradient">{grid_custom_gradient}</div></details>
+      <details class="sect" data-sect="custom-editor" open><summary><h2>Custom &middot; made in the editor</h2> <span class="sect-count"></span></summary>
+        <div class="grid" id="grid-custom-editor" data-grid="custom-editor">{grid_custom_editor}</div></details>
       <details class="sect" data-sect="community" open><summary><h2>Community</h2> <span class="sect-count"></span></summary>
-        <div class="grid" id="grid-community">{grid_community}</div></details>
-      <details class="sect" data-sect="custom" open><summary><h2>Custom (built for this homelab)</h2> <span class="sect-count"></span></summary>
-        <div class="grid" id="grid-custom">{grid_custom}</div></details>
+        <div class="grid" id="grid-community" data-grid="community">{grid_community}</div></details>
+      <details class="sect" data-sect="official" open><summary><h2>Official</h2> <span class="sect-count"></span></summary>
+        <div class="grid" id="grid-official" data-grid="official">{grid_official}</div></details>
       <details class="sect" data-sect="all" open hidden><summary><h2>All themes</h2> <span class="sect-count"></span></summary>
-        <div class="grid" id="grid-all"></div></details>
+        <div class="grid" id="grid-all" data-grid="all"></div></details>
     </form>
   </div>
  </div>
@@ -83,7 +85,8 @@
     <p class="count">Every themed app, the theme it should get, and whether it actually does. Pin an app to keep it on one theme.</p>
     <button type="button" id="cov-run">Check now</button></div>
   <p class="coverage" id="cov-summary">Checking which apps received the theme...</p>
-  <div class="app-grid">{apps}</div>
+  <p class="apps-toggle" id="apps-toggle-row" hidden><button type="button" id="apps-toggle" aria-controls="app-grid" aria-expanded="false"></button></p>
+  <div class="app-grid" id="app-grid">{apps}</div>
 </section>
 
 <section class="tab-panel" id="tab-schedule" data-tab="schedule">
@@ -105,7 +108,7 @@
         <div class="ed-row"><label>Name <input id="ed-name" placeholder="my-theme" maxlength="40"></label>
           <label>Title <input id="ed-title" placeholder="My Theme" maxlength="40"></label></div>
         <div class="ed-row"><button type="button" id="ed-save">Save &amp; deploy</button>
-          <span id="ed-status" class="count"></span></div>
+          {ed_twin_note} <span id="ed-status" class="count"></span></div>
       </div>
       <div>
         <div class="ed-preview" id="ed-preview">

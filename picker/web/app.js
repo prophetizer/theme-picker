@@ -6,9 +6,10 @@ const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAl
 const esc = v => String(v).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'})[c]);
 const tiles = $$('.theme-btn');
 tiles.forEach((b, i) => b.dataset.idx = i);
-const grids = {official: $('#grid-official'), community: $('#grid-community'),
-               custom: $('#grid-custom'), all: $('#grid-all')};
-const state = {q: '', mode: '', grad: false, readable: false, fresh: false,
+// One grid per section (custom-dark, ..., community, official, all); a tile's
+// data-section names the grid it belongs to when sorted by section.
+const grids = Object.fromEntries($$('.grid[data-grid]').map(g => [g.dataset.grid, g]));
+const state = {q: '', grad: false, readable: false, fresh: false,
                fav: false, hc: false, family: '', sort: 'section', preview: '', view: 'designed'};
 
 // --- light/dark pairs ---------------------------------------------------------
@@ -52,7 +53,6 @@ function matches(b) {
   const d = b.dataset;
   return isShownForm(b)
       && (!state.q || d.theme.toLowerCase().includes(state.q))
-      && (!state.mode || d.mode === state.mode)
       && (!state.grad || d.gradient === '1')
       && (!state.readable || d.contrast === 'ok')
       && (!state.fresh || d.new === '1')
@@ -92,16 +92,17 @@ function refresh() {
   }
   // Counted over the form each pair is showing: one tile per theme.
   const forms = tiles.filter(isShownForm), total = forms.length;
-  const twins = tiles.filter(b => b.dataset.twin).length;
+  // Every theme should have a light/dark twin; say so only when some don't.
+  const single = forms.filter(b => !b.dataset.twin && !b.dataset.twinOf).length;
   const grads = forms.filter(b => b.dataset.gradient === '1').length;
   const low = forms.filter(b => b.dataset.contrast === 'low').length;
   const hc = forms.filter(b => b.dataset.hc === '1').length;
   $('#count').textContent = shown === total
-    ? `${total} themes (${twins} with a light/dark twin) · ${grads} gradient · ${hc} high contrast · ${low} low contrast`
+    ? `${total} themes${single ? ` (${single} without a light/dark twin)` : ''} · ${grads} gradient · ${hc} high contrast · ${low} low contrast`
     : `${shown} of ${total}`;
   $$('#view [data-view]').forEach(v => v.classList.toggle('on', v.dataset.view === state.view));
   $$('.fam').forEach(f => f.classList.toggle('on', f.dataset.family === state.family));
-  const active = [state.q, state.mode, state.grad, state.readable, state.fresh, state.fav, state.hc, state.family]
+  const active = [state.q, state.grad, state.readable, state.fresh, state.fav, state.hc, state.family]
     .filter(Boolean).length;
   $('#filters-toggle').textContent = active ? `Filters (${active})` : 'Filters';
   updateSurprise();
@@ -109,15 +110,14 @@ function refresh() {
 }
 
 // --- toolbar wiring -------------------------------------------------------
-const ctl = {q: $('#filter'), mode: $('#mode'), grad: $('#only-gradient'),
+const ctl = {q: $('#filter'), grad: $('#only-gradient'),
              readable: $('#only-readable'), fresh: $('#only-new'), fav: $('#only-fav'), hc: $('#only-hc'),
              sort: $('#sort'), preview: $('#preview')};
-ctl.q.value = state.q; ctl.mode.value = state.mode; ctl.sort.value = state.sort;
+ctl.q.value = state.q; ctl.sort.value = state.sort;
 ctl.preview.value = state.preview || '';
 ctl.grad.checked = state.grad; ctl.readable.checked = state.readable;
 ctl.fresh.checked = state.fresh; ctl.fav.checked = state.fav; ctl.hc.checked = state.hc;
 ctl.q.addEventListener('input', () => { state.q = ctl.q.value.trim().toLowerCase(); refresh(); });
-ctl.mode.addEventListener('change', () => { state.mode = ctl.mode.value; refresh(); });
 ctl.sort.addEventListener('change', () => { state.sort = ctl.sort.value; layout(); refresh(); });
 ctl.preview.addEventListener('change', () => { state.preview = ctl.preview.value; applyPreview(); save(); });
 for (const k of ['grad', 'readable', 'fresh', 'fav', 'hc'])
@@ -446,8 +446,26 @@ for (const sel of $$('.pin')) {
     const msg = $('#msg'); msg.textContent = data.message; msg.hidden = false;
     if (!data.ok) sel.value = sel.dataset.current || '';
     else { sel.dataset.current = sel.value; setTimeout(runCoverage, 3500); }
+    sel.closest('.app-card').classList.toggle('pinned', !!sel.value);
+    updateAppsView();
   });
+  sel.closest('.app-card').classList.toggle('pinned', !!sel.value);
 }
+
+// The apps list shows what needs attention -- pinned apps and apps not
+// getting their theme -- and folds the rest ("quiet") behind one button.
+// Without a coverage result, or without JavaScript, every app shows.
+let showAllApps = false;
+function updateAppsView() {
+  const cards = $$('.app-card'), grid = $('#app-grid'), row = $('#apps-toggle-row'), btn = $('#apps-toggle');
+  const quiet = cards.filter(c => c.classList.contains('quiet') && !c.classList.contains('pinned')).length;
+  grid.classList.toggle('only-notable', !showAllApps && quiet > 0);
+  row.hidden = quiet === 0;
+  btn.textContent = showAllApps ? 'Show only pinned and failing apps'
+    : `Show all ${cards.length} apps (${quiet} following the live theme, all fine)`;
+  btn.setAttribute('aria-expanded', String(showAllApps));
+}
+$('#apps-toggle').addEventListener('click', () => { showAllApps = !showAllApps; updateAppsView(); });
 async function runCoverage() {
   const sum = $('#cov-summary'), pill = $('#cov-pill');
   sum.textContent = 'Checking which apps received the theme...';
@@ -468,10 +486,12 @@ async function runCoverage() {
   for (const r of data.results) {
     const cell = document.querySelector(`.cov[data-app="${CSS.escape(r.app)}"]`);
     if (!cell) continue;
+    cell.closest('.app-card').classList.toggle('quiet', r.state === 'ok' && !r.pinned);
     cell.innerHTML = r.state === 'ok'
       ? `<span class="ok">ok</span> ${esc(r.expected)}${r.pinned ? ' (pinned)' : ''}`
       : `<span class="bad">${esc(r.state)}</span> ${esc(r.detail)}`;
   }
+  updateAppsView();
 }
 $('#cov-run').addEventListener('click', runCoverage);
 

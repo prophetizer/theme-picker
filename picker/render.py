@@ -6,8 +6,9 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import date
 from pathlib import Path
 
-from . import config, schedule, shots, state, themes
+from . import config, deploy, schedule, shots, state, themes
 from .colour import FAMILIES
+from .editor import EDITOR_MARKER
 from .metrics import theme_metrics
 
 NEW_DAYS = 14
@@ -125,6 +126,29 @@ def theme_grid(names, section, active, shot_idx, dates, today, favs=frozenset(),
         list(ex.map(theme_metrics, every))
     return "\n".join(tile_html(t, section, active, shot_idx, dates, today, favs, twin=tw, twin_of=of)
                      for t, tw, of in entries)
+
+
+# The hand-made themes, split so 130-odd tiles aren't one wall: made in the
+# editor, gradients, then by the mode each was designed in. A pair's twin is
+# not listed here: theme_grid() places it right after its lead.
+CUSTOM_GROUPS = ("custom-dark", "custom-light", "custom-gradient", "custom-editor")
+
+
+def custom_groups(pairs):
+    twins = set(pairs.values())
+    out = {g: [] for g in CUSTOM_GROUPS}
+    for t in themes.own_themes():
+        if t in twins:
+            continue
+        if EDITOR_MARKER in themes.theme_css(t)[:600]:
+            out["custom-editor"].append(t)
+        elif themes.is_gradient(t):
+            out["custom-gradient"].append(t)
+        elif theme_metrics(t)["mode"] == "light":
+            out["custom-light"].append(t)
+        else:
+            out["custom-dark"].append(t)
+    return out
 
 
 def apps_html(active):
@@ -259,7 +283,9 @@ def render_page(message="", preview=""):
         history=history_html(active), undo=undo_html(active), app_opts=app_opts, fams=fams,
         grid_official=grid(themes.official_themes(), "official"),
         grid_community=grid(themes.community_themes(), "community"),
-        grid_custom=grid(themes.own_themes(), "custom"),
+        **{f"grid_{g.replace('-', '_')}": grid(names, g) for g, names in custom_groups(pairs).items()},
+        ed_twin_note=("" if deploy.enabled() else
+                      '<span class="count">A light/dark twin of it is made automatically.</span>'),
         live_swatch=swatch_html(active),
         msg_hidden=msg_hidden, msg_text=msg_text, preview_banner=preview_banner,
         early_v=VERSION["early.js"], apps=apps_html(active),

@@ -231,13 +231,27 @@ class RealPairs(SandboxCase):
         self.add_custom("sol-dark", self.LIGHT)      # hand-made, but sol already has its twin
         self.assertEqual(themes.variant_pairs(), {"sol": "sol-light"})
 
+    def test_custom_themes_are_grouped(self):
+        from picker import render
+        from picker.editor import EDITOR_MARKER
+        self.add_custom("inky", self.DARK)
+        self.add_custom("paper", self.LIGHT)
+        self.add_custom("wash", self.DARK.replace("#101418", "linear-gradient(135deg, #101418 0%, #203040 100%)"))
+        self.add_custom("mine", f"/*\n * theme.park custom theme: Mine\n *\n * {EDITOR_MARKER} on 2026-01-01\n */\n"
+                                + self.DARK.split("*/\n", 1)[1])
+        self.add_custom("zeta", self.DARK)
+        self.add_custom("zeta-light", self.LIGHT)          # a real pair: follows zeta, not listed itself
+        groups = render.custom_groups(themes.variant_pairs())
+        self.assertEqual(groups, {"custom-dark": ["inky", "zeta"], "custom-light": ["paper"],
+                                  "custom-gradient": ["wash"], "custom-editor": ["mine"]})
+
     def test_real_twin_follows_its_lead_once(self):
         from picker import render
         self.add_custom("zeta-light", self.LIGHT)
         self.add_custom("alpha", self.DARK)
         self.add_custom("zeta", self.DARK)
         page = render.render_page()
-        grid = page[page.index('id="grid-custom"'):]
+        grid = page[page.index('id="grid-custom-dark"'):]
         grid = grid[:grid.index("</details>")]
         self.assertEqual(grid.count('data-theme="zeta-light"'), 1)
         self.assertLess(grid.index('data-theme="zeta"'), grid.index('data-theme="zeta-light"'))

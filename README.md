@@ -4,21 +4,35 @@ A web UI for switching a self-hosted [theme.park](https://theme-park.dev) theme
 across every app behind Traefik at once — with live previews, real screenshots,
 a contrast audit, per-app pins and an in-browser theme editor.
 
-![Every theme as a tile, sorted by accent colour, with filters on the left and the live theme across the top](docs/screenshots/themes.png)
+![Every theme as a tile, your own themes first in foldable groups, with filters on the left and the live theme across the top](docs/screenshots/themes.png)
 
-*Sorted by accent colour. Any sort other than the default "By section" merges
-Official, Community and Custom into one "All themes" list.*
+*Hand-made themes come first, in foldable groups (dark, light, gradients, made
+in the editor), then theme.park's Community and Official themes. Any sort other
+than "By section" pools them into one list.*
 
-> **Status: early.** It needs Traefik with its file provider and the
+> **Requirements:** Traefik with its file provider and the
 > [`traefik-themepark`](https://github.com/packruler/traefik-themepark) plugin;
-> it writes the plugin's middleware config itself. Official and community
-> themes work out of the box. It can also deploy your own themes into a
-> self-hosted theme.park: 100 are ready-made in
-> [theme-park-themes](https://github.com/prophetizer/theme-park-themes).
->
-> **[Deployment guide → DEPLOY.md](DEPLOY.md)**. The image is
-> `ghcr.io/prophetizer/theme-picker`, and every setting is documented in
-> `picker.example.yml`.
+> the picker writes the plugin's middleware config itself. Official and
+> community themes work out of the box. It can also deploy your own themes
+> into a self-hosted theme.park: 153 are ready-made, each in light and dark,
+> in [theme-park-themes](https://github.com/prophetizer/theme-park-themes).
+
+## Install
+
+The image is published for linux/amd64 and linux/arm64:
+
+```bash
+docker pull ghcr.io/prophetizer/theme-picker:1
+```
+
+Tags: `1.0.0` (exact release), `1.0` and `1` (latest patch or minor of that
+line), `latest`. Pin `1` to get fixes without breaking changes.
+
+It runs as a non-root user, listens on port 8090, and keeps its config and
+state in `/data`. Put it behind your reverse proxy's authentication rather
+than publishing the port. The **[deployment guide → DEPLOY.md](DEPLOY.md)**
+has the full compose example and Traefik wiring; every setting is documented
+in [`picker.example.yml`](picker.example.yml).
 
 ## Features
 
@@ -55,18 +69,19 @@ The picker wears the live theme itself.
 ### Themes
 
 Every official, community and custom theme is a tile with a colour-band
-preview. The sidebar narrows the list:
+preview, and every one comes in a light and a dark form. The sidebar narrows
+the list:
 - search
-- light or dark background
 - readable only, high contrast, gradients, favourites, new
 - accent colour
 
 It also sorts the list by section, name, lightness, accent colour or date
 added. Click a tile to apply it everywhere. The ☀/☾ switch on a tile flips
-that theme between its original and its generated light or dark twin.
+that theme between its light and dark form: the author's own where they made
+both, otherwise a generated twin.
 
-*Show every theme as* **Light** or **Dark** flips every theme at once. Here
-it is set to **Light** in Catppuccin Latte:
+*Show themes as* **Light** or **Dark** flips every theme at once. Here it is
+set to **Light** in Catppuccin Latte:
 
 ![The picker in a light theme, with every theme shown in its light form](docs/screenshots/light.png)
 
@@ -81,8 +96,10 @@ Every themed app, the theme it should get, and whether it actually gets it.
 The check requests each app's page the way a browser would and reads which
 stylesheet was injected, so a router that lost its middleware shows up as
 **missing**. It runs on a schedule too and can alert through ntfy. Pin an
-app to keep it on one theme whatever the live theme is; Grafana is pinned
-to Nord here.
+app to keep it on one theme whatever the live theme is. Apps that are fine
+and follow the live theme fold behind one button, so pinned and failing ones
+stand out; here the list is unfolded, Prowlarr is pinned to Nord and Grafana
+is missing its theme.
 
 ![Apps and coverage: six apps, five themed, one pinned, one missing its theme](docs/screenshots/apps.png)
 

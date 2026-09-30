@@ -286,8 +286,9 @@ class Routes(ServerCase):
         page = body.decode()
         self.assertIn("<title>Theme Picker</title>", page)
         self.assertIn('data-theme="nord"', page)
-        for sect in ("official", "community", "custom"):                        # collapsible, open by default
-            self.assertIn(f'<details class="sect" data-sect="{sect}" open><summary><h2>', page)
+        order = ("custom-dark", "custom-light", "custom-gradient", "custom-editor", "community", "official")
+        at = [page.index(f'<details class="sect" data-sect="{sect}" open><summary><h2>') for sect in order]
+        self.assertEqual(at, sorted(at))                  # collapsible, open, the homelab's own first
         self.assertIn(f'<script src="/static/app.js?v={render.VERSION["app.js"]}"></script>', page)
         self.assertIn(f'<link rel="stylesheet" href="/static/style.css?v={render.VERSION["style.css"]}">', page)
         self.assertIn(f'<link rel="icon" type="image/svg+xml" href="/static/icon.svg?v={render.VERSION["icon.svg"]}">', page)
@@ -351,7 +352,8 @@ class Template(unittest.TestCase):
         import string
         fields = {f for _, f, _, _ in string.Formatter().parse(render.PAGE_TEMPLATE) if f}
         self.assertEqual(fields, {"theme_link", "style_v", "icon_v", "active", "history", "app_opts", "fams",
-                                  "grid_official", "grid_community", "grid_custom", "live_swatch", "msg_hidden",
+                                  "grid_official", "grid_community", "grid_custom_dark", "grid_custom_light",
+                                  "grid_custom_gradient", "grid_custom_editor", "ed_twin_note", "live_swatch", "msg_hidden",
                                   "msg_text", "apps", "stats", "base_opts", "script_v", "undo",
                                   "schedule", "preview_banner", "early_v"})
 
