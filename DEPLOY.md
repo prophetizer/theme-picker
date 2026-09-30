@@ -110,7 +110,8 @@ services:
       - "traefik.http.services.theme-picker.loadbalancer.server.port=8090"
 ```
 
-The image has a health check, `/api/current` on port 8090.
+The image has a health check, `/healthz` on port 8090. It answers without
+contacting theme.park, so the container stays healthy while theme.park is down.
 
 **From a checkout instead:** clone the repo and use the stock
 `python:3.12-slim` image. Mount the checkout at `/app` read-only, set
@@ -149,7 +150,17 @@ behind your auth middleware, as in the compose example. The picker then:
   can't drive a logged-in or LAN-bypassed browser;
 - sends a strict CSP and anti-framing headers on every response;
 - passes a theme name on only after an exact match against the list of known
-  themes.
+  themes;
+- answers only to its own host names (421 otherwise), which stops a
+  DNS-rebinding page from reaching it as "same-origin". IP addresses,
+  localhost, single-word Docker names and `.local` / `.lan` / `.internal` /
+  `.home.arpa` names always work, as does `picker_url`'s host. List any
+  other name you use under `allowed_hosts` in `picker.yml`.
+
+Keep port 8090 unpublished (no `ports:`), so everything reaches it through
+the proxy, with the proxy's auth, timeouts and connection limits. The
+picker's own server is simple: it caps request bodies and idle time, but it
+has no rate limiting or connection cap of its own.
 
 `/dashboards/*.css` is the one path that is safe to leave unauthenticated: it
 serves only the live theme's colours. See [Dashboards](#dashboards-follow-the-theme).
@@ -286,6 +297,12 @@ What it refuses, and why:
 - **Names with capitals or dots.** theme.park lowercases names and splits
   them at dots, so they would only half-deploy.
 - **Symlinks, and files over 64 KB.**
+
+**Trust:** with `theme_park_www` set, the picker runs `themes.py` from
+theme.park's directory, so whatever can write that directory can run code
+as the picker (which holds your hook and ntfy tokens and writes Traefik's
+theme config). Mount only theme.park's `www` there, and don't share it with
+anything you trust less than the picker.
 
 Leave `theme_park_www` unset if something else deploys your themes. The
 picker then only lists them, and the editor queues saves for an external

@@ -173,9 +173,9 @@ def editor_status(name):
 # --- verifying a queued file (run by theme-worker.sh on the host) -----------
 _HEAD = re.compile(r"^/\*\n \* theme\.park custom theme: (?P<title>[^\n]*)\n \*\n \* "
                    + re.escape(EDITOR_MARKER)
-                   + r" on (?P<on>\d{4}-\d\d-\d\d), starting from '(?P<base>[A-Za-z0-9._-]{1,64})'\.\n")
-_GRADIENT = re.compile(r"^linear-gradient\((?P<angle>\d{1,3})deg, (?P<a>#[0-9a-fA-F]{6}) 0%, "
-                       r"(?P<b>#[0-9a-fA-F]{6}) 100%\) center center/cover no-repeat fixed$")
+                   + r" on (?P<on>[0-9]{4}-[0-9]{2}-[0-9]{2}), starting from '(?P<base>[A-Za-z0-9._-]{1,64})'\.\n")
+_GRADIENT = re.compile(r"^linear-gradient\((?P<angle>[0-9]{1,3})deg, (?P<a>#[0-9a-fA-F]{6}) 0%, "
+                       r"(?P<b>#[0-9a-fA-F]{6}) 100%\) center center/cover no-repeat fixed\Z")
 _FIELD_VARS = {"panel_bg": "--modal-bg-color", "button": "--button-color",
                "button_hover": "--button-color-hover", "button_text": "--button-text",
                "link": "--link-color", "link_hover": "--link-color-hover", "text": "--text",

@@ -136,6 +136,7 @@ class CrossSite(ServerCase):
                 self.assertEqual(status, 403)
         self.assertEqual(state.read_favourites(), [])
 
+    @mock.patch.object(config, "PICKER_URL", "https://picker.example.test/")
     def test_same_origin_and_non_browser_requests_work(self):
         host = f"127.0.0.1:{self.server.server_address[1]}"
         for headers in ({}, {"Origin": f"http://{host}", "Sec-Fetch-Site": "same-origin"},
@@ -185,8 +186,58 @@ class NotifyLink(ServerCase):
              mock.patch.object(config, "PICKER_URL", "https://picker.example.test/"):
             self.request("POST", "/set-theme", b"theme=nord",
                          {"Content-Type": "application/x-www-form-urlencoded",
-                          "X-Forwarded-Host": "evil.example", "Host": "evil.example"})
+                          "X-Forwarded-Host": "evil.example", "Host": "picker.example.test"})
         self.assertEqual(notify.call_args.args[2], "https://picker.example.test/")
+
+
+class HostCheck(ServerCase):
+    """Found by the v1.0.0 security review: a DNS-rebinding page's requests
+    are same-origin from the browser's point of view, so only Host shows
+    they aren't for the picker."""
+
+    def test_rebinding_page_cannot_set_the_theme(self):
+        status, _, _ = self.request("POST", "/set-theme", b"theme=nord",
+                                    {"Content-Type": "application/x-www-form-urlencoded",
+                                     "Host": "evil.test", "Origin": "http://evil.test",
+                                     "Sec-Fetch-Site": "same-origin"})
+        self.assertEqual(status, 421)
+        status, _, _ = self.request("POST", "/api/favourite", b'{"theme": "nord", "on": true}',
+                                    {"Content-Type": "application/json", "Host": "evil.test:8090",
+                                     "Origin": "http://evil.test:8090"})
+        self.assertEqual(status, 421)
+        self.assertEqual(self.backend.applied, [])
+        self.assertEqual(state.read_favourites(), [])
+
+    def test_reads_are_refused_too(self):
+        for path in ("/", "/api/current", "/metrics"):
+            with self.subTest(path=path):
+                self.assertEqual(self.request("GET", path, headers={"Host": "evil.test"})[0], 421)
+
+    def test_hosts_that_cannot_be_rebound_are_allowed(self):
+        for host in ("172.16.5.20:8090", "127.0.0.1", "[::1]:8090", "localhost:8090", "theme-picker:8090",
+                     "nas.local", "picker.home.arpa", "box.lan", "x.internal", "app.localhost", "NAS.LOCAL."):
+            with self.subTest(host=host):
+                self.assertTrue(handler.host_allowed(host))
+        for host in ("evil.test", "picker.example.test", "attacker.example:8090", "a b", "evil.test@x"):
+            with self.subTest(host=host):
+                self.assertFalse(handler.host_allowed(host))
+
+    def test_configured_names_are_allowed(self):
+        with mock.patch.object(config, "PICKER_URL", "https://picker.example.test/"), \
+             mock.patch.dict(config.SETTINGS, {"allowed_hosts": ["other.example.test"]}):
+            for host in ("picker.example.test", "PICKER.example.test:443", "other.example.test"):
+                with self.subTest(host=host):
+                    self.assertTrue(handler.host_allowed(host))
+            self.assertEqual(self.request("GET", "/api/current", headers={"Host": "picker.example.test"})[0], 200)
+
+    def test_allowed_hosts_setting_is_validated(self):
+        self.assertEqual(config.resolve({"ALLOWED_HOSTS": "a.example.test, B.example.test."}, {})["allowed_hosts"],
+                         ["a.example.test", "b.example.test"])
+        self.assertEqual(config.resolve({}, {"allowed_hosts": ["c.example.test"]})["allowed_hosts"],
+                         ["c.example.test"])
+        for bad in (["https://a.example.test"], ["a.example.test/x"], [5], "a.example.test:8090"):
+            with self.subTest(bad=bad), self.assertRaises(config.ConfigError):
+                config.resolve({}, {"allowed_hosts": bad})
 
 
 class CoverageCache(SandboxCase):

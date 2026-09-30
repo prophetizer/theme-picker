@@ -10,9 +10,14 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     THEME_SWITCHER_DIR=/data \
     PICKER_CONFIG=/data/picker.yml
 
+# pip is only needed for this one install. It is removed afterwards: nothing
+# at runtime uses it, and the base image's copy carries CVEs that image
+# scanners (rightly) report against anything that ships it.
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir --require-hashes -r /tmp/requirements.txt \
-    && rm /tmp/requirements.txt
+    && rm /tmp/requirements.txt \
+    && python -m pip uninstall -y pip \
+    && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.12
 
 WORKDIR /app
 COPY server.py LICENSE ./
@@ -24,5 +29,5 @@ USER 1000:1000
 EXPOSE 8090
 VOLUME ["/data"]
 HEALTHCHECK --interval=60s --timeout=5s --start-period=20s \
-    CMD python3 -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/api/current', timeout=4)"
+    CMD python3 -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/healthz', timeout=4)"
 CMD ["python3", "server.py"]

@@ -178,7 +178,10 @@ class Script:
         env = dict(os.environ, THEME_IGNORE_OVERRIDES="1" if ignore_pins else "0")
         r = subprocess.run(argv, cwd=self.cwd, env=env, capture_output=True, text=True, timeout=30)
         if r.returncode != 0:
-            raise ApplyError(f"{what} failed: {r.stderr.strip()[-300:]}")
+            # The detail goes to the container log, not to the browser: script
+            # errors can carry host paths and environment details.
+            print(f"{what} failed (exit {r.returncode}): {r.stderr.strip()[-2000:]}", file=sys.stderr, flush=True)
+            raise ApplyError(f"{what} failed (exit {r.returncode}); the details are in the picker's log")
 
     def apply(self, theme, ignore_pins=False):
         # An argument list, never shell=True: the name cannot become a command.

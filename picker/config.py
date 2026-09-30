@@ -36,6 +36,7 @@ KEYS = {
     ("theme_park_url",): ("THEME_PARK_URL", None),
     ("domain",): ("DOMAIN", ""),
     ("picker_url",): ("PICKER_URL", None),
+    ("allowed_hosts",): ("ALLOWED_HOSTS", []),
     ("listen", "host"): ("LISTEN_HOST", "0.0.0.0"),
     ("listen", "port"): ("LISTEN_PORT", 8090),
     ("screenshots", "apps"): ("APPS", DEFAULT_SCREENSHOT_APPS),
@@ -132,6 +133,12 @@ def resolve(env, data, repo_dir=REPO_DIR):
             fail(name, "expected a whole number")
         if not lo <= out[name] <= hi:
             fail(name, f"expected {lo}-{hi}")
+    hosts = out["allowed_hosts"]
+    if isinstance(hosts, str):
+        hosts = hosts.replace(",", " ").split()
+    if not isinstance(hosts, list) or not all(isinstance(h, str) and _HOST.match(h) for h in hosts):
+        fail("allowed_hosts", "expected a list of host names (no scheme, port or path)")
+    out["allowed_hosts"] = [h.lower().rstrip(".") for h in hosts]
     apps = out["screenshots.apps"]
     if isinstance(apps, str):
         apps = apps.split()

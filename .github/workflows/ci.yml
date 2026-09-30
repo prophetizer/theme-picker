@@ -35,6 +35,11 @@ jobs:
       contents: read
       packages: write        # push to ghcr.io with the workflow's own token
     steps:
+      - name: Only vX.Y.Z tags publish
+        env:
+          REF: ${{ github.ref_name }}     # via env, never pasted into the script
+        run: |
+          [[ "$REF" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]] || { echo "::error::$REF is not vX.Y.Z; not publishing"; exit 1; }
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
@@ -53,7 +58,7 @@ jobs:
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
-            type=raw,value=latest,enable=${{ !contains(github.ref_name, '-') }}
+            type=raw,value=latest
       - uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
         with:
           context: .

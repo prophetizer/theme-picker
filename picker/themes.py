@@ -60,6 +60,9 @@ CUSTOM_THEMES_DIR = config.CUSTOM_DIR
 # "down" -- until someone restarted the picker. A failed fetch is cached as
 # None too, so a down theme-park costs one timeout per TTL, not one per render.
 MANIFEST_TTL = 600
+# theme.park's theme list and theme sheets are a few KB; never buffer more
+# than this from it, whatever it (or something in its place) sends.
+MAX_FETCH = 1_000_000
 _MANIFEST = {}
 _MANIFEST_LOCK = threading.Lock()
 
@@ -73,7 +76,7 @@ def manifest():
             if base:
                 try:
                     with urllib.request.urlopen(f"{base}/themes.json", timeout=6) as r:
-                        data = json.loads(r.read().decode("utf-8"))
+                        data = json.loads(r.read(MAX_FETCH).decode("utf-8"))
                 except Exception:
                     data = None
             _MANIFEST["data"], _MANIFEST["at"] = data, now
@@ -292,7 +295,7 @@ def _load_css(theme):
         if url:
             try:
                 with urllib.request.urlopen(url, timeout=4) as r:
-                    css = r.read().decode("utf-8", "replace")
+                    css = r.read(MAX_FETCH).decode("utf-8", "replace")
             except Exception:
                 css = ""
     return css

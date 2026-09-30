@@ -102,9 +102,9 @@ class ScriptBackend(TempDir):
     def test_failures_and_bad_names(self):
         b = Script(self.d / "set-theme.sh", self.d / "gen.py", self.d)
         with self.run_with(1, "boom"):
-            with self.assertRaisesRegex(ApplyError, "^set-theme.sh failed: boom$"):
+            with self.assertRaisesRegex(ApplyError, r"^set-theme.sh failed \(exit \d+\); the details are in the picker's log$"):
                 b.apply("nord")
-            with self.assertRaisesRegex(ApplyError, "^generator failed: boom$"):
+            with self.assertRaisesRegex(ApplyError, r"^generator failed \(exit \d+\); the details are in the picker's log$"):
                 b.set_pins()
         with self.run_with() as run:
             with self.assertRaises(ApplyError):

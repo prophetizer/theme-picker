@@ -22,6 +22,14 @@ domain: example.com
 # Default: https://theme-picker.<domain>/  Env: PICKER_URL
 picker_url: https://theme-picker.example.com/
 
+# Extra host names the picker answers to. Requests naming any other host get
+# 421: that is what stops a DNS-rebinding page from driving a picker whose
+# port is reachable directly. Always allowed without listing: picker_url's
+# host, IP addresses, localhost, single-word names (a Docker service such as
+# theme-picker) and names ending .local, .lan, .internal or .home.arpa.
+# Default: none.  Env: ALLOWED_HOSTS (comma or space separated)
+allowed_hosts: []
+
 listen:
   host: 0.0.0.0        # Env: LISTEN_HOST
   port: 8090           # Env: LISTEN_PORT

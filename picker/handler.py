@@ -41,6 +41,45 @@ def content_security_policy():
             "form-action 'self'; frame-ancestors 'none'")
 
 
+# Host names no DNS-rebinding page can have: rebinding needs a public name the
+# attacker controls, and none of these can be one.
+_PRIVATE_SUFFIXES = (".local", ".lan", ".internal", ".home.arpa", ".localhost")
+
+
+def host_allowed(header):
+    """Whether a request's Host header names this picker.
+
+    The CSRF check compares Origin with Host, so on its own it trusts any
+    Host: a page on attacker.example that re-points its own name at the
+    picker's IP (DNS rebinding) makes same-origin requests to :8090 and
+    passes. Allowed: no Host at all (not a browser), IP literals, localhost,
+    single-label names (a Docker service such as "theme-picker"), private
+    suffixes, and the names configured: picker_url's host and
+    allowed_hosts."""
+    if not header:
+        return True
+    h = header.strip().lower()
+    if h.startswith("["):                                # [::1]:8090
+        name = h[1:h.index("]")] if "]" in h else h
+    else:
+        name = h.rsplit(":", 1)[0] if h.count(":") == 1 else h
+    name = name.rstrip(".")
+    try:
+        ipaddress.ip_address(name)
+        return True
+    except ValueError:
+        pass
+    if not config._HOST.match(name):
+        return False
+    if name == "localhost" or "." not in name or name.endswith(_PRIVATE_SUFFIXES):
+        return True
+    configured = set(config.SETTINGS["allowed_hosts"])
+    own = urlsplit(config.picker_url()).hostname
+    if own:
+        configured.add(own.lower())
+    return name in configured
+
+
 class Handler(BaseHTTPRequestHandler):
     # Seconds a connection may sit idle mid-request. Without it every stalled
     # client (a half-sent header or POST body) held a server thread forever,
@@ -116,7 +155,17 @@ class Handler(BaseHTTPRequestHandler):
         else:
             self._send_html(render_page(message), status=status)
 
+    def _host_refused(self):
+        """Answer 421 and return True if the Host isn't this picker's."""
+        if host_allowed(self.headers.get("Host")):
+            return False
+        self._send_html("Unknown host. If this is the picker's own address, add it to "
+                        "allowed_hosts in picker.yml (or ALLOWED_HOSTS).", status=421)
+        return True
+
     def do_GET(self):
+        if self._host_refused():
+            return
         path = urlsplit(self.path).path
         if path in ("/", ""):
             preview = (parse_qs(urlsplit(self.path).query).get("preview") or [""])[0]
@@ -158,6 +207,11 @@ class Handler(BaseHTTPRequestHandler):
             self._send_shot(path)
         elif path == "/api/custom-themes":
             self._send_json({"enabled": deploy.enabled(), "last": dict(deploy.LAST)})
+        elif path == "/healthz":
+            # For the image's HEALTHCHECK: answers without touching theme.park,
+            # so the picker doesn't report unhealthy exactly when theme.park is
+            # down and the picker is how you'd recover.
+            self._send_json({"ok": True})
         elif path == "/api/current":
             # Read-only, for the Glance/Homepage widgets, which call it over the
             # Docker network (http://theme-picker:8090) and never meet Authelia.
@@ -258,6 +312,8 @@ class Handler(BaseHTTPRequestHandler):
         return ip
 
     def do_POST(self):
+        if self._host_refused():
+            return
         path = urlsplit(self.path).path
         if not self._same_origin():
             if path.startswith("/api/") or self._wants_json():
