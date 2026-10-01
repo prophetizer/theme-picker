@@ -20,6 +20,10 @@ RUN pip install --no-cache-dir --require-hashes -r /tmp/requirements.txt \
     && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.12
 
 WORKDIR /app
+# /data exists and belongs to the runtime user before VOLUME declares it, so
+# a named volume mounted there starts out writable (one created from a
+# missing path is root's, and the picker could not save its state).
+RUN mkdir -p /data && chown 1000:1000 /data
 COPY server.py LICENSE ./
 COPY picker/ ./picker/
 

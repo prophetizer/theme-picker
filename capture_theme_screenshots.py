@@ -113,6 +113,8 @@ def save_atomic(dst, write):
     os.close(fd)
     try:
         write(tmp)
+        # mkstemp makes it 0600; the picker serves these as another user.
+        os.chmod(tmp, 0o644)
         os.replace(tmp, dst)
     except BaseException:
         Path(tmp).unlink(missing_ok=True)

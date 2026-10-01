@@ -23,9 +23,14 @@ set -euo pipefail
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 # The theme-switcher directory -- parent of this checkout unless overridden.
 DIR="${THEME_SWITCHER_DIR:-$(dirname "$HERE")}"
-QUEUE="$DIR/editor-queue"
 SRC="$DIR/themes-src"
-STATUS="$DIR/editor-status.json"
+# The queue and status live in the picker's state directory: state_dir /
+# STATE_DIR (picker.yml or config.env), else theme-switcher/ itself. Asked
+# of the picker's own config so the two can never disagree.
+STATE="$(cd "$HERE" && THEME_SWITCHER_DIR="$DIR" python3 -c 'from picker import config; print(config.STATE_DIR)')" \
+  || { echo "!! cannot read the picker's config" >&2; exit 1; }
+QUEUE="$STATE/editor-queue"
+STATUS="$STATE/editor-status.json"
 
 # Lock (and, via install-cron.sh, the log) live where the container cannot
 # reach: in theme-switcher/ it could replace the lock with a symlink, and the

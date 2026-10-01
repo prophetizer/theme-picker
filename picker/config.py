@@ -33,6 +33,7 @@ DEFAULT_SCREENSHOT_APPS = ["dozzle", "nzbhydra2", "forgejo", "grafana", "portain
 # file key path -> (env var, default)
 KEYS = {
     ("theme_switcher_dir",): ("THEME_SWITCHER_DIR", None),
+    ("state_dir",): ("STATE_DIR", None),
     ("theme_park_url",): ("THEME_PARK_URL", None),
     ("domain",): ("DOMAIN", ""),
     ("picker_url",): ("PICKER_URL", None),
@@ -52,7 +53,7 @@ KEYS = {
     ("custom_themes", "dir"): ("CUSTOM_THEMES_DIR", None),
     ("custom_themes", "theme_park_www"): ("THEME_PARK_WWW", None),
 }
-BACKENDS = ("traefik-file", "script")
+BACKENDS = ("traefik-file", "script", "state")
 
 
 class ConfigError(Exception):
@@ -151,10 +152,10 @@ def resolve(env, data, repo_dir=REPO_DIR):
         fail("backend.type", f"expected one of: {', '.join(BACKENDS)}")
     if not isinstance(out["backend.default_theme"], str) or not SAFE_NAME.match(out["backend.default_theme"]):
         fail("backend.default_theme", "expected a plain theme name")
-    for name in ("custom_themes.dir", "custom_themes.theme_park_www"):
+    for name in ("custom_themes.dir", "custom_themes.theme_park_www", "state_dir"):
         if out[name] == "":                          # the example file's "unset"
             out[name] = None
-    for name in ("backend.output_file", "backend.apps_file", "custom_themes.dir", "custom_themes.theme_park_www"):
+    for name in ("backend.output_file", "backend.apps_file", "custom_themes.dir", "custom_themes.theme_park_www", "state_dir"):
         if out[name] is not None:
             if not isinstance(out[name], str) or not out[name].strip():
                 fail(name, "expected a file path")
@@ -171,10 +172,35 @@ SETTINGS = resolve(os.environ, read_file(CONFIG_PATH))
 # Defaults to the parent of this repo's checkout, which is where the homelab
 # clones it; relative paths in picker.yml are relative to this checkout.
 THEME_DIR = SETTINGS["theme_switcher_dir"]
+SETTINGS_FILE = THEME_DIR / "config.env"
+
+
+def _state_dir():
+    """Where the picker keeps what it writes: the live theme, history,
+    favourites, pins, the schedule and the editor queue. state_dir in
+    picker.yml (or STATE_DIR), else STATE_DIR in config.env -- which the
+    theme-switcher scripts read too -- else the theme-switcher directory
+    itself. A separate directory lets theme-switcher/ be mounted read-only
+    into the picker's container, so the container cannot touch the scripts
+    the host runs."""
+    raw = SETTINGS["state_dir"]
+    if not raw:
+        try:
+            for line in SETTINGS_FILE.read_text().splitlines():
+                if line.startswith("STATE_DIR="):
+                    raw = line.split("=", 1)[1].strip() or None
+        except OSError:
+            pass
+    if not raw:
+        return THEME_DIR
+    path = Path(raw).expanduser()
+    return path if path.is_absolute() else (THEME_DIR / path).resolve()
+
+
+STATE_DIR = _state_dir()
 # The active theme lives in its own gitignored file, not config.env --
 # see the note in config.env. May legitimately not exist yet.
-CONFIG_FILE = THEME_DIR / "current-theme.env"
-SETTINGS_FILE = THEME_DIR / "config.env"
+CONFIG_FILE = STATE_DIR / "current-theme.env"
 
 SET_THEME_SCRIPT = THEME_DIR / "set-theme.sh"
 

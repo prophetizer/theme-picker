@@ -37,7 +37,7 @@ from urllib.parse import urlsplit
 
 from . import config, state
 
-MANIFEST_FILE = config.THEME_DIR / "custom-deployed.json"
+MANIFEST_FILE = config.STATE_DIR / "custom-deployed.json"
 CHECK_EVERY = 60            # seconds between checks for changed or missing themes
 MAX_THEME_BYTES = 64 * 1024
 # Stricter than SAFE_NAME: theme.park lowercases names for its per-app files

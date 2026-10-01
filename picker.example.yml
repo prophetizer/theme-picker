@@ -10,6 +10,12 @@
 # Env: THEME_SWITCHER_DIR
 theme_switcher_dir: ..
 
+# Where the picker keeps what it writes: the live theme, history,
+# favourites, pins, the schedule and the editor queue. Give it its own
+# directory to mount theme_switcher_dir read-only into the container.
+# Default: STATE_DIR from config.env, else theme_switcher_dir.  Env: STATE_DIR
+state_dir: ""
+
 # The self-hosted theme.park instance. Default: BASE_URL from config.env in
 # the theme-switcher directory. Env: THEME_PARK_URL
 theme_park_url: https://theme-park.example.com
@@ -50,6 +56,9 @@ backend:
   # writes one traefik-themepark middleware per app into a file Traefik's
   # file provider watches. script runs set-theme.sh / generate-themes-yml.py
   # from the theme-switcher directory instead. Env: THEME_BACKEND
+  # state only records the change (in state_dir) and leaves the proxy config
+  # to `python3 -m picker.renderer`, run as a separate, network-less
+  # container: then only that container can write Traefik config.
   type: traefik-file
   # traefik-file: where to write. Default: OUTPUT_FILE from config.env in the
   # theme-switcher directory, else dynamic/themes.yml there. Relative paths

@@ -13,6 +13,7 @@ Times are naive local wall-clock times (the container's TZ): "19:00" means
 19:00 on the clock, including across a DST change.
 """
 
+import random
 import re
 import sys
 import threading
@@ -21,11 +22,16 @@ from datetime import datetime, time as dtime, timedelta
 
 from . import apply, config, state, themes
 
-SCHEDULE_FILE = config.THEME_DIR / "theme-schedule.json"
+SCHEDULE_FILE = config.STATE_DIR / "theme-schedule.json"
 TICK = 30
 _HHMM = re.compile(r"^([01][0-9]|2[0-3]):([0-5][0-9])\Z")
 DEFAULTS = {"enabled": False, "day": "", "night": "", "day_at": "07:00", "night_at": "19:00",
-            "handled": ""}
+            "handled": "",
+            # Theme of the day: a random pick once a day, at daily_at, from
+            # the favourites or every theme -- never a hidden one or the live
+            # one. Exclusive with day/night: enabling one turns the other off.
+            "daily_enabled": False, "daily_at": "08:00", "daily_pool": "favourites", "daily_handled": ""}
+POOLS = ("favourites", "all")
 _LOCK = threading.Lock()
 
 
@@ -76,6 +82,8 @@ def validate(data):
         sch[slot], sch[f"{slot}_at"] = t, at
     if sch["day_at"] == sch["night_at"]:
         return None, "Day and night need different switch times."
+    if sch["enabled"]:
+        sch["daily_enabled"] = False                 # one schedule at a time
     return sch, None
 
 
@@ -100,6 +108,79 @@ def save(data, now=None):
     elif applied:
         msg += f" Could not apply {applied[1]}: {applied[3]}"
     return True, msg
+
+
+def daily_pool(sch):
+    """The themes the theme of the day picks from: favourites (or every
+    theme), minus hidden ones and the live one."""
+    allowed = set(themes.allowed_themes())
+    hidden = set(state.read_hidden())
+    base = state.read_favourites() if sch["daily_pool"] == "favourites" else sorted(allowed)
+    live = themes.current_theme()
+    return [t for t in base if t in allowed and t not in hidden and t != live]
+
+
+def daily_due(sch, now):
+    """The most recent daily pick time at or before now."""
+    today = datetime.combine(now.date(), _at(sch["daily_at"]))
+    return today if today <= now else today - timedelta(days=1)
+
+
+def save_daily(data, now=None, rng=random):
+    """Validate and store the theme-of-the-day settings; enabling it turns
+    day/night off and picks a theme now. Returns (ok, message)."""
+    at, pool, on = str(data.get("at", "")), str(data.get("pool", "")), bool(data.get("enabled"))
+    if not _HHMM.match(at):
+        return False, "The time must be HH:MM (24-hour)."
+    if pool not in POOLS:
+        return False, "Pick from favourites or all themes."
+    with _LOCK:
+        sch = read()
+        sch.update(daily_enabled=on, daily_at=at, daily_pool=pool, daily_handled="")
+        if on:
+            sch["enabled"] = False                   # one schedule at a time
+        state.write_json(SCHEDULE_FILE, sch)
+    if not on:
+        return True, "Theme of the day off."
+    if not daily_pool(sch):
+        return True, ("Theme of the day on, but there is nothing to pick from yet: "
+                      + ("star some favourites." if pool == "favourites" else "every theme is hidden."))
+    picked = tick_daily(now, rng=rng)
+    msg = f"Theme of the day on: a new pick from {'your favourites' if pool == 'favourites' else 'all themes'} every day at {at}."
+    if picked and picked[1]:
+        msg += f" Today's: {picked[0]}."
+    return True, msg
+
+
+def tick_daily(now=None, apply_fn=None, rng=random):
+    """Pick and apply today's theme if today's pick has not happened.
+    Returns (theme, ok, message) when it acted, else None."""
+    apply_fn = apply_fn or apply.apply_theme
+    now = now or datetime.now()
+    with _LOCK:
+        sch = read()
+        if not sch["daily_enabled"]:
+            return None
+        when = daily_due(sch, now)
+        try:
+            handled = datetime.fromisoformat(sch["daily_handled"]) if sch["daily_handled"] else None
+        except ValueError:
+            handled = None
+        if handled and handled >= when:
+            return None
+        pool = daily_pool(sch)
+        result = None
+        if pool:
+            theme = rng.choice(pool)
+            ok, message, status = apply_fn(theme, "schedule (theme of the day)")
+            result = (theme, ok, message)
+            if not ok:
+                print(f"schedule: {message}", file=sys.stderr, flush=True)
+                if status != 400:
+                    return result                    # retry next tick
+        sch["daily_handled"] = when.isoformat()
+        state.write_json(SCHEDULE_FILE, sch)
+        return result
 
 
 def tick(now=None, apply_fn=None):
@@ -136,7 +217,12 @@ def tick(now=None, apply_fn=None):
 def status(now=None):
     """The schedule plus where it is now, for the page and /api/schedule."""
     sch = read()
-    out = {k: sch[k] for k in ("enabled", "day", "night", "day_at", "night_at")}
+    out = {k: sch[k] for k in ("enabled", "day", "night", "day_at", "night_at",
+                               "daily_enabled", "daily_at", "daily_pool")}
+    if sch["daily_enabled"]:
+        now_ = now or datetime.now()
+        out["daily_next"] = (daily_due(sch, now_) + timedelta(days=1)).strftime("%a %H:%M")
+        out["daily_pool_size"] = len(daily_pool(sch))
     if sch["enabled"] and sch["day"] and sch["night"]:
         now = now or datetime.now()
         _, slot = current_slot(sch, now)
@@ -149,6 +235,7 @@ def _loop():
     while True:
         try:
             tick()
+            tick_daily()
         except Exception as e:                   # never let the scheduler die
             print(f"schedule: {e}", file=sys.stderr, flush=True)
         time.sleep(TICK)

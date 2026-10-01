@@ -19,8 +19,8 @@ from datetime import date, datetime
 
 from . import deploy, colour as c, config, state, themes
 
-QUEUE_DIR = config.THEME_DIR / "editor-queue"
-EDITOR_STATUS = config.THEME_DIR / "editor-status.json"
+QUEUE_DIR = config.STATE_DIR / "editor-queue"
+EDITOR_STATUS = config.STATE_DIR / "editor-status.json"
 EDITOR_MARKER = "Created in the theme picker's editor"
 HEX6 = re.compile(r"^#[0-9a-fA-F]{6}\Z")
 NEWNAME = re.compile(r"^[a-z0-9][a-z0-9-]{1,39}\Z")

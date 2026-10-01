@@ -1,0 +1,24 @@
+# Routes for the starter stack. The <app>-theme middleware is defined in
+# themes.yml, which the picker writes (one per app in apps.yml).
+http:
+  routers:
+    picker:
+      rule: "Host(`picker.localhost`)"
+      service: picker
+    themepark:
+      rule: "Host(`themepark.localhost`)"
+      service: themepark
+    files:
+      rule: "Host(`files.localhost`)"
+      service: files
+      middlewares: [files-theme@file]
+  services:
+    picker:
+      loadBalancer:
+        servers: [{url: "http://picker:8090"}]
+    themepark:
+      loadBalancer:
+        servers: [{url: "http://themepark:80"}]
+    files:
+      loadBalancer:
+        servers: [{url: "http://files:80"}]

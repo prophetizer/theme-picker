@@ -119,3 +119,17 @@ class Selection(unittest.TestCase):
             self.assertIsInstance(backend.get(), Script)
         with mock.patch.dict(config.SETTINGS, {"backend.type": "traefik-file"}):
             self.assertIsInstance(backend.get(), TraefikFile)
+
+
+class FirstStart(TempDir):
+    def test_writes_a_missing_config_once(self):
+        from picker import handler
+        b = TraefikFile(output_file=self.d / "dyn" / "themes.yml", state_file=self.d / "current-theme.env",
+                        default_theme="dark", apps=lambda: APPS, pins=dict, base_url=lambda: "https://tp.example.test")
+        with mock.patch.object(backend, "get", return_value=b), mock.patch("builtins.print"):
+            handler.write_missing_proxy_config()
+            first = (self.d / "dyn" / "themes.yml").read_text()
+            self.assertIn("theme: dark", first)
+            (self.d / "dyn" / "themes.yml").write_text("# mine\n")
+            handler.write_missing_proxy_config()                   # existing file: left alone
+        self.assertEqual((self.d / "dyn" / "themes.yml").read_text(), "# mine\n")

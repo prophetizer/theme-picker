@@ -7,6 +7,7 @@ from datetime import date, datetime
 from pathlib import Path
 
 from . import config, deploy, schedule, shots, state, themes
+from . import colour
 from .colour import FAMILIES
 from .editor import EDITOR_MARKER
 from .metrics import theme_metrics
@@ -37,6 +38,18 @@ STATIC_TYPES = {"style.css": "text/css; charset=utf-8", "app.js": "text/javascri
 VERSION = {name: hashlib.sha256(data).hexdigest()[:12] for name, data in STATIC.items()}
 
 
+def swatch_colours(theme):
+    """The swatch's colours as #rrggbb (page, panels, button, link, text --
+    the first stop of a gradient), for find-by-colour and similar themes."""
+    pal = themes.theme_palette(theme)
+    out = []
+    for v in themes.SWATCH_VARS:
+        st = colour.stops(pal.get(v, ""))
+        if st:
+            out.append(colour.to_hex(st[0]))
+    return " ".join(out)
+
+
 def swatch_html(theme):
     pal = themes.theme_palette(theme)
     if not pal:
@@ -60,7 +73,7 @@ def added_day(added):
     return added[:10]
 
 
-def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin="", twin_of=""):
+def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin="", twin_of="", hidden=frozenset()):
     """One theme tile. A theme with a light/dark twin carries data-twin; the
     twin itself data-twin-of, and sits right after it in the same section.
     The page shows one form of each pair at a time (the sun/moon switch, or
@@ -118,14 +131,15 @@ def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin
         f'data-added="{e(added)}" data-new="{int(fresh)}" '
         f'data-contrast="{"low" if warn else "ok"}" data-warn="{e(warn)}" '
         f'data-hc="{int(m["high_contrast"])}" '
-        f'data-shots="{e(" ".join(apps))}" data-fav="{int(fav)}"{pair_attrs}>'
+        f'data-shots="{e(" ".join(apps))}" data-fav="{int(fav)}" data-hidden="{int(t in hidden)}" '
+        f'data-colors="{e(swatch_colours(t))}"{pair_attrs}>'
         f'<span class="tile-top"><span class="name" title="{e(t)}">{e(t)}</span>{star}</span>'
         f'{swatch_html(t)}'
         f'<span class="tile-foot"><span class="tags">{"".join(tags)}</span>{peek}{forms}</span></button>'
     )
 
 
-def theme_grid(names, section, active, shot_idx, dates, today, favs=frozenset(), pairs=None):
+def theme_grid(names, section, active, shot_idx, dates, today, favs=frozenset(), pairs=None, hidden=frozenset()):
     """Tiles for a section; with `pairs`, each theme's twin follows it (and a
     twin in `names` is skipped where it stands)."""
     pairs = pairs or {}
@@ -141,7 +155,7 @@ def theme_grid(names, section, active, shot_idx, dates, today, favs=frozenset(),
     themes.warm_palette_cache(every)
     with ThreadPoolExecutor(max_workers=8) as ex:     # metrics read the same cache
         list(ex.map(theme_metrics, every))
-    return "\n".join(tile_html(t, section, active, shot_idx, dates, today, favs, twin=tw, twin_of=of)
+    return "\n".join(tile_html(t, section, active, shot_idx, dates, today, favs, twin=tw, twin_of=of, hidden=hidden)
                      for t, tw, of in entries)
 
 
@@ -229,7 +243,26 @@ def schedule_html():
         f'<div class="ed-row"><button type="button" id="sch-save">Save</button>'
         f'<span id="sch-status" class="count"></span></div>'
         f'<p class="count">A theme picked by hand stays until the next switch time; then the '
-        f'schedule takes over again. Scheduled switches are not announced on ntfy.</p></div>')
+        f'schedule takes over again. Scheduled switches are not announced on ntfy.</p>'
+        f'<h2 class="tab-title">Theme of the day '
+        f'<span id="daily-state" class="count">{e(daily_summary(st))}</span></h2>'
+        f'<div class="ed-row"><label><input type="checkbox" id="daily-enabled"'
+        f'{" checked" if st["daily_enabled"] else ""}> Pick a new theme every day</label>'
+        f'<label>at <input type="time" id="daily-at" value="{e(st["daily_at"])}"></label>'
+        f'<label>from <select id="daily-pool">'
+        f'<option value="favourites"{" selected" if st["daily_pool"] == "favourites" else ""}>my favourites</option>'
+        f'<option value="all"{" selected" if st["daily_pool"] == "all" else ""}>all themes</option></select></label></div>'
+        f'<div class="ed-row"><button type="button" id="daily-save">Save</button>'
+        f'<span id="daily-status" class="count"></span></div>'
+        f'<p class="count">Never picks a hidden theme or the one already live. Turning this on '
+        f'turns the day/night schedule off, and the other way round.</p></div>')
+
+
+def daily_summary(st):
+    if not st["daily_enabled"]:
+        return "off"
+    pool = "favourites" if st["daily_pool"] == "favourites" else "all themes"
+    return f"on · from {pool} ({st.get('daily_pool_size', 0)}) · next pick {st.get('daily_next', '')}"
 
 
 def schedule_summary(st):
@@ -287,8 +320,9 @@ def render_page(message="", preview=""):
     msg_text = html.escape(message)
     shot_idx, dates, today = shots.screenshot_index(), state.theme_dates(), date.today()
     favs = frozenset(state.read_favourites())
+    hidden = frozenset(state.read_hidden())
     pairs = themes.variant_pairs()
-    grid = lambda names, sect: theme_grid(names, sect, active, shot_idx, dates, today, favs, pairs)
+    grid = lambda names, sect: theme_grid(names, sect, active, shot_idx, dates, today, favs, pairs, hidden)
     app_opts = "".join(f'<option value="{a}">{a} screenshots</option>' for a in shots.APP_ORDER)
     base_opts = "".join(f'<option value="{html.escape(t)}"{" selected" if t == active else ""}>'
                         f'{html.escape(t)}</option>' for t in sorted(themes.allowed_themes()))
@@ -302,7 +336,7 @@ def render_page(message="", preview=""):
         grid_community=grid(themes.community_themes(), "community"),
         **{f"grid_{g.replace('-', '_')}": grid(names, g) for g, names in custom_groups(pairs).items()},
         ed_twin_note=("" if deploy.enabled() else
-                      '<span class="count">A light/dark twin of it is made automatically.</span>'),
+                      '<span class="count" id="ed-twin-note">A light/dark twin of it is made automatically.</span>'),
         live_swatch=swatch_html(active),
         msg_hidden=msg_hidden, msg_text=msg_text, preview_banner=preview_banner,
         early_v=VERSION["early.js"], apps=apps_html(active),

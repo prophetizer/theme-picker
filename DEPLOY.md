@@ -9,6 +9,10 @@ re-themes every app within a second or two, with no restarts.
 This guide takes you from nothing to a working picker, then covers the
 optional extras.
 
+
+> To try it first, the [starter stack](starter/) brings up Traefik,
+> theme.park, the picker and a demo app on `http://*.localhost` with one command.
+
 ## What you need
 
 - **Traefik v3**, with the file provider watching a directory.

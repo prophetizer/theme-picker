@@ -197,6 +197,15 @@ class Variants(SandboxCase):
         self.assertIn(f'title="Added {render.added_day(now)}"', tile("fresh-one"))
         self.assertIn('data-new="0"', tile("old-one"))
 
+    def test_tiles_carry_their_swatch_colours(self):
+        from picker import render
+        self.add_custom("hc", fixture("high_contrast.css"))
+        cols = render.swatch_colours("hc").split()
+        self.assertEqual(len(cols), 5)
+        self.assertTrue(all(len(c) == 7 and c.startswith("#") for c in cols))
+        page = render.render_page()
+        self.assertIn(f'data-colors="{" ".join(cols)}"', page)
+
     def test_added_day_is_the_local_day(self):
         import os, time as _t
         from picker import render

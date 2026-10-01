@@ -1,0 +1,97 @@
+# Theme Picker starter stack: Traefik, theme.park, the picker and one demo app
+# (File Browser), on http://*.localhost -- no domain, no TLS, nothing to edit.
+#
+#   docker compose up -d
+#   open http://picker.localhost      (pick a theme)
+#   open http://files.localhost       (watch it change)
+#
+# Port 80 busy? STARTER_PORT=8088 docker compose up -d, then use
+# http://picker.localhost:8088 and http://files.localhost:8088.
+#
+# For trying it out, not for production: plain HTTP and no login in front of
+# the picker. DEPLOY.md covers a real setup.
+
+name: theme-picker-starter
+
+services:
+  traefik:
+    image: traefik:v3.7
+    command:
+      - --entrypoints.web.address=:${STARTER_PORT:-80}
+      - --providers.file.directory=/dynamic
+      - --providers.file.watch=true
+      # The plugin that injects the theme into each app's pages.
+      - --experimental.plugins.themepark.modulename=github.com/packruler/traefik-themepark
+      - --experimental.plugins.themepark.version=v1.4.2
+    ports:
+      - "${STARTER_PORT:-80}:${STARTER_PORT:-80}"
+    volumes:
+      # One folder holds both files: Traefik's file provider reacts to
+      # changes in its own folder only, not in sub-folders. It is the
+      # picker's proxy/ folder, read-only here: themes.yml (the picker
+      # writes it, at start and on every change) and routes.yml (copied in
+      # by the routes service below).
+      - type: volume
+        source: picker-data
+        target: /dynamic
+        read_only: true
+        volume:
+          subpath: proxy
+    depends_on:
+      routes:
+        condition: service_completed_successfully
+    networks:
+      default:
+        # The picker fetches theme.park and checks the demo app through the
+        # same addresses your browser uses, so inside the stack these names
+        # lead to Traefik too.
+        aliases: [picker.localhost, themepark.localhost, files.localhost]
+    restart: unless-stopped
+
+  routes:
+    # One-shot: copies traefik/routes.yml next to the picker's themes.yml,
+    # once the picker is up (it creates that folder at start).
+    image: busybox:1.37
+    command: ["cp", "/in/routes.yml", "/out/routes.yml"]
+    volumes:
+      - ./traefik/routes.yml:/in/routes.yml:ro
+      - type: volume
+        source: picker-data
+        target: /out
+        volume:
+          subpath: proxy
+    depends_on:
+      picker:
+        condition: service_healthy
+    restart: "no"
+
+  themepark:
+    image: ghcr.io/themepark-dev/theme.park:1.23.0
+    environment:
+      - TP_DOMAIN=themepark.localhost:${STARTER_PORT:-80}
+      - TP_SCHEME=http
+    restart: unless-stopped
+
+  picker:
+    image: ${PICKER_IMAGE:-ghcr.io/prophetizer/theme-picker:1}
+    environment:
+      - DOMAIN=localhost
+      - PICKER_URL=http://picker.localhost:${STARTER_PORT:-80}/
+      - THEME_PARK_URL=http://themepark.localhost:${STARTER_PORT:-80}
+      - THEME_APPS_FILE=/config/apps.yml
+      - THEME_OUTPUT_FILE=/data/proxy/themes.yml
+      - THEME_DEFAULT=dark
+    volumes:
+      - ./apps.yml:/config/apps.yml:ro
+      - picker-data:/data             # history, favourites, pins; proxy/themes.yml
+    restart: unless-stopped
+
+  files:
+    image: filebrowser/filebrowser:v2.63.23
+    command: ["--noauth", "--root", "/srv", "--address", "0.0.0.0", "--port", "80", "--database", "/tmp/filebrowser.db"]
+    volumes:
+      - ./demo-files:/srv:ro
+    restart: unless-stopped
+
+volumes:
+  picker-data:

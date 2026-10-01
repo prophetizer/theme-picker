@@ -9,7 +9,7 @@ tiles.forEach((b, i) => b.dataset.idx = i);
 // One grid per section (custom-dark, ..., community, official, all); a tile's
 // data-section names the grid it belongs to when sorted by section.
 const grids = Object.fromEntries($$('.grid[data-grid]').map(g => [g.dataset.grid, g]));
-const state = {q: '', grad: false, readable: false, fresh: false,
+const state = {q: '', near: '', showHidden: false, grad: false, readable: false, fresh: false,
                fav: false, hc: false, family: '', sort: 'section', preview: '', view: 'designed'};
 
 // --- light/dark pairs ---------------------------------------------------------
@@ -18,6 +18,7 @@ const state = {q: '', grad: false, readable: false, fresh: false,
 // The choice is the tile's own sun/moon switch if touched, else the sidebar's
 // "show every theme as". The live theme always shows in its live form.
 const byName = Object.fromEntries(tiles.map(b => [b.dataset.theme, b]));
+for (const b of tiles) if (b.dataset.twinOf && byName[b.dataset.twinOf]) b.dataset.hidden = byName[b.dataset.twinOf].dataset.hidden;
 let pick = {};                                  // original name -> 'orig' | 'twin'
 const originalOf = b => (b.dataset.twinOf && byName[b.dataset.twinOf]) || b;
 function activeForm(orig) {
@@ -29,6 +30,40 @@ function activeForm(orig) {
     ? twin : orig;
 }
 const isShownForm = b => activeForm(originalOf(b)) === b;
+// Hidden is a property of the theme, kept on its lead tile; the twin follows.
+const isHiddenTheme = b => originalOf(b).dataset.hidden === '1';
+
+// --- colour distance (OKLab), for "closest to a colour" and similar themes ---
+const lin = c => { c /= 255; return c <= 0.04045 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); };
+function oklab(hex) {
+  const r = lin(parseInt(hex.slice(1, 3), 16)), g = lin(parseInt(hex.slice(3, 5), 16)), b = lin(parseInt(hex.slice(5, 7), 16));
+  const l = Math.cbrt(0.4122214708*r + 0.5363325363*g + 0.0514459929*b);
+  const m = Math.cbrt(0.2119034982*r + 0.6806995451*g + 0.1073969566*b);
+  const s = Math.cbrt(0.0883024619*r + 0.2817188376*g + 0.6299787005*b);
+  return [0.2104542553*l + 0.7936177850*m - 0.0040720468*s, 1.9779984951*l - 2.4285922050*m + 0.4505937099*s,
+          0.0259040371*l + 0.7827717662*m - 0.8086757660*s];
+}
+const labOf = b => b._lab || (b._lab = (b.dataset.colors || '').split(' ').filter(Boolean).map(oklab));
+const dLab = (p, q) => Math.hypot(p[0] - q[0], p[1] - q[1], p[2] - q[2]);
+// How close a theme comes to one colour: its nearest swatch colour.
+function nearness(b) {
+  const target = oklab(state.near), labs = labOf(b);
+  return labs.length ? Math.min(...labs.map(x => dLab(x, target))) : Infinity;
+}
+// How alike two themes look (lower = more alike). Two measures, added:
+// role by role (page to page, button to button...), and as colour sets
+// (each colour to its nearest in the other theme, both ways). Role by role
+// alone missed a family that shifts its shades by one (Nordfox's panel IS
+// Nord's page); sets alone lost same-family variants. Page and panels weigh
+// most, then button, link, text. Checked across all 200 themes.
+const ROLE_WEIGHT = [3, 2, 1.5, 1, 1], WSUM = 8.5;
+function likeness(a, b) {
+  const p = labOf(a), q = labOf(b);
+  if (p.length !== 5 || q.length !== 5) return Infinity;
+  const role = p.reduce((sum, x, i) => sum + ROLE_WEIGHT[i] * dLab(x, q[i]), 0);
+  const near = (from, to) => from.reduce((sum, x, i) => sum + ROLE_WEIGHT[i] * Math.min(...to.map(y => dLab(x, y))), 0);
+  return (role + near(p, q) + near(q, p)) / WSUM;
+}
 function seedPick() {
   pick = {};
   const live = tiles.find(b => b.classList.contains('active'));
@@ -52,6 +87,7 @@ function save() { try { localStorage.setItem('picker-state', JSON.stringify(stat
 function matches(b) {
   const d = b.dataset;
   return isShownForm(b)
+      && (state.showHidden || !isHiddenTheme(b))
       && (!state.q || d.theme.toLowerCase().includes(state.q))
       && (!state.grad || d.gradient === '1')
       && (!state.readable || d.contrast === 'ok')
@@ -69,18 +105,22 @@ const SORTS = {
                     || (a.dataset.hue - b.dataset.hue),
   // ISO text sorts by time: full UTC timestamps order same-day additions;
   // an older day-only value sorts before any timestamp of that day.
+  near:   (a, b) => nearness(a) - nearness(b),
   newest: (a, b) => (b.dataset.added || '').localeCompare(a.dataset.added || '')
                     || a.dataset.theme.localeCompare(b.dataset.theme),
 };
 
+// A picked colour overrides the sort: closest first, in one list.
+const sortKey = () => state.near ? 'near' : state.sort;
 function layout() {
   // "section" keeps official / community / custom; any other sort pools every
   // theme into one grid, because sorting 110 themes by brightness is only
   // useful if it is one list.
-  const sorted = state.sort === 'section'
+  const key = sortKey();
+  const sorted = key === 'section'
     ? [...tiles].sort((a, b) => a.dataset.idx - b.dataset.idx)
-    : [...tiles].sort(SORTS[state.sort]);
-  for (const b of sorted) (state.sort === 'section' ? grids[b.dataset.section] : grids.all).appendChild(b);
+    : [...tiles].sort(SORTS[key]);
+  for (const b of sorted) (key === 'section' ? grids[b.dataset.section] : grids.all).appendChild(b);
 }
 
 function refresh() {
@@ -89,11 +129,12 @@ function refresh() {
   for (const sec of $$('.sect')) {
     const n = sec.querySelectorAll('.theme-btn:not([hidden])').length;
     sec.querySelector('.sect-count').textContent = n ? `${n}` : '';
-    const inMode = (sec.dataset.sect === 'all') === (state.sort !== 'section');
+    const inMode = (sec.dataset.sect === 'all') === (sortKey() !== 'section');
     sec.hidden = !inMode || !sec.querySelector('.theme-btn:not([hidden])');
   }
   // Counted over the form each pair is showing: one tile per theme.
   const forms = tiles.filter(isShownForm), total = forms.length;
+  const hiddenN = tiles.filter(b => !b.dataset.twinOf && b.dataset.hidden === '1').length;
   // Every theme should have a light/dark twin; say so only when some don't.
   const single = forms.filter(b => !b.dataset.twin && !b.dataset.twinOf).length;
   const grads = forms.filter(b => b.dataset.gradient === '1').length;
@@ -101,10 +142,11 @@ function refresh() {
   const hc = forms.filter(b => b.dataset.hc === '1').length;
   $('#count').textContent = shown === total
     ? `${total} themes${single ? ` (${single} without a light/dark twin)` : ''} · ${grads} gradient · ${hc} high contrast · ${low} low contrast`
+      + (hiddenN && !state.showHidden ? ` · ${hiddenN} hidden` : '')
     : `${shown} of ${total}`;
   $$('#view [data-view]').forEach(v => v.classList.toggle('on', v.dataset.view === state.view));
   $$('.fam').forEach(f => f.classList.toggle('on', f.dataset.family === state.family));
-  const active = [state.q, state.grad, state.readable, state.fresh, state.fav, state.hc, state.family]
+  const active = [state.q, state.near, state.grad, state.readable, state.fresh, state.fav, state.hc, state.family]
     .filter(Boolean).length;
   $('#filters-toggle').textContent = active ? `Filters (${active})` : 'Filters';
   updateSurprise();
@@ -122,6 +164,19 @@ ctl.fresh.checked = state.fresh; ctl.fav.checked = state.fav; ctl.hc.checked = s
 ctl.q.addEventListener('input', () => { state.q = ctl.q.value.trim().toLowerCase(); refresh(); });
 ctl.sort.addEventListener('change', () => { state.sort = ctl.sort.value; layout(); refresh(); });
 ctl.preview.addEventListener('change', () => { state.preview = ctl.preview.value; applyPreview(); save(); });
+ctl.showHidden = $('#show-hidden'); ctl.showHidden.checked = state.showHidden;
+ctl.showHidden.addEventListener('change', () => { state.showHidden = ctl.showHidden.checked; refresh(); });
+const nearIn = $('#near');
+function setNear(hex) {
+  state.near = hex;
+  $('#near-value').textContent = hex || 'off';
+  $('#near-clear').hidden = !hex;
+  if (hex) nearIn.value = hex;
+  layout(); refresh();
+}
+nearIn.addEventListener('input', () => setNear(nearIn.value));
+if (state.near) { $('#near-value').textContent = state.near; $('#near-clear').hidden = false; nearIn.value = state.near; }
+$('#near-clear').addEventListener('click', () => setNear(''));
 for (const k of ['grad', 'readable', 'fresh', 'fav', 'hc'])
   ctl[k].addEventListener('change', () => { state[k] = ctl[k].checked; refresh(); });
 $$('.fam').forEach(f => f.addEventListener('click', () => {
@@ -220,7 +275,7 @@ function visibleTiles() {
 // visibleTiles(): the button sits in the live strip on every tab, and on any
 // tab but Themes no tile has an offsetParent, so it used to do nothing there.
 function surprisePool() {
-  return tiles.filter(b => !b.hidden && !b.closest('.sect[hidden], details.sect:not([open])'));
+  return tiles.filter(b => !b.hidden && !isHiddenTheme(b) && !b.closest('.sect[hidden], details.sect:not([open])'));
 }
 const surpriseCandidates = () => surprisePool().filter(b => !b.classList.contains('active'));
 
@@ -272,6 +327,15 @@ function openLightbox(btn) {
   const added = btn.dataset.added || '';
   if (added) bits.push('added ' + (added.includes('T') ? new Date(added).toLocaleDateString() : added));
   $('#lb-meta').textContent = bits.join(' · ');
+  $('#lb-hide').textContent = isHiddenTheme(btn) ? 'Unhide' : 'Hide';
+  $('#lb-readable').hidden = !btn.dataset.warn;            // only for low-contrast themes
+  // The five themes that look most like this one (in the forms on show).
+  const near = tiles.filter(b => isShownForm(b) && originalOf(b) !== originalOf(btn))
+    .map(b => [likeness(btn, b), b]).filter(x => x[0] < Infinity).sort((x, y) => x[0] - y[0]).slice(0, 5);
+  const sim = $('#lb-similar');
+  sim.innerHTML = near.length ? 'Looks like: ' + near.map(([, b]) =>
+    `<button type="button" class="chip" data-similar="${esc(b.dataset.theme)}">${esc(b.dataset.theme)}</button>`).join(' ') : '';
+  sim.hidden = !near.length;
   const warn = $('#lb-warn');
   warn.textContent = btn.dataset.warn ? 'Contrast: ' + btn.dataset.warn : '';
   warn.hidden = !btn.dataset.warn;
@@ -333,6 +397,11 @@ lbBody.addEventListener('click', ev => {
   if (ev.target.closest('[data-go="grid"]')) showGrid();
 });
 $('#lb-close').addEventListener('click', closeLightbox);
+$('#lb-hide').addEventListener('click', () => { if (lbTile) toggleHide(lbTile); });
+$('#lb-similar').addEventListener('click', ev => {
+  const c = ev.target.closest('[data-similar]');
+  if (c && byName[c.dataset.similar]) openLightbox(byName[c.dataset.similar]);
+});
 $('#lb-apply').addEventListener('click', () => { applyTheme(lbTile.dataset.theme); closeLightbox(); });
 // A link that opens the picker dressed in this theme without applying it.
 $('#lb-share').addEventListener('click', async () => {
@@ -397,6 +466,7 @@ document.addEventListener('keydown', ev => {
   if ((ev.key === 'l' || ev.key === 'L') && cur) { flipForm(cur, cur.dataset.mode === 'light' ? 'dark' : 'light'); return; }
   if ((ev.key === 'p' || ev.key === 'P') && cur) { openLightbox(cur); return; }
   if ((ev.key === 'f' || ev.key === 'F') && cur) { toggleFav(cur); return; }
+  if ((ev.key === 'h' || ev.key === 'H') && cur) { toggleHide(cur); return; }
   if (!ev.key.startsWith('Arrow')) return;
   ev.preventDefault();
   const list = visibleTiles();
@@ -414,6 +484,14 @@ async function postJSON(url, body) {
   const res = await fetch(url, {method: 'POST', headers: {'Content-Type': 'application/json'},
                                 body: JSON.stringify(body)});
   return res.json();
+}
+async function toggleHide(btn) {
+  const orig = originalOf(btn), on = orig.dataset.hidden !== '1';
+  const data = await postJSON('/api/hide', {theme: orig.dataset.theme, on});
+  if (!data.ok) return;
+  for (const b of [orig, byName[orig.dataset.twin]]) if (b) b.dataset.hidden = on ? '1' : '0';
+  if (lbTile && originalOf(lbTile) === orig) $('#lb-hide').textContent = on ? 'Unhide' : 'Hide';
+  refresh();
 }
 async function toggleFav(btn) {
   const on = btn.dataset.fav !== '1';
@@ -627,6 +705,7 @@ function edUpdate() {
       + (fix ? ` <button type="button" class="ed-fix" data-f="${a}" data-v="${fix}" title="Same hue, lightness adjusted">`
                + `<i style="background:${fix}"></i>Use ${fix}</button>` : '') + '</li>';
   }).join('');
+  if (typeof updateTwin === 'function') updateTwin();
 }
 for (const el of edInputs) {
   el.addEventListener('input', () => {
@@ -777,8 +856,317 @@ $('#sch-save').addEventListener('click', async () => {
   st.textContent = data.message;
   if (!data.ok) return;
   $('#sch-state').textContent = schSummary(data.schedule);
+  $('#daily-state').textContent = dailySummary(data.schedule);
+  $('#daily-enabled').checked = data.schedule.daily_enabled;
   if (data.theme !== data.previous) markApplied(data.previous, data.theme, data.css);
 });
+function dailySummary(s) {
+  if (!s.daily_enabled) return 'off';
+  const pool = s.daily_pool === 'favourites' ? 'favourites' : 'all themes';
+  return `on · from ${pool} (${s.daily_pool_size || 0}) · next pick ${s.daily_next || ''}`;
+}
+$('#daily-save').addEventListener('click', async () => {
+  const st = $('#daily-status');
+  st.textContent = 'Saving...';
+  const data = await postJSON('/api/daily', {
+    enabled: $('#daily-enabled').checked, at: $('#daily-at').value, pool: $('#daily-pool').value});
+  st.textContent = data.message;
+  if (!data.ok) return;
+  $('#daily-state').textContent = dailySummary(data.schedule);
+  $('#sch-state').textContent = schSummary(data.schedule);
+  $('#sch-enabled').checked = data.schedule.enabled;
+  if (data.theme !== data.previous) markApplied(data.previous, data.theme, data.css);
+});
+
+// --- the other-mode twin, live ------------------------------------------------
+// The same maths as homelab-themes' tools/make_variants.py (build()), on the
+// editor's flat fields: surfaces flip lightness around the page, keeping hue
+// with softened chroma; text is inverted then moved only as far as 7:1 (muted
+// 4.5:1) on every panel and page colour; accents keep their colour and move
+// only as far as contrast needs; the button label is re-picked. In this
+// homelab the worker generates the real twin on save with the Python tool.
+function fromOklab(L, a, b) {
+  L = Math.min(1, Math.max(0, L));
+  const raw = (k) => {
+    const l = (L + 0.3963377774*a*k + 0.2158037573*b*k) ** 3, m = (L - 0.1055613458*a*k - 0.0638541728*b*k) ** 3,
+          s = (L - 0.0894841775*a*k - 1.2914855480*b*k) ** 3;
+    return [4.0767416621*l - 3.3077115913*m + 0.2309699292*s, -1.2684380046*l + 2.6097574011*m - 0.3413193965*s,
+            -0.0041960863*l - 0.7034186147*m + 1.7076147010*s];
+  };
+  const inGamut = c => c.every(x => x >= -0.0005 && x <= 1.0005);
+  let k = 1;
+  if (!inGamut(raw(1))) {                          // reduce chroma, never lightness or hue
+    let lo = 0, hi = 1;
+    for (let i = 0; i < 24; i++) { const mid = (lo + hi) / 2; if (inGamut(raw(mid))) lo = mid; else hi = mid; }
+    k = lo;
+  }
+  const gam = x => { x = Math.min(1, Math.max(0, x)); return 255 * (x <= 0.0031308 ? 12.92 * x : 1.055 * x ** (1 / 2.4) - 0.055); };
+  return rgbHex(raw(k).map(gam));
+}
+// Lightness moved (in OKLab) only as far as needed for `need`:1 on every bg.
+function fixLab(hex, bgs, need, startL) {
+  const [L0raw, a, b] = oklab(hex), L0 = startL === undefined ? L0raw : startL;
+  const worst = h => Math.min(...bgs.map(g => hexCon(h, g)));
+  const cur = fromOklab(L0, a, b);
+  if (worst(cur) >= need) return cur;
+  const meanBg = bgs.reduce((s, g) => s + hexLum(g), 0) / bgs.length;
+  for (const end of (hexLum(cur) >= meanBg ? [1, 0] : [0, 1])) {
+    if (worst(fromOklab(end, a, b)) < need) continue;
+    let lo = L0, hi = end;
+    for (let i = 0; i < 30; i++) { const mid = (lo + hi) / 2; if (worst(fromOklab(mid, a, b)) >= need) hi = mid; else lo = mid; }
+    return fromOklab(hi, a, b);
+  }
+  return null;
+}
+function twinFields(f, bg2) {
+  const page = [f.page_bg].concat(bg2 ? [bg2] : []);
+  const L0 = page.reduce((s, h) => s + oklab(h)[0], 0) / page.length;
+  const mode = page.reduce((s, h) => s + hexLum(h), 0) / page.length > 0.35 ? 'light' : 'dark';
+  const target = mode === 'light' ? 'dark' : 'light';
+  const surf = h => {
+    const [L, a, b] = oklab(h);
+    if (target === 'light') return fromOklab(Math.min(1, Math.max(0.86, 0.965 + 0.5 * (L - L0))), a * 0.6, b * 0.6);
+    const k = Math.min(1, 0.08 / Math.max(1e-6, Math.hypot(a, b)));
+    return fromOklab(Math.min(0.34, Math.max(0.12, 0.21 + 1.2 * (L - L0))), a * 0.8 * k, b * 0.8 * k);
+  };
+  const neutral = Math.hypot(...oklab(f.button).slice(1)) < 0.04;
+  const btnMove = h => {
+    const [L, a, b] = oklab(h), gap = Math.max(0.06, Math.abs(L - L0));
+    return target === 'light' ? fromOklab(Math.max(0.55, 0.965 - 0.8 * gap), a * 0.6, b * 0.6)
+                              : fromOklab(Math.min(0.5, 0.21 + 1.2 * gap), a * 0.8, b * 0.8);
+  };
+  const t = {page_bg: surf(f.page_bg), panel_bg: surf(f.panel_bg)};
+  if (bg2) t.page_bg2 = surf(bg2);
+  const bgs = [t.panel_bg, t.page_bg].concat(t.page_bg2 ? [t.page_bg2] : []);
+  for (const [k, need] of [['text', 7], ['text_hover', 7], ['muted', 4.5]])
+    t[k] = fixLab(f[k], bgs, need, 1 - oklab(f[k])[0]) || f[k];
+  for (const k of ['button', 'button_hover'])
+    t[k] = neutral ? btnMove(f[k]) : (fixLab(f[k], bgs, 3) || f[k]);
+  for (const [k, need] of [['link', 4.5], ['link_hover', 4.5], ['queue', 3]]) t[k] = fixLab(f[k], bgs, need) || f[k];
+  const best = () => hexCon('#ffffff', t.button) >= hexCon('#11141b', t.button) ? '#ffffff' : '#11141b';
+  let lab = f.button_text;
+  if (hexCon(lab, t.button) < 4.5) {
+    const [L, a, b] = oklab(lab), inv = fromOklab(1 - L, a, b);
+    lab = hexCon(inv, t.button) >= 4.5 ? inv : best();      // as make_variants: never a half-way colour
+  }
+  t.button_text = lab;
+  return {target, fields: t};
+}
+const PV_VARS = {panel_bg: '--pv-panel', text: '--pv-text', text_hover: '--pv-text-hover', muted: '--pv-muted',
+  link: '--pv-link', link_hover: '--pv-link-hover', button: '--pv-button', button_hover: '--pv-button-hover',
+  button_text: '--pv-button-text', queue: '--pv-queue'};
+function updateTwin() {
+  const f = edGet(), box = $('#ed-twin'), label = $('#ed-twin-label');
+  const ready = ['page_bg', 'panel_bg', 'button', 'button_hover', 'button_text', 'link', 'link_hover',
+                 'text', 'text_hover', 'muted', 'queue'].every(k => isHex(f[k]));
+  box.hidden = label.hidden = !ready;
+  if (!ready) return;
+  const bg2 = $('#ed-gradient').checked ? $('#ed-bg2').value : '';
+  const {target, fields: t} = twinFields(f, bg2);
+  box.style.setProperty('--pv-page', t.page_bg2
+    ? `linear-gradient(${$('#ed-angle').value}deg, ${t.page_bg}, ${t.page_bg2})` : t.page_bg);
+  for (const [k, v] of Object.entries(PV_VARS)) box.style.setProperty(v, t[k]);
+  label.textContent = `Its ${target} twin` + ($('#ed-twin-note') ? ' (made automatically when you save)' : '') + ':';
+}
+
+// --- import a colour scheme ------------------------------------------------------
+// Parsed here, in the browser: base16/base24 YAML, Ghostty, Kitty, Alacritty,
+// Xresources, Windows Terminal JSON, iTerm2 .itermcolors, VS Code themes.
+// Each becomes one palette ({bg, panel, fg, fgBright, muted, accents, button,
+// buttonText, link, name}), and that maps onto the editor's fields the way
+// homelab-themes' tools/port_palette.py does: every text colour moved only
+// in lightness until it reads (body 7:1, muted, links and labels 4.5:1).
+// #rrggbb, also from #rgb and #rrggbbaa (VS Code themes use both).
+const hex6 = v => {
+  const m = /#?([0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{3})\b/i.exec(String(v || ''));
+  if (!m) return null;
+  const h = m[1].length === 3 ? [...m[1]].map(c => c + c).join('') : m[1].slice(0, 6);
+  return '#' + h.toLowerCase();
+};
+const ANSI = ['black', 'red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white'];
+function fromAnsi(name, bg, fg, ansi, extra = {}) {
+  const a = i => ansi[i] || ansi[i % 8] || null;
+  return Object.assign({name, bg, fg, fgBright: a(15), muted: a(8) || a(7),
+    red: a(1), green: a(2), yellow: a(3), blue: a(4), magenta: a(5), cyan: a(6)}, extra);
+}
+function parseScheme(text) {
+  const src = text.trim();
+  if (!src) throw new Error('Paste a scheme first.');
+  // iTerm2 .itermcolors: a plist of colour dicts with 0-1 float components.
+  if (src.includes('<plist') || src.includes('Ansi 0 Color')) {
+    const doc = new DOMParser().parseFromString(src, 'application/xml');
+    const colours = {};
+    const keys = [...doc.querySelectorAll('plist > dict > key')];
+    for (const k of keys) {
+      const d = k.nextElementSibling; if (!d || d.tagName !== 'dict') continue;
+      const comp = {};
+      const ck = [...d.children];
+      for (let i = 0; i < ck.length - 1; i++) if (ck[i].tagName === 'key') comp[ck[i].textContent] = parseFloat(ck[i + 1].textContent);
+      if ('Red Component' in comp) colours[k.textContent] = rgbHex(['Red', 'Green', 'Blue'].map(c => comp[`${c} Component`] * 255));
+    }
+    const ansi = Array.from({length: 16}, (_, i) => colours[`Ansi ${i} Color`] || null);
+    if (!colours['Background Color']) throw new Error('No background colour in that iTerm2 file.');
+    return fromAnsi('', colours['Background Color'], colours['Foreground Color'], ansi);
+  }
+  // JSON: VS Code theme, or a Windows Terminal scheme.
+  if (src.startsWith('{') || /^\[\s*[{"]/.test(src)) {       // not a TOML [section]
+    const j = JSON.parse(src.replace(/^\s*\/\/.*$/gm, '').replace(/\/\*[\s\S]*?\*\//g, '').replace(/,(\s*[}\]])/g, '$1'));
+    if (j.colors && typeof j.colors === 'object') {
+      const c = Object.fromEntries(Object.entries(j.colors).map(([k, v]) => [k.toLowerCase(), hex6(v)]));
+      const term = n => c[`terminal.ansi${n}`];
+      const tok = {};
+      for (const r of j.tokenColors || []) { const fgc = hex6(r && r.settings && r.settings.foreground); if (fgc) tok[fgc] = (tok[fgc] || 0) + 1; }
+      const common = Object.entries(tok).sort((x, y) => y[1] - x[1]).map(x => x[0]);
+      const bg = c['editor.background'];
+      if (!bg) throw new Error('That VS Code theme has no editor.background.');
+      return {name: j.name || '', bg, panel: c['sidebar.background'] || c['editorwidget.background'],
+        fg: c['editor.foreground'] || c['foreground'] || common[0], fgBright: term('brightwhite'),
+        muted: c['descriptionforeground'] || c['editorlinenumber.foreground'] || term('brightblack'),
+        red: term('red') || common[3], green: term('green') || common[2], yellow: term('yellow') || common[4],
+        blue: term('blue') || common[1], magenta: term('magenta') || common[5], cyan: term('cyan') || common[6],
+        button: c['button.background'], buttonText: c['button.foreground'], link: c['textlink.foreground']};
+    }
+    if (j.background && (j.black || j.red)) {              // Windows Terminal
+      const ansi = [...ANSI.map(n => hex6(j[n])), ...ANSI.map(n => hex6(j['bright' + n[0].toUpperCase() + n.slice(1)]))];
+      return fromAnsi(j.name || '', hex6(j.background), hex6(j.foreground), ansi);
+    }
+    throw new Error('That JSON is neither a VS Code theme nor a Windows Terminal scheme.');
+  }
+  // base16 / base24 YAML (or the flat "baseXX: hex" form).
+  const b = {};
+  for (const m of src.matchAll(/\bbase([0-9A-Fa-f]{2})\s*:\s*["']?#?([0-9a-fA-F]{6})/g)) b[m[1].toUpperCase()] = '#' + m[2].toLowerCase();
+  if (b['00'] && b['05']) {
+    const nm = /^\s*(?:name|scheme)\s*:\s*["']?([^"'\n]+)/m.exec(src);
+    return {name: nm ? nm[1].trim() : '', bg: b['00'], panel: b['01'], fg: b['05'], fgBright: b['07'], muted: b['04'],
+      red: b['08'], orange: b['09'], yellow: b['0A'], green: b['0B'], cyan: b['0C'], blue: b['0D'], magenta: b['0E']};
+  }
+  // key/value terminal formats: Ghostty, Kitty, Alacritty TOML, Xresources.
+  const kv = {}, ansi = new Array(16).fill(null);
+  let section = '';
+  for (const raw of src.split('\n')) {
+    const line = raw.replace(/[#;].*$/, m => /^#[0-9a-f]{3,6}/i.test(m) ? m : '').trim();
+    const sec = /^\[(.+)\]$/.exec(line); if (sec) { section = sec[1].toLowerCase(); continue; }
+    let m;
+    if ((m = /^palette\s*=\s*(\d+)\s*=\s*(#?[0-9a-f]{6})/i.exec(line))) { ansi[+m[1]] = hex6(m[2]); continue; }
+    if ((m = /^\*?\.?color(\d+)\s*[:= ]\s*["']?(#?[0-9a-f]{6})/i.exec(line))) { ansi[+m[1]] = hex6(m[2]); continue; }
+    if ((m = /^\*?\.?([a-z_-]+)\s*[:= ]\s*["']?(#?[0-9a-f]{6})/i.exec(line))) {
+      const key = m[1].toLowerCase(), v = hex6(m[2]);
+      const i = ANSI.indexOf(key);
+      if (i >= 0 && /colors\.(normal|bright)/.test(section)) ansi[i + (section.endsWith('bright') ? 8 : 0)] = v;
+      else kv[key] = v;
+    }
+  }
+  if (!kv.background) throw new Error("Couldn't find a background colour: is that one of the formats listed above?");
+  return fromAnsi('', kv.background, kv.foreground, ansi);
+}
+// Every colour fixed against every background it sits on.
+const fixOn = (h, bgs, need) => (h && fixLab(h, bgs, need)) || null;
+function fieldsFromPalette(p) {
+  let page = p.bg, panel = p.panel || p.bg;
+  if (hexLum(panel) < hexLum(page)) [page, panel] = [panel, page];   // cards lighter than the page
+  const bgs = [page, panel];
+  const dark = hexLum(page) <= 0.35;
+  const fallbackText = dark ? '#eeeeee' : '#222222';
+  const text = fixOn(p.fg || fallbackText, bgs, 7) || (dark ? '#ffffff' : '#000000');
+  const button = p.button || p.blue || p.cyan || p.green || '#3584e4';
+  const hover = p.cyan && p.cyan !== button ? p.cyan : (p.blue || button);
+  const cands = [p.buttonText, page, p.fgBright, panel, p.fg].filter(Boolean);
+  let label = cands.sort((x, y) => Math.min(hexCon(y, button), hexCon(y, hover)) - Math.min(hexCon(x, button), hexCon(x, hover)))[0];
+  if (Math.min(hexCon(label, button), hexCon(label, hover)) < 4.5)
+    label = Math.min(hexCon('#ffffff', button), hexCon('#ffffff', hover)) >= Math.min(hexCon('#11141b', button), hexCon('#11141b', hover))
+      ? '#ffffff' : '#11141b';
+  // Still short on one button (a dark and a light one share no label): that
+  // button's lightness moves instead, as port_palette.py's nudge_button does.
+  const fitted = h => hexCon(label, h) >= 4.5 ? h : (fixLab(h, [label], 4.5) || h);
+  const link = fixOn(p.link || p.cyan || p.blue || button, bgs, 4.5) || text;
+  return {page_bg: page, page_bg2: '', panel_bg: panel, button: fitted(button), button_hover: fitted(hover), button_text: label,
+    link, link_hover: fixOn(p.magenta || p.blue || link, bgs, 4.5) || link,
+    text, text_hover: fixOn(p.fgBright || p.fg || fallbackText, bgs, 7) || text,
+    muted: fixOn(p.muted || p.fg || fallbackText, bgs, 4.5) || text,
+    queue: p.green || p.cyan || button};
+}
+const slugify = s => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40);
+$('#ed-import-go').addEventListener('click', () => {
+  const st = $('#ed-import-status');
+  try {
+    const p = parseScheme($('#ed-import-text').value);
+    edSet(fieldsFromPalette(p));
+    if (p.name) { $('#ed-title').value = p.name.slice(0, 40); $('#ed-name').value = slugify(p.name); }
+    st.textContent = `Imported${p.name ? ' ' + p.name : ''}. Check the preview and the contrast list, then Save & deploy.`;
+  } catch (e) {
+    st.textContent = e.message || String(e);
+  }
+});
+
+// --- edit a copy, or make a readable copy, from a theme's preview -------------------
+// Readable: body text and its hover to 7:1, muted, links and button labels
+// to 4.5:1 on the panels and page -- lightness only, the way Organizr
+// Contrast was made from Organizr.
+// A background with only its lightness moved, as little as possible, until
+// fg reads on it at `need`:1 (darker for a dark theme, lighter for a light one).
+function moveBg(bg, fg, need, darker) {
+  if (hexCon(fg, bg) >= need) return bg;
+  const [L0, a, b] = oklab(bg), end = darker ? 0 : 1;
+  if (hexCon(fg, fromOklab(end, a, b)) < need) return null;
+  let lo = L0, hi = end;
+  for (let i = 0; i < 30; i++) { const mid = (lo + hi) / 2; if (hexCon(fg, fromOklab(mid, a, b)) >= need) hi = mid; else lo = mid; }
+  return fromOklab(hi, a, b);
+}
+function makeReadable(f) {
+  f = Object.assign({}, f);
+  const changed = [];
+  // Some themes put text on mid-tone or bright-gradient surfaces where no text
+  // colour reaches 7:1, not even white. Then the surfaces move instead: text
+  // goes to the far end of its own hue, and page and panels darken (or
+  // lighten) just enough for it -- the same idea as the gradient themes' veil.
+  const surf = ['page_bg', 'panel_bg'].concat(f.page_bg2 ? ['page_bg2'] : []);
+  if (!fixLab(f.text, surf.map(k => f[k]), 7)) {
+    const dark = surf.reduce((sum, k) => sum + hexLum(f[k]), 0) / surf.length < 0.35 || hexLum(f.text) > 0.5;
+    const [, ta, tb] = oklab(f.text);
+    const far = fromOklab(dark ? 0.97 : 0.2, ta, tb);
+    for (const k of surf) {
+      const v = moveBg(f[k], far, 7.1, dark);
+      const what = {page_bg: 'page', panel_bg: 'panels', page_bg2: "the gradient's second colour"}[k];
+      if (v && v !== f[k]) { f[k] = v; changed.push(`${what} ${dark ? 'darkened' : 'lightened'}`); }
+    }
+  }
+  const bgs = [f.page_bg, f.panel_bg].concat(f.page_bg2 ? [f.page_bg2] : []);
+  const out = Object.assign({}, f);
+  for (const [k, need] of [['text', 7], ['text_hover', 7], ['muted', 4.5], ['link', 4.5], ['link_hover', 4.5]]) {
+    const v = fixLab(f[k], bgs, need);
+    if (v && v !== f[k]) { out[k] = v; changed.push(k.replace('_', ' ')); }
+  }
+  const lab = fixLab(f.button_text, [f.button, f.button_hover], 4.5);
+  if (lab && lab !== f.button_text) { out.button_text = lab; changed.push('button text'); }
+  return {fields: out, changed};
+}
+async function openInEditor(btn, readable) {
+  const theme = originalOf(btn).dataset.theme;
+  closeLightbox();
+  // Switch tabs here, synchronously: a hash change shows the tab a tick
+  // later, and the tab's own first-open load then landed after this one and
+  // overwrote the readable fix with the theme's original colours.
+  $('#ed-base').value = theme;
+  history.pushState(null, '', '#editor');
+  showTab('editor');
+  await edLoad();                                    // the newest load, so it wins
+  const title = theme.split('-').map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
+  $('#ed-name').value = slugify(`${theme}-${readable ? 'readable' : 'mine'}`);
+  $('#ed-title').value = `${title} ${readable ? 'Readable' : '(edited)'}`.slice(0, 40);
+  const st = $('#ed-status');
+  if (readable) {
+    const f = Object.assign(edGet(), {page_bg2: $('#ed-gradient').checked ? $('#ed-bg2').value : ''});
+    const r = makeReadable(f);
+    edSet(r.fields);
+    st.textContent = r.changed.length
+      ? `Made readable: ${r.changed.join(', ')} (lightness only). Review, then Save & deploy.`
+      : 'Already readable everywhere; nothing to change.';
+  } else {
+    st.textContent = `Loaded ${theme}. Change what you like, then Save & deploy under the new name.`;
+  }
+}
+$('#lb-edit').addEventListener('click', () => { if (lbTile) openInEditor(lbTile, false); });
+$('#lb-readable').addEventListener('click', () => { if (lbTile) openInEditor(lbTile, true); });
 
 // --- collapsible sections: which are folded is remembered per browser ---------
 let folded = {};

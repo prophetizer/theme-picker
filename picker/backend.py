@@ -15,6 +15,12 @@ produce, so the two can be used side by side.
 script delegates to those two scripts instead, for a setup that wants its own
 hooks around a change.
 
+state only records the change -- the live theme and whether pins are ignored,
+in current-theme.env -- and leaves the proxy config to picker.renderer, run
+in a separate container that alone can write Traefik's dynamic config. The
+picker's own container then cannot write proxy config at all: a compromised
+picker can pick theme names, nothing more.
+
 Callers validate the theme against the allowlist first; backends re-check
 that it is a plain name anyway, since the name ends up in a file Traefik
 loads.
@@ -45,15 +51,20 @@ def _plain(theme):
     return theme
 
 
-def _atomic_write(path, text):
+def _atomic_write(path, text, mode=0o664):
     """Write via a temp file in the same directory + os.replace(): a watcher
     (Traefik's file provider) only ever sees the old or the new file, never a
     truncated one -- a plain open(path, "w") briefly 502'd every themed
-    router when this was done by the generator."""
+    router when this was done by the generator.
+
+    mkstemp() makes the file 0600, so it is widened to `mode` first: the
+    state file is written by the picker and read by the renderer (another
+    user), and 0600 left the renderer falling back to the default theme."""
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, tmp = tempfile.mkstemp(dir=path.parent, prefix=f".{path.name}-", suffix=".tmp")
     try:
+        os.fchmod(fd, mode)
         with os.fdopen(fd, "w") as f:
             f.write(text)
         os.replace(tmp, path)
@@ -86,25 +97,39 @@ def _read_state(path):
         return f.read(STATE_MAX).decode("utf-8", "replace")
 
 
-def read_current(state_file):
-    """CURRENT_THEME from the state file, or "" if absent."""
+def _read_key(state_file, key):
     for line in (_read_state(state_file) or "").splitlines():
-        if line.startswith("CURRENT_THEME="):
+        if line.startswith(f"{key}="):
             return line.split("=", 1)[1].strip()
     return ""
 
 
-def write_current(state_file, theme):
-    """Set CURRENT_THEME, keeping any other lines (comments) as they are --
-    what set-theme.sh does with sed."""
+def read_current(state_file):
+    """CURRENT_THEME from the state file, or "" if absent."""
+    return _read_key(state_file, "CURRENT_THEME")
+
+
+def read_ignore_pins(state_file):
+    """IGNORE_PINS=1 in the state file: the screenshot capture's "every app
+    shows this theme, pinned or not", for the renderer to honour."""
+    return _read_key(state_file, "IGNORE_PINS") == "1"
+
+
+def write_current(state_file, theme, ignore_pins=None):
+    """Set CURRENT_THEME (and IGNORE_PINS when given), keeping any other lines
+    (comments) as they are -- what set-theme.sh does with sed."""
     path = Path(state_file)
     lines = (_read_state(path) or "").splitlines()
-    for i, line in enumerate(lines):
-        if line.startswith("CURRENT_THEME="):
-            lines[i] = f"CURRENT_THEME={theme}"
-            break
-    else:
-        lines.append(f"CURRENT_THEME={theme}")
+    want = {"CURRENT_THEME": theme}
+    if ignore_pins is not None:
+        want["IGNORE_PINS"] = "1" if ignore_pins else "0"
+    for key, value in want.items():
+        for i, line in enumerate(lines):
+            if line.startswith(f"{key}="):
+                lines[i] = f"{key}={value}"
+                break
+        else:
+            lines.append(f"{key}={value}")
     _atomic_write(path, "\n".join(lines) + "\n")
 
 
@@ -152,7 +177,8 @@ class TraefikFile:
         with _LOCK:
             self._write(read_current(self.state_file) or self.default_theme, False)
 
-    def _write(self, theme, ignore_pins):
+    def text(self, theme, ignore_pins):
+        """The whole themes.yml for this theme and the current pins."""
         base = self._base_url()
         if not base:
             raise ApplyError("no theme-park URL (theme_park_url in picker.yml, or BASE_URL in config.env)")
@@ -162,8 +188,12 @@ class TraefikFile:
         pins = {} if ignore_pins else {k: _plain(v) for k, v in self._pins().items()}
         body = yaml.safe_dump(render_middlewares(apps, theme, pins, base),
                               default_flow_style=False, sort_keys=False)
+        return HEADER + body
+
+    def _write(self, theme, ignore_pins):
+        text = self.text(theme, ignore_pins)
         try:
-            _atomic_write(self.output_file, HEADER + body)
+            _atomic_write(self.output_file, text, mode=0o644)
         except OSError as e:
             raise ApplyError(f"could not write {self.output_file.name}: {e.strerror or e}")
 
@@ -191,10 +221,28 @@ class Script:
         self._run([sys.executable, str(self.generator)], "generator")
 
 
+class StateOnly:
+    """Records the change for picker.renderer to apply; writes no proxy config."""
+    name = "state"
+
+    def __init__(self, state_file):
+        self.state_file = Path(state_file)
+
+    def apply(self, theme, ignore_pins=False):
+        theme = _plain(theme)
+        with _LOCK:
+            write_current(self.state_file, theme, ignore_pins=ignore_pins)
+
+    def set_pins(self):
+        pass                    # the pins file IS the state; the renderer watches it
+
+
 def get():
     """The configured backend, built from current settings."""
     from . import state                            # state imports this module
     s = config.SETTINGS
+    if s["backend.type"] == "state":
+        return StateOnly(config.CONFIG_FILE)
     if s["backend.type"] == "script":
         return Script(config.SET_THEME_SCRIPT, config.THEME_DIR / "generate-themes-yml.py", config.THEME_DIR)
     try:

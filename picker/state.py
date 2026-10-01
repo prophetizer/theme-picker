@@ -13,8 +13,11 @@ from . import backend, config, themes
 from .config import SAFE_NAME
 
 APPS_FILE = config.apps_file()
-OVERRIDES_FILE = config.THEME_DIR / "theme-overrides.json"
-FAVS_FILE = config.THEME_DIR / "theme-favourites.json"
+OVERRIDES_FILE = config.STATE_DIR / "theme-overrides.json"
+FAVS_FILE = config.STATE_DIR / "theme-favourites.json"
+# Themes the viewer never wants offered: left out of the grid (unless "Show
+# hidden" is on), Surprise me and the theme of the day.
+HIDDEN_FILE = config.STATE_DIR / "theme-hidden.json"
 STATE_LOCK = threading.Lock()
 
 # When each custom theme first landed in homelab-themes -- written by
@@ -25,7 +28,7 @@ DATES_FILE = config.THEME_DIR / "theme-dates.json"
 # Applied-theme history for the "recent" chips. Only the picker writes it:
 # set-theme.sh run by hand, and the screenshot capture cycling through every
 # theme, do not -- otherwise one capture run would bury the real history.
-HISTORY_FILE = config.THEME_DIR / "theme-history.json"
+HISTORY_FILE = config.STATE_DIR / "theme-history.json"
 HISTORY_KEEP, HISTORY_CHIPS = 5000, 6
 _HISTORY_LOCK = threading.Lock()
 
@@ -133,6 +136,21 @@ def set_favourite(theme, on):
         if on:
             favs.append(theme)
         write_json(FAVS_FILE, sorted(favs))
+    return True
+
+
+def read_hidden():
+    return [t for t in read_json(HIDDEN_FILE, []) if isinstance(t, str) and SAFE_NAME.match(t)]
+
+
+def set_hidden(theme, on):
+    if theme not in themes.allowed_themes():
+        return False
+    with STATE_LOCK:
+        hidden = [t for t in read_hidden() if t != theme]
+        if on:
+            hidden.append(theme)
+        write_json(HIDDEN_FILE, sorted(hidden))
     return True
 
 

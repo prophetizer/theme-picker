@@ -143,3 +143,77 @@ class Panel(ScheduleCase):
         self.assertIn('id="sch-enabled" checked', html)
         self.assertIn('<option value="dracula" selected>', html)
         self.assertIn('value="19:00"', html)
+
+
+class FirstPick:
+    """A stand-in for random: always the first candidate, so tests are exact."""
+    @staticmethod
+    def choice(seq):
+        return seq[0]
+
+
+class ThemeOfTheDay(ScheduleCase):
+    def setUp(self):
+        super().setUp()
+        for t in ("dracula", "catppuccin-latte", "nord"):
+            state.set_favourite(t, True)
+
+    def daily(self, now, **over):
+        data = {"enabled": True, "at": "08:00", "pool": "favourites", **over}
+        return schedule.save_daily(data, now=now, rng=FirstPick)
+
+    def test_enabling_picks_now_from_favourites_never_the_live_one(self):
+        ok, msg = self.daily(D(9))
+        self.assertTrue(ok, msg)
+        self.assertEqual(self.applied, [("catppuccin-latte", "schedule (theme of the day)")])  # nord is live
+        self.assertIn("Today's: catppuccin-latte", msg)
+
+    def test_once_a_day_at_the_set_time(self):
+        self.daily(D(9))
+        schedule.tick_daily(D(23), rng=FirstPick)                     # same day: nothing
+        schedule.tick_daily(D(7, day=24), rng=FirstPick)              # before 08:00 next day: nothing
+        self.assertEqual(len(self.applied), 1)
+        schedule.tick_daily(D(8, 1, day=24), rng=FirstPick)           # due
+        self.assertEqual([t for t, _ in self.applied], ["catppuccin-latte", "dracula"])
+
+    def test_hidden_themes_are_never_picked(self):
+        state.set_hidden("catppuccin-latte", True)
+        self.daily(D(9))
+        self.assertEqual(self.applied[0][0], "dracula")
+
+    def test_nothing_to_pick_from(self):
+        for t in ("dracula", "catppuccin-latte", "nord"):
+            state.set_favourite(t, False)
+        ok, msg = self.daily(D(9))
+        self.assertTrue(ok)
+        self.assertIn("nothing to pick from", msg)
+        self.assertEqual(self.applied, [])
+
+    def test_all_themes_pool(self):
+        for t in ("dracula", "catppuccin-latte", "nord"):
+            state.set_favourite(t, False)
+        self.daily(D(9), pool="all")
+        self.assertEqual(len(self.applied), 1)
+        self.assertNotEqual(self.applied[0][0], "nord")
+
+    def test_exclusive_with_day_night(self):
+        self.enable(D(9))
+        self.assertTrue(schedule.read()["enabled"])
+        self.daily(D(10))
+        self.assertTrue(schedule.read()["daily_enabled"])
+        self.assertFalse(schedule.read()["enabled"])                  # day/night turned off
+        self.enable(D(11))
+        self.assertFalse(schedule.read()["daily_enabled"])            # and the other way round
+
+    def test_rejections_and_off(self):
+        self.assertFalse(self.daily(D(9), at="25:00")[0])
+        self.assertFalse(self.daily(D(9), pool="everything")[0])
+        self.assertEqual(self.daily(D(9), enabled=False), (True, "Theme of the day off."))
+        self.assertEqual(self.applied, [])
+
+    def test_status_and_panel(self):
+        self.daily(D(9))
+        st = schedule.status(now=D(10))
+        self.assertTrue(st["daily_enabled"])
+        self.assertEqual(st["daily_pool_size"], 2)                     # favourites minus the live one
+        self.assertIn("next pick", render.daily_summary(st))

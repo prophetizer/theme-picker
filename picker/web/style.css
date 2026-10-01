@@ -303,3 +303,22 @@
     .tile-foot { min-height: 30px; }
     .theme-btn { height: auto; min-height: 104px; }
   }
+
+  /* Find by colour, hidden themes, "looks like" in the preview. */
+  .near-row { display: flex; align-items: center; gap: 8px; }
+  .near-row input[type=color] { width: 44px; height: 30px; padding: 2px; border-radius: 6px; cursor: pointer;
+         border: 1px solid var(--line); background: var(--main-bg-color, #14181a); }
+  .near-clear { cursor: pointer; border-radius: 6px; padding: 3px 9px; font-size: .8rem; border: 1px solid var(--line);
+         background: var(--main-bg-color, #14181a); color: var(--text, #e6ecec); }
+  .near-clear[hidden] { display: none; }
+  .theme-btn[data-hidden="1"] { opacity: .5; }           /* only visible with "Show hidden themes" */
+  .lb-similar { margin: 0 0 10px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: .85rem; }
+  .lb-similar[hidden] { display: none; }
+
+  /* Editor: scheme import and the live twin preview. */
+  .ed-import { margin: 10px 0; }
+  .ed-import summary { cursor: pointer; color: var(--text, #e6ecec); }
+  .ed-import textarea { width: 100%; box-sizing: border-box; font: .82rem/1.4 ui-monospace, monospace; border-radius: 8px;
+         padding: 8px; border: 1px solid var(--line); background: var(--main-bg-color, #14181a); color: var(--text, #e6ecec); }
+  .ed-twin-label { margin: 14px 0 6px; }
+  .ed-twin-label[hidden], .ed-twin[hidden] { display: none; }

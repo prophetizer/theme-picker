@@ -54,6 +54,7 @@ class SandboxCase(unittest.TestCase):
             (state, "APPS_FILE", d / "apps.yml"),
             (state, "OVERRIDES_FILE", d / "theme-overrides.json"),
             (state, "FAVS_FILE", d / "theme-favourites.json"),
+            (state, "HIDDEN_FILE", d / "theme-hidden.json"),
             (state, "DATES_FILE", d / "theme-dates.json"),
             (state, "HISTORY_FILE", d / "theme-history.json"),
             (shots, "SHOT_DIR", d / "screenshots"),

@@ -19,6 +19,10 @@ than "By section" pools them into one list.*
 
 ## Install
 
+**Just want to try it?** The [starter stack](starter/) runs Traefik,
+theme.park, the picker and a demo app on `http://*.localhost` with one
+`docker compose up -d`.
+
 The image is published for linux/amd64 and linux/arm64:
 
 ```bash
@@ -73,6 +77,12 @@ preview, and every one comes in a light and a dark form. The sidebar narrows
 the list:
 - search
 - readable only, high contrast, gradients, favourites, new
+- **closest to a colour**: pick any colour and the themes that use it come first
+- hidden themes: **hide** a theme you never want (in its preview, or **H**) and
+  it leaves the grid, Surprise me and the theme of the day; "Show hidden
+  themes" brings them back
+
+A theme's preview also lists the five themes that **look most like it**.
 - accent colour
 
 It also sorts the list by section, name, lightness, accent colour or date
@@ -110,15 +120,27 @@ is missing its theme.
 A day theme and a night theme, switched at the times you set. A theme picked
 by hand holds until the next switch, then the schedule takes over again.
 
+Or a **theme of the day**: a random pick every morning, from your favourites
+or from every theme, never a hidden one. One schedule runs at a time.
+
 ![Day/night schedule: Catppuccin Latte from 07:00, Catppuccin Mocha from 19:30](docs/screenshots/schedule.png)
 
 ### Editor
 
-Build a theme from any existing one, or from an image. The colours are
-extracted in the browser and the image never leaves it. The preview panel
-updates as you edit, with a contrast ratio for each text role against its
-target. *Save & deploy* adds it to your custom themes and deploys it to
-theme.park. See [DEPLOY.md](DEPLOY.md#custom-themes).
+Build a theme from any existing one, from an image, or by **importing a colour
+scheme**: paste a base16/base24 YAML, a Ghostty, Kitty, Alacritty, Xresources or
+Windows Terminal scheme, an iTerm2 `.itermcolors` file or a VS Code theme, and it
+is mapped onto the fields and made readable. Everything is parsed in the browser.
+The preview updates as you edit, with a contrast ratio for each text role, and a
+second preview shows the theme's **light or dark twin**.
+
+From any theme's preview, **Edit a copy** opens its colours in the editor, and
+on a low-contrast theme **Make a readable copy** opens a copy with every text
+role brought to 7:1 (body) or 4.5:1, moving only lightness (and darkening the
+page where no text colour could otherwise reach it).
+
+*Save & deploy* adds it to your custom themes and deploys it to theme.park. See
+[DEPLOY.md](DEPLOY.md#custom-themes).
 
 ![The theme editor with colour fields, a live preview and contrast ratios](docs/screenshots/editor.png)
 

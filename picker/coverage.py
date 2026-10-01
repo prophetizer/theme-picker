@@ -5,6 +5,7 @@ import threading
 import time
 import urllib.error
 import urllib.request
+from urllib.parse import urlsplit
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
@@ -50,9 +51,14 @@ def check_coverage():
         except urllib.error.HTTPError as err:
             return err.code, err.read(600_000).decode("utf-8", "replace")
 
+    # Apps answer on the same scheme and port as the picker itself:
+    # https and 443 in a normal setup, http://...:8088 in the starter stack.
+    own = urlsplit(config.picker_url() or "https://x/")
+    prefix, port = own.scheme or "https", f":{own.port}" if own.port else ""
+
     def one(a, retry=True):
         expected = overrides.get(a["name"], main)
-        url = f"https://{a['host']}.{config.DOMAIN}/"
+        url = f"{prefix}://{a['host']}.{config.DOMAIN}{port}/"
         out = {"app": a["name"], "url": url, "expected": expected,
                "pinned": a["name"] in overrides}
         # apps.yml is writable from the picker's container; a host with "/",

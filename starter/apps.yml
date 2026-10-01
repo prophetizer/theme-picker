@@ -1,0 +1,7 @@
+# The apps the picker themes. name: the middleware is <name>-theme (used in
+# traefik/routes.yml); theme_app: theme.park's name for the app; host: the
+# first part of its address (files.localhost).
+apps:
+  - name: files
+    theme_app: filebrowser
+    host: files

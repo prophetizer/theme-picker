@@ -59,3 +59,24 @@ class Coverage(SandboxCase):
         sheets = [u for u in self.requested if "/css/base/" in u]
         self.assertTrue(sheets)
         self.assertTrue(all(u.startswith("https://tp.example/") for u in sheets))
+
+
+class Scheme(SandboxCase):
+    def test_apps_use_the_pickers_scheme_and_port(self):
+        from unittest import mock
+        from picker import config, coverage, state
+        state.APPS_FILE.write_text("apps:\n  - name: files\n    theme_app: filebrowser\n")
+        seen = []
+        def fake(req, timeout):
+            seen.append(req.full_url)
+            raise OSError("no network in tests")
+        with mock.patch.object(config, "DOMAIN", "localhost"), \
+             mock.patch.object(config, "PICKER_URL", "http://picker.localhost:8088/"), \
+             mock.patch("urllib.request.urlopen", side_effect=fake):
+            coverage.check_coverage()
+        self.assertEqual(seen, ["http://files.localhost:8088/"])
+        seen.clear()
+        with mock.patch.object(config, "DOMAIN", "example.com"), mock.patch.object(config, "PICKER_URL", None), \
+             mock.patch("urllib.request.urlopen", side_effect=fake):
+            coverage.check_coverage()
+        self.assertEqual(seen, ["https://files.example.com/"])        # unchanged default

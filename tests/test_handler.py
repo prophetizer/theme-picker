@@ -190,6 +190,24 @@ class NotifyLink(ServerCase):
         self.assertEqual(notify.call_args.args[2], "https://picker.example.test/")
 
 
+class HideThemes(ServerCase):
+    def test_hide_and_unhide(self):
+        status, _, body = self.post_json("/api/hide", {"theme": "nord", "on": True})
+        self.assertEqual((status, json.loads(body)["hidden"]), (200, ["nord"]))
+        page = self.request("GET", "/")[2].decode()
+        tile = page[page.index('value="nord" data-theme="nord"'):]
+        self.assertIn('data-hidden="1"', tile[:tile.index("</button>")])
+        self.post_json("/api/hide", {"theme": "nord", "on": False})
+        self.assertEqual(state.read_hidden(), [])
+
+    def test_unknown_theme_and_cross_site_are_refused(self):
+        self.assertEqual(self.post_json("/api/hide", {"theme": "no-such-theme", "on": True})[0], 400)
+        status, _, _ = self.request("POST", "/api/hide", b'{"theme": "nord", "on": true}',
+                                    {"Content-Type": "application/json", "Origin": "https://evil.example"})
+        self.assertEqual(status, 403)
+        self.assertEqual(state.read_hidden(), [])
+
+
 class HostCheck(ServerCase):
     """Found by the v1.0.0 security review: a DNS-rebinding page's requests
     are same-origin from the browser's point of view, so only Host shows

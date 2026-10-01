@@ -8,7 +8,7 @@ import re
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlsplit
 
-from . import apply, config, dashboards, deploy, editor, hooks, monitor, ntfy, schedule, shots, state, themes
+from . import apply, backend, config, dashboards, deploy, editor, hooks, monitor, ntfy, schedule, shots, state, themes
 from .coverage import cached_coverage
 from .prom import render_metrics
 from .render import STATIC, STATIC_TYPES, render_page
@@ -327,6 +327,10 @@ class Handler(BaseHTTPRequestHandler):
                 ok, msg = state.set_override(str(data.get("app", "")), str(data.get("theme", "")))
                 return self._send_json({"ok": ok, "message": msg, "pinned": state.read_overrides()},
                                        status=200 if ok else 400)
+            if path == "/api/hide":
+                ok = state.set_hidden(str(data.get("theme", "")), bool(data.get("on")))
+                return self._send_json({"ok": ok, "hidden": state.read_hidden()},
+                                       status=200 if ok else 400)
             if path == "/api/favourite":
                 ok = state.set_favourite(str(data.get("theme", "")), bool(data.get("on")))
                 return self._send_json({"ok": ok, "favourites": state.read_favourites()},
@@ -340,9 +344,9 @@ class Handler(BaseHTTPRequestHandler):
                     return self._send_json({"ok": False, "message": "bad or missing token"}, status=401)
                 ok, msg, status, theme = hooks.set_theme(data)
                 return self._send_json({"ok": ok, "message": msg, "theme": theme}, status=status)
-            if path == "/api/schedule":
+            if path in ("/api/schedule", "/api/daily"):
                 before = themes.current_theme()
-                ok, msg = schedule.save(data)
+                ok, msg = (schedule.save if path == "/api/schedule" else schedule.save_daily)(data)
                 now = themes.current_theme()
                 return self._send_json(
                     {"ok": ok, "message": msg, "schedule": schedule.status(),
@@ -377,9 +381,23 @@ class Handler(BaseHTTPRequestHandler):
         pass  # keep container logs quiet; Traefik/access logs cover requests
 
 
+def write_missing_proxy_config():
+    """A fresh install has no themes.yml yet, and Traefik refuses every router
+    that names a <app>-theme middleware until it exists. Write it for the
+    current (or default) theme at start; an existing file is left alone."""
+    try:
+        b = backend.get()
+        if isinstance(b, backend.TraefikFile) and not b.output_file.exists():
+            b.set_pins()
+            print(f"wrote {b.output_file} for a first start", flush=True)
+    except (backend.ApplyError, OSError, ValueError) as e:
+        print(f"could not write the initial proxy config: {e}", file=sys.stderr, flush=True)
+
+
 def main(host=None, port=None):
     host = host or config.SETTINGS["listen.host"]
     port = port or config.SETTINGS["listen.port"]
+    write_missing_proxy_config()
     monitor.start()
     schedule.start()
     deploy.start()
