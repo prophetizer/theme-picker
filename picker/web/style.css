@@ -322,3 +322,4 @@
          padding: 8px; border: 1px solid var(--line); background: var(--main-bg-color, #14181a); color: var(--text, #e6ecec); }
   .ed-twin-label { margin: 14px 0 6px; }
   .ed-twin-label[hidden], .ed-twin[hidden] { display: none; }
+  .demo-banner a { color: var(--link-color, #4fbfa2); }
