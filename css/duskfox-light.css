@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Duskfox (light)
+ *
+ * Generated variant: light of 'duskfox', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'duskfox'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#9d81be'.
+ */
+:root {
+  --main-bg-color: #f3f2ff;
+  --modal-bg-color: #fbfaff;
+  --modal-header-color: #fbfaff;
+  --modal-footer-color: #fbfaff;
+  --drop-down-menu-bg: #fbfaff;
+  --button-color: #9d81be;
+  --button-color-hover: #4d96b1;
+  --button-text: #191726;
+  --button-text-hover: #191726;
+  --accent-color: 157, 129, 190;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #46777f;
+  --link-color-hover: #7f649f;
+  --label-text-color: #191726;
+  --text: #03010a;
+  --text-hover: #010005;
+  --text-muted: #3f3a55;
+  --arr-queue-color: #7b9565;
+  --plex-poster-unwatched: #c57876;
+  --petio-spinner: invert(54%) sepia(54%) saturate(646%) hue-rotate(218deg) brightness(100%) contrast(49%);
+  --gitea-color-primary-dark-4: 157, 129, 190;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 242, 255, 0.17) 0%, #f3f2ff 100%);
+}

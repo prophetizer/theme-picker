@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Velvet
+ *
+ * Palette source: original gradient theme -- no upstream scheme to cite.
+ * A GRADIENT theme, following the shape of theme.park's own hotpink,
+ * aquamarine, hotline and maroon: a hero gradient on the page background, a
+ * matching -90deg linear gradient on panels, and a SOLID colour for the
+ * drop-down menu -- a gradient in a small menu renders as a flat slice and
+ * looks broken.
+ *
+ * Deep wine. Shares a family with the official maroon theme but sits brighter
+ * and pinker: maroon centres on rgba(76,21,51) and stays muted, this lifts to
+ * #a3234f and takes a rose accent.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#d94a72'.
+ */
+:root {
+  --main-bg-color: radial-gradient(circle farthest-corner at 50% 108%, #a3234f 0%, #4a0f27 40%, #14060d 85%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #2e0d1b 0%, #14060d 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #2e0d1b 0%, #14060d 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #2e0d1b 0%, #14060d 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #14060d;
+  --button-color: #d94a72;
+  --button-color-hover: #f07c9b;
+  --button-text: #14060d;
+  --button-text-hover: #14060d;
+  --accent-color: 217, 74, 114;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #e07a99;
+  --link-color-hover: #f2a8bd;
+  --label-text-color: #14060d;
+  --text: #ecdde2;
+  --text-hover: #ffffff;
+  --text-muted: #b08e99;
+  --arr-queue-color: #5fbf7a;
+  --plex-poster-unwatched: #d94a72;
+  --petio-spinner: invert(33%) sepia(97%) saturate(420%) hue-rotate(292deg) brightness(105%) contrast(99%);
+  --gitea-color-primary-dark-4: 217, 74, 114;
+  --overseerr-gradient: radial-gradient(circle farthest-corner at 50% 108%, rgba(163,35,79,.9) 0%, rgba(74,15,39,.9) 40%, rgba(20,6,13,.9) 85%) center center/cover no-repeat fixed;
+}

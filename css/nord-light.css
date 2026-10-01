@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Nord (light)
+ *
+ * Generated variant: light of 'nord', theme.park's official theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'nord'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#5896a8'.
+ */
+:root {
+  --main-bg-color: #eff4fd;
+  --modal-bg-color: #fbfdff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #f3f7ff;
+  --button-color: #5896a8;
+  --button-color-hover: #6295a6;
+  --button-text: #11141b;
+  --button-text-hover: #020308;
+  --accent-color: 88, 150, 168;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #547391;
+  --link-color-hover: #417786;
+  --label-text-color: #222730;
+  --text: #020308;
+  --text-hover: #000001;
+  --text-muted: #14314b;
+  --arr-queue-color: #7b9565;
+  --plex-poster-unwatched: #c37b64;
+  --petio-spinner: invert(40%) sepia(100%) saturate(208%) hue-rotate(147deg) brightness(113%) contrast(78%);
+  --gitea-color-primary-dark-4: 88, 150, 168;
+  --overseerr-gradient: linear-gradient(180deg, rgba(239, 244, 253, 0.17) 0%, #eff4fd 100%);
+}

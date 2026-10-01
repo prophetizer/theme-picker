@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Darkmoss
+ *
+ * Palette source: tinted-theming/schemes base16/darkmoss.yaml (Gabriel Avanzi; base00, base01, base04-base06 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #879586 is the palette's #818f80 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #569e8c is the palette's #499180 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --button-text #050b0c is the palette's #171e1f with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#499180'.
+ */
+:root {
+  --main-bg-color: #171e1f;
+  --modal-bg-color: #252c2d;
+  --modal-header-color: #252c2d;
+  --modal-footer-color: #252c2d;
+  --drop-down-menu-bg: #252c2d;
+  --button-color: #499180;
+  --button-color-hover: #498091;
+  --button-text: #050b0c;
+  --button-text-hover: #050b0c;
+  --accent-color: 73, 145, 128;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #569e8c;
+  --link-color-hover: #66d9ef;
+  --label-text-color: #050b0c;
+  --text: #c7c7a5;
+  --text-hover: #e3e3c8;
+  --text-muted: #879586;
+  --arr-queue-color: #499180;
+  --plex-poster-unwatched: #e6db74;
+  --petio-spinner: invert(67%) sepia(51%) saturate(533%) hue-rotate(116deg) brightness(68%) contrast(57%);
+  --gitea-color-primary-dark-4: 73, 145, 128;
+  --overseerr-gradient: linear-gradient(180deg, rgba(23, 30, 31, 0.17) 0%, rgba(23, 30, 31) 100%);
+}

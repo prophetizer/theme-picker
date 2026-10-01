@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Laser
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Laser (background, foreground, selection background, ANSI 0-15)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #ff94f2 is the palette's #f106e3 with its lightness nudged to reach
+ * 7:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#00ff9c'.
+ */
+:root {
+  --main-bg-color: #030d18;
+  --modal-bg-color: #2e206a;
+  --modal-header-color: #2e206a;
+  --modal-footer-color: #2e206a;
+  --drop-down-menu-bg: #2e206a;
+  --button-color: #00ff9c;
+  --button-color-hover: #ff90fe;
+  --button-text: #030d18;
+  --button-text-hover: #030d18;
+  --accent-color: 0, 255, 156;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00ff9c;
+  --link-color-hover: #ff90fe;
+  --label-text-color: #030d18;
+  --text: #ff94f2;
+  --text-hover: #ffffff;
+  --text-muted: #d1d1fe;
+  --arr-queue-color: #b4fb73;
+  --plex-poster-unwatched: #fed300;
+  --petio-spinner: invert(24%) sepia(64%) saturate(1081%) hue-rotate(92deg) brightness(101%) contrast(103%);
+  --gitea-color-primary-dark-4: 0, 255, 156;
+  --overseerr-gradient: linear-gradient(180deg, rgba(3, 13, 24, 0.17) 0%, rgba(3, 13, 24) 100%);
+}

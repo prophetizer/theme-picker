@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Meadow (dark)
+ *
+ * Generated variant: dark of 'meadow', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'meadow'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#4a7c2f'.
+ */
+:root {
+  --main-bg-color: linear-gradient(165deg, #20211d 0%, #181b10 45%, #0c1203 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #1b1d16 0%, #111508 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #1b1d16 0%, #111508 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #1b1d16 0%, #111508 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #181b10;
+  --button-color: #4a7c2f;
+  --button-color-hover: #4c7538;
+  --button-text: #fdfff7;
+  --button-text-hover: #fdfff7;
+  --accent-color: 74, 124, 47;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #54937a;
+  --link-color-hover: #4d947d;
+  --label-text-color: #fdfff7;
+  --text: #9eb095;
+  --text-hover: #b1bfac;
+  --text-muted: #778d6b;
+  --arr-queue-color: #2f7d5a;
+  --plex-poster-unwatched: #4a7c2f;
+  --petio-spinner: invert(39%) sepia(59%) saturate(339%) hue-rotate(55deg) brightness(98%) contrast(115%);
+  --gitea-color-primary-dark-4: 74, 124, 47;
+  --overseerr-gradient: linear-gradient(165deg, rgba(32, 33, 29, 0.9) 0%, rgba(24, 27, 16, 0.9) 45%, rgba(12, 18, 3, 0.9) 100%) center center/cover no-repeat fixed;
+}

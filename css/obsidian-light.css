@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Obsidian (light)
+ *
+ * Generated variant: light of 'obsidian', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'obsidian'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#5688d1'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at 50% 0%, #fcfdff 0%, #eff2f8 55%, #e8ebee 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #f8faff 0%, #edf0f5 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #f8faff 0%, #edf0f5 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #f8faff 0%, #edf0f5 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #e8ebee;
+  --button-color: #5688d1;
+  --button-color-hover: #5c89c7;
+  --button-text: #05070a;
+  --button-text-hover: #05070a;
+  --accent-color: 86, 136, 209;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #3d6ca8;
+  --link-color-hover: #4a6c98;
+  --label-text-color: #05070a;
+  --text: #040911;
+  --text-hover: #000000;
+  --text-muted: #2d3847;
+  --arr-queue-color: #2b995e;
+  --plex-poster-unwatched: #5688d1;
+  --petio-spinner: invert(65%) sepia(72%) saturate(221%) hue-rotate(179deg) brightness(68%) contrast(179%);
+  --gitea-color-primary-dark-4: 86, 136, 209;
+  --overseerr-gradient: radial-gradient(ellipse at 50% 0%, rgba(252, 253, 255, 0.9) 0%, rgba(239, 242, 248, 0.9) 55%, rgba(232, 235, 238, 0.9) 100%) center center/cover no-repeat fixed;
+}

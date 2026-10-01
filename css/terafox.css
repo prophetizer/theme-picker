@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Terafox
+ *
+ * Based on the Terafox color scheme by EdenEast, part of nightfox.nvim
+ * (https://github.com/EdenEast/nightfox.nvim), canonical hex values from
+ * lua/nightfox/palette/terafox.lua. That file labels its surfaces, so the
+ * mapping is upstream's own: bg1 is the base, bg2 the raised surface,
+ * and comment the muted foreground.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #152528;
+
+  --modal-bg-color: #1D3337;
+  --modal-header-color: #1D3337;
+  --modal-footer-color: #1D3337;
+
+  --drop-down-menu-bg: #1D3337;
+
+  --button-color: #A1CDD8;
+  --button-color-hover: #FDA47F;
+  --button-text: #152528;
+  --button-text-hover: #152528;
+
+  --accent-color: 161, 205, 216;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #FDA47F;
+  --link-color-hover: #FDB292;
+  --label-text-color: #152528;
+
+  --text: #E6EAEA;
+  --text-hover: #ffffff;
+  --text-muted: #6D7F8B;
+
+  --arr-queue-color: #7AA4A1;
+  --plex-poster-unwatched: #A1CDD8;
+  --petio-spinner: invert(76%) sepia(51%) saturate(155%) hue-rotate(145deg) brightness(95%) contrast(90%);
+  --gitea-color-primary-dark-4: 161, 205, 216;
+  --overseerr-gradient: linear-gradient(180deg, rgba(21, 37, 40, 0.17) 0%, rgba(21, 37, 40) 100%);
+}

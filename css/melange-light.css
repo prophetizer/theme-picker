@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Melange (light)
+ *
+ * Generated variant: light of 'melange', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'melange'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#b08731'.
+ */
+:root {
+  --main-bg-color: #f6f3f0;
+  --modal-bg-color: #fdfaf7;
+  --modal-header-color: #fdfaf7;
+  --modal-footer-color: #fdfaf7;
+  --drop-down-menu-bg: #fdfaf7;
+  --button-color: #b08731;
+  --button-color-hover: #689878;
+  --button-text: #292522;
+  --button-text-hover: #292522;
+  --accent-color: 176, 135, 49;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4e7779;
+  --link-color-hover: #696e90;
+  --label-text-color: #292522;
+  --text: #040100;
+  --text-hover: #000000;
+  --text-muted: #493724;
+  --arr-queue-color: #689878;
+  --plex-poster-unwatched: #b08731;
+  --petio-spinner: invert(68%) sepia(81%) saturate(436%) hue-rotate(350deg) brightness(73%) contrast(84%);
+  --gitea-color-primary-dark-4: 176, 135, 49;
+  --overseerr-gradient: linear-gradient(180deg, rgba(246, 243, 240, 0.17) 0%, #f6f3f0 100%);
+}

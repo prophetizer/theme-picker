@@ -1,0 +1,48 @@
+/*
+ * theme.park custom theme: Modus Operandi
+ *
+ * HIGH CONTRAST: every text role meets WCAG AAA (7:1) against its surface --
+ * text 21:1, muted 7.0:1, links 7.0:1, button labels 10.4:1.
+ * The theme picker's "high contrast" badge measures exactly this bar.
+ *
+ * Palette source:
+ * protesilaos/modus-themes, modus-themes.el, modus-themes-operandi-palette
+ * and modus-themes-common-palette-mappings (5.3.0, commit 4fcc8d00540a).
+ * The light twin of Modus Vivendi, built to WCAG AAA.
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * Modus pairs its dim text (fg-dim #595959) with bg-main, and fg-dim on bg-dim
+ * is only 6.3:1 -- so the page is bg-dim #f2f2f2 and panels are bg-main
+ * #ffffff, where fg-dim measures 7.005:1. Links are fg-link (blue-warmer
+ * #3548cf). Buttons use blue #0031a9 rather than Modus's grey bg-active,
+ * which reads as disabled in a web UI.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#0031a9'.
+ */
+:root {
+  --main-bg-color: #f2f2f2;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #0031a9;
+  --button-color-hover: #0000b0;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 0, 49, 169;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #3548cf;
+  --link-color-hover: #0031a9;
+  --label-text-color: #ffffff;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #595959;
+  --arr-queue-color: #006800;
+  --plex-poster-unwatched: #0031a9;
+  --petio-spinner: invert(45%) sepia(75%) saturate(558%) hue-rotate(168deg) brightness(59%) contrast(200%);
+  --gitea-color-primary-dark-4: 0, 49, 169;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 242, 242, 0.17) 0%, rgba(242, 242, 242) 100%);
+}

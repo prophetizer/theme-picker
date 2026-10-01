@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Sublime Vivid (light)
+ *
+ * Generated variant: light of 'sublime-vivid', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'sublime-vivid'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#6c84cb'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fff0f1 0%, #edf2ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #fff0f1 0%, #edf2ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #fff0f1 0%, #edf2ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #fff0f1 0%, #edf2ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #f5d5ff;
+  --button-color: #6c84cb;
+  --button-color-hover: #ce6773;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 108, 132, 203;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #576999;
+  --link-color-hover: #98575e;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #190020;
+  --arr-queue-color: #7386b8;
+  --plex-poster-unwatched: #ce6773;
+  --petio-spinner: invert(61%) sepia(28%) saturate(700%) hue-rotate(187deg) brightness(80%) contrast(98%);
+  --gitea-color-primary-dark-4: 108, 132, 203;
+  --overseerr-gradient: linear-gradient(180deg, rgba(237, 242, 255, 0.17) 0%, #edf2ff 100%);
+}

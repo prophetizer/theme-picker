@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Night Owl
+ *
+ * Based on the Night Owl color scheme by Sarah Drasner
+ * (https://github.com/sdras/night-owl-vscode-theme), canonical hex values
+ * from themes/Night Owl-color-theme.json. Modal/dropdown surfaces use that
+ * theme's input.background (#0B253A), the one elevation lighter than the
+ * editor background; muted text is its comment color.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #011627;
+
+  --modal-bg-color: #0B253A;
+  --modal-header-color: #0B253A;
+  --modal-footer-color: #0B253A;
+
+  --drop-down-menu-bg: #0B253A;
+
+  --button-color: #82AAFF;
+  --button-color-hover: #C792EA;
+  --button-text: #011627;
+  --button-text-hover: #011627;
+
+  --accent-color: 130, 170, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #21C7A8;
+  --link-color-hover: #7FDBCA;
+  --label-text-color: #011627;
+
+  --text: #D6DEEB;
+  --text-hover: #ffffff;
+  --text-muted: #637777;
+
+  --arr-queue-color: #22DA6E;
+  --plex-poster-unwatched: #82AAFF;
+  --petio-spinner: invert(47%) sepia(100%) saturate(205%) hue-rotate(183deg) brightness(112%) contrast(113%);
+  --gitea-color-primary-dark-4: 130, 170, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(1, 22, 39, 0.17) 0%, rgba(1, 22, 39) 100%);
+}

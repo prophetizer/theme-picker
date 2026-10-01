@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Dark (light)
+ *
+ * Generated variant: light of 'dark', theme.park's official theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'dark'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#969696'.
+ */
+:root {
+  --main-bg-color: radial-gradient(circle, #ffffff, #ffffff, #f8f8f8, #efefef, #d1d1d1) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(135deg , #ffffff, #ffffff, #f8f8f8, #efefef, #d1d1d1) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(135deg , #ffffff, #ffffff, #f8f8f8, #efefef, #d1d1d1) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(135deg , #ffffff, #ffffff, #f8f8f8, #efefef, #d1d1d1) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #969696;
+  --button-color-hover: #7c7c7c;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 117, 117, 117;
+  --accent-color-hover: rgba(117, 117, 117, 0.45);
+  --link-color: #5a5a5a;
+  --link-color-hover: #5a5a5a;
+  --label-text-color: #000000;
+  --text: #040404;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #31871c;
+  --plex-poster-unwatched: #9d6c00;
+  --petio-spinner: invert(100%) sepia(100%) saturate(0%) hue-rotate(296deg) brightness(200%) contrast(17%);
+  --gitea-color-primary-dark-4: 117, 117, 117;
+  --overseerr-gradient: radial-gradient(circle, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.95), rgba(248, 248, 248, 0.95), rgba(239, 239, 239, 0.95), rgba(209, 209, 209, 0.95)) center center/cover no-repeat fixed;
+}

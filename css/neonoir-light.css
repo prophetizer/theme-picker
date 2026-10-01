@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Neonoir (light)
+ *
+ * Generated variant: light of 'neonoir', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'neonoir'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#008292'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at 80% 110%, #ffffff 0%, #e1d9f5 40%, #cfd2d6 85%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #e1ddec 0%, #d3d4da 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #e1ddec 0%, #d3d4da 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #e1ddec 0%, #d3d4da 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #cfd2d6;
+  --button-color: #008292;
+  --button-color-hover: #e40081;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 0, 130, 146;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #006379;
+  --link-color-hover: #006473;
+  --label-text-color: #ffffff;
+  --text: #020307;
+  --text-hover: #000000;
+  --text-muted: #343649;
+  --arr-queue-color: #008752;
+  --plex-poster-unwatched: #008292;
+  --petio-spinner: invert(66%) sepia(99%) saturate(278%) hue-rotate(134deg) brightness(55%) contrast(184%);
+  --gitea-color-primary-dark-4: 0, 130, 146;
+  --overseerr-gradient: radial-gradient(ellipse at 80% 110%, rgba(255, 255, 255, 0.9) 0%, rgba(225, 217, 245, 0.9) 40%, rgba(207, 210, 214, 0.9) 85%) center center/cover no-repeat fixed;
+}

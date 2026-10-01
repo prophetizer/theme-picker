@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Evergarden (light)
+ *
+ * Generated variant: light of 'evergarden', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'evergarden'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#7e9467'.
+ */
+:root {
+  --main-bg-color: #eff4f7;
+  --modal-bg-color: #f4fafd;
+  --modal-header-color: #f4fafd;
+  --modal-footer-color: #f4fafd;
+  --drop-down-menu-bg: #f4fafd;
+  --button-color: #7e9467;
+  --button-color-hover: #699780;
+  --button-text: #1c2225;
+  --button-text-hover: #1c2225;
+  --accent-color: 126, 148, 103;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #61764b;
+  --link-color-hover: #4c7963;
+  --label-text-color: #1c2225;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #0e2921;
+  --arr-queue-color: #7e9467;
+  --plex-poster-unwatched: #ca785a;
+  --petio-spinner: invert(1%) sepia(1%) saturate(4%) hue-rotate(117deg) brightness(1%) contrast(2%);
+  --gitea-color-primary-dark-4: 126, 148, 103;
+  --overseerr-gradient: linear-gradient(180deg, rgba(239, 244, 247, 0.17) 0%, #eff4f7 100%);
+}

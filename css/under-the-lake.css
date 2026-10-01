@@ -1,0 +1,50 @@
+/*
+ * theme.park custom theme: Under the Lake
+ *
+ * Gradient source: Ghosh/uiGradients gradients.json, 'Under the Lake' (#093028 -> #237a57), MIT.
+ * uiGradients gives only the gradient's colours, so every role below is
+ * one of them (lightness moved where noted), a black veil over them, or a
+ * near-white tinted toward them: text is not taken from anywhere else.
+ *
+ * A GRADIENT theme in the shape of theme.park's own: the gradient on the
+ * page, the same stops at -90deg on panels, and a SOLID drop-down menu.
+ * Panels lay a black veil at 0.22 alpha over the gradient, the least that
+ * brings body text to 7:1.
+ * --button-color #79cba4 is uiGradients' #237a57 lightened so buttons stand
+ * out on the gradient.
+ * --button-color-hover #9ac1b6 is uiGradients' #093028 lightened so buttons
+ * stand out on the gradient.
+ * --link-color #86d8b1 is uiGradients' #237a57 with its lightness moved to
+ * read at 4.5:1 on every panel colour.
+ * --link-color-hover #a8d0c5 is uiGradients' #093028 with its lightness moved
+ * to read at 4.5:1 on every panel colour.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#79cba4'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #093028 0%, #237a57 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.22) 100%), linear-gradient(-90deg, #093028 0%, #237a57 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.22) 100%), linear-gradient(-90deg, #093028 0%, #237a57 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0.22) 100%), linear-gradient(-90deg, #093028 0%, #237a57 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #114131;
+  --button-color: #79cba4;
+  --button-color-hover: #9ac1b6;
+  --button-text: #093028;
+  --button-text-hover: #093028;
+  --accent-color: 121, 203, 164;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #86d8b1;
+  --link-color-hover: #a8d0c5;
+  --label-text-color: #093028;
+  --text: #e3fcf1;
+  --text-hover: #ffffff;
+  --text-muted: #89d7b8;
+  --arr-queue-color: #86d8b1;
+  --plex-poster-unwatched: #9ac1b6;
+  --petio-spinner: invert(23%) sepia(47%) saturate(287%) hue-rotate(99deg) brightness(87%) contrast(90%);
+  --gitea-color-primary-dark-4: 121, 203, 164;
+  --overseerr-gradient: linear-gradient(180deg, rgba(35, 122, 87, 0.17) 0%, rgba(35, 122, 87) 100%);
+}

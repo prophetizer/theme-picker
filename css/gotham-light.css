@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Gotham (light)
+ *
+ * Generated variant: light of 'gotham', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'gotham'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#1b9f81'.
+ */
+:root {
+  --main-bg-color: #f0f4f8;
+  --modal-bg-color: #f4f8fe;
+  --modal-header-color: #f4f8fe;
+  --modal-footer-color: #f4f8fe;
+  --drop-down-menu-bg: #f4f8fe;
+  --button-color: #1b9f81;
+  --button-color-hover: #1b9f81;
+  --button-text: #0c1014;
+  --button-text-hover: #0c1014;
+  --accent-color: 27, 159, 129;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007f65;
+  --link-color-hover: #926800;
+  --label-text-color: #0c1014;
+  --text: #001615;
+  --text-hover: #000202;
+  --text-muted: #00414d;
+  --arr-queue-color: #1b9f81;
+  --plex-poster-unwatched: #d26937;
+  --petio-spinner: invert(49%) sepia(12%) saturate(6674%) hue-rotate(132deg) brightness(87%) contrast(79%);
+  --gitea-color-primary-dark-4: 27, 159, 129;
+  --overseerr-gradient: linear-gradient(180deg, rgba(240, 244, 248, 0.17) 0%, #f0f4f8 100%);
+}

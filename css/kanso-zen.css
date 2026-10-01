@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Kanso Zen
+ *
+ * Palette source: webhooked/kanso.nvim lua/kanso/colors.lua (zen: zenBg0, zenBg1, fg, fg2, gray and the palette's accents; cyan is green5, red is red2, magenta is violet)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #7c8888 is the palette's #717c7c with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7fb4ca'.
+ */
+:root {
+  --main-bg-color: #090e13;
+  --modal-bg-color: #1c1e25;
+  --modal-header-color: #1c1e25;
+  --modal-footer-color: #1c1e25;
+  --drop-down-menu-bg: #1c1e25;
+  --button-color: #7fb4ca;
+  --button-color-hover: #7aa89f;
+  --button-text: #090e13;
+  --button-text-hover: #090e13;
+  --accent-color: 127, 180, 202;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7fb4ca;
+  --link-color-hover: #e6c384;
+  --label-text-color: #090e13;
+  --text: #c5c9c7;
+  --text-hover: #f2f1ef;
+  --text-muted: #7c8888;
+  --arr-queue-color: #98bb6c;
+  --plex-poster-unwatched: #b6927b;
+  --petio-spinner: invert(26%) sepia(54%) saturate(243%) hue-rotate(155deg) brightness(83%) contrast(88%);
+  --gitea-color-primary-dark-4: 127, 180, 202;
+  --overseerr-gradient: linear-gradient(180deg, rgba(9, 14, 19, 0.17) 0%, rgba(9, 14, 19) 100%);
+}

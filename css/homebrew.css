@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Homebrew
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Homebrew (macOS Terminal's 'Homebrew' profile: background, foreground, ANSI 0-15; panels are its selection background)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #1caf18 is the palette's #00a600 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#00a600'.
+ */
+:root {
+  --main-bg-color: #000000;
+  --modal-bg-color: #083905;
+  --modal-header-color: #083905;
+  --modal-footer-color: #083905;
+  --drop-down-menu-bg: #083905;
+  --button-color: #00a600;
+  --button-color-hover: #00d900;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 0, 166, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00e5e5;
+  --link-color-hover: #00d900;
+  --label-text-color: #000000;
+  --text: #00ff00;
+  --text-hover: #00ff00;
+  --text-muted: #1caf18;
+  --arr-queue-color: #00a600;
+  --plex-poster-unwatched: #999900;
+  --petio-spinner: invert(41%) sepia(89%) saturate(467%) hue-rotate(67deg) brightness(93%) contrast(169%);
+  --gitea-color-primary-dark-4: 0, 166, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.17) 0%, rgba(0, 0, 0) 100%);
+}

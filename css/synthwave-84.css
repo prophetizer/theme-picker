@@ -1,0 +1,51 @@
+/*
+ * theme.park custom theme: Synthwave '84
+ *
+ * Based on SynthWave '84 by Robb Owen
+ * (https://github.com/robb0wen/synthwave-vscode), canonical hex values from
+ * themes/synthwave-color-theme.json. ~2.5M VS Code installs, 5.3k stars.
+ * Flat colours only -- the theme's neon glow is a separate CSS effect
+ * (synthwave84.css) and has no equivalent in theme.park's variables.
+ *
+ * Upstream deliberately omits editor.foreground, so plain text renders as
+ * the hot pink; #FFFFFF (the workbench foreground) is used for --text here
+ * and the pink is kept as the accent.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #262335;
+
+  --modal-bg-color: #2A2139;
+  --modal-header-color: #2A2139;
+  --modal-footer-color: #2A2139;
+
+  --drop-down-menu-bg: #2A2139;
+
+  --button-color: #FF7EDB;
+  --button-color-hover: #36F9F6;
+  --button-text: #262335;
+  --button-text-hover: #262335;
+
+  --accent-color: 255, 126, 219;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #36F9F6;
+  --link-color-hover: #72F1B8;
+  --label-text-color: #262335;
+
+  --text: #FFFFFF;
+  --text-hover: #ffffff;
+  --text-muted: #848BBD;
+
+  --arr-queue-color: #72F1B8;
+  --plex-poster-unwatched: #FF7EDB;
+  --petio-spinner: invert(48%) sepia(74%) saturate(285%) hue-rotate(264deg) brightness(107%) contrast(130%);
+  --gitea-color-primary-dark-4: 255, 126, 219;
+  --overseerr-gradient: linear-gradient(180deg, rgba(38, 35, 53, 0.17) 0%, rgba(38, 35, 53) 100%);
+}

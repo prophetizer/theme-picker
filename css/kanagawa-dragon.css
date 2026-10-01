@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Kanagawa Dragon
+ *
+ * Palette source: rebelot/kanagawa.nvim lua/kanagawa/colors.lua + themes.lua (dragon theme: ui, syn and term roles)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #798279 is the palette's #737c73 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#c4b28a'.
+ */
+:root {
+  --main-bg-color: #12120f;
+  --modal-bg-color: #181616;
+  --modal-header-color: #181616;
+  --modal-footer-color: #181616;
+  --drop-down-menu-bg: #181616;
+  --button-color: #c4b28a;
+  --button-color-hover: #b6927b;
+  --button-text: #12120f;
+  --button-text-hover: #12120f;
+  --accent-color: 196, 178, 138;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8ba4b0;
+  --link-color-hover: #c4746e;
+  --label-text-color: #12120f;
+  --text: #c5c9c5;
+  --text-hover: #c5c9c5;
+  --text-muted: #798279;
+  --arr-queue-color: #8a9a7b;
+  --plex-poster-unwatched: #b6927b;
+  --petio-spinner: invert(65%) sepia(86%) saturate(263%) hue-rotate(338deg) brightness(125%) contrast(54%);
+  --gitea-color-primary-dark-4: 196, 178, 138;
+  --overseerr-gradient: linear-gradient(180deg, rgba(18, 18, 15, 0.17) 0%, rgba(18, 18, 15) 100%);
+}

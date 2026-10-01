@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Frost (light)
+ *
+ * Generated variant: light of 'frost', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'frost'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#4880c0'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #cdddfc 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #cdddfc 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #cdddfc 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #cdddfc 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ecf4ff;
+  --button-color: #4880c0;
+  --button-color-hover: #667eab;
+  --button-text: #000428;
+  --button-text-hover: #000428;
+  --accent-color: 72, 128, 192;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #33639a;
+  --link-color-hover: #4b618e;
+  --label-text-color: #000428;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #001434;
+  --arr-queue-color: #4f80b9;
+  --plex-poster-unwatched: #667eab;
+  --petio-spinner: invert(41%) sepia(100%) saturate(552%) hue-rotate(176deg) brightness(89%) contrast(64%);
+  --gitea-color-primary-dark-4: 72, 128, 192;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.17) 0%, #ffffff 100%);
+}

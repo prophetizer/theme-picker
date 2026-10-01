@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Soul (light)
+ *
+ * Generated variant: light of 'soul', theme.park's community theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'soul'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#ab6500'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center bottom, rgba(255, 255, 254, 0.7) 0%, #ffd6dd 80%, #d1d1d1 100%) center center/cover no-repeat fixed, url(/resources/soul.jpg) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(180deg, #ffffff 0%, #ffd6dd 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(180deg, #ffffff 0%, #ffd6dd 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(180deg, #ffffff 0%, #ffd6dd 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: linear-gradient(180deg, #ffffff 0%, #ffd6dd 100%) center center/cover no-repeat fixed;
+  --button-color: #ab6500;
+  --button-color-hover: rgba(171, 101, 0, 0.8);
+  --button-text: #000000;
+  --button-text-hover: #ffffff;
+  --accent-color: 171, 101, 0;
+  --accent-color-hover: rgba(var(--accent-color), 0.8);
+  --link-color: #854d00;
+  --link-color-hover: rgba(133, 77, 0, 0.8);
+  --label-text-color: #ffffff;
+  --text: #040404;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #ab6500;
+  --plex-poster-unwatched: #880030;
+  --petio-spinner: invert(66%) sepia(99%) saturate(266%) hue-rotate(351deg) brightness(59%) contrast(187%);
+  --gitea-color-primary-dark-4: 171, 101, 0;
+  --overseerr-gradient: linear-gradient(rgba(var(--accent-color), 0.3) 0%, #d1d1d1 100%);
+}

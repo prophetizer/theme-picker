@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Sonokai
+ *
+ * Palette source: sainnhe/sonokai autoload/sonokai.vim, Default variant palette
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted was chosen/adjusted for legibility against --modal-bg-color
+ * (WCAG contrast checked at author time, >= 4.0:1); where the upstream
+ * palette published a lighter grey, that one is used rather than a new value.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#FC5D7C'.
+ */
+:root {
+  --main-bg-color: #2C2E34;
+  --modal-bg-color: #33353F;
+  --modal-header-color: #33353F;
+  --modal-footer-color: #33353F;
+  --drop-down-menu-bg: #33353F;
+  --button-color: #FC5D7C;
+  --button-color-hover: #9ED072;
+  --button-text: #2C2E34;
+  --button-text-hover: #2C2E34;
+  --accent-color: 252, 93, 124;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #76CCE0;
+  --link-color-hover: #B39DF3;
+  --label-text-color: #2C2E34;
+  --text: #E2E2E3;
+  --text-hover: #FFFFFF;
+  --text-muted: #9CA0AB;
+  --arr-queue-color: #9ED072;
+  --plex-poster-unwatched: #FC5D7C;
+  --petio-spinner: invert(40%) sepia(50%) saturate(700%) hue-rotate(298deg) brightness(113%) contrast(98%);
+  --gitea-color-primary-dark-4: 252, 93, 124;
+  --overseerr-gradient: linear-gradient(180deg, rgba(44, 46, 52, 0.17) 0%, rgba(44, 46, 52) 100%);
+}

@@ -1,0 +1,42 @@
+/*
+ * theme.park custom theme: Sakura
+ *
+ * Palette source: original gradient theme -- no upstream scheme to cite.
+ * A GRADIENT theme, following the shape of theme.park's own hotpink,
+ * aquamarine, hotline and maroon: a hero gradient on the page background, a
+ * matching -90deg linear gradient on panels, and a SOLID colour for the
+ * drop-down menu -- a gradient in a small menu renders as a flat slice and
+ * looks broken.
+ *
+ * Light. Blossom pink kept very pale on the page so body text stays dark-on-
+ * near-white; the saturated pink lives in the accent, not the background.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#b5477a'.
+ */
+:root {
+  --main-bg-color: linear-gradient(165deg, #fffafb 0%, #fdeef2 45%, #f8dde5 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #fff5f7 0%, #fae5eb 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #fff5f7 0%, #fae5eb 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #fff5f7 0%, #fae5eb 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #fdeef2;
+  --button-color: #b5477a;
+  --button-color-hover: #8e2f5e;
+  --button-text: #fffafb;
+  --button-text-hover: #fffafb;
+  --accent-color: 181, 71, 122;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #a63f6e;
+  --link-color-hover: #cc6f9b;
+  --label-text-color: #fffafb;
+  --text: #3a2028;
+  --text-hover: #241016;
+  --text-muted: #7a5560;
+  --arr-queue-color: #2f7d5a;
+  --plex-poster-unwatched: #b5477a;
+  --petio-spinner: invert(22%) sepia(22%) saturate(700%) hue-rotate(280deg) brightness(185%) contrast(171%);
+  --gitea-color-primary-dark-4: 181, 71, 122;
+  --overseerr-gradient: linear-gradient(165deg, rgba(255,250,251,.9) 0%, rgba(253,238,242,.9) 45%, rgba(248,221,229,.9) 100%) center center/cover no-repeat fixed;
+}

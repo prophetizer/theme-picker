@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Andromeda
+ *
+ * Palette source: EliverLara/Andromeda themes/Andromeda-color-theme.json
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * A GRADIENT theme in the shape of theme.park's own: a hero gradient built
+ * from the palette's own background tones on the page, a matching -90deg
+ * gradient on panels, and a SOLID drop-down menu (a gradient in a small menu
+ * reads as a slice).
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#00e8c6'.
+ */
+:root {
+  --main-bg-color: linear-gradient(165deg, #1a1c22 0%, #2e323d 55%, #23262e 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #23262e 0%, #1a1c22 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #23262e 0%, #1a1c22 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #23262e 0%, #1a1c22 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #23262e;
+  --button-color: #00e8c6;
+  --button-color-hover: #ff00aa;
+  --button-text: #1a1c22;
+  --button-text-hover: #1a1c22;
+  --accent-color: 0, 232, 198;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00e8c6;
+  --link-color-hover: #ffe66d;
+  --label-text-color: #1a1c22;
+  --text: #d5ced9;
+  --text-hover: #eeeeee;
+  --text-muted: #a0a1a7;
+  --arr-queue-color: #96e072;
+  --plex-poster-unwatched: #f39c12;
+  --petio-spinner: invert(71%) sepia(97%) saturate(435%) hue-rotate(109deg) brightness(91%) contrast(100%);
+  --gitea-color-primary-dark-4: 0, 232, 198;
+  --overseerr-gradient: linear-gradient(180deg, rgba(26, 28, 34, 0.17) 0%, rgba(26, 28, 34) 100%);
+}

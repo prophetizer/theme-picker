@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Moonfly
+ *
+ * Palette source: bluz71/vim-moonfly-colors README (author's published palette)
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted was chosen/adjusted for legibility against --modal-bg-color
+ * (WCAG contrast checked at author time, >= 4.0:1); where the upstream
+ * palette published a lighter grey, that one is used rather than a new value.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#80A0FF'.
+ */
+:root {
+  --main-bg-color: #080808;
+  --modal-bg-color: #1c1c1c;
+  --modal-header-color: #1c1c1c;
+  --modal-footer-color: #1c1c1c;
+  --drop-down-menu-bg: #1c1c1c;
+  --button-color: #80A0FF;
+  --button-color-hover: #79DAC8;
+  --button-text: #080808;
+  --button-text-hover: #080808;
+  --accent-color: 128, 160, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #74B2FF;
+  --link-color-hover: #B2CEEE;
+  --label-text-color: #080808;
+  --text: #C6C6C6;
+  --text-hover: #EEEEEE;
+  --text-muted: #949494;
+  --arr-queue-color: #8CC85F;
+  --plex-poster-unwatched: #80A0FF;
+  --petio-spinner: invert(58%) sepia(65%) saturate(304%) hue-rotate(188deg) brightness(91%) contrast(123%);
+  --gitea-color-primary-dark-4: 128, 160, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(8, 8, 8, 0.17) 0%, rgba(8, 8, 8) 100%);
+}

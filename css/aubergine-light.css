@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Aubergine (light)
+ *
+ * Generated variant: light of 'aubergine', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'aubergine'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ca5d92'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #ffffff 0%, #ffdafc 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.06) 0%, rgba(209, 209, 209, 0.06) 100%), linear-gradient(-90deg, #ffffff 0%, #ffdafc 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.06) 0%, rgba(209, 209, 209, 0.06) 100%), linear-gradient(-90deg, #ffffff 0%, #ffdafc 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.06) 0%, rgba(209, 209, 209, 0.06) 100%), linear-gradient(-90deg, #ffffff 0%, #ffdafc 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffe9f6;
+  --button-color: #ca5d92;
+  --button-color-hover: #ba62b5;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 202, 93, 146;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #974f70;
+  --link-color-hover: #974893;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #200016;
+  --arr-queue-color: #b66b8d;
+  --plex-poster-unwatched: #ba62b5;
+  --petio-spinner: invert(29%) sepia(38%) saturate(5338%) hue-rotate(295deg) brightness(84%) contrast(86%);
+  --gitea-color-primary-dark-4: 202, 93, 146;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 218, 252, 0.17) 0%, #ffdafc 100%);
+}

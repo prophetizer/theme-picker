@@ -1,0 +1,54 @@
+/*
+ * theme.park custom theme: Electron Highlighter
+ *
+ * Based on the Electron Highlighter color scheme by Mike McBride
+ * (https://github.com/electron-highlighter/palette), canonical hex values
+ * from electron-dark.js, the palette repo's stated single source of truth.
+ *
+ * NOTE: the iTerm2-Color-Schemes port of this theme is corrupt -- every one
+ * of its eight core values is a near-transposition of the canonical one
+ * (#23283d vs #24283b, #77abff vs #82aaff, and so on). The canonical values
+ * are used here. Do not "correct" them back against that port.
+ *
+ * Surfaces come from the upstream editor ramp (config/colors.js), which is
+ * deliberately cooler than the terminal ramp; #24283B is the terminal
+ * background and sits one step lighter, so it serves as the modal surface.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #1D232F;
+
+  --modal-bg-color: #24283B;
+  --modal-header-color: #24283B;
+  --modal-footer-color: #24283B;
+
+  --drop-down-menu-bg: #24283B;
+
+  --button-color: #58FFC7;
+  --button-color-hover: #5CE1FF;
+  --button-text: #1D232F;
+  --button-text-hover: #1D232F;
+
+  --accent-color: 88, 255, 199;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #82AAFF;
+  --link-color-hover: #D2A6EF;
+  --label-text-color: #1D232F;
+
+  --text: #A8B5D1;
+  --text-hover: #ffffff;
+  --text-muted: #7586B3;
+
+  --arr-queue-color: #5CE1FF;
+  --plex-poster-unwatched: #58FFC7;
+  --petio-spinner: invert(64%) sepia(64%) saturate(348%) hue-rotate(107deg) brightness(118%) contrast(100%);
+  --gitea-color-primary-dark-4: 88, 255, 199;
+  --overseerr-gradient: linear-gradient(180deg, rgba(29, 35, 47, 0.17) 0%, rgba(29, 35, 47) 100%);
+}

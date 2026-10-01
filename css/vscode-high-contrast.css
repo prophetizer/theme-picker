@@ -1,0 +1,48 @@
+/*
+ * theme.park custom theme: VS Code High Contrast
+ *
+ * HIGH CONTRAST: every text role meets WCAG AAA (7:1) against its surface --
+ * text 18.5:1, muted 7.5:1, links 7.0:1, button labels 8.2:1.
+ * The theme picker's "high contrast" badge measures exactly this bar.
+ *
+ * Palette source:
+ * microsoft/vscode, extensions/theme-defaults/themes/hc_black.json plus the
+ * hcDark values in src/vs/platform/theme/common/colors/*.ts and
+ * src/vs/workbench/common/theme.ts (main, commit 1fe7285a1162).
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * Panels are editorWidget.background #0c141f on the #000000 editor background.
+ * Muted is disabledForeground #a5a5a5; descriptionForeground is computed at
+ * runtime and has no hex. VS Code's own buttons are black with a #6fc3df
+ * border, which theme.park cannot draw, so buttons use focusBorder #f38518
+ * with black labels and contrastBorder #6fc3df on hover.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#f38518'.
+ */
+:root {
+  --main-bg-color: #000000;
+  --modal-bg-color: #0c141f;
+  --modal-header-color: #0c141f;
+  --modal-footer-color: #0c141f;
+  --drop-down-menu-bg: #0c141f;
+  --button-color: #f38518;
+  --button-color-hover: #6fc3df;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 243, 133, 24;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #21a6ff;
+  --link-color-hover: #6fc3df;
+  --label-text-color: #000000;
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-muted: #a5a5a5;
+  --arr-queue-color: #89d185;
+  --plex-poster-unwatched: #f38518;
+  --petio-spinner: invert(35%) sepia(90%) saturate(242%) hue-rotate(349deg) brightness(131%) contrast(200%);
+  --gitea-color-primary-dark-4: 243, 133, 24;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.17) 0%, rgba(0, 0, 0) 100%);
+}

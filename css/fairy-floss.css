@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Fairy Floss
+ *
+ * Palette source: sailorhg/fairyfloss fairyfloss.tmTheme (background, foreground and the token colours; panels share its one background -- its lighter line-highlight purple can't carry text at 7:1)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #fefef8 is the palette's #f8f8f2 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #d9c5ff is the palette's #c5a3ff with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --button-text #585273 is the palette's #5a5475 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ffb8d1'.
+ */
+:root {
+  --main-bg-color: #5a5475;
+  --modal-bg-color: #5a5475;
+  --modal-header-color: #5a5475;
+  --modal-footer-color: #5a5475;
+  --drop-down-menu-bg: #5a5475;
+  --button-color: #ffb8d1;
+  --button-color-hover: #c2ffdf;
+  --button-text: #585273;
+  --button-text-hover: #585273;
+  --accent-color: 255, 184, 209;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #fff352;
+  --link-color-hover: #c2ffdf;
+  --label-text-color: #585273;
+  --text: #fefef8;
+  --text-hover: #ffffff;
+  --text-muted: #d9c5ff;
+  --arr-queue-color: #c2ffdf;
+  --plex-poster-unwatched: #e6c000;
+  --petio-spinner: invert(16%) sepia(8%) saturate(2369%) hue-rotate(295deg) brightness(101%) contrast(101%);
+  --gitea-color-primary-dark-4: 255, 184, 209;
+  --overseerr-gradient: linear-gradient(180deg, rgba(90, 84, 117, 0.17) 0%, rgba(90, 84, 117) 100%);
+}

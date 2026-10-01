@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Bamboo Multiplex (light)
+ *
+ * Generated variant: light of 'bamboo-multiplex', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'bamboo-multiplex'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#6d9a43'.
+ */
+:root {
+  --main-bg-color: #eff6ef;
+  --modal-bg-color: #f7fcf7;
+  --modal-header-color: #f7fcf7;
+  --modal-footer-color: #f7fcf7;
+  --drop-down-menu-bg: #f7fcf7;
+  --button-color: #6d9a43;
+  --button-color-hover: #a18e01;
+  --button-text: #171f17;
+  --button-text-hover: #171f17;
+  --accent-color: 109, 154, 67;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #517c23;
+  --link-color-hover: #807000;
+  --label-text-color: #171f17;
+  --text: #040200;
+  --text-hover: #040200;
+  --text-muted: #383d38;
+  --arr-queue-color: #6d9a43;
+  --plex-poster-unwatched: #cd791e;
+  --petio-spinner: invert(68%) sepia(65%) saturate(336%) hue-rotate(48deg) brightness(70%) contrast(93%);
+  --gitea-color-primary-dark-4: 109, 154, 67;
+  --overseerr-gradient: linear-gradient(180deg, rgba(239, 246, 239, 0.17) 0%, #eff6ef 100%);
+}

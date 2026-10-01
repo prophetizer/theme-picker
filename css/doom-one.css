@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Doom One
+ *
+ * Palette source: doomemacs/themes themes/doom-one-theme.el (bg, bg-alt, fg, base8, comments, accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #8c939a is the palette's #5b6268 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#51afef'.
+ */
+:root {
+  --main-bg-color: #21242b;
+  --modal-bg-color: #282c34;
+  --modal-header-color: #282c34;
+  --modal-footer-color: #282c34;
+  --drop-down-menu-bg: #282c34;
+  --button-color: #51afef;
+  --button-color-hover: #46d9ff;
+  --button-text: #21242b;
+  --button-text-hover: #21242b;
+  --accent-color: 81, 175, 239;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #51afef;
+  --link-color-hover: #c678dd;
+  --label-text-color: #21242b;
+  --text: #bbc2cf;
+  --text-hover: #dfdfdf;
+  --text-muted: #8c939a;
+  --arr-queue-color: #98be65;
+  --plex-poster-unwatched: #da8548;
+  --petio-spinner: invert(46%) sepia(88%) saturate(325%) hue-rotate(161deg) brightness(116%) contrast(92%);
+  --gitea-color-primary-dark-4: 81, 175, 239;
+  --overseerr-gradient: linear-gradient(180deg, rgba(33, 36, 43, 0.17) 0%, rgba(33, 36, 43) 100%);
+}

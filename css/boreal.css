@@ -1,0 +1,42 @@
+/*
+ * theme.park custom theme: Boreal
+ *
+ * Palette source: original gradient theme -- no upstream scheme to cite.
+ * A GRADIENT theme, following the shape of theme.park's own hotpink,
+ * aquamarine, hotline and maroon: a hero gradient on the page background, a
+ * matching -90deg linear gradient on panels, and a SOLID colour for the
+ * drop-down menu -- a gradient in a small menu renders as a flat slice and
+ * looks broken.
+ *
+ * Conifer green lifting off a near-black floor. Named to avoid collision
+ * with everforest, everblush and the community pine-shadow theme.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#7bc47f'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at 50% 115%, #4f9d69 0%, #1f4034 45%, #0e1a17 85%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #1c332b 0%, #0e1a17 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #1c332b 0%, #0e1a17 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #1c332b 0%, #0e1a17 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #0e1a17;
+  --button-color: #7bc47f;
+  --button-color-hover: #a3dba6;
+  --button-text: #0e1a17;
+  --button-text-hover: #0e1a17;
+  --accent-color: 123, 196, 127;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8fd6c1;
+  --link-color-hover: #b8ead9;
+  --label-text-color: #0e1a17;
+  --text: #dfe7e1;
+  --text-hover: #ffffff;
+  --text-muted: #9db3a6;
+  --arr-queue-color: #9ccc65;
+  --plex-poster-unwatched: #7bc47f;
+  --petio-spinner: invert(83%) sepia(99%) saturate(197%) hue-rotate(51deg) brightness(71%) contrast(130%);
+  --gitea-color-primary-dark-4: 123, 196, 127;
+  --overseerr-gradient: radial-gradient(ellipse at 50% 115%, rgba(79,157,105,.9) 0%, rgba(31,64,52,.9) 45%, rgba(14,26,23,.9) 85%) center center/cover no-repeat fixed;
+}

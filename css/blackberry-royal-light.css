@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Blackberry Royal (light)
+ *
+ * Generated variant: light of 'blackberry-royal', theme.park's community theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'blackberry-royal'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#78706a'.
+ */
+:root {
+  --main-bg-color: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(209, 209, 209, 0.7) 100%) center center/cover no-repeat fixed, radial-gradient(at top center, rgba(255, 255, 255, 0.3) 0%, rgba(209, 209, 209, 0.4) 120%) #d1d1d1 center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --modal-header-color: var(--main-bg-color);
+  --modal-footer-color: var(--main-bg-color);
+  --drop-down-menu-bg: var(--main-bg-color);
+  --button-color: #78706a;
+  --button-color-hover: #807268;
+  --button-text: rgba(255, 255, 255, 0.95);
+  --button-text-hover: rgba(255, 255, 255, 0.95);
+  --accent-color: 132, 118, 108;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #685b51;
+  --link-color-hover: #6f5948;
+  --label-text-color: rgba(255, 255, 255, 0.95);
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #348a21;
+  --plex-poster-unwatched: #84766c;
+  --petio-spinner: invert(74%) sepia(100%) saturate(89%) hue-rotate(336deg) brightness(44%) contrast(54%);
+  --gitea-color-primary-dark-4: 132, 118, 108;
+  --overseerr-gradient: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(209, 209, 209, 0.7) 100%) center center/cover no-repeat fixed, radial-gradient(at top center, rgba(255, 255, 255, 0.3) 0%, rgba(209, 209, 209, 0.4) 120%) rgba(209, 209, 209, 0.9) center center/cover no-repeat fixed;
+}

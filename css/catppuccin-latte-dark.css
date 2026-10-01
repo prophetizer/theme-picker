@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Catppuccin Latte (dark)
+ *
+ * Generated variant: dark of 'catppuccin-latte', theme.park's community theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'catppuccin-latte'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#33353c'.
+ */
+:root {
+  --main-bg-color: #17181a;
+  --modal-bg-color: #101215;
+  --modal-header-color: #090b0f;
+  --modal-footer-color: #090b0f;
+  --drop-down-menu-bg: #04060a;
+  --button-color: #33353c;
+  --button-color-hover: #42454d;
+  --button-text: var(--text);
+  --button-text-hover: var(--text-hover);
+  --accent-color: 137, 180, 250;
+  --accent-color-hover: rgb(var(--accent-color), 0.8);
+  --link-color: var(--text);
+  --link-color-hover: #3579ff;
+  --label-text-color: #ffffff;
+  --text: #9da1be;
+  --text-hover: var(--text);
+  --text-muted: #7c7f95;
+  --arr-queue-color: #40a02b;
+  --plex-poster-unwatched: #fe640b;
+  --petio-spinner: invert(1%) sepia(97%) saturate(700%) hue-rotate(198deg) brightness(200%) contrast(63%);
+  --gitea-color-primary-dark-4: var(--accent-color);
+  --overseerr-gradient: linear-gradient( var(--main-bg-color), var(--main-bg-color) );
+}

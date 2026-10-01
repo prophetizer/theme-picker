@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Neonoir
+ *
+ * Palette source: original gradient theme -- no upstream scheme to cite.
+ * A GRADIENT theme, following the shape of theme.park's own hotpink,
+ * aquamarine, hotline and maroon: a hero gradient on the page background, a
+ * matching -90deg linear gradient on panels, and a SOLID colour for the
+ * drop-down menu -- a gradient in a small menu renders as a flat slice and
+ * looks broken.
+ *
+ * Black with a magenta glow in the lower corner and an electric cyan accent.
+ * Distinct from Vaporwave, which runs pink into violet into navy with no
+ * black and no cyan.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#00e5ff'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at 80% 110%, #ff2d95 0%, #1a0c2e 40%, #04060a 85%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #1a1426 0%, #08080f 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #1a1426 0%, #08080f 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #1a1426 0%, #08080f 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #04060a;
+  --button-color: #00e5ff;
+  --button-color-hover: #ff2d95;
+  --button-text: #04060a;
+  --button-text-hover: #04060a;
+  --accent-color: 0, 229, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4dd9ff;
+  --link-color-hover: #9beeff;
+  --label-text-color: #04060a;
+  --text: #d8dfe8;
+  --text-hover: #ffffff;
+  --text-muted: #8e91a8;
+  --arr-queue-color: #3ddb8f;
+  --plex-poster-unwatched: #00e5ff;
+  --petio-spinner: invert(32%) sepia(100%) saturate(545%) hue-rotate(168deg) brightness(164%) contrast(160%);
+  --gitea-color-primary-dark-4: 0, 229, 255;
+  --overseerr-gradient: radial-gradient(ellipse at 80% 110%, rgba(255,45,149,.9) 0%, rgba(26,12,46,.9) 40%, rgba(4,6,10,.9) 85%) center center/cover no-repeat fixed;
+}

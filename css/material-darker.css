@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Material Darker
+ *
+ * Palette source: marko-cerovac/material.nvim lua/material/colors/init.lua ('darker' style: editor bg, bg_alt, fg, fg_dark, accent, and the main colours)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ff9800'.
+ */
+:root {
+  --main-bg-color: #1a1a1a;
+  --modal-bg-color: #212121;
+  --modal-header-color: #212121;
+  --modal-footer-color: #212121;
+  --drop-down-menu-bg: #212121;
+  --button-color: #ff9800;
+  --button-color-hover: #ffcb6b;
+  --button-text: #1a1a1a;
+  --button-text-hover: #1a1a1a;
+  --accent-color: 255, 152, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #80cbc4;
+  --link-color-hover: #82aaff;
+  --label-text-color: #1a1a1a;
+  --text: #b0bec5;
+  --text-hover: #eeffff;
+  --text-muted: #8c8b8b;
+  --arr-queue-color: #c3e88d;
+  --plex-poster-unwatched: #f78c6c;
+  --petio-spinner: invert(46%) sepia(91%) saturate(1302%) hue-rotate(0deg) brightness(104%) contrast(105%);
+  --gitea-color-primary-dark-4: 255, 152, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(26, 26, 26, 0.17) 0%, rgba(26, 26, 26) 100%);
+}

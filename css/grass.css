@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Grass
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Grass (macOS Terminal's 'Grass' profile: background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * Body text is held to 4.5:1 (WCAG AA), not this repo's usual 7:1: on Grass's
+ * green page no colour reaches 7:1, not even white (5.6:1).
+ * --text-muted #e6e6e6 is the palette's #bbbbbb with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --button-text #005528 is the palette's #13773d with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#e7b000'.
+ */
+:root {
+  --main-bg-color: #13773d;
+  --modal-bg-color: #13773d;
+  --modal-header-color: #13773d;
+  --modal-footer-color: #13773d;
+  --drop-down-menu-bg: #13773d;
+  --button-color: #e7b000;
+  --button-color-hover: #fff0a5;
+  --button-text: #005528;
+  --button-text-hover: #005528;
+  --accent-color: 231, 176, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #55ffff;
+  --link-color-hover: #ffffff;
+  --label-text-color: #005528;
+  --text: #fff0a5;
+  --text-hover: #ffffff;
+  --text-muted: #e6e6e6;
+  --arr-queue-color: #00bb00;
+  --plex-poster-unwatched: #e7b000;
+  --petio-spinner: invert(68%) sepia(100%) saturate(500%) hue-rotate(355deg) brightness(89%) contrast(104%);
+  --gitea-color-primary-dark-4: 231, 176, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(19, 119, 61, 0.17) 0%, rgba(19, 119, 61) 100%);
+}

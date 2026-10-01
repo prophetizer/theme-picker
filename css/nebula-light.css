@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Nebula (light)
+ *
+ * Generated variant: light of 'nebula', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'nebula'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#8e58ea'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at 30% 20%, #ffffff 0%, #edecff 40%, #d5d3dc 85%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #e8e7ff 0%, #d5d3dc 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #e8e7ff 0%, #d5d3dc 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #e8e7ff 0%, #d5d3dc 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #d5d3dc;
+  --button-color: #8e58ea;
+  --button-color-hover: #8c64c3;
+  --button-text: #08060f;
+  --button-text-hover: #08060f;
+  --accent-color: 142, 88, 234;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #006290;
+  --link-color-hover: #2d6280;
+  --label-text-color: #08060f;
+  --text: #030107;
+  --text-hover: #000000;
+  --text-muted: #2b2240;
+  --arr-queue-color: #00895a;
+  --plex-poster-unwatched: #8e58ea;
+  --petio-spinner: invert(35%) sepia(100%) saturate(669%) hue-rotate(229deg) brightness(98%) contrast(97%);
+  --gitea-color-primary-dark-4: 142, 88, 234;
+  --overseerr-gradient: radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.9) 0%, rgba(237, 236, 255, 0.9) 40%, rgba(213, 211, 220, 0.9) 85%) center center/cover no-repeat fixed;
+}

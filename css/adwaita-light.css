@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Adwaita Light
+ *
+ * Palette source: Mofiqul/adwaita.nvim lua/adwaita/utils.lua colour table + light.lua (Normal, Comment, float and terminal colours; accents are GNOME's palette)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #707070 is the palette's #777777 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#1c71d8'.
+ */
+:root {
+  --main-bg-color: #f6f5f4;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #1c71d8;
+  --button-color-hover: #1a5fb4;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 28, 113, 216;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #1a5fb4;
+  --link-color-hover: #9141ac;
+  --label-text-color: #ffffff;
+  --text: #505050;
+  --text-hover: #3d3d3d;
+  --text-muted: #707070;
+  --arr-queue-color: #26a269;
+  --plex-poster-unwatched: #e66100;
+  --petio-spinner: invert(62%) sepia(45%) saturate(5035%) hue-rotate(201deg) brightness(90%) contrast(87%);
+  --gitea-color-primary-dark-4: 28, 113, 216;
+  --overseerr-gradient: linear-gradient(180deg, rgba(246, 245, 244, 0.17) 0%, rgba(246, 245, 244) 100%);
+}

@@ -1,0 +1,48 @@
+/*
+ * theme.park custom theme: Moonlit Asteroid
+ *
+ * Gradient source: Ghosh/uiGradients gradients.json, 'Moonlit Asteroid' (#0f2027 -> #203a43 -> #2c5364), MIT.
+ * uiGradients gives only the gradient's colours, so every role below is
+ * one of them (lightness moved where noted), a black veil over them, or a
+ * near-white tinted toward them: text is not taken from anywhere else.
+ *
+ * A GRADIENT theme in the shape of theme.park's own: the gradient on the
+ * page, the same stops at -90deg on panels, and a SOLID drop-down menu.
+ * --button-color #95bfd2 is uiGradients' #2c5364 lightened so buttons stand
+ * out on the gradient.
+ * --button-color-hover #9fbdc8 is uiGradients' #203a43 lightened so buttons
+ * stand out on the gradient.
+ * --link-color #9bc5d9 is uiGradients' #2c5364 with its lightness moved to
+ * read at 4.5:1 on every panel colour.
+ * --link-color-hover #a6c4cf is uiGradients' #203a43 with its lightness moved
+ * to read at 4.5:1 on every panel colour.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#95bfd2'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #0f2027 0%, #203a43 50%, #2c5364 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #0f2027 0%, #203a43 50%, #2c5364 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #0f2027 0%, #203a43 50%, #2c5364 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #1e3944;
+  --button-color: #95bfd2;
+  --button-color-hover: #9fbdc8;
+  --button-text: #0f2027;
+  --button-text-hover: #0f2027;
+  --accent-color: 149, 191, 210;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #9bc5d9;
+  --link-color-hover: #a6c4cf;
+  --label-text-color: #0f2027;
+  --text: #e8f8ff;
+  --text-hover: #ffffff;
+  --text-muted: #7bcaea;
+  --arr-queue-color: #9bc5d9;
+  --plex-poster-unwatched: #9fbdc8;
+  --petio-spinner: invert(54%) sepia(42%) saturate(171%) hue-rotate(154deg) brightness(116%) contrast(123%);
+  --gitea-color-primary-dark-4: 149, 191, 210;
+  --overseerr-gradient: linear-gradient(180deg, rgba(44, 83, 100, 0.17) 0%, rgba(44, 83, 100) 100%);
+}

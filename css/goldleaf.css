@@ -1,0 +1,48 @@
+/*
+ * theme.park custom theme: Goldleaf
+ *
+ * Palette source: original gradient theme -- no upstream scheme to cite.
+ * A GRADIENT theme, following the shape of theme.park's own hotpink,
+ * aquamarine, hotline and maroon: a hero gradient on the page background, a
+ * matching -90deg linear gradient on panels, and a SOLID colour for the
+ * drop-down menu -- a gradient in a small menu renders as a flat slice and
+ * looks broken.
+ *
+ * Warm gold rising off a near-black floor. The gold is the accent and the
+ * lower edge only -- the reading area stays dark, which is what keeps a
+ * yellow-family theme usable.
+ *
+ * The gold is a translucent lobe layered over the brown base, not a gradient
+ * stop of its own. At full strength #d9a441 put body text at 1.8:1, below
+ * every one of theme.park's four gradient themes (2.1-3.0:1). At 45% over
+ * #6b4f1c it measures 3.2:1. Same treatment as Aurora's green.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#d9a441'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse 85% 42% at 50% 118%, rgba(217,164,65,.45) 0%, rgba(217,164,65,0) 70%), radial-gradient(ellipse at 50% 112%, #6b4f1c 0%, #2a2417 40%, #12100b 82%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #2a2417 0%, #12100b 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #2a2417 0%, #12100b 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #2a2417 0%, #12100b 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #12100b;
+  --button-color: #d9a441;
+  --button-color-hover: #f0c56e;
+  --button-text: #12100b;
+  --button-text-hover: #12100b;
+  --accent-color: 217, 164, 65;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #e0b75f;
+  --link-color-hover: #f2d394;
+  --label-text-color: #12100b;
+  --text: #ece3d0;
+  --text-hover: #ffffff;
+  --text-muted: #ad9f83;
+  --arr-queue-color: #7fb069;
+  --plex-poster-unwatched: #d9a441;
+  --petio-spinner: invert(71%) sepia(59%) saturate(700%) hue-rotate(338deg) brightness(105%) contrast(70%);
+  --gitea-color-primary-dark-4: 217, 164, 65;
+  --overseerr-gradient: radial-gradient(ellipse 85% 42% at 50% 118%, rgba(217,164,65,.40) 0%, rgba(217,164,65,0) 70%), radial-gradient(ellipse at 50% 112%, rgba(107,79,28,.9) 0%, rgba(42,36,23,.9) 40%, rgba(18,16,11,.9) 82%) center center/cover no-repeat fixed;
+}

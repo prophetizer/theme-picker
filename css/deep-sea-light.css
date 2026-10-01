@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Deep Sea (light)
+ *
+ * Generated variant: light of 'deep-sea', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'deep-sea'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#009085'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center, #feffff 0%, #d2e2f3 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #e5f6ff 0%, #d2e2f3 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #e5f6ff 0%, #d2e2f3 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #e5f6ff 0%, #d2e2f3 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #d2e2f3;
+  --button-color: #009085;
+  --button-color-hover: #009084;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 0, 144, 133;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #006e7b;
+  --link-color-hover: #00725b;
+  --label-text-color: #11141b;
+  --text: #000305;
+  --text-hover: #000000;
+  --text-muted: #112933;
+  --arr-queue-color: #009264;
+  --plex-poster-unwatched: #009085;
+  --petio-spinner: invert(21%) sepia(90%) saturate(592%) hue-rotate(131deg) brightness(163%) contrast(107%);
+  --gitea-color-primary-dark-4: 0, 144, 133;
+  --overseerr-gradient: radial-gradient(ellipse at center, rgba(254, 255, 255, 0.9) 0%, rgba(210, 226, 243, 0.9) 100%) center center/cover no-repeat fixed;
+}

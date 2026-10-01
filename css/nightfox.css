@@ -1,0 +1,51 @@
+/*
+ * theme.park custom theme: Nightfox
+ *
+ * Based on the flagship nightfox variant of nightfox.nvim by EdenEast
+ * (https://github.com/EdenEast/nightfox.nvim), canonical hex values from
+ * lua/nightfox/palette/nightfox.lua. 4.1k stars. Sibling of the terafox
+ * theme already in this repo -- same upstream, different palette file.
+ *
+ * The palette labels its surfaces, so the mapping is upstream's own: bg1 is
+ * the base, bg2 the raised surface, comment the muted foreground. Palette
+ * entries are Shade.new(base, ...) -- the .base value is what is used here;
+ * .bright and .dim are computed at runtime, not literals.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #192330;
+
+  --modal-bg-color: #212E3F;
+  --modal-header-color: #212E3F;
+  --modal-footer-color: #212E3F;
+
+  --drop-down-menu-bg: #212E3F;
+
+  --button-color: #719CD6;
+  --button-color-hover: #9D79D6;
+  --button-text: #192330;
+  --button-text-hover: #192330;
+
+  --accent-color: 113, 156, 214;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #63CDCF;
+  --link-color-hover: #81B29A;
+  --label-text-color: #192330;
+
+  --text: #CDCECF;
+  --text-hover: #ffffff;
+  --text-muted: #738091;
+
+  --arr-queue-color: #81B29A;
+  --plex-poster-unwatched: #719CD6;
+  --petio-spinner: invert(44%) sepia(81%) saturate(298%) hue-rotate(175deg) brightness(120%) contrast(73%);
+  --gitea-color-primary-dark-4: 113, 156, 214;
+  --overseerr-gradient: linear-gradient(180deg, rgba(25, 35, 48, 0.17) 0%, rgba(25, 35, 48) 100%);
+}

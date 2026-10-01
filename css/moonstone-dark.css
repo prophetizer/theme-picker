@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Moonstone (dark)
+ *
+ * Generated variant: dark of 'moonstone', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'moonstone'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#5b6bbf'.
+ */
+:root {
+  --main-bg-color: linear-gradient(160deg, #242424 0%, #17181c 45%, #0b0d15 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #1d1d20 0%, #101218 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #1d1d20 0%, #101218 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #1d1d20 0%, #101218 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #17181c;
+  --button-color: #5b6bbf;
+  --button-color-hover: #5768b6;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 91, 107, 191;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7286d8;
+  --link-color-hover: #7c8ad4;
+  --label-text-color: #ffffff;
+  --text: #a5acd4;
+  --text-hover: #aeb4cf;
+  --text-muted: #8189a9;
+  --arr-queue-color: #2e7d5b;
+  --plex-poster-unwatched: #5b6bbf;
+  --petio-spinner: invert(38%) sepia(49%) saturate(700%) hue-rotate(193deg) brightness(99%) contrast(82%);
+  --gitea-color-primary-dark-4: 91, 107, 191;
+  --overseerr-gradient: linear-gradient(160deg, rgba(36, 36, 36, 0.9) 0%, rgba(23, 24, 28, 0.9) 45%, rgba(11, 13, 21, 0.9) 100%) center center/cover no-repeat fixed;
+}

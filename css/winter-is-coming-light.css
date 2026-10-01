@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Winter is Coming (Light)
+ *
+ * Palette source: johnpapa/vscode-winteriscoming themes/WinterIsComing-light-color-theme.json (editor, side bar, foreground, title bar, button and ANSI colours)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #11519e is the palette's #1857a4 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #66707a is the palette's #7e8993 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #7949fb is the palette's #7c4dff with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color-hover #007fae is the palette's #219fd5 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#03648a'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #03648a;
+  --button-color-hover: #007fae;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 3, 100, 138;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #236ebf;
+  --link-color-hover: #7949fb;
+  --label-text-color: #ffffff;
+  --text: #11519e;
+  --text-hover: #112233;
+  --text-muted: #66707a;
+  --arr-queue-color: #08916a;
+  --plex-poster-unwatched: #da5221;
+  --petio-spinner: invert(20%) sepia(76%) saturate(459%) hue-rotate(151deg) brightness(154%) contrast(118%);
+  --gitea-color-primary-dark-4: 3, 100, 138;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, rgba(243, 243, 243) 100%);
+}

@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Moonstone
+ *
+ * Palette source: original gradient theme -- no upstream scheme to cite.
+ * A GRADIENT theme, following the shape of theme.park's own hotpink,
+ * aquamarine, hotline and maroon: a hero gradient on the page background, a
+ * matching -90deg linear gradient on panels, and a SOLID colour for the
+ * drop-down menu -- a gradient in a small menu renders as a flat slice and
+ * looks broken.
+ *
+ * The only LIGHT gradient theme here -- theme.park's own four gradient
+ * themes are all dark. Button and label text are white on the indigo
+ * accent, the light-theme convention the other light themes use.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#5b6bbf'.
+ */
+:root {
+  --main-bg-color: linear-gradient(160deg, #ffffff 0%, #eef0f8 45%, #dfe3f2 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #f6f7fc 0%, #e6e9f5 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #f6f7fc 0%, #e6e9f5 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #f6f7fc 0%, #e6e9f5 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #eef0f8;
+  --button-color: #5b6bbf;
+  --button-color-hover: #3f4d99;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 91, 107, 191;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4a5aa8;
+  --link-color-hover: #7c8ad4;
+  --label-text-color: #ffffff;
+  --text: #2c3050;
+  --text-hover: #171a2e;
+  --text-muted: #5f6684;
+  --arr-queue-color: #2e7d5b;
+  --plex-poster-unwatched: #5b6bbf;
+  --petio-spinner: invert(38%) sepia(49%) saturate(700%) hue-rotate(193deg) brightness(99%) contrast(82%);
+  --gitea-color-primary-dark-4: 91, 107, 191;
+  --overseerr-gradient: linear-gradient(160deg, rgba(255,255,255,.9) 0%, rgba(238,240,248,.9) 45%, rgba(223,227,242,.9) 100%) center center/cover no-repeat fixed;
+}

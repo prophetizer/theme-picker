@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Everblush (light)
+ *
+ * Generated variant: light of 'everblush', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'everblush'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#5c9d4e'.
+ */
+:root {
+  --main-bg-color: #eff5f7;
+  --modal-bg-color: #fcfeff;
+  --modal-header-color: #fcfeff;
+  --modal-footer-color: #fcfeff;
+  --drop-down-menu-bg: #fcfeff;
+  --button-color: #5c9d4e;
+  --button-color-hover: #4b94ca;
+  --button-text: #141b1e;
+  --button-text-hover: #141b1e;
+  --accent-color: 92, 157, 78;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007b94;
+  --link-color-hover: #3e7e31;
+  --label-text-color: #141b1e;
+  --text: #171b1b;
+  --text-hover: #030403;
+  --text-muted: #384344;
+  --arr-queue-color: #5c9d4e;
+  --plex-poster-unwatched: #5c9d4e;
+  --petio-spinner: invert(70%) sepia(64%) saturate(353%) hue-rotate(63deg) brightness(69%) contrast(88%);
+  --gitea-color-primary-dark-4: 92, 157, 78;
+  --overseerr-gradient: linear-gradient(180deg, rgba(239, 245, 247, 0.17) 0%, #eff5f7 100%);
+}

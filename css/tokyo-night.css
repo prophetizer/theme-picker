@@ -1,0 +1,48 @@
+/*
+ * theme.park custom theme: Tokyo Night
+ *
+ * Based on the Tokyo Night color scheme (https://github.com/folke/tokyonight.nvim),
+ * the "Night" variant's hex values (the most widely ported default across
+ * VS Code / terminal / editor implementations).
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ *
+ * Contrast fix 2026-09-22: --text-muted was comment #565f89, 2.9:1 on bg_dark.
+ * Now dark5 #737aa2 (folke/tokyonight.nvim colors/storm.lua), 4.3:1.
+ */
+
+:root {
+  --main-bg-color: #1a1b26;
+
+  --modal-bg-color: #16161e;
+  --modal-header-color: #16161e;
+  --modal-footer-color: #16161e;
+
+  --drop-down-menu-bg: #16161e;
+
+  --button-color: #7aa2f7;
+  --button-color-hover: #bb9af7;
+  --button-text: #1a1b26;
+  --button-text-hover: #1a1b26;
+
+  --accent-color: 122, 162, 247;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #e0af68;
+  --link-color-hover: #7dcfff;
+  --label-text-color: #16161e;
+
+  --text: #c0caf5;
+  --text-hover: #ffffff;
+  --text-muted: #737aa2;
+
+  --arr-queue-color: #9ece6a;
+  --plex-poster-unwatched: #7aa2f7;
+  --petio-spinner: invert(45%) sepia(69%) saturate(287%) hue-rotate(183deg) brightness(118%) contrast(115%);
+  --gitea-color-primary-dark-4: 122, 162, 247;
+  --overseerr-gradient: linear-gradient(180deg, rgba(26, 27, 38, 0.17) 0%, rgba(26, 27, 38) 100%);
+}

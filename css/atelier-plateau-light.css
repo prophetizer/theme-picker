@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Atelier Plateau Light
+ *
+ * Palette source: tinted-theming/schemes base16/atelier-plateau-light.yaml (Bram de Haan; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #4d4646 is the palette's #585050 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --link-color #5c5ab0 is the palette's #7272ca with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #7252b0 is the palette's #8464c4 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #6e6dc5 is the palette's #7272ca with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #497aaa is the palette's #5485b6 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6e6dc5'.
+ */
+:root {
+  --main-bg-color: #e7dfdf;
+  --modal-bg-color: #f4ecec;
+  --modal-header-color: #f4ecec;
+  --modal-footer-color: #f4ecec;
+  --drop-down-menu-bg: #f4ecec;
+  --button-color: #6e6dc5;
+  --button-color-hover: #497aaa;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 110, 109, 197;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5c5ab0;
+  --link-color-hover: #7252b0;
+  --label-text-color: #ffffff;
+  --text: #4d4646;
+  --text-hover: #1b1818;
+  --text-muted: #655d5d;
+  --arr-queue-color: #4b8b8b;
+  --plex-poster-unwatched: #b45a3c;
+  --petio-spinner: invert(46%) sepia(8%) saturate(5822%) hue-rotate(206deg) brightness(82%) contrast(85%);
+  --gitea-color-primary-dark-4: 110, 109, 197;
+  --overseerr-gradient: linear-gradient(180deg, rgba(231, 223, 223, 0.17) 0%, rgba(231, 223, 223) 100%);
+}

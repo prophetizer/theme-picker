@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Challenger Deep (light)
+ *
+ * Generated variant: light of 'challenger-deep', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'challenger-deep'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#af78c6'.
+ */
+:root {
+  --main-bg-color: #f2f2ff;
+  --modal-bg-color: #fdfdff;
+  --modal-header-color: #fdfdff;
+  --modal-footer-color: #fdfdff;
+  --drop-down-menu-bg: #fdfdff;
+  --button-color: #af78c6;
+  --button-color-hover: #4a96b6;
+  --button-text: #100e23;
+  --button-text-hover: #100e23;
+  --accent-color: 175, 120, 198;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #297896;
+  --link-color-hover: #905aa6;
+  --label-text-color: #100e23;
+  --text: #000506;
+  --text-hover: #000000;
+  --text-muted: #151e30;
+  --arr-queue-color: #32a14b;
+  --plex-poster-unwatched: #c47c41;
+  --petio-spinner: invert(45%) sepia(39%) saturate(508%) hue-rotate(238deg) brightness(90%) contrast(91%);
+  --gitea-color-primary-dark-4: 175, 120, 198;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 242, 255, 0.17) 0%, #f2f2ff 100%);
+}

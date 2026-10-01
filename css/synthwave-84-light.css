@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Synthwave '84 (light)
+ *
+ * Generated variant: light of 'synthwave-84', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'synthwave-84'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#db5db9'.
+ */
+:root {
+  --main-bg-color: #f3f1ff;
+  --modal-bg-color: #f6f1ff;
+  --modal-header-color: #f6f1ff;
+  --modal-footer-color: #f6f1ff;
+  --drop-down-menu-bg: #f6f1ff;
+  --button-color: #db5db9;
+  --button-color-hover: #009d9b;
+  --button-text: #262335;
+  --button-text-hover: #262335;
+  --accent-color: 219, 93, 185;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007c7b;
+  --link-color-hover: #007f56;
+  --label-text-color: #262335;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #323661;
+  --arr-queue-color: #00a06e;
+  --plex-poster-unwatched: #db5db9;
+  --petio-spinner: invert(46%) sepia(80%) saturate(496%) hue-rotate(266deg) brightness(93%) contrast(84%);
+  --gitea-color-primary-dark-4: 219, 93, 185;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 241, 255, 0.17) 0%, #f3f1ff 100%);
+}

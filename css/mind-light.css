@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Mind (light)
+ *
+ * Generated variant: light of 'mind', theme.park's community theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'mind'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#7f7800'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center bottom, rgba(255, 255, 251, 0.7) 0%, #d9cfc6 80%, #d1d1d1 100%) center center/cover no-repeat fixed, url(/resources/mind.jpg) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(180deg, #eeeed0 0%, #d1d1d1 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(180deg, #eeeed0 0%, #d1d1d1 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(180deg, #eeeed0 0%, #d1d1d1 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: linear-gradient(180deg, #eeeed0 0%, #d1d1d1 100%) center center/cover no-repeat fixed;
+  --button-color: #7f7800;
+  --button-color-hover: #7e7800;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 127, 120, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #615c00;
+  --link-color-hover: rgba(97, 92, 0, 0.8);
+  --label-text-color: #000000;
+  --text: #040404;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #7f7800;
+  --plex-poster-unwatched: #7f7800;
+  --petio-spinner: invert(66%) sepia(69%) saturate(455%) hue-rotate(17deg) brightness(61%) contrast(125%);
+  --gitea-color-primary-dark-4: 127, 120, 0;
+  --overseerr-gradient: linear-gradient(rgba(var(--accent-color), 0.3) 0%, #d1d1d1 100%);
+}

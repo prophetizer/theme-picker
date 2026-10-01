@@ -1,0 +1,51 @@
+/*
+ * theme.park custom theme: Radical
+ *
+ * HIGH-CHROMA THEME. Based on Radical by Dan Hedgecock
+ * (https://github.com/DHedgecock/radical-vscode), canonical hex values from
+ * dist/Radical.json -- the src/ palette module is no longer on main, so the
+ * built artefact is the authoritative published palette.
+ * ~151k VS Code installs.
+ *
+ * Highest mean accent contrast of the neon themes here (12.0:1), which is
+ * why its chartreuse #C8FF00 and pinks read so hard against the deep purple
+ * page.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #141322;
+
+  --modal-bg-color: #262B4B;
+  --modal-header-color: #262B4B;
+  --modal-footer-color: #262B4B;
+
+  --drop-down-menu-bg: #262B4B;
+
+  --button-color: #FF428E;
+  --button-color-hover: #C8FF00;
+  --button-text: #141322;
+  --button-text-hover: #141322;
+
+  --accent-color: 255, 66, 142;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #84F9FE;
+  --link-color-hover: #83FEE8;
+  --label-text-color: #141322;
+
+  --text: #94B4C4;
+  --text-hover: #FFFFFF;
+  --text-muted: #45898C;
+
+  --arr-queue-color: #C8FF00;
+  --plex-poster-unwatched: #FF428E;
+  --petio-spinner: invert(39%) sepia(86%) saturate(420%) hue-rotate(290deg) brightness(106%) contrast(159%);
+  --gitea-color-primary-dark-4: 255, 66, 142;
+  --overseerr-gradient: linear-gradient(180deg, rgba(20, 19, 34, 0.17) 0%, rgba(20, 19, 34) 100%);
+}

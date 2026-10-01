@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Abyss
+ *
+ * Palette source: microsoft/vscode extensions/theme-abyss/themes/abyss-color-theme.json (editor, title bar, line numbers, ANSI; green, orange and magenta from its token colours)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #80a4ea is the palette's #6688cc with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #6085a8 is the palette's #406385 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#80baff'.
+ */
+:root {
+  --main-bg-color: #000c18;
+  --modal-bg-color: #10192c;
+  --modal-header-color: #10192c;
+  --modal-footer-color: #10192c;
+  --drop-down-menu-bg: #10192c;
+  --button-color: #80baff;
+  --button-color-hover: #99ffff;
+  --button-text: #000c18;
+  --button-text-hover: #000c18;
+  --accent-color: 128, 186, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #80baff;
+  --link-color-hover: #99ffff;
+  --label-text-color: #000c18;
+  --text: #80a4ea;
+  --text-hover: #ffffff;
+  --text-muted: #6085a8;
+  --arr-queue-color: #22aa44;
+  --plex-poster-unwatched: #ddbb88;
+  --petio-spinner: invert(28%) sepia(100%) saturate(120%) hue-rotate(173deg) brightness(174%) contrast(199%);
+  --gitea-color-primary-dark-4: 128, 186, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 12, 24, 0.17) 0%, rgba(0, 12, 24) 100%);
+}

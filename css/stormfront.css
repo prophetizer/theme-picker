@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Stormfront
+ *
+ * Palette source: original gradient theme -- no upstream scheme to cite.
+ * A GRADIENT theme, following the shape of theme.park's own hotpink,
+ * aquamarine, hotline and maroon: a hero gradient on the page background, a
+ * matching -90deg linear gradient on panels, and a SOLID colour for the
+ * drop-down menu -- a gradient in a small menu renders as a flat slice and
+ * looks broken.
+ *
+ * Cool neutral slate, the only grey-blue gradient in the set. Reads as
+ * overcast rather than as a colour choice, which suits dashboards that are
+ * already busy.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#7f9bbf'.
+ */
+:root {
+  --main-bg-color: linear-gradient(190deg, #3d4a5c 0%, #232b36 45%, #10141a 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #262f3b 0%, #141920 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #262f3b 0%, #141920 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #262f3b 0%, #141920 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #10141a;
+  --button-color: #7f9bbf;
+  --button-color-hover: #a3bcd9;
+  --button-text: #10141a;
+  --button-text-hover: #10141a;
+  --accent-color: 127, 155, 191;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8fb3d9;
+  --link-color-hover: #b6d2ec;
+  --label-text-color: #10141a;
+  --text: #ccd5e0;
+  --text-hover: #ffffff;
+  --text-muted: #8b97a6;
+  --arr-queue-color: #6aaf7a;
+  --plex-poster-unwatched: #7f9bbf;
+  --petio-spinner: invert(45%) sepia(16%) saturate(571%) hue-rotate(174deg) brightness(126%) contrast(112%);
+  --gitea-color-primary-dark-4: 127, 155, 191;
+  --overseerr-gradient: linear-gradient(190deg, rgba(61,74,92,.9) 0%, rgba(35,43,54,.9) 45%, rgba(16,20,26,.9) 100%) center center/cover no-repeat fixed;
+}

@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Patina
+ *
+ * Palette source: original gradient theme -- no upstream scheme to cite.
+ * A GRADIENT theme, following the shape of theme.park's own hotpink,
+ * aquamarine, hotline and maroon: a hero gradient on the page background, a
+ * matching -90deg linear gradient on panels, and a SOLID colour for the
+ * drop-down menu -- a gradient in a small menu renders as a flat slice and
+ * looks broken.
+ *
+ * Two hues rather than one: oxidising copper in the lit corner falling away
+ * to verdigris and then near-black. The accent is the verdigris end, so the
+ * copper stays scenery.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#5fbfa8'.
+ */
+:root {
+  --main-bg-color: linear-gradient(35deg, #b06a3b 0%, #3d6b63 45%, #0f1c1b 95%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #1d3330 0%, #0f1c1b 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #1d3330 0%, #0f1c1b 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #1d3330 0%, #0f1c1b 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #0f1c1b;
+  --button-color: #5fbfa8;
+  --button-color-hover: #c98a5c;
+  --button-text: #0f1c1b;
+  --button-text-hover: #0f1c1b;
+  --accent-color: 95, 191, 168;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #79cfc0;
+  --link-color-hover: #a5e3d8;
+  --label-text-color: #0f1c1b;
+  --text: #d6e5e1;
+  --text-hover: #ffffff;
+  --text-muted: #93aba6;
+  --arr-queue-color: #6fbf5f;
+  --plex-poster-unwatched: #5fbfa8;
+  --petio-spinner: invert(62%) sepia(72%) saturate(366%) hue-rotate(115deg) brightness(115%) contrast(50%);
+  --gitea-color-primary-dark-4: 95, 191, 168;
+  --overseerr-gradient: linear-gradient(35deg, rgba(176,106,59,.9) 0%, rgba(61,107,99,.9) 45%, rgba(15,28,27,.9) 95%) center center/cover no-repeat fixed;
+}

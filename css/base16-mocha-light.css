@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Base16 Mocha (light)
+ *
+ * Generated variant: light of 'base16-mocha', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'base16-mocha'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6c9496'.
+ */
+:root {
+  --main-bg-color: #f9f2ea;
+  --modal-bg-color: #fffffe;
+  --modal-header-color: #fffffe;
+  --modal-footer-color: #fffffe;
+  --drop-down-menu-bg: #fffffe;
+  --button-color: #6c9496;
+  --button-color-hover: #589981;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 108, 148, 150;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4e7678;
+  --link-color-hover: #776a86;
+  --label-text-color: #11141b;
+  --text: #040201;
+  --text-hover: #010000;
+  --text-muted: #1f1917;
+  --arr-queue-color: #988f33;
+  --plex-poster-unwatched: #c17c62;
+  --petio-spinner: invert(42%) sepia(45%) saturate(212%) hue-rotate(134deg) brightness(87%) contrast(86%);
+  --gitea-color-primary-dark-4: 108, 148, 150;
+  --overseerr-gradient: linear-gradient(180deg, rgba(249, 242, 234, 0.17) 0%, #f9f2ea 100%);
+}

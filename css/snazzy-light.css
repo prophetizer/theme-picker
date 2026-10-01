@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Snazzy (light)
+ *
+ * Generated variant: light of 'snazzy', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'snazzy'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#1497cd'.
+ */
+:root {
+  --main-bg-color: #f1f3fd;
+  --modal-bg-color: #f5f7ff;
+  --modal-header-color: #f5f7ff;
+  --modal-footer-color: #f5f7ff;
+  --drop-down-menu-bg: #f5f7ff;
+  --button-color: #1497cd;
+  --button-color-hover: #e855ad;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 20, 151, 205;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #207a8a;
+  --link-color-hover: #c5328e;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #393939;
+  --arr-queue-color: #00a34e;
+  --plex-poster-unwatched: #8e9236;
+  --petio-spinner: invert(46%) sepia(52%) saturate(6224%) hue-rotate(170deg) brightness(98%) contrast(84%);
+  --gitea-color-primary-dark-4: 20, 151, 205;
+  --overseerr-gradient: linear-gradient(180deg, rgba(241, 243, 253, 0.17) 0%, #f1f3fd 100%);
+}

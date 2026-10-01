@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Bluloco Light
+ *
+ * Palette source: uloco/theme-bluloco-light themes/bluloco-light-color-theme.json (editor, side bar, button, link and ANSI colours)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #67686e is the palette's #a0a1a7 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #265ee3 is the palette's #275fe4 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #803cee is the palette's #823ff1 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #007db8 is the palette's #0083c0 with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #007dba is the palette's #0099e1 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#007db8'.
+ */
+:root {
+  --main-bg-color: #e8e8e8;
+  --modal-bg-color: #f9f9f9;
+  --modal-header-color: #f9f9f9;
+  --modal-footer-color: #f9f9f9;
+  --drop-down-menu-bg: #f9f9f9;
+  --button-color: #007db8;
+  --button-color-hover: #007dba;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 0, 125, 184;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #265ee3;
+  --link-color-hover: #803cee;
+  --label-text-color: #ffffff;
+  --text: #383a42;
+  --text-hover: #383a42;
+  --text-muted: #67686e;
+  --arr-queue-color: #23974a;
+  --plex-poster-unwatched: #df631c;
+  --petio-spinner: invert(50%) sepia(88%) saturate(664%) hue-rotate(150deg) brightness(65%) contrast(200%);
+  --gitea-color-primary-dark-4: 0, 125, 184;
+  --overseerr-gradient: linear-gradient(180deg, rgba(232, 232, 232, 0.17) 0%, rgba(232, 232, 232) 100%);
+}

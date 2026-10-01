@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Darcula
+ *
+ * Palette source: doums/darcula colors/darcula.vim (JetBrains Darcula: bg, gutter, fg, comment, link and syntax colours; orange is its keyword colour)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #b4c3d2 is the palette's #a9b7c6 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #c1c1c1 is the palette's #bbbbbb with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #9a9a9a is the palette's #808080 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #4d9cff is the palette's #287bde with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #70a0c4 is the palette's #6897bb with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #262626 is the palette's #2b2b2b with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#cc7832'.
+ */
+:root {
+  --main-bg-color: #2b2b2b;
+  --modal-bg-color: #313335;
+  --modal-header-color: #313335;
+  --modal-footer-color: #313335;
+  --drop-down-menu-bg: #313335;
+  --button-color: #cc7832;
+  --button-color-hover: #ffc66d;
+  --button-text: #262626;
+  --button-text-hover: #262626;
+  --accent-color: 204, 120, 50;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4d9cff;
+  --link-color-hover: #70a0c4;
+  --label-text-color: #262626;
+  --text: #b4c3d2;
+  --text-hover: #c1c1c1;
+  --text-muted: #9a9a9a;
+  --arr-queue-color: #629755;
+  --plex-poster-unwatched: #cc7832;
+  --petio-spinner: invert(30%) sepia(51%) saturate(3694%) hue-rotate(341deg) brightness(86%) contrast(82%);
+  --gitea-color-primary-dark-4: 204, 120, 50;
+  --overseerr-gradient: linear-gradient(180deg, rgba(43, 43, 43, 0.17) 0%, rgba(43, 43, 43) 100%);
+}

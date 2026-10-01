@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Blackberry Pumpkin (light)
+ *
+ * Generated variant: light of 'blackberry-pumpkin', theme.park's community theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'blackberry-pumpkin'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#924e00'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, transparent 40%, rgba(235, 226, 242, 0.5)) center center/cover no-repeat fixed, radial-gradient(at center center, rgba(255, 255, 255, 0.25), rgba(255, 249, 248, 0.55), rgba(233, 216, 237, 0.7)) center center/cover no-repeat fixed, radial-gradient(at bottom center, rgba(209, 209, 209, 0.25), rgba(255, 249, 248, 0.55), #e3dce5) center center/cover no-repeat fixed, radial-gradient(at center center, #fffffe 50%, #ffebff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --modal-header-color: var(--main-bg-color);
+  --modal-footer-color: var(--main-bg-color);
+  --drop-down-menu-bg: var(--main-bg-color);
+  --button-color: #924e00;
+  --button-color-hover: #723d00;
+  --button-text: #eeeeee;
+  --button-text-hover: rgba(255, 255, 255, 0.95);
+  --accent-color: 203, 109, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #a15500;
+  --link-color-hover: #a15500;
+  --label-text-color: rgba(255, 255, 255, 0.95);
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #439731;
+  --plex-poster-unwatched: #cb6d00;
+  --petio-spinner: invert(55%) sepia(95%) saturate(572%) hue-rotate(8deg) brightness(60%) contrast(174%);
+  --gitea-color-primary-dark-4: 203, 109, 0;
+  --overseerr-gradient: linear-gradient(135deg, transparent 40%, rgba(235, 226, 242, 0.5)) center center/cover no-repeat fixed, radial-gradient(at center center, rgba(255, 255, 255, 0.25), rgba(255, 249, 248, 0.55), rgba(233, 216, 237, 0.7)) center center/cover no-repeat fixed, radial-gradient(at bottom center, rgba(209, 209, 209, 0.25), rgba(255, 249, 248, 0.55), rgba(227, 220, 229, 0.85)) center center/cover no-repeat fixed, radial-gradient(at center center, rgba(255, 255, 254, 0.85) 50%, rgba(255, 235, 255, 0.85) 100%) center center/cover no-repeat fixed;
+}

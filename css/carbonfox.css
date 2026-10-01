@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Carbonfox
+ *
+ * Palette source: EdenEast/nightfox.nvim, extra/carbonfox/base16.yaml (the palette Lua file
+ * computes bg0..bg4 and comment at runtime, so the base16 export is the
+ * one with literal values). Carbonfox follows IBM's Carbon design palette.
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted uses base06 #b6b8bb rather than base04 #7b7c7e, which reaches
+ * only 3.7:1 against base01 #252525. --text/--text-hover are base07/base05;
+ * carbonfox is unusual in that base05 is brighter than base07.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#33B1FF'.
+ */
+:root {
+  --main-bg-color: #161616;
+  --modal-bg-color: #252525;
+  --modal-header-color: #252525;
+  --modal-footer-color: #252525;
+  --drop-down-menu-bg: #252525;
+  --button-color: #33B1FF;
+  --button-color-hover: #BE95FF;
+  --button-text: #161616;
+  --button-text-hover: #161616;
+  --accent-color: 51, 177, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #78A9FF;
+  --link-color-hover: #33B1FF;
+  --label-text-color: #161616;
+  --text: #e4e4e5;
+  --text-hover: #f2f4f8;
+  --text-muted: #b6b8bb;
+  --arr-queue-color: #25be6a;
+  --plex-poster-unwatched: #33B1FF;
+  --petio-spinner: invert(53%) sepia(82%) saturate(311%) hue-rotate(160deg) brightness(92%) contrast(148%);
+  --gitea-color-primary-dark-4: 51, 177, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(22, 22, 22, 0.17) 0%, rgba(22, 22, 22) 100%);
+}

@@ -1,0 +1,57 @@
+/*
+ * theme.park custom theme: GitHub Light
+ *
+ * LIGHT THEME. Based on GitHub's official VS Code theme
+ * (https://github.com/primer/github-vscode-theme), canonical hex values from
+ * @primer/primitives 7.10.0 dist/json/colors/light.json, the version pinned
+ * in that repo's package.json. Variant: GitHub Light (default), not the
+ * high-contrast or colourblind variants.
+ *
+ * Light themes invert several conventions used by the dark themes in this
+ * repo, per theme.park's own light themes (catppuccin-latte, rose-pine-dawn):
+ * --text-hover must NOT be #ffffff, --button-text and --label-text-color are
+ * white ON the accent, and the modal surface is DARKER than the page.
+ *
+ * GitHub separates surfaces with borders rather than fills, so canvas.subtle
+ * is nearly invisible as a card. --modal-bg-color uses scale.gray[1]
+ * (#EAEEF2) instead -- still a published Primer token, one step further down
+ * the same ramp.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #FFFFFF;
+
+  --modal-bg-color: #EAEEF2;
+  --modal-header-color: #EAEEF2;
+  --modal-footer-color: #EAEEF2;
+
+  --drop-down-menu-bg: #EAEEF2;
+
+  --button-color: #0969DA;
+  --button-color-hover: #24292F;
+  --button-text: #FFFFFF;
+  --button-text-hover: #FFFFFF;
+
+  --accent-color: 9, 105, 218;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0969DA;
+  --link-color-hover: #8250DF;
+  --label-text-color: #FFFFFF;
+
+  --text: #24292F;
+  --text-hover: #24292F;
+  --text-muted: #57606A;
+
+  --arr-queue-color: #1A7F37;
+  --plex-poster-unwatched: #0969DA;
+  --petio-spinner: invert(41%) sepia(99%) saturate(461%) hue-rotate(173deg) brightness(80%) contrast(133%);
+  --gitea-color-primary-dark-4: 9, 105, 218;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.17) 0%, rgba(255, 255, 255) 100%);
+}

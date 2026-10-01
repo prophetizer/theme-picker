@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Eighties (light)
+ *
+ * Generated variant: light of 'eighties', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'eighties'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5e91c3'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #fbfbfb;
+  --modal-header-color: #fbfbfb;
+  --modal-footer-color: #fbfbfb;
+  --drop-down-menu-bg: #fbfbfb;
+  --button-color: #5e91c3;
+  --button-color-hover: #2e9b9c;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 94, 145, 195;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4173a4;
+  --link-color-hover: #8f5f8f;
+  --label-text-color: #11141b;
+  --text: #0b0905;
+  --text-hover: #000000;
+  --text-muted: #2c2b21;
+  --arr-queue-color: #689968;
+  --plex-poster-unwatched: #d67236;
+  --petio-spinner: invert(50%) sepia(75%) saturate(301%) hue-rotate(168deg) brightness(95%) contrast(86%);
+  --gitea-color-primary-dark-4: 94, 145, 195;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

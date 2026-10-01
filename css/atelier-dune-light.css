@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Atelier Dune Light
+ *
+ * Palette source: tinted-theming/schemes base16/atelier-dune-light.yaml (Bram de Haan; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #4c493d is the palette's #6e6b5e with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #696655 is the palette's #7d7a68 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #4660ba is the palette's #6684e1 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #9c37b7 is the palette's #b854d4 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #5571cc is the palette's #6684e1 with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #008764 is the palette's #1fad83 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5571cc'.
+ */
+:root {
+  --main-bg-color: #e8e4cf;
+  --modal-bg-color: #fefbec;
+  --modal-header-color: #fefbec;
+  --modal-footer-color: #fefbec;
+  --drop-down-menu-bg: #fefbec;
+  --button-color: #5571cc;
+  --button-color-hover: #008764;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 85, 113, 204;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4660ba;
+  --link-color-hover: #9c37b7;
+  --label-text-color: #ffffff;
+  --text: #4c493d;
+  --text-hover: #20201d;
+  --text-muted: #696655;
+  --arr-queue-color: #60ac39;
+  --plex-poster-unwatched: #b65611;
+  --petio-spinner: invert(48%) sepia(13%) saturate(2577%) hue-rotate(189deg) brightness(83%) contrast(91%);
+  --gitea-color-primary-dark-4: 85, 113, 204;
+  --overseerr-gradient: linear-gradient(180deg, rgba(232, 228, 207, 0.17) 0%, rgba(232, 228, 207) 100%);
+}

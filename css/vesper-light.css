@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Vesper (light)
+ *
+ * Generated variant: light of 'vesper', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'vesper'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#b68256'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #f8f8f8;
+  --modal-header-color: #f8f8f8;
+  --modal-footer-color: #f8f8f8;
+  --drop-down-menu-bg: #f8f8f8;
+  --button-color: #b68256;
+  --button-color-hover: #319d85;
+  --button-text: #101010;
+  --button-text-hover: #101010;
+  --accent-color: 182, 130, 86;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #966539;
+  --link-color-hover: #007e69;
+  --label-text-color: #101010;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #2b2b2b;
+  --arr-queue-color: #319d85;
+  --plex-poster-unwatched: #b68256;
+  --petio-spinner: invert(65%) sepia(62%) saturate(386%) hue-rotate(342deg) brightness(77%) contrast(80%);
+  --gitea-color-primary-dark-4: 182, 130, 86;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

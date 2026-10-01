@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Pinot Noir (light)
+ *
+ * Generated variant: light of 'pinot-noir', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'pinot-noir'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5c7bbf'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #ffffff 0%, #d1def8 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #ffffff 0%, #d1def8 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #ffffff 0%, #d1def8 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #ffffff 0%, #d1def8 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #dce8ff;
+  --button-color: #5c7bbf;
+  --button-color-hover: #687ca3;
+  --button-text: #0f1219;
+  --button-text-hover: #0f1219;
+  --accent-color: 92, 123, 191;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #486092;
+  --link-color-hover: #4d6085;
+  --label-text-color: #0f1219;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #010a35;
+  --arr-queue-color: #627cb0;
+  --plex-poster-unwatched: #687ca3;
+  --petio-spinner: invert(49%) sepia(27%) saturate(936%) hue-rotate(183deg) brightness(88%) contrast(84%);
+  --gitea-color-primary-dark-4: 92, 123, 191;
+  --overseerr-gradient: linear-gradient(180deg, rgba(209, 222, 248, 0.17) 0%, #d1def8 100%);
+}

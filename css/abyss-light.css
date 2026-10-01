@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Abyss (light)
+ *
+ * Generated variant: light of 'abyss', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'abyss'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#5890d2'.
+ */
+:root {
+  --main-bg-color: #e9f5ff;
+  --modal-bg-color: #feffff;
+  --modal-header-color: #feffff;
+  --modal-footer-color: #feffff;
+  --drop-down-menu-bg: #feffff;
+  --button-color: #5890d2;
+  --button-color-hover: #2d9c9c;
+  --button-text: #000c18;
+  --button-text-hover: #000c18;
+  --accent-color: 88, 144, 210;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #3a72b2;
+  --link-color-hover: #007d7e;
+  --label-text-color: #000c18;
+  --text: #09235e;
+  --text-hover: #000000;
+  --text-muted: #274a6a;
+  --arr-queue-color: #13a33d;
+  --plex-poster-unwatched: #a88856;
+  --petio-spinner: invert(68%) sepia(36%) saturate(386%) hue-rotate(172deg) brightness(72%) contrast(166%);
+  --gitea-color-primary-dark-4: 88, 144, 210;
+  --overseerr-gradient: linear-gradient(180deg, rgba(233, 245, 255, 0.17) 0%, #e9f5ff 100%);
+}

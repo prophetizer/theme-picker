@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Under the Lake (light)
+ *
+ * Generated variant: light of 'under-the-lake', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'under-the-lake'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#398d69'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #cee6df 0%, #feffff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.22) 0%, rgba(209, 209, 209, 0.22) 100%), linear-gradient(-90deg, #cee6df 0%, #feffff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.22) 0%, rgba(209, 209, 209, 0.22) 100%), linear-gradient(-90deg, #cee6df 0%, #feffff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.22) 0%, rgba(209, 209, 209, 0.22) 100%), linear-gradient(-90deg, #cee6df 0%, #feffff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #d4f1e4;
+  --button-color: #398d69;
+  --button-color-hover: #60857b;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 57, 141, 105;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #14704e;
+  --link-color-hover: #446960;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #00170e;
+  --arr-queue-color: #398d69;
+  --plex-poster-unwatched: #60857b;
+  --petio-spinner: invert(54%) sepia(15%) saturate(1396%) hue-rotate(102deg) brightness(99%) contrast(85%);
+  --gitea-color-primary-dark-4: 57, 141, 105;
+  --overseerr-gradient: linear-gradient(180deg, rgba(254, 255, 255, 0.17) 0%, #feffff 100%);
+}

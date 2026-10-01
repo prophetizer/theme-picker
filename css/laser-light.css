@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Laser (light)
+ *
+ * Generated variant: light of 'laser', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'laser'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#00a261'.
+ */
+:root {
+  --main-bg-color: #eaf5ff;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #00a261;
+  --button-color-hover: #cf63cf;
+  --button-text: #030d18;
+  --button-text-hover: #030d18;
+  --accent-color: 0, 162, 97;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00814c;
+  --link-color-hover: #ae43ae;
+  --label-text-color: #030d18;
+  --text: #280025;
+  --text-hover: #000000;
+  --text-muted: #06021d;
+  --arr-queue-color: #5f9d00;
+  --plex-poster-unwatched: #a88b00;
+  --petio-spinner: invert(62%) sepia(81%) saturate(3748%) hue-rotate(140deg) brightness(98%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 162, 97;
+  --overseerr-gradient: linear-gradient(180deg, rgba(234, 245, 255, 0.17) 0%, #eaf5ff 100%);
+}

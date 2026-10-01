@@ -1,0 +1,48 @@
+/*
+ * theme.park custom theme: Everforest (dark, medium contrast)
+ *
+ * Based on the Everforest color scheme (https://github.com/sainnhe/everforest),
+ * canonical hex values from the upstream palette.md.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ *
+ * Contrast fix 2026-09-22: --text-muted was grey0 #7a8478, 2.8:1 on bg1. Now
+ * grey2 #9da9a0 (sainnhe/everforest autoload/everforest.vim), 4.4:1. grey1, the
+ * comment colour, reached only 3.3:1.
+ */
+
+:root {
+  --main-bg-color: #2D353B;
+
+  --modal-bg-color: #343F44;
+  --modal-header-color: #343F44;
+  --modal-footer-color: #343F44;
+
+  --drop-down-menu-bg: #343F44;
+
+  --button-color: #A7C080;
+  --button-color-hover: #DBBC7F;
+  --button-text: #2D353B;
+  --button-text-hover: #2D353B;
+
+  --accent-color: 167, 192, 128;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7FBBB3;
+  --link-color-hover: #83C092;
+  --label-text-color: #2D353B;
+
+  --text: #D3C6AA;
+  --text-hover: #ffffff;
+  --text-muted: #9da9a0;
+
+  --arr-queue-color: #83C092;
+  --plex-poster-unwatched: #A7C080;
+  --petio-spinner: invert(88%) sepia(42%) saturate(268%) hue-rotate(27deg) brightness(72%) contrast(116%);
+  --gitea-color-primary-dark-4: 167, 192, 128;
+  --overseerr-gradient: linear-gradient(180deg, rgba(45, 53, 59, 0.17) 0%, rgba(45, 53, 59) 100%);
+}

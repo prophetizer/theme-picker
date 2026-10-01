@@ -1,0 +1,46 @@
+/*
+ * theme.park custom theme: Organizr Contrast
+ *
+ * Palette source: theme.park's official 'organizr' theme
+ * (css/theme-options/organizr.css). Same surfaces and the same Organizr blue;
+ * only the roles that fell short of their contrast targets moved, each by
+ * lightness alone. Worst case on the page, panels, headers and menus
+ * (#1f1f1f, #333333, #232323, #1b1b1b), before -> after:
+ *
+ *   --text          #96a2b4 -> #b6c2d5   4.9:1 -> 7:1 (WCAG AAA)
+ *   --text-muted    #999999 -> #a3a3a3   4.4:1 -> 5:1 (still dimmer than body)
+ *   --link-color    #2cabe3 -> #67ccff   4.8:1 -> 7:1
+ *   --link-hover    #3cc5ff -> #c5ebff   brighter still, 10:1, so hover shows
+ *   --button-text   #eeeeee -> #1b1b1b   2.3:1 -> 6.6:1 on the button, 4.7:1
+ *                   on its hover: dark labels (Organizr's own menu colour) on
+ *                   the unchanged blue, instead of white on a light blue
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#2cabe3'.
+ */
+:root {
+  --main-bg-color: #1f1f1f;
+  --modal-bg-color: #333333;
+  --modal-header-color: #232323;
+  --modal-footer-color: #232323;
+  --drop-down-menu-bg: #1b1b1b;
+  --button-color: #2cabe3;
+  --button-color-hover: #298fbc;
+  --button-text: #1b1b1b;
+  --button-text-hover: #1b1b1b;
+  --accent-color: 44, 171, 227;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #67ccff;
+  --link-color-hover: #c5ebff;
+  --label-text-color: #ffffff;
+  --text: #b6c2d5;
+  --text-hover: #ffffff;
+  --text-muted: #a3a3a3;
+  --arr-queue-color: #2cabe3;
+  --plex-poster-unwatched: #2cabe3;
+  --petio-spinner: invert(37%) sepia(19%) saturate(3356%) hue-rotate(166deg) brightness(94%) contrast(90%);
+  --gitea-color-primary-dark-4: 44, 171, 227;
+  --overseerr-gradient: linear-gradient(180deg, rgba(31, 31, 31, 0.17) 0%, rgba(31, 31, 31) 100%);
+}

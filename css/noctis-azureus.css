@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Noctis Azureus
+ *
+ * Palette source: liviuschera/noctis themes/azureus.json (editor, panel, button, link, descriptionForeground and ANSI colours)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --button-color #007b95 is the palette's #007f99 with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #0077af is the palette's #49ace9 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#007b95'.
+ */
+:root {
+  --main-bg-color: #051b29;
+  --modal-bg-color: #07273b;
+  --modal-header-color: #07273b;
+  --modal-footer-color: #07273b;
+  --drop-down-menu-bg: #07273b;
+  --button-color: #007b95;
+  --button-color-hover: #0077af;
+  --button-text: #ebf7ff;
+  --button-text-hover: #ebf7ff;
+  --accent-color: 0, 123, 149;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #49ace9;
+  --link-color-hover: #49d6e9;
+  --label-text-color: #ebf7ff;
+  --text: #becfda;
+  --text-hover: #ebf7ff;
+  --text-muted: #61a6d1;
+  --arr-queue-color: #49e9a6;
+  --plex-poster-unwatched: #d67e5c;
+  --petio-spinner: invert(21%) sepia(79%) saturate(507%) hue-rotate(140deg) brightness(162%) contrast(137%);
+  --gitea-color-primary-dark-4: 0, 123, 149;
+  --overseerr-gradient: linear-gradient(180deg, rgba(5, 27, 41, 0.17) 0%, rgba(5, 27, 41) 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Taran Tado (light)
+ *
+ * Generated variant: light of 'taran-tado', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'taran-tado'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#bd5c42'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #d9d1ff 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #d9d1ff 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #d9d1ff 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #d9d1ff 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffdde8;
+  --button-color: #bd5c42;
+  --button-color-hover: #7e6db9;
+  --button-text: #0a0a0a;
+  --button-text-hover: #0a0a0a;
+  --accent-color: 189, 92, 66;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8d4b39;
+  --link-color-hover: #62548e;
+  --label-text-color: #0a0a0a;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #23000f;
+  --arr-queue-color: #ab6653;
+  --plex-poster-unwatched: #7e6db9;
+  --petio-spinner: invert(64%) sepia(76%) saturate(672%) hue-rotate(329deg) brightness(97%) contrast(75%);
+  --gitea-color-primary-dark-4: 189, 92, 66;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.17) 0%, #ffffff 100%);
+}

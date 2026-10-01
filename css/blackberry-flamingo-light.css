@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Blackberry Flamingo (light)
+ *
+ * Generated variant: light of 'blackberry-flamingo', theme.park's community theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'blackberry-flamingo'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#a07a6f'.
+ */
+:root {
+  --main-bg-color: radial-gradient(at bottom center, rgba(209, 209, 209, 0.15), rgba(217, 206, 206, 0.65), rgba(212, 208, 208, 0.95)) center center/cover no-repeat fixed, linear-gradient(45deg, #ffffff 0%, #ffffff 99%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --modal-header-color: var(--main-bg-color);
+  --modal-footer-color: var(--main-bg-color);
+  --drop-down-menu-bg: var(--main-bg-color);
+  --button-color: #a07a6f;
+  --button-color-hover: #c5666c;
+  --button-text: rgba(15, 10, 10, 0.95);
+  --button-text-hover: rgba(15, 10, 10, 0.95);
+  --accent-color: 160, 122, 111;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #825e54;
+  --link-color-hover: #776164;
+  --label-text-color: rgba(15, 10, 10, 0.95);
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #3f942d;
+  --plex-poster-unwatched: #c5666c;
+  --petio-spinner: invert(51%) sepia(97%) saturate(56%) hue-rotate(327deg) brightness(82%) contrast(200%);
+  --gitea-color-primary-dark-4: 197, 102, 108;
+  --overseerr-gradient: radial-gradient(at bottom center, rgba(209, 209, 209, 0.15), rgba(217, 206, 206, 0.65), rgba(212, 208, 208, 0.95)) center center/cover no-repeat fixed, linear-gradient(45deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.9) 99%, rgba(255, 255, 255, 0.9) 100%) center center/cover no-repeat fixed;
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Space Gray (light)
+ *
+ * Generated variant: light of 'space-gray', theme.park's official theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'space-gray'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#bbcdd6'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center, #feffff 0%, #dae4e8 100.2%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #feffff 0%, #dae4e8 100.2%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #feffff 0%, #dae4e8 100.2%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #feffff 0%, #dae4e8 100.2%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #feffff;
+  --button-color: #bbcdd6;
+  --button-color-hover: #97acb7;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 99, 135, 151;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #476a7a;
+  --link-color-hover: #266d89;
+  --label-text-color: #000000;
+  --text: #181818;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #638797;
+  --plex-poster-unwatched: #4b89a4;
+  --petio-spinner: invert(88%) sepia(30%) saturate(153%) hue-rotate(163deg) brightness(96%) contrast(74%);
+  --gitea-color-primary-dark-4: 99, 135, 151;
+  --overseerr-gradient: radial-gradient(ellipse at center, rgba(254, 255, 255, 0.9) 0%, rgba(218, 228, 232, 0.9) 100.2%) center center/cover no-repeat fixed;
+}

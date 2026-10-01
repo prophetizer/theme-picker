@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Sunset (light)
+ *
+ * Generated variant: light of 'sunset', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'sunset'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#c6643d'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #cce9ff 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #cce9ff 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #cce9ff 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #cce9ff 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #f4dfde;
+  --button-color: #c6643d;
+  --button-color-hover: #4e85ac;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 198, 100, 61;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #945237;
+  --link-color-hover: #31698d;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #250000;
+  --arr-queue-color: #b36e52;
+  --plex-poster-unwatched: #4e85ac;
+  --petio-spinner: invert(55%) sepia(74%) saturate(407%) hue-rotate(332deg) brightness(89%) contrast(103%);
+  --gitea-color-primary-dark-4: 198, 100, 61;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.17) 0%, #ffffff 100%);
+}

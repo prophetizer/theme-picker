@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Blackberry Amethyst (light)
+ *
+ * Generated variant: light of 'blackberry-amethyst', theme.park's community theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'blackberry-amethyst'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#865484'.
+ */
+:root {
+  --main-bg-color: radial-gradient(at top center, rgba(209, 209, 209, 0.25), rgba(248, 238, 237, 0.55) , rgba(221, 217, 217, 0.9)) center center/cover no-repeat fixed, linear-gradient(to bottom, #ffffff 0%, #dacde1 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --modal-header-color: var(--main-bg-color);
+  --modal-footer-color: var(--main-bg-color);
+  --drop-down-menu-bg: var(--main-bg-color);
+  --button-color: #865484;
+  --button-color-hover: rgba(134, 84, 132, 0.8);
+  --button-text: #eeeeee;
+  --button-text-hover: #ffffff;
+  --accent-color: 156, 107, 156;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8f428e;
+  --link-color-hover: #7f4f7f;
+  --label-text-color: #ffffff;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #378d24;
+  --plex-poster-unwatched: #865484;
+  --petio-spinner: invert(31%) sepia(81%) saturate(129%) hue-rotate(253deg) brightness(120%) contrast(164%);
+  --gitea-color-primary-dark-4: 134, 84, 132;
+  --overseerr-gradient: radial-gradient(at top center, rgba(209, 209, 209, 0.25), rgba(248, 238, 237, 0.55) , rgba(221, 217, 217, 0.9)) center center/cover no-repeat fixed, linear-gradient(to bottom, rgba(255, 255, 255, 0.85) 0%, #dacde1 100%) center center/cover no-repeat fixed;
+}

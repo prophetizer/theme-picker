@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Overseerr (light)
+ *
+ * Generated variant: light of 'overseerr', theme.park's official theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'overseerr'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#4f46e5'.
+ */
+:root {
+  --main-bg-color: linear-gradient(360deg, #e7eefb 65%, #f5faff 100%);
+  --modal-bg-color: #f5f9ff;
+  --modal-header-color: #f5f9ff;
+  --modal-footer-color: #f5f9ff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #4f46e5;
+  --button-color-hover: #6366f1;
+  --button-text: #e5e7eb;
+  --button-text-hover: #ffffff;
+  --accent-color: 148, 119, 228;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #595ae4;
+  --link-color-hover: #7759c3;
+  --label-text-color: #ffffff;
+  --text: #05070b;
+  --text-hover: #000000;
+  --text-muted: #252b34;
+  --arr-queue-color: #6366f1;
+  --plex-poster-unwatched: #6366f1;
+  --petio-spinner: invert(23%) sepia(100%) saturate(397%) hue-rotate(204deg) brightness(139%) contrast(148%);
+  --gitea-color-primary-dark-4: 98, 116, 145;
+  --overseerr-gradient: linear-gradient(rgba(231, 238, 251, 0.47) 0%, #e7eefb 100%);
+}

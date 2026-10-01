@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Terafox (light)
+ *
+ * Generated variant: light of 'terafox', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'terafox'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#6a949e'.
+ */
+:root {
+  --main-bg-color: #eaf6f8;
+  --modal-bg-color: #f6feff;
+  --modal-header-color: #f6feff;
+  --modal-footer-color: #f6feff;
+  --drop-down-menu-bg: #f6feff;
+  --button-color: #6a949e;
+  --button-color-hover: #cc7754;
+  --button-text: #152528;
+  --button-text-hover: #152528;
+  --accent-color: 106, 148, 158;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #ab5a36;
+  --link-color-hover: #a25e41;
+  --label-text-color: #152528;
+  --text: #010101;
+  --text-hover: #000000;
+  --text-muted: #3d4e59;
+  --arr-queue-color: #6b9592;
+  --plex-poster-unwatched: #6a949e;
+  --petio-spinner: invert(100%) sepia(100%) saturate(700%) hue-rotate(206deg) brightness(200%) contrast(7%);
+  --gitea-color-primary-dark-4: 106, 148, 158;
+  --overseerr-gradient: linear-gradient(180deg, rgba(234, 246, 248, 0.17) 0%, #eaf6f8 100%);
+}

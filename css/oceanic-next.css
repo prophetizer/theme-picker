@@ -1,0 +1,40 @@
+/*
+ * theme.park custom theme: Oceanic Next
+ *
+ * Palette source: mhartington/oceanic-next, colors/OceanicNext.vim (base00-base07 plus accents).
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted uses base04 #a7adba, not base03 #65737e. base03 is the comment
+ * colour but is illegible against base01 #343d46; base04 gives 5.0:1.
+ * --link-color-hover is the palette's cyan -- Oceanic Next defines exactly
+ * one blue, so the hover state shifts hue rather than brightness.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#62b3b2'.
+ */
+:root {
+  --main-bg-color: #1b2b34;
+  --modal-bg-color: #343d46;
+  --modal-header-color: #343d46;
+  --modal-footer-color: #343d46;
+  --drop-down-menu-bg: #343d46;
+  --button-color: #62b3b2;
+  --button-color-hover: #f99157;
+  --button-text: #1b2b34;
+  --button-text-hover: #1b2b34;
+  --accent-color: 98, 179, 178;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #6699cc;
+  --link-color-hover: #62b3b2;
+  --label-text-color: #1b2b34;
+  --text: #c0c5ce;
+  --text-hover: #d8dee9;
+  --text-muted: #a7adba;
+  --arr-queue-color: #99c794;
+  --plex-poster-unwatched: #62b3b2;
+  --petio-spinner: invert(68%) sepia(83%) saturate(376%) hue-rotate(116deg) brightness(118%) contrast(40%);
+  --gitea-color-primary-dark-4: 98, 179, 178;
+  --overseerr-gradient: linear-gradient(180deg, rgba(27, 43, 52, 0.17) 0%, rgba(27, 43, 52) 100%);
+}

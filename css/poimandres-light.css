@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Poimandres (light)
+ *
+ * Generated variant: light of 'poimandres', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'poimandres'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#009f86'.
+ */
+:root {
+  --main-bg-color: #f0f3fc;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #009f86;
+  --button-color-hover: #6991b6;
+  --button-text: #1b1e28;
+  --button-text-hover: #1b1e28;
+  --accent-color: 0, 159, 134;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4c7397;
+  --link-color-hover: #1c7897;
+  --label-text-color: #1b1e28;
+  --text: #1c1f38;
+  --text-hover: #000000;
+  --text-muted: #424765;
+  --arr-queue-color: #469b8a;
+  --plex-poster-unwatched: #009f86;
+  --petio-spinner: invert(66%) sepia(37%) saturate(579%) hue-rotate(122deg) brightness(68%) contrast(185%);
+  --gitea-color-primary-dark-4: 0, 159, 134;
+  --overseerr-gradient: linear-gradient(180deg, rgba(240, 243, 252, 0.17) 0%, #f0f3fc 100%);
+}

@@ -1,0 +1,56 @@
+/*
+ * theme.park custom theme: Dayfox
+ *
+ * LIGHT THEME. Based on the dayfox variant of nightfox.nvim by EdenEast
+ * (https://github.com/EdenEast/nightfox.nvim), canonical hex values from
+ * lua/nightfox/palette/dayfox.lua. Sibling of the nightfox and terafox
+ * themes already in this repo.
+ *
+ * The palette labels its surfaces, so the mapping is upstream's own: bg1 is
+ * the page, bg0 the raised card, comment the muted foreground, and fg0 is
+ * genuinely DARKER than fg1 despite the ordering, which makes it the correct
+ * --text-hover. All six accents clear 4.5:1 on bg1 without adjustment --
+ * unusual for a light scheme and the reason this one is here.
+ *
+ * Light themes invert several conventions used by the dark themes in this
+ * repo: --text-hover must NOT be #ffffff, --button-text and
+ * --label-text-color are white ON the accent, and the modal is darker.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #F6F2EE;
+
+  --modal-bg-color: #E4DCD4;
+  --modal-header-color: #E4DCD4;
+  --modal-footer-color: #E4DCD4;
+
+  --drop-down-menu-bg: #E4DCD4;
+
+  --button-color: #2848A9;
+  --button-color-hover: #6E33CE;
+  --button-text: #FFFFFF;
+  --button-text-hover: #FFFFFF;
+
+  --accent-color: 40, 72, 169;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #2848A9;
+  --link-color-hover: #287980;
+  --label-text-color: #FFFFFF;
+
+  --text: #3D2B5A;
+  --text-hover: #302B5D;
+  --text-muted: #837A72;
+
+  --arr-queue-color: #396847;
+  --plex-poster-unwatched: #2848A9;
+  --petio-spinner: invert(51%) sepia(100%) saturate(272%) hue-rotate(189deg) brightness(60%) contrast(166%);
+  --gitea-color-primary-dark-4: 40, 72, 169;
+  --overseerr-gradient: linear-gradient(180deg, rgba(246, 242, 238, 0.17) 0%, rgba(246, 242, 238) 100%);
+}

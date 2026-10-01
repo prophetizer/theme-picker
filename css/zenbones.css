@@ -1,0 +1,59 @@
+/*
+ * theme.park custom theme: Zenbones
+ *
+ * LIGHT THEME. Based on the zenbones light variant by Michael Chris Lopez
+ * (https://github.com/zenbones-theme/zenbones.nvim), canonical hex values
+ * from the upstream-generated extras/kitty/zenbones_light.conf. Sibling of
+ * the kanagawabones theme already in this repo.
+ *
+ * Chosen specifically for legibility: zenbones contrast-adjusts its palette
+ * in HSLuv, so five of its six accents clear 4.5:1 on its own background and
+ * the sixth (sky) has a published darker sibling that does. It is also the
+ * only light scheme surveyed with a genuinely compliant muted foreground
+ * (fg1 at 5.34:1 on the card).
+ *
+ * --modal-bg-color uses bg1/color8 rather than bg_dim: bg_dim is only a
+ * 1.08:1 step from the page and effectively invisible as a card.
+ *
+ * Light themes invert several conventions used by the dark themes in this
+ * repo: --text-hover must NOT be #ffffff, --button-text and
+ * --label-text-color are white ON the accent, and the modal is darker.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #F0EDEC;
+
+  --modal-bg-color: #CFC1BA;
+  --modal-header-color: #CFC1BA;
+  --modal-footer-color: #CFC1BA;
+
+  --drop-down-menu-bg: #CFC1BA;
+
+  --button-color: #286486;
+  --button-color-hover: #1D5573;
+  --button-text: #FFFFFF;
+  --button-text-hover: #FFFFFF;
+
+  --accent-color: 40, 100, 134;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #88507D;
+  --link-color-hover: #7B3B70;
+  --label-text-color: #FFFFFF;
+
+  --text: #2C363C;
+  --text-hover: #2C363C;
+  --text-muted: #4F5E68;
+
+  --arr-queue-color: #4F6C31;
+  --plex-poster-unwatched: #286486;
+  --petio-spinner: invert(39%) sepia(69%) saturate(500%) hue-rotate(158deg) brightness(72%) contrast(86%);
+  --gitea-color-primary-dark-4: 40, 100, 134;
+  --overseerr-gradient: linear-gradient(180deg, rgba(240, 237, 236, 0.17) 0%, rgba(240, 237, 236) 100%);
+}

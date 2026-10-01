@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Cyberdream Light
+ *
+ * Palette source: scottmckendry/cyberdream.nvim lua/cyberdream/colors.lua (light palette: bg, bg_alt, fg, grey, accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #626a7b is the palette's #7b8496 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #c000b0 is the palette's #d100bf with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color-hover #00838f is the palette's #008c99 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0057d1'.
+ */
+:root {
+  --main-bg-color: #eaeaea;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #0057d1;
+  --button-color-hover: #00838f;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 0, 87, 209;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0057d1;
+  --link-color-hover: #c000b0;
+  --label-text-color: #ffffff;
+  --text: #16181a;
+  --text-hover: #16181a;
+  --text-muted: #626a7b;
+  --arr-queue-color: #008b0c;
+  --plex-poster-unwatched: #d17c00;
+  --petio-spinner: invert(78%) sepia(96%) saturate(2016%) hue-rotate(205deg) brightness(95%) contrast(108%);
+  --gitea-color-primary-dark-4: 0, 87, 209;
+  --overseerr-gradient: linear-gradient(180deg, rgba(234, 234, 234, 0.17) 0%, rgba(234, 234, 234) 100%);
+}

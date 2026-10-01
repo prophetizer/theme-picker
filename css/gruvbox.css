@@ -1,0 +1,50 @@
+/*
+ * theme.park custom theme: Gruvbox (dark)
+ *
+ * Based on the Gruvbox terminal/editor color scheme
+ * (https://github.com/morhetz/gruvbox), canonical hex values pulled from
+ * the upstream colors/gruvbox.vim source.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ *
+ * --arr-queue-color is the scheme's bright_aqua #8ec07c, not its green #b8bb26.
+ * theme.park's CONTRIBUTING forbids orange/yellow here: the colour collides
+ * with the *arr queue-ERROR colour, and this scheme's green sits at hue
+ * 61 deg, squarely in that band. Both values are canonical to the scheme.
+ */
+
+:root {
+  --main-bg-color: #282828;
+
+  --modal-bg-color: #3c3836;
+  --modal-header-color: #3c3836;
+  --modal-footer-color: #3c3836;
+
+  --drop-down-menu-bg: #3c3836;
+
+  --button-color: #fe8019;
+  --button-color-hover: #fabd2f;
+  --button-text: #282828;
+  --button-text-hover: #282828;
+
+  --accent-color: 254, 128, 25;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8ec07c;
+  --link-color-hover: #b8bb26;
+  --label-text-color: #1d2021;
+
+  --text: #ebdbb2;
+  --text-hover: #fbf1c7;
+  --text-muted: #928374;
+
+  --arr-queue-color: #8ec07c;
+  --plex-poster-unwatched: #fe8019;
+  --petio-spinner: invert(59%) sepia(86%) saturate(338%) hue-rotate(341deg) brightness(80%) contrast(165%);
+  --gitea-color-primary-dark-4: 254, 128, 25;
+  --overseerr-gradient: linear-gradient(180deg, rgba(40, 40, 40, 0.17) 0%, rgba(40, 40, 40) 100%);
+}

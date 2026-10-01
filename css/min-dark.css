@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Min Dark
+ *
+ * Palette source: misolori/min-theme themes/min-dark.json (editor, side bar, foreground and link colours; accents from its token colours; the scheme has no green or cyan)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #a9a9a9 is the palette's #888888 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #7e8790 is the palette's #6b737c with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#79b8ff'.
+ */
+:root {
+  --main-bg-color: #1a1a1a;
+  --modal-bg-color: #1f1f1f;
+  --modal-header-color: #1f1f1f;
+  --modal-footer-color: #1f1f1f;
+  --drop-down-menu-bg: #1f1f1f;
+  --button-color: #79b8ff;
+  --button-color-hover: #b392f0;
+  --button-text: #1a1a1a;
+  --button-text-hover: #1a1a1a;
+  --accent-color: 121, 184, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #cccccc;
+  --link-color-hover: #fafafa;
+  --label-text-color: #1a1a1a;
+  --text: #a9a9a9;
+  --text-hover: #fafafa;
+  --text-muted: #7e8790;
+  --arr-queue-color: #79b8ff;
+  --plex-poster-unwatched: #ffab70;
+  --petio-spinner: invert(31%) sepia(40%) saturate(3494%) hue-rotate(189deg) brightness(109%) contrast(103%);
+  --gitea-color-primary-dark-4: 121, 184, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(26, 26, 26, 0.17) 0%, rgba(26, 26, 26) 100%);
+}

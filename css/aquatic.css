@@ -1,0 +1,51 @@
+/*
+ * theme.park custom theme: Aquatic
+ *
+ * HIGH CONTRAST: every text role meets WCAG AAA (7:1) against its surface --
+ * text 16.3:1, muted 16.3:1, links 11.5:1, button labels 7.9:1.
+ * The theme picker's "high contrast" badge measures exactly this bar.
+ *
+ * Palette source:
+ * Windows 11 contrast theme 'Aquatic', from Microsoft Learn 'Contrast
+ * themes' (windows/apps/design/accessibility/high-contrast-themes). The page
+ * gives the system colours only as swatch images; these hexes were sampled
+ * from the official swatch PNGs (flat fills, 96-99.8% one colour).
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * Windows draws panels in the same colour as the window and separates them
+ * with WindowText borders, which theme.park cannot draw -- so page and
+ * panels are both Window #202020. Muted text is WindowText, not GrayText:
+ * GrayText is Windows' DISABLED colour (which WCAG exempts) and reaches
+ * 6.7:1; secondary text in Windows is WindowText. Buttons use the
+ * Highlight/HighlightText pair. The palette has no green, so the queue
+ * colour is Hotlight #75e9fc.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#8ee3f0'.
+ */
+:root {
+  --main-bg-color: #202020;
+  --modal-bg-color: #202020;
+  --modal-header-color: #202020;
+  --modal-footer-color: #202020;
+  --drop-down-menu-bg: #202020;
+  --button-color: #8ee3f0;
+  --button-color-hover: #75e9fc;
+  --button-text: #263b50;
+  --button-text-hover: #263b50;
+  --accent-color: 142, 227, 240;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #75e9fc;
+  --link-color-hover: #8ee3f0;
+  --label-text-color: #263b50;
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-muted: #ffffff;
+  --arr-queue-color: #75e9fc;
+  --plex-poster-unwatched: #8ee3f0;
+  --petio-spinner: invert(81%) sepia(37%) saturate(429%) hue-rotate(146deg) brightness(101%) contrast(88%);
+  --gitea-color-primary-dark-4: 142, 227, 240;
+  --overseerr-gradient: linear-gradient(180deg, rgba(32, 32, 32, 0.17) 0%, rgba(32, 32, 32) 100%);
+}

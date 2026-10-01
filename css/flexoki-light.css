@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Flexoki Light
+ *
+ * Palette source: kepano/flexoki README + stephango.com/flexoki (light-mode roles: paper, bg-2, ui, tx, tx-2, 600 accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #6e6d68 is the palette's #6f6e69 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#205ea6'.
+ */
+:root {
+  --main-bg-color: #f2f0e5;
+  --modal-bg-color: #fffcf0;
+  --modal-header-color: #fffcf0;
+  --modal-footer-color: #fffcf0;
+  --drop-down-menu-bg: #fffcf0;
+  --button-color: #205ea6;
+  --button-color-hover: #af3029;
+  --button-text: #fffcf0;
+  --button-text-hover: #fffcf0;
+  --accent-color: 32, 94, 166;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #205ea6;
+  --link-color-hover: #a02f6f;
+  --label-text-color: #fffcf0;
+  --text: #100f0f;
+  --text-hover: #100f0f;
+  --text-muted: #6e6d68;
+  --arr-queue-color: #66800b;
+  --plex-poster-unwatched: #bc5215;
+  --petio-spinner: invert(42%) sepia(96%) saturate(486%) hue-rotate(173deg) brightness(66%) contrast(100%);
+  --gitea-color-primary-dark-4: 32, 94, 166;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 240, 229, 0.17) 0%, rgba(242, 240, 229) 100%);
+}

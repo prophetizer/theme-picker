@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Monokai (classic) (light)
+ *
+ * Generated variant: light of 'monokai', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'monokai'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#f92672'.
+ */
+:root {
+  --main-bg-color: #f3f4ef;
+  --modal-bg-color: #fffffc;
+  --modal-header-color: #fffffc;
+  --modal-footer-color: #fffffc;
+  --drop-down-menu-bg: #fffffc;
+  --button-color: #f92672;
+  --button-color-hover: #cf7800;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 249, 38, 114;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007b8d;
+  --link-color-hover: #577b00;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #5a5744;
+  --arr-queue-color: #6e9b00;
+  --plex-poster-unwatched: #f92672;
+  --petio-spinner: invert(53%) sepia(38%) saturate(698%) hue-rotate(287deg) brightness(74%) contrast(197%);
+  --gitea-color-primary-dark-4: 249, 38, 114;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 244, 239, 0.17) 0%, #f3f4ef 100%);
+}

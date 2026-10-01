@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Embark
+ *
+ * Palette source: embark-theme/vim, colors/embark.vim.
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted is astral0 #8A889D, the Comment colour, at 3.9:1 against
+ * space2 #2F2A47 -- marginally under 4.0:1, but it is the palette's only
+ * muted tone -- the 23-colour palette has nothing between it and the accents.
+ * --text-hover repeats the body text -- astral1 is the brightest foreground
+ * the palette defines.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#d4bfff'.
+ */
+:root {
+  --main-bg-color: #1e1c31;
+  --modal-bg-color: #2F2A47;
+  --modal-header-color: #2F2A47;
+  --modal-footer-color: #2F2A47;
+  --drop-down-menu-bg: #2F2A47;
+  --button-color: #d4bfff;
+  --button-color-hover: #F48FB1;
+  --button-text: #1e1c31;
+  --button-text-hover: #1e1c31;
+  --accent-color: 212, 191, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #91ddff;
+  --link-color-hover: #ABF8F7;
+  --label-text-color: #1e1c31;
+  --text: #cbe3e7;
+  --text-hover: #cbe3e7;
+  --text-muted: #8A889D;
+  --arr-queue-color: #A1EFD3;
+  --plex-poster-unwatched: #d4bfff;
+  --petio-spinner: invert(50%) sepia(23%) saturate(366%) hue-rotate(218deg) brightness(141%) contrast(123%);
+  --gitea-color-primary-dark-4: 212, 191, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(30, 28, 49, 0.17) 0%, rgba(30, 28, 49) 100%);
+}

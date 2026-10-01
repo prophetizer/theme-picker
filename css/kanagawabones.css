@@ -1,0 +1,52 @@
+/*
+ * theme.park custom theme: Kanagawabones
+ *
+ * Based on the Kanagawabones color scheme by Michael Chris Lopez, part of
+ * the zenbones family (https://github.com/zenbones-theme/zenbones.nvim) and
+ * itself inspired by rebelot/kanagawa.nvim. Canonical hex values from the
+ * upstream-generated extras/kitty/kanagawabones.conf -- these are the
+ * hsluv contrast-adjusted outputs, which are the correct ones for a port;
+ * lua/kanagawabones/palette.lua holds only the pre-adjustment source colors.
+ *
+ * zenbones generates its elevations programmatically rather than publishing
+ * them, so the modal surface uses the published inactive_tab_background
+ * (#363644) and muted text uses color15 (#A8A48D).
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #1F1F28;
+
+  --modal-bg-color: #363644;
+  --modal-header-color: #363644;
+  --modal-footer-color: #363644;
+
+  --drop-down-menu-bg: #363644;
+
+  --button-color: #E5C283;
+  --button-color-hover: #E46A78;
+  --button-text: #1F1F28;
+  --button-text-hover: #1F1F28;
+
+  --accent-color: 229, 194, 131;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7EB3C9;
+  --link-color-hover: #7BC2DF;
+  --label-text-color: #1F1F28;
+
+  --text: #DDD8BB;
+  --text-hover: #ffffff;
+  --text-muted: #A8A48D;
+
+  --arr-queue-color: #98BC6D;
+  --plex-poster-unwatched: #E5C283;
+  --petio-spinner: invert(56%) sepia(77%) saturate(299%) hue-rotate(341deg) brightness(138%) contrast(80%);
+  --gitea-color-primary-dark-4: 229, 194, 131;
+  --overseerr-gradient: linear-gradient(180deg, rgba(31, 31, 40, 0.17) 0%, rgba(31, 31, 40) 100%);
+}

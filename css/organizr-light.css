@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Organizr (light)
+ *
+ * Generated variant: light of 'organizr', theme.park's official theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'organizr'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#0097cd'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #f6f6f6;
+  --modal-footer-color: #f6f6f6;
+  --drop-down-menu-bg: #f0f0f0;
+  --button-color: #0097cd;
+  --button-color-hover: #298fbc;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 0, 151, 205;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0078a4;
+  --link-color-hover: #0078a1;
+  --label-text-color: #000000;
+  --text: #232c3b;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #0097cd;
+  --plex-poster-unwatched: #0097cd;
+  --petio-spinner: invert(46%) sepia(94%) saturate(451%) hue-rotate(149deg) brightness(86%) contrast(113%);
+  --gitea-color-primary-dark-4: 0, 151, 205;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

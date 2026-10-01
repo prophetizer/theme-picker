@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Tokyodark
+ *
+ * Palette source: tiagovla/tokyodark.nvim lua/tokyodark/palette.lua
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted was chosen/adjusted for legibility against --modal-bg-color
+ * (WCAG contrast checked at author time, >= 4.0:1); where the upstream
+ * palette published a lighter grey, that one is used rather than a new value.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#A485DD'.
+ */
+:root {
+  --main-bg-color: #11121D;
+  --modal-bg-color: #1A1B2A;
+  --modal-header-color: #1A1B2A;
+  --modal-footer-color: #1A1B2A;
+  --drop-down-menu-bg: #1A1B2A;
+  --button-color: #A485DD;
+  --button-color-hover: #7199EE;
+  --button-text: #11121D;
+  --button-text-hover: #11121D;
+  --accent-color: 164, 133, 221;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7199EE;
+  --link-color-hover: #38A89D;
+  --label-text-color: #11121D;
+  --text: #A0A8CD;
+  --text-hover: #FFFFFF;
+  --text-muted: #7C85A8;
+  --arr-queue-color: #95C561;
+  --plex-poster-unwatched: #A485DD;
+  --petio-spinner: invert(35%) sepia(100%) saturate(111%) hue-rotate(220deg) brightness(128%) contrast(199%);
+  --gitea-color-primary-dark-4: 164, 133, 221;
+  --overseerr-gradient: linear-gradient(180deg, rgba(17, 18, 29, 0.17) 0%, rgba(17, 18, 29) 100%);
+}

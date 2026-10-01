@@ -1,0 +1,48 @@
+/*
+ * theme.park custom theme: GitHub Dark High Contrast
+ *
+ * HIGH CONTRAST: every text role meets WCAG AAA (7:1) against its surface --
+ * text 18.4:1, muted 18.4:1, links 9.7:1, button labels 7.1:1.
+ * The theme picker's "high contrast" badge measures exactly this bar.
+ *
+ * Palette source:
+ * primer/primitives v7.10.0 (the version primer/github-vscode-theme pins),
+ * data/colors/themes/dark_high_contrast.ts, with token-to-surface mapping
+ * from github-vscode-theme src/theme.js.
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * Muted text equals body text ON PURPOSE: in GitHub's high-contrast themes
+ * fg.muted IS fg.default (#f0f3f6). They remove the dim grey rather than
+ * keep one that cannot pass; fg.subtle #9ea7b3 would be 5.8:1. Panels are
+ * canvas.inset #010409, as in GitHub's own VS Code theme -- canvas.overlay
+ * #272b33 left links at 6.7:1. Buttons are btn.primary.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#09b43a'.
+ */
+:root {
+  --main-bg-color: #0a0c10;
+  --modal-bg-color: #010409;
+  --modal-header-color: #010409;
+  --modal-footer-color: #010409;
+  --drop-down-menu-bg: #010409;
+  --button-color: #09b43a;
+  --button-color-hover: #26cd4d;
+  --button-text: #0a0c10;
+  --button-text-hover: #0a0c10;
+  --accent-color: 9, 180, 58;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #71b7ff;
+  --link-color-hover: #409eff;
+  --label-text-color: #0a0c10;
+  --text: #f0f3f6;
+  --text-hover: #ffffff;
+  --text-muted: #f0f3f6;
+  --arr-queue-color: #26cd4d;
+  --plex-poster-unwatched: #09b43a;
+  --petio-spinner: invert(65%) sepia(100%) saturate(220%) hue-rotate(85deg) brightness(65%) contrast(200%);
+  --gitea-color-primary-dark-4: 9, 180, 58;
+  --overseerr-gradient: linear-gradient(180deg, rgba(10, 12, 16, 0.17) 0%, rgba(10, 12, 16) 100%);
+}

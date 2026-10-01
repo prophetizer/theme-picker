@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Shroom Haze (light)
+ *
+ * Generated variant: light of 'shroom-haze', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'shroom-haze'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#986dc8'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #eee2ff 0%, #feffff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #eee2ff 0%, #feffff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #eee2ff 0%, #feffff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #eee2ff 0%, #feffff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #e0e3ff;
+  --button-color: #986dc8;
+  --button-color-hover: #4389a2;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 152, 109, 200;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #745896;
+  --link-color-hover: #246c85;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #0c0533;
+  --arr-queue-color: #9174b5;
+  --plex-poster-unwatched: #4389a2;
+  --petio-spinner: invert(50%) sepia(41%) saturate(619%) hue-rotate(226deg) brightness(91%) contrast(88%);
+  --gitea-color-primary-dark-4: 152, 109, 200;
+  --overseerr-gradient: linear-gradient(180deg, rgba(254, 255, 255, 0.17) 0%, #feffff 100%);
+}

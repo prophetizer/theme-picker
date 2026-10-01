@@ -1,0 +1,51 @@
+/*
+ * theme.park custom theme: Edge Light
+ *
+ * Palette source: sainnhe/edge autoload/edge.vim (light: bg0, bg_dim, fg, grey, accents; the scheme has no orange)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #484d58 is the palette's #4b505b with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #484d58 is the palette's #4b505b with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #626b7a is the palette's #8790a0 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #426aae is the palette's #5079be with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #9946b5 is the palette's #b05ccc with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #4d76bb is the palette's #5079be with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #30827c is the palette's #3a8b84 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#4d76bb'.
+ */
+:root {
+  --main-bg-color: #e8ebf0;
+  --modal-bg-color: #fafafa;
+  --modal-header-color: #fafafa;
+  --modal-footer-color: #fafafa;
+  --drop-down-menu-bg: #fafafa;
+  --button-color: #4d76bb;
+  --button-color-hover: #30827c;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 77, 118, 187;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #426aae;
+  --link-color-hover: #9946b5;
+  --label-text-color: #ffffff;
+  --text: #484d58;
+  --text-hover: #484d58;
+  --text-muted: #626b7a;
+  --arr-queue-color: #608e32;
+  --plex-poster-unwatched: #be7e05;
+  --petio-spinner: invert(59%) sepia(90%) saturate(381%) hue-rotate(179deg) brightness(88%) contrast(83%);
+  --gitea-color-primary-dark-4: 77, 118, 187;
+  --overseerr-gradient: linear-gradient(180deg, rgba(232, 235, 240, 0.17) 0%, rgba(232, 235, 240) 100%);
+}

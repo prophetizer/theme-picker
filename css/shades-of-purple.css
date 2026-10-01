@@ -1,0 +1,53 @@
+/*
+ * theme.park custom theme: Shades of Purple
+ *
+ * Based on the "Shades of Purple" terminal color scheme
+ * (https://terminalcolors.com/themes/shades-of-purple/default/, originally
+ * Ahmad Awais' Hyper/iTerm2/VS Code theme).
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ *
+ * Do not change the "R, G, B" (no #, no rgb()) syntax on --accent-color /
+ * --gitea-color-primary-dark-4 -- theme.park's base CSS wraps those in
+ * rgb(var(--accent-color)) itself.
+ *
+ * Contrast fix 2026-09-22: --text-muted was #6f6c99, 2.7:1 on the #2d2b55 panels.
+ * Now #a599e9 -- the theme's own workbench foreground (ahmadawais
+ * shades-of-purple-color-theme.json) -- at 5.2:1; #7580b8 missed 3.5:1 at 3.49.
+ * --button-text was #eee, 2.96:1 on the #b362ff button; now #ffffff
+ * (editor.foreground), 3.4:1.
+ */
+
+:root {
+  --main-bg-color: #1E1D40;
+
+  --modal-bg-color: #2D2B55;
+  --modal-header-color: #2D2B55;
+  --modal-footer-color: #2D2B55;
+
+  --drop-down-menu-bg: #2D2B55;
+
+  --button-color: #b362ff;
+  --button-color-hover: #FAD000;
+  --button-text: #ffffff;
+  --button-text-hover: #1E1D40;
+
+  --accent-color: 179, 98, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #FAD000;
+  --link-color-hover: #80fcff;
+  --label-text-color: #14132a;
+
+  --text: #c7c7c7;
+  --text-hover: #ffffff;
+  --text-muted: #a599e9;
+
+  --arr-queue-color: #3ad900;
+  --plex-poster-unwatched: #b362ff;
+  --petio-spinner: invert(38%) sepia(72%) saturate(681%) hue-rotate(227deg) brightness(112%) contrast(111%);
+  --gitea-color-primary-dark-4: 179, 98, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(30, 29, 64, 0.17) 0%, rgba(30, 29, 64) 100%);
+}

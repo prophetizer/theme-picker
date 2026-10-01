@@ -1,0 +1,54 @@
+/*
+ * theme.park custom theme: Solarized (Dark)
+ *
+ * Based on Ethan Schoonover's Solarized color scheme
+ * (https://ethanschoonover.com/solarized/), dark variant base tones.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ *
+ * --arr-queue-color is the scheme's cyan #2aa198, not its green #859900.
+ * theme.park's CONTRIBUTING forbids orange/yellow here: the colour collides
+ * with the *arr queue-ERROR colour, and this scheme's green sits at hue
+ * 68 deg, squarely in that band. Both values are canonical to the scheme.
+ *
+ * Contrast fix 2026-09-22: the panels are base02, one step lighter than the base03
+ * Solarized pairs body text with, so base0 body text was 4.1:1 and base01 muted
+ * 2.4:1. Both moved one step up the canonical ramp: text base1 #93a1a1 (4.9:1),
+ * muted base0 #839496 (4.1:1). Hierarchy is unchanged -- still adjacent tones.
+ */
+
+:root {
+  --main-bg-color: #002b36;
+
+  --modal-bg-color: #073642;
+  --modal-header-color: #073642;
+  --modal-footer-color: #073642;
+
+  --drop-down-menu-bg: #073642;
+
+  --button-color: #268bd2;
+  --button-color-hover: #2aa198;
+  --button-text: #eee8d5;
+  --button-text-hover: #fdf6e3;
+
+  --accent-color: 38, 139, 210;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #b58900;
+  --link-color-hover: #cb4b16;
+  --label-text-color: #002b36;
+
+  --text: #93a1a1;
+  --text-hover: #fdf6e3;
+  --text-muted: #839496;
+
+  --arr-queue-color: #2aa198;
+  --plex-poster-unwatched: #268bd2;
+  --petio-spinner: invert(46%) sepia(92%) saturate(453%) hue-rotate(162deg) brightness(86%) contrast(92%);
+  --gitea-color-primary-dark-4: 38, 139, 210;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 43, 54, 0.17) 0%, rgba(0, 43, 54) 100%);
+}

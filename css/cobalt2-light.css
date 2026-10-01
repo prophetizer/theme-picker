@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Cobalt2 (light)
+ *
+ * Generated variant: light of 'cobalt2', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'cobalt2'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#b08700'.
+ */
+:root {
+  --main-bg-color: #e9f5ff;
+  --modal-bg-color: #fcfeff;
+  --modal-header-color: #fcfeff;
+  --modal-footer-color: #fcfeff;
+  --drop-down-menu-bg: #fcfeff;
+  --button-color: #b08700;
+  --button-color-hover: #c97b00;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 176, 135, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007c7f;
+  --link-color-hover: #a16100;
+  --label-text-color: #11141b;
+  --text: #000003;
+  --text-hover: #000000;
+  --text-muted: #242424;
+  --arr-queue-color: #29a300;
+  --plex-poster-unwatched: #b08700;
+  --petio-spinner: invert(87%) sepia(33%) saturate(700%) hue-rotate(346deg) brightness(60%) contrast(200%);
+  --gitea-color-primary-dark-4: 176, 135, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(233, 245, 255, 0.17) 0%, #e9f5ff 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Dayfox (dark)
+ *
+ * Generated variant: dark of 'dayfox', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'dayfox'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#3b5ec1'.
+ */
+:root {
+  --main-bg-color: #1a1816;
+  --modal-bg-color: #0b0704;
+  --modal-header-color: #0b0704;
+  --modal-footer-color: #0b0704;
+  --drop-down-menu-bg: #0b0704;
+  --button-color: #3b5ec1;
+  --button-color-hover: #7840db;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 59, 94, 193;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #557ce1;
+  --link-color-hover: #3d8b92;
+  --label-text-color: #ffffff;
+  --text: #ac9ad2;
+  --text-hover: #9f9dd9;
+  --text-muted: #887f77;
+  --arr-queue-color: #3f6e4d;
+  --plex-poster-unwatched: #3b5ec1;
+  --petio-spinner: invert(37%) sepia(100%) saturate(309%) hue-rotate(187deg) brightness(89%) contrast(131%);
+  --gitea-color-primary-dark-4: 59, 94, 193;
+  --overseerr-gradient: linear-gradient(180deg, rgba(26, 24, 22, 0.17) 0%, #1a1816 100%);
+}

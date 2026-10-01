@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Melange
+ *
+ * Palette source: savq/melange-nvim lua/melange/palettes/dark.lua
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted was chosen/adjusted for legibility against --modal-bg-color
+ * (WCAG contrast checked at author time, >= 4.0:1); where the upstream
+ * palette published a lighter grey, that one is used rather than a new value.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#EBC06D'.
+ */
+:root {
+  --main-bg-color: #292522;
+  --modal-bg-color: #34302C;
+  --modal-header-color: #34302C;
+  --modal-footer-color: #34302C;
+  --drop-down-menu-bg: #34302C;
+  --button-color: #EBC06D;
+  --button-color-hover: #85B695;
+  --button-text: #292522;
+  --button-text-hover: #292522;
+  --accent-color: 235, 192, 109;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #89B3B6;
+  --link-color-hover: #A3A9CE;
+  --label-text-color: #292522;
+  --text: #ECE1D7;
+  --text-hover: #FFFFFF;
+  --text-muted: #A08B76;
+  --arr-queue-color: #85B695;
+  --plex-poster-unwatched: #EBC06D;
+  --petio-spinner: invert(66%) sepia(88%) saturate(321%) hue-rotate(342deg) brightness(114%) contrast(84%);
+  --gitea-color-primary-dark-4: 235, 192, 109;
+  --overseerr-gradient: linear-gradient(180deg, rgba(41, 37, 34, 0.17) 0%, rgba(41, 37, 34) 100%);
+}

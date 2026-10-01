@@ -1,0 +1,62 @@
+/*
+ * theme.park custom theme: One Light
+ *
+ * LIGHT THEME. Based on Atom's One Light (https://github.com/atom/one-light-syntax
+ * and atom/one-light-ui). Those repos are archived read-only since Atom's
+ * sunset in Dec 2022, but remain the canonical definition. The theme ships
+ * LESS, so the values here are its hsl()/darken() expressions evaluated.
+ *
+ * --accent-color is the purple @hue-3 rather than One Light's signature blue
+ * @hue-2 #4078F2: the blue reaches only 3.88:1 on this background and 4.05:1
+ * under white text, and One Light publishes no darker blue sibling. The blue
+ * is kept on --plex-poster-unwatched, where it is decorative. Purple, red2
+ * (@hue-5-2) and orange (@hue-6) are the only accents here that clear 4.5:1.
+ *
+ * Light themes invert several conventions used by the dark themes in this
+ * repo: --text-hover must NOT be #ffffff, --button-text and
+ * --label-text-color are white ON the accent, and the modal is darker.
+ * @text-color-highlight gives a genuine darker hover foreground here.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ *
+ * Contrast fix 2026-09-22: --text-muted was #8e8e90, 2.7:1 on the #eaeaeb panels.
+ * Now mono-2 #696c77 -- One Light's own secondary text colour -- at 4.4:1.
+ * atom/one-light-syntax colors.less defines it as hsl(230, 6%, 44%); the hex is a
+ * conversion, since that file contains no hex values at all.
+ */
+
+:root {
+  --main-bg-color: #FAFAFA;
+
+  --modal-bg-color: #EAEAEB;
+  --modal-header-color: #EAEAEB;
+  --modal-footer-color: #EAEAEB;
+
+  --drop-down-menu-bg: #EAEAEB;
+
+  --button-color: #A626A4;
+  --button-color-hover: #CA1243;
+  --button-text: #FFFFFF;
+  --button-text-hover: #FFFFFF;
+
+  --accent-color: 166, 38, 164;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #A626A4;
+  --link-color-hover: #CA1243;
+  --label-text-color: #FFFFFF;
+
+  --text: #424243;
+  --text-hover: #232324;
+  --text-muted: #696c77;
+
+  --arr-queue-color: #50A14F;
+  --plex-poster-unwatched: #4078F2;
+  --petio-spinner: invert(31%) sepia(100%) saturate(382%) hue-rotate(252deg) brightness(96%) contrast(145%);
+  --gitea-color-primary-dark-4: 166, 38, 164;
+  --overseerr-gradient: linear-gradient(180deg, rgba(250, 250, 250, 0.17) 0%, rgba(250, 250, 250) 100%);
+}

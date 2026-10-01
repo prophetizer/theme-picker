@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Apprentice
+ *
+ * Palette source: romainl/Apprentice colors/apprentice.vim (256-colour hex set)
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted was chosen/adjusted for legibility against --modal-bg-color
+ * (WCAG contrast checked at author time, >= 4.0:1); where the upstream
+ * palette published a lighter grey, that one is used rather than a new value.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#5F87AF'.
+ */
+:root {
+  --main-bg-color: #1C1C1C;
+  --modal-bg-color: #262626;
+  --modal-header-color: #262626;
+  --modal-footer-color: #262626;
+  --drop-down-menu-bg: #262626;
+  --button-color: #5F87AF;
+  --button-color-hover: #5F875F;
+  --button-text: #1C1C1C;
+  --button-text-hover: #1C1C1C;
+  --accent-color: 95, 135, 175;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5FAFAF;
+  --link-color-hover: #87AFAF;
+  --label-text-color: #1C1C1C;
+  --text: #BCBCBC;
+  --text-hover: #E4E4E4;
+  --text-muted: #8A8A8A;
+  --arr-queue-color: #87875F;
+  --plex-poster-unwatched: #5F87AF;
+  --petio-spinner: invert(26%) sepia(100%) saturate(87%) hue-rotate(169deg) brightness(157%) contrast(200%);
+  --gitea-color-primary-dark-4: 95, 135, 175;
+  --overseerr-gradient: linear-gradient(180deg, rgba(28, 28, 28, 0.17) 0%, rgba(28, 28, 28) 100%);
+}

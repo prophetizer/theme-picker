@@ -1,0 +1,57 @@
+/*
+ * theme.park custom theme: Palenight
+ *
+ * Based on the Palenight variant of the Material Theme by Mattia Astorino
+ * (equinusocio), canonical hex values from the Material Theme colour
+ * reference (https://material-theme.com/docs/reference/color-palette/),
+ * Palenight section. ~4.3M installs for the original extension, plus ~2.6M
+ * for the standalone Palenight port.
+ *
+ * --accent-color uses the palette purple #C792EA rather than the spec's
+ * "accent" token #AB47BC: the latter is a UI chrome colour and is too dark
+ * to carry dark button text. #C792EA is the colour the theme is known by.
+ * The whizkydee fork drifts slightly (fg #BFC7D5); the official values are
+ * used here.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ *
+ * Contrast fix 2026-09-22: --text-muted was #676e95, 2.5:1 on the #34324a panels.
+ * Now #aaaabb (input.placeholderForeground, whizkydee palenight.json), 5.4:1. The
+ * comment colour #697098 reached only 2.6:1.
+ */
+
+:root {
+  --main-bg-color: #292D3E;
+
+  --modal-bg-color: #34324A;
+  --modal-header-color: #34324A;
+  --modal-footer-color: #34324A;
+
+  --drop-down-menu-bg: #34324A;
+
+  --button-color: #C792EA;
+  --button-color-hover: #82AAFF;
+  --button-text: #292D3E;
+  --button-text-hover: #292D3E;
+
+  --accent-color: 199, 146, 234;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #82AAFF;
+  --link-color-hover: #89DDFF;
+  --label-text-color: #292D3E;
+
+  --text: #A6ACCD;
+  --text-hover: #ffffff;
+  --text-muted: #aaaabb;
+
+  --arr-queue-color: #C3E88D;
+  --plex-poster-unwatched: #C792EA;
+  --petio-spinner: invert(70%) sepia(18%) saturate(677%) hue-rotate(233deg) brightness(83%) contrast(140%);
+  --gitea-color-primary-dark-4: 199, 146, 234;
+  --overseerr-gradient: linear-gradient(180deg, rgba(41, 45, 62, 0.17) 0%, rgba(41, 45, 62) 100%);
+}

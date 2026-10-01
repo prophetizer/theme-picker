@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Jellybeans
+ *
+ * Palette source: nanotech/jellybeans.vim colors/jellybeans.vim
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * HIGH CONTRAST: every text role (body, muted, links, button label) is meant
+ * to reach WCAG AAA 7:1 on the panels.
+ * --text-muted #a6a6a6 is the palette's #888888 with its lightness nudged to
+ * reach 7:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#fad07a'.
+ */
+:root {
+  --main-bg-color: #151515;
+  --modal-bg-color: #1c1c1c;
+  --modal-header-color: #1c1c1c;
+  --modal-footer-color: #1c1c1c;
+  --drop-down-menu-bg: #1c1c1c;
+  --button-color: #fad07a;
+  --button-color-hover: #ffb964;
+  --button-text: #151515;
+  --button-text-hover: #151515;
+  --accent-color: 250, 208, 122;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8fbfdc;
+  --link-color-hover: #f0a0c0;
+  --label-text-color: #151515;
+  --text: #e8e8d3;
+  --text-hover: #ffffff;
+  --text-muted: #a6a6a6;
+  --arr-queue-color: #99ad6a;
+  --plex-poster-unwatched: #ffb964;
+  --petio-spinner: invert(64%) sepia(67%) saturate(326%) hue-rotate(347deg) brightness(121%) contrast(96%);
+  --gitea-color-primary-dark-4: 250, 208, 122;
+  --overseerr-gradient: linear-gradient(180deg, rgba(21, 21, 21, 0.17) 0%, rgba(21, 21, 21) 100%);
+}

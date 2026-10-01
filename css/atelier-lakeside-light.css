@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Atelier Lakeside Light
+ *
+ * Palette source: tinted-theming/schemes base16/atelier-lakeside-light.yaml (Bram de Haan; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #2f4a57 is the palette's #516d7b with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #476778 is the palette's #5a7b8c with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #006995 is the palette's #257fad with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #5b5aa6 is the palette's #6b6bb8 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #247eac is the palette's #257fad with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #208666 is the palette's #2d8f6f with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#247eac'.
+ */
+:root {
+  --main-bg-color: #c1e4f6;
+  --modal-bg-color: #ebf8ff;
+  --modal-header-color: #ebf8ff;
+  --modal-footer-color: #ebf8ff;
+  --drop-down-menu-bg: #ebf8ff;
+  --button-color: #247eac;
+  --button-color-hover: #208666;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 36, 126, 172;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #006995;
+  --link-color-hover: #5b5aa6;
+  --label-text-color: #ffffff;
+  --text: #2f4a57;
+  --text-hover: #161b1d;
+  --text-muted: #476778;
+  --arr-queue-color: #568c3b;
+  --plex-poster-unwatched: #935c25;
+  --petio-spinner: invert(57%) sepia(12%) saturate(2731%) hue-rotate(156deg) brightness(96%) contrast(90%);
+  --gitea-color-primary-dark-4: 36, 126, 172;
+  --overseerr-gradient: linear-gradient(180deg, rgba(193, 228, 246, 0.17) 0%, rgba(193, 228, 246) 100%);
+}

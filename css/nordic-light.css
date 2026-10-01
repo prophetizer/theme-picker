@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Nordic (light)
+ *
+ * Generated variant: light of 'nordic', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'nordic'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#4c6f98'.
+ */
+:root {
+  --main-bg-color: #f0f4fa;
+  --modal-bg-color: #f5f8ff;
+  --modal-header-color: #f5f8ff;
+  --modal-footer-color: #f5f8ff;
+  --drop-down-menu-bg: #f5f8ff;
+  --button-color: #4c6f98;
+  --button-color-hover: #516f8d;
+  --button-text: #eceff4;
+  --button-text-hover: #eceff4;
+  --accent-color: 76, 111, 152;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #417786;
+  --link-color-hover: #896582;
+  --label-text-color: #eceff4;
+  --text: #0d121e;
+  --text-hover: #000001;
+  --text-muted: #2b3b51;
+  --arr-queue-color: #7b9565;
+  --plex-poster-unwatched: #c37b64;
+  --petio-spinner: invert(60%) sepia(22%) saturate(901%) hue-rotate(172deg) brightness(98%) contrast(91%);
+  --gitea-color-primary-dark-4: 76, 111, 152;
+  --overseerr-gradient: linear-gradient(180deg, rgba(240, 244, 250, 0.17) 0%, #f0f4fa 100%);
+}

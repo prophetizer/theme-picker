@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Ocean (light)
+ *
+ * Generated variant: light of 'ocean', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'ocean'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#009d9d'.
+ */
+:root {
+  --main-bg-color: #eef4ff;
+  --modal-bg-color: #eef4ff;
+  --modal-header-color: #eef4ff;
+  --modal-footer-color: #eef4ff;
+  --drop-down-menu-bg: #eef4ff;
+  --button-color: #009d9d;
+  --button-color-hover: #929200;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 0, 157, 157;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007d7d;
+  --link-color-hover: #747400;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #0b0b0b;
+  --arr-queue-color: #00a400;
+  --plex-poster-unwatched: #929200;
+  --petio-spinner: invert(54%) sepia(90%) saturate(423%) hue-rotate(131deg) brightness(75%) contrast(105%);
+  --gitea-color-primary-dark-4: 0, 157, 157;
+  --overseerr-gradient: linear-gradient(180deg, rgba(238, 244, 255, 0.17) 0%, #eef4ff 100%);
+}

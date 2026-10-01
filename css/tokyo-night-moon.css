@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Tokyo Night Moon
+ *
+ * Palette source: folke/tokyonight.nvim lua/tokyonight/colors/moon.lua (bg, bg_dark, bg_highlight, fg, fg_dark, accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#82aaff'.
+ */
+:root {
+  --main-bg-color: #1e2030;
+  --modal-bg-color: #222436;
+  --modal-header-color: #222436;
+  --modal-footer-color: #222436;
+  --drop-down-menu-bg: #222436;
+  --button-color: #82aaff;
+  --button-color-hover: #86e1fc;
+  --button-text: #1e2030;
+  --button-text-hover: #1e2030;
+  --accent-color: 130, 170, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #82aaff;
+  --link-color-hover: #c099ff;
+  --label-text-color: #1e2030;
+  --text: #c8d3f5;
+  --text-hover: #c8d3f5;
+  --text-muted: #828bb8;
+  --arr-queue-color: #c3e88d;
+  --plex-poster-unwatched: #ff966c;
+  --petio-spinner: invert(47%) sepia(100%) saturate(205%) hue-rotate(183deg) brightness(112%) contrast(113%);
+  --gitea-color-primary-dark-4: 130, 170, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(30, 32, 48, 0.17) 0%, rgba(30, 32, 48) 100%);
+}

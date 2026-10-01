@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Royal (light)
+ *
+ * Generated variant: light of 'royal', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'royal'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7089a7'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #e2ebfa 0%, #fbfdff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #e2ebfa 0%, #fbfdff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #e2ebfa 0%, #fbfdff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #e2ebfa 0%, #fbfdff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ecf4ff;
+  --button-color: #7089a7;
+  --button-color-hover: #7a889e;
+  --button-text: #141e30;
+  --button-text-hover: #141e30;
+  --accent-color: 112, 137, 167;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #546c89;
+  --link-color-hover: #5f6b81;
+  --label-text-color: #141e30;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #001436;
+  --arr-queue-color: #7089a7;
+  --plex-poster-unwatched: #7a889e;
+  --petio-spinner: invert(43%) sepia(4%) saturate(2313%) hue-rotate(173deg) brightness(91%) contrast(96%);
+  --gitea-color-primary-dark-4: 112, 137, 167;
+  --overseerr-gradient: linear-gradient(180deg, rgba(251, 253, 255, 0.17) 0%, #fbfdff 100%);
+}

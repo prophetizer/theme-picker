@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Matrix
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Matrix (background, foreground, selection background, ANSI 0-15 -- every ANSI slot is a green)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * A GRADIENT theme in the shape of theme.park's own: a hero gradient built
+ * from the palette's own background tones on the page, a matching -90deg
+ * gradient on panels, and a SOLID drop-down menu (a gradient in a small menu
+ * reads as a slice).
+ * --text #93ba94 is the palette's #426644 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #7a9372 is the palette's #688060 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#82d967'.
+ */
+:root {
+  --main-bg-color: linear-gradient(165deg, #0f191c 0%, #18282e 55%, #0f191c 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #18282e 0%, #0f191c 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #18282e 0%, #0f191c 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #18282e 0%, #0f191c 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #18282e;
+  --button-color: #82d967;
+  --button-color-hover: #90d762;
+  --button-text: #0f191c;
+  --button-text-hover: #0f191c;
+  --accent-color: 130, 217, 103;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #c1ff8a;
+  --link-color-hover: #11ff25;
+  --label-text-color: #0f191c;
+  --text: #93ba94;
+  --text-hover: #c1ff8a;
+  --text-muted: #7a9372;
+  --arr-queue-color: #82d967;
+  --plex-poster-unwatched: #ffd700;
+  --petio-spinner: invert(58%) sepia(57%) saturate(332%) hue-rotate(61deg) brightness(111%) contrast(109%);
+  --gitea-color-primary-dark-4: 130, 217, 103;
+  --overseerr-gradient: linear-gradient(180deg, rgba(15, 25, 28, 0.17) 0%, rgba(15, 25, 28) 100%);
+}

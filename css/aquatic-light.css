@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Aquatic (light)
+ *
+ * Generated variant: light of 'aquatic', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'aquatic'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#4299a5'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #f3f3f3;
+  --modal-header-color: #f3f3f3;
+  --modal-footer-color: #f3f3f3;
+  --drop-down-menu-bg: #f3f3f3;
+  --button-color: #4299a5;
+  --button-color-hover: #079bad;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 66, 153, 165;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007b8a;
+  --link-color-hover: #1d7a87;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #079bad;
+  --plex-poster-unwatched: #4299a5;
+  --petio-spinner: invert(58%) sepia(72%) saturate(357%) hue-rotate(139deg) brightness(81%) contrast(79%);
+  --gitea-color-primary-dark-4: 66, 153, 165;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

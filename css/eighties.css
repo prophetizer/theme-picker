@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Eighties
+ *
+ * Palette source: tinted-theming/schemes base16/eighties.yaml (Chris Kempson; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #a4a397 is the palette's #a09f93 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #73a6da is the palette's #6699cc with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6699cc'.
+ */
+:root {
+  --main-bg-color: #2d2d2d;
+  --modal-bg-color: #393939;
+  --modal-header-color: #393939;
+  --modal-footer-color: #393939;
+  --drop-down-menu-bg: #393939;
+  --button-color: #6699cc;
+  --button-color-hover: #66cccc;
+  --button-text: #2d2d2d;
+  --button-text-hover: #2d2d2d;
+  --accent-color: 102, 153, 204;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #73a6da;
+  --link-color-hover: #cc99cc;
+  --label-text-color: #2d2d2d;
+  --text: #d3d0c8;
+  --text-hover: #f2f0ec;
+  --text-muted: #a4a397;
+  --arr-queue-color: #99cc99;
+  --plex-poster-unwatched: #f99157;
+  --petio-spinner: invert(44%) sepia(46%) saturate(429%) hue-rotate(169deg) brightness(95%) contrast(89%);
+  --gitea-color-primary-dark-4: 102, 153, 204;
+  --overseerr-gradient: linear-gradient(180deg, rgba(45, 45, 45, 0.17) 0%, rgba(45, 45, 45) 100%);
+}

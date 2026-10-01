@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Blackberry Hearth (light)
+ *
+ * Generated variant: light of 'blackberry-hearth', theme.park's community theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'blackberry-hearth'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#dd5c5d'.
+ */
+:root {
+  --main-bg-color: radial-gradient(at bottom center, rgba(209, 209, 209, 0.4) 0%, rgba(255, 255, 255, 0.55), rgba(236, 231, 231, 0)) center center/cover no-repeat fixed, linear-gradient(to bottom, #ece7e7, #ffffff, #ffe9e5) center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --modal-header-color: var(--main-bg-color);
+  --modal-footer-color: var(--main-bg-color);
+  --drop-down-menu-bg: var(--main-bg-color);
+  --button-color: #dd5c5d;
+  --button-color-hover: #611515;
+  --button-text: rgba(15, 10, 10, 0.95);
+  --button-text-hover: rgba(0, 0, 0, 0.95);
+  --accent-color: 221, 92, 93;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #856157;
+  --link-color-hover: #7a6467;
+  --label-text-color: rgba(15, 10, 10, 0.95);
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #439831;
+  --plex-poster-unwatched: #c96a6f;
+  --petio-spinner: invert(45%) sepia(100%) saturate(166%) hue-rotate(311deg) brightness(88%) contrast(200%);
+  --gitea-color-primary-dark-4: 201, 106, 111;
+  --overseerr-gradient: radial-gradient(at bottom center, rgba(209, 209, 209, 0.4) 0%, rgba(255, 255, 255, 0.55), rgba(236, 231, 231, 0)) center center/cover no-repeat fixed, linear-gradient(to bottom, rgba(236, 231, 231, 0.9), rgba(255, 255, 255, 0.9), rgba(255, 233, 229, 0.9)) center center/cover no-repeat fixed;
+}

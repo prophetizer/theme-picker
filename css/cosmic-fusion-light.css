@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Cosmic Fusion (light)
+ *
+ * Generated variant: light of 'cosmic-fusion', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'cosmic-fusion'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#c753a6'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #ffffff 0%, #dce2ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #ffffff 0%, #dce2ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #ffffff 0%, #dce2ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #ffffff 0%, #dce2ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #f5daff;
+  --button-color: #c753a6;
+  --button-color-hover: #6e7ac3;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 199, 83, 166;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #93497c;
+  --link-color-hover: #565f95;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #1c0024;
+  --arr-queue-color: #b2659a;
+  --plex-poster-unwatched: #6e7ac3;
+  --petio-spinner: invert(39%) sepia(96%) saturate(621%) hue-rotate(271deg) brightness(89%) contrast(77%);
+  --gitea-color-primary-dark-4: 199, 83, 166;
+  --overseerr-gradient: linear-gradient(180deg, rgba(220, 226, 255, 0.17) 0%, #dce2ff 100%);
+}

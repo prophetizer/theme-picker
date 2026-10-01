@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Tomorrow Night Blue
+ *
+ * Palette source: microsoft/vscode extensions/theme-tomorrow-night-blue/themes/tomorrow-night-blue-color-theme.json (editor, side bar, ANSI; muted is its comment colour #7285b7, orange its #ffc58f)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #788bbd is the palette's #7285b7 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#bbdaff'.
+ */
+:root {
+  --main-bg-color: #001c40;
+  --modal-bg-color: #002451;
+  --modal-header-color: #002451;
+  --modal-footer-color: #002451;
+  --drop-down-menu-bg: #002451;
+  --button-color: #bbdaff;
+  --button-color-hover: #99ffff;
+  --button-text: #001c40;
+  --button-text-hover: #001c40;
+  --accent-color: 187, 218, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #bbdaff;
+  --link-color-hover: #ebbbff;
+  --label-text-color: #001c40;
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-muted: #788bbd;
+  --arr-queue-color: #d1f1a9;
+  --plex-poster-unwatched: #ffc58f;
+  --petio-spinner: invert(64%) sepia(26%) saturate(242%) hue-rotate(173deg) brightness(111%) contrast(138%);
+  --gitea-color-primary-dark-4: 187, 218, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 28, 64, 0.17) 0%, rgba(0, 28, 64) 100%);
+}

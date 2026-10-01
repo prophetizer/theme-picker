@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Ayu Mirage (light)
+ *
+ * Generated variant: light of 'ayu-mirage', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'ayu-mirage'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#b48500'.
+ */
+:root {
+  --main-bg-color: #eff3fd;
+  --modal-bg-color: #f3f7ff;
+  --modal-header-color: #f3f7ff;
+  --modal-footer-color: #f3f7ff;
+  --drop-down-menu-bg: #f3f7ff;
+  --button-color: #b48500;
+  --button-color-hover: #cd7824;
+  --button-text: #1f2430;
+  --button-text-hover: #1f2430;
+  --accent-color: 180, 133, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0078a3;
+  --link-color-hover: #81639d;
+  --label-text-color: #1f2430;
+  --text: #0f0e08;
+  --text-hover: #0f0e08;
+  --text-muted: #2e3b4c;
+  --arr-queue-color: #759900;
+  --plex-poster-unwatched: #cd7824;
+  --petio-spinner: invert(77%) sepia(99%) saturate(331%) hue-rotate(335deg) brightness(61%) contrast(189%);
+  --gitea-color-primary-dark-4: 180, 133, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(239, 243, 253, 0.17) 0%, #eff3fd 100%);
+}

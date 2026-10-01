@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Edge Dark
+ *
+ * Palette source: sainnhe/edge autoload/edge.vim (default style, dark: bg_dim, bg0, fg, grey, accents; the scheme has no orange)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #8a96aa is the palette's #758094 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6cb6eb'.
+ */
+:root {
+  --main-bg-color: #24262a;
+  --modal-bg-color: #2c2e34;
+  --modal-header-color: #2c2e34;
+  --modal-footer-color: #2c2e34;
+  --drop-down-menu-bg: #2c2e34;
+  --button-color: #6cb6eb;
+  --button-color-hover: #5dbbc1;
+  --button-text: #24262a;
+  --button-text-hover: #24262a;
+  --accent-color: 108, 182, 235;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #6cb6eb;
+  --link-color-hover: #d38aea;
+  --label-text-color: #24262a;
+  --text: #c5cdd9;
+  --text-hover: #c5cdd9;
+  --text-muted: #8a96aa;
+  --arr-queue-color: #a0c980;
+  --plex-poster-unwatched: #deb974;
+  --petio-spinner: invert(22%) sepia(45%) saturate(2502%) hue-rotate(176deg) brightness(95%) contrast(94%);
+  --gitea-color-primary-dark-4: 108, 182, 235;
+  --overseerr-gradient: linear-gradient(180deg, rgba(36, 38, 42, 0.17) 0%, rgba(36, 38, 42) 100%);
+}

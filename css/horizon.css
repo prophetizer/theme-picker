@@ -1,0 +1,46 @@
+/*
+ * theme.park custom theme: Horizon (dark)
+ *
+ * Based on the Horizon color scheme by Jolaleye
+ * (https://github.com/jolaleye/horizon-theme-vscode), canonical hex values
+ * from src/dark/globals.json. UI surfaces use that file's named roles:
+ * ui.background, ui.backgroundAlt (modal/dropdown) and ui.accentAlt (muted).
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #1C1E26;
+
+  --modal-bg-color: #232530;
+  --modal-header-color: #232530;
+  --modal-footer-color: #232530;
+
+  --drop-down-menu-bg: #232530;
+
+  --button-color: #E95678;
+  --button-color-hover: #FAB795;
+  --button-text: #1C1E26;
+  --button-text-hover: #1C1E26;
+
+  --accent-color: 233, 86, 120;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #26BBD9;
+  --link-color-hover: #59E1E3;
+  --label-text-color: #1C1E26;
+
+  --text: #D5D8DA;
+  --text-hover: #ffffff;
+  --text-muted: #6C6F93;
+
+  --arr-queue-color: #29D398;
+  --plex-poster-unwatched: #E95678;
+  --petio-spinner: invert(43%) sepia(77%) saturate(543%) hue-rotate(297deg) brightness(96%) contrast(91%);
+  --gitea-color-primary-dark-4: 233, 86, 120;
+  --overseerr-gradient: linear-gradient(180deg, rgba(28, 30, 38, 0.17) 0%, rgba(28, 30, 38) 100%);
+}

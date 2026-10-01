@@ -1,0 +1,53 @@
+/*
+ * theme.park custom theme: Poimandres
+ *
+ * Based on Poimandres by Paul Henschel (drcmda)
+ * (https://github.com/drcmda/poimandres-theme), canonical hex values from
+ * src/theme.js -- the named base.colors object, which the shipped theme JSON
+ * is generated from. ~161k VS Code installs as pmndrs.pmndrs.
+ * Variant: default, not storm.
+ *
+ * Poimandres is deliberately frameless: sidebar, panel and statusbar all sit
+ * flat at the editor background, and #303340 (its "focus" token) is the only
+ * real elevation step -- so that is the modal surface. The palette has no
+ * true red and no orange at all; --arr-queue-color uses lowerMint rather
+ * than inventing one.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #1B1E28;
+
+  --modal-bg-color: #303340;
+  --modal-header-color: #303340;
+  --modal-footer-color: #303340;
+
+  --drop-down-menu-bg: #303340;
+
+  --button-color: #5DE4C7;
+  --button-color-hover: #ADD7FF;
+  --button-text: #1B1E28;
+  --button-text-hover: #1B1E28;
+
+  --accent-color: 93, 228, 199;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #ADD7FF;
+  --link-color-hover: #89DDFF;
+  --label-text-color: #1B1E28;
+
+  --text: #A6ACCD;
+  --text-hover: #ffffff;
+  --text-muted: #767C9D;
+
+  --arr-queue-color: #5FB3A1;
+  --plex-poster-unwatched: #5DE4C7;
+  --petio-spinner: invert(77%) sepia(49%) saturate(420%) hue-rotate(112deg) brightness(94%) contrast(96%);
+  --gitea-color-primary-dark-4: 93, 228, 199;
+  --overseerr-gradient: linear-gradient(180deg, rgba(27, 30, 40, 0.17) 0%, rgba(27, 30, 40) 100%);
+}

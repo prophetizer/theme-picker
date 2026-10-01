@@ -1,0 +1,42 @@
+/*
+ * theme.park custom theme: Deep Sea
+ *
+ * Palette source: original gradient theme -- no upstream scheme to cite.
+ * A GRADIENT theme, following the shape of theme.park's own hotpink,
+ * aquamarine, hotline and maroon: a hero gradient on the page background, a
+ * matching -90deg linear gradient on panels, and a SOLID colour for the
+ * drop-down menu -- a gradient in a small menu renders as a flat slice and
+ * looks broken.
+ *
+ * Centre-lit ellipse like aquamarine's, but colder and considerably darker
+ * at the edges, so it reads as depth rather than as a teal wash.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#2ec4b6'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center, #10606b 0%, #05192e 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #0e3a4d 0%, #05192e 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #0e3a4d 0%, #05192e 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #0e3a4d 0%, #05192e 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #05192e;
+  --button-color: #2ec4b6;
+  --button-color-hover: #45e0d0;
+  --button-text: #05192e;
+  --button-text-hover: #05192e;
+  --accent-color: 46, 196, 182;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #56cfe1;
+  --link-color-hover: #80ffdb;
+  --label-text-color: #05192e;
+  --text: #d6e6ec;
+  --text-hover: #ffffff;
+  --text-muted: #93aebb;
+  --arr-queue-color: #57cc99;
+  --plex-poster-unwatched: #2ec4b6;
+  --petio-spinner: invert(61%) sepia(78%) saturate(326%) hue-rotate(125deg) brightness(88%) contrast(110%);
+  --gitea-color-primary-dark-4: 46, 196, 182;
+  --overseerr-gradient: radial-gradient(ellipse at center, rgba(16,96,107,.9) 0%, rgba(5,25,46,.9) 100%) center center/cover no-repeat fixed;
+}

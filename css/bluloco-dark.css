@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Bluloco Dark
+ *
+ * Palette source: uloco/theme-bluloco-dark bluloco-dark-color-theme.json
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted was chosen/adjusted for legibility against --modal-bg-color
+ * (WCAG contrast checked at author time, >= 4.0:1); where the upstream
+ * palette published a lighter grey, that one is used rather than a new value.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#3691FF'.
+ */
+:root {
+  --main-bg-color: #282C34;
+  --modal-bg-color: #22252A;
+  --modal-header-color: #22252A;
+  --modal-footer-color: #22252A;
+  --drop-down-menu-bg: #22252A;
+  --button-color: #3691FF;
+  --button-color-hover: #2B72C9;
+  --button-text: #282C34;
+  --button-text-hover: #282C34;
+  --accent-color: 54, 145, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #3691FF;
+  --link-color-hover: #7AB8FF;
+  --label-text-color: #282C34;
+  --text: #ABB2BF;
+  --text-hover: #FFFFFF;
+  --text-muted: #8A94A6;
+  --arr-queue-color: #3FC56B;
+  --plex-poster-unwatched: #3691FF;
+  --petio-spinner: invert(50%) sepia(81%) saturate(348%) hue-rotate(173deg) brightness(88%) contrast(152%);
+  --gitea-color-primary-dark-4: 54, 145, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(40, 44, 52, 0.17) 0%, rgba(40, 44, 52) 100%);
+}

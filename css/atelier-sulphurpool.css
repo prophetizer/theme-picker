@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Atelier Sulphurpool
+ *
+ * Palette source: tinted-theming/schemes base16/atelier-sulphurpool.yaml (Bram de Haan; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #bbc2da is the palette's #979db4 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #969bb1 is the palette's #898ea4 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #51a2e5 is the palette's #3d8fd1 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #8297ed is the palette's #6679cc with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #1b2140 is the palette's #202746 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#3d8fd1'.
+ */
+:root {
+  --main-bg-color: #202746;
+  --modal-bg-color: #293256;
+  --modal-header-color: #293256;
+  --modal-footer-color: #293256;
+  --drop-down-menu-bg: #293256;
+  --button-color: #3d8fd1;
+  --button-color-hover: #22a2c9;
+  --button-text: #1b2140;
+  --button-text-hover: #1b2140;
+  --accent-color: 61, 143, 209;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #51a2e5;
+  --link-color-hover: #8297ed;
+  --label-text-color: #1b2140;
+  --text: #bbc2da;
+  --text-hover: #f5f7ff;
+  --text-muted: #969bb1;
+  --arr-queue-color: #ac9739;
+  --plex-poster-unwatched: #c76b29;
+  --petio-spinner: invert(49%) sepia(13%) saturate(2344%) hue-rotate(165deg) brightness(98%) contrast(89%);
+  --gitea-color-primary-dark-4: 61, 143, 209;
+  --overseerr-gradient: linear-gradient(180deg, rgba(32, 39, 70, 0.17) 0%, rgba(32, 39, 70) 100%);
+}

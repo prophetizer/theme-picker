@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Man of Steel (light)
+ *
+ * Generated variant: light of 'man-of-steel', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'man-of-steel'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#cd695e'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fffcfb 0%, #e1eaff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #fffcfb 0%, #e1eaff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #fffcfb 0%, #e1eaff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #fffcfb 0%, #e1eaff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffedfd;
+  --button-color: #cd695e;
+  --button-color-hover: #6885cb;
+  --button-text: #061161;
+  --button-text-hover: #061161;
+  --accent-color: 205, 105, 94;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #b4463b;
+  --link-color-hover: #4666bb;
+  --label-text-color: #061161;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #2a0129;
+  --arr-queue-color: #d66457;
+  --plex-poster-unwatched: #6885cb;
+  --petio-spinner: invert(45%) sepia(19%) saturate(1486%) hue-rotate(317deg) brightness(87%) contrast(83%);
+  --gitea-color-primary-dark-4: 205, 105, 94;
+  --overseerr-gradient: linear-gradient(180deg, rgba(225, 234, 255, 0.17) 0%, #e1eaff 100%);
+}

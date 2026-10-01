@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Maroon (light)
+ *
+ * Generated variant: light of 'maroon', theme.park's official theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'maroon'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#7b154d'.
+ */
+:root {
+  --main-bg-color: radial-gradient( circle farthest-corner at 48.4% 47.5%, #fffafc 0%, #f8e4fa 90% ) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #fffafc 0%, #f8e4fa 90% ) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #fffafc 0%, #f8e4fa 90% ) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #fffafc 0%, #f8e4fa 90% ) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #f8e4fa;
+  --button-color: #7b154d;
+  --button-color-hover: #961a5e;
+  --button-text: #eeeeee;
+  --button-text-hover: #ffffff;
+  --accent-color: 162, 28, 101;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #a21c65;
+  --link-color-hover: #c2247a;
+  --label-text-color: #ffffff;
+  --text: #050505;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #449932;
+  --plex-poster-unwatched: #7b154d;
+  --petio-spinner: invert(34%) sepia(81%) saturate(700%) hue-rotate(280deg) brightness(57%) contrast(118%);
+  --gitea-color-primary-dark-4: 150, 26, 94;
+  --overseerr-gradient: linear-gradient(0deg, rgba(255, 250, 252, 0.9) 0%, rgba(248, 228, 250, 0.9) 100%) center center/cover no-repeat fixed;
+}

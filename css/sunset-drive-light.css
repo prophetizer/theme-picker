@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Sunset Drive (light)
+ *
+ * Generated variant: light of 'sunset-drive', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'sunset-drive'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#ca4a22'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at 50% 120%, #ffffff 0%, #ffeff8 35%, #d4c9fa 75%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #ddcaf8 0%, #d5cbe9 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #ddcaf8 0%, #d5cbe9 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #ddcaf8 0%, #d5cbe9 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #d5cbe9;
+  --button-color: #ca4a22;
+  --button-color-hover: #b45c37;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 202, 74, 34;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #913b63;
+  --link-color-hover: #7d4962;
+  --label-text-color: #ffffff;
+  --text: #020004;
+  --text-hover: #000000;
+  --text-muted: #2a1c38;
+  --arr-queue-color: #378500;
+  --plex-poster-unwatched: #ca4a22;
+  --petio-spinner: invert(57%) sepia(39%) saturate(680%) hue-rotate(327deg) brightness(69%) contrast(151%);
+  --gitea-color-primary-dark-4: 202, 74, 34;
+  --overseerr-gradient: radial-gradient(ellipse at 50% 120%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 239, 248, 0.9) 35%, rgba(212, 201, 250, 0.9) 75%) center center/cover no-repeat fixed;
+}

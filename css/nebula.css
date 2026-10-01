@@ -1,0 +1,42 @@
+/*
+ * theme.park custom theme: Nebula
+ *
+ * Palette source: original gradient theme -- no upstream scheme to cite.
+ * A GRADIENT theme, following the shape of theme.park's own hotpink,
+ * aquamarine, hotline and maroon: a hero gradient on the page background, a
+ * matching -90deg linear gradient on panels, and a SOLID colour for the
+ * drop-down menu -- a gradient in a small menu renders as a flat slice and
+ * looks broken.
+ *
+ * Off-centre light source at 30%/20%, so the bright lobe sits behind the
+ * sidebar rather than behind body copy.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#a06bff'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at 30% 20%, #7b2ff7 0%, #2b1a5e 40%, #08060f 85%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #241a4a 0%, #08060f 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #241a4a 0%, #08060f 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #241a4a 0%, #08060f 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #08060f;
+  --button-color: #a06bff;
+  --button-color-hover: #c39bff;
+  --button-text: #08060f;
+  --button-text-hover: #08060f;
+  --accent-color: 160, 107, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #6ec6ff;
+  --link-color-hover: #a5dcff;
+  --label-text-color: #08060f;
+  --text: #e3dff0;
+  --text-hover: #ffffff;
+  --text-muted: #a89fc4;
+  --arr-queue-color: #5ee6a8;
+  --plex-poster-unwatched: #a06bff;
+  --petio-spinner: invert(30%) sepia(29%) saturate(609%) hue-rotate(220deg) brightness(159%) contrast(198%);
+  --gitea-color-primary-dark-4: 160, 107, 255;
+  --overseerr-gradient: radial-gradient(ellipse at 30% 20%, rgba(123,47,247,.9) 0%, rgba(43,26,94,.9) 40%, rgba(8,6,15,.9) 85%) center center/cover no-repeat fixed;
+}

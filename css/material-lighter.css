@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Material Lighter
+ *
+ * Palette source: marko-cerovac/material.nvim lua/material/colors/init.lua ('lighter' style: editor bg, bg_alt, fg, fg_dark, accent, and the main colours); main colours from its default (not high-visibility) set
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #405a65 is the palette's #546e7a with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #405a65 is the palette's #546e7a with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #64767f is the palette's #94a7b0 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #5474a9 is the palette's #6182b8 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --button-color #008294 is the palette's #00bcd4 with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #00838b is the palette's #39adb5 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#008294'.
+ */
+:root {
+  --main-bg-color: #fafafa;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #008294;
+  --button-color-hover: #00838b;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 0, 130, 148;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5474a9;
+  --link-color-hover: #7c4dff;
+  --label-text-color: #ffffff;
+  --text: #405a65;
+  --text-hover: #405a65;
+  --text-muted: #64767f;
+  --arr-queue-color: #91b859;
+  --plex-poster-unwatched: #f76d47;
+  --petio-spinner: invert(67%) sepia(38%) saturate(2795%) hue-rotate(158deg) brightness(93%) contrast(102%);
+  --gitea-color-primary-dark-4: 0, 130, 148;
+  --overseerr-gradient: linear-gradient(180deg, rgba(250, 250, 250, 0.17) 0%, rgba(250, 250, 250) 100%);
+}

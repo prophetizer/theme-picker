@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Kanagawa
+ *
+ * Palette source: rebelot/kanagawa.nvim, lua/kanagawa/colors.lua (the default 'wave' variant).
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted uses springViolet1 #938AA9, not fujiGray #727169. Kanagawa's
+ * comment grey manages only 2.9:1 against sumiInk4 #2A2A37; springViolet1
+ * is from the same palette and gives 4.4:1.
+ * --text/--text-hover are oldWhite/fujiWhite: the palette has nothing
+ * brighter than fujiWhite, so the hover step goes downward from it.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#7E9CD8'.
+ */
+:root {
+  --main-bg-color: #1F1F28;
+  --modal-bg-color: #2A2A37;
+  --modal-header-color: #2A2A37;
+  --modal-footer-color: #2A2A37;
+  --drop-down-menu-bg: #2A2A37;
+  --button-color: #7E9CD8;
+  --button-color-hover: #D27E99;
+  --button-text: #1F1F28;
+  --button-text-hover: #1F1F28;
+  --accent-color: 126, 156, 216;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7FB4CA;
+  --link-color-hover: #9CABCA;
+  --label-text-color: #1F1F28;
+  --text: #C8C093;
+  --text-hover: #DCD7BA;
+  --text-muted: #938AA9;
+  --arr-queue-color: #98BB6C;
+  --plex-poster-unwatched: #7E9CD8;
+  --petio-spinner: invert(52%) sepia(89%) saturate(157%) hue-rotate(182deg) brightness(95%) contrast(126%);
+  --gitea-color-primary-dark-4: 126, 156, 216;
+  --overseerr-gradient: linear-gradient(180deg, rgba(31, 31, 40, 0.17) 0%, rgba(31, 31, 40) 100%);
+}

@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Mellow Light
+ *
+ * Palette source: mellow-theme/mellow.nvim lua/mellow/colors.lua (light: bg, bg_dark, fg, bright_white and the ANSI colours)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#174c97'.
+ */
+:root {
+  --main-bg-color: #f7f7f7;
+  --modal-bg-color: #f9f9f9;
+  --modal-header-color: #f9f9f9;
+  --modal-footer-color: #f9f9f9;
+  --drop-down-menu-bg: #f9f9f9;
+  --button-color: #174c97;
+  --button-color-hover: #d82b65;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 23, 76, 151;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #174c97;
+  --link-color-hover: #bf386e;
+  --label-text-color: #ffffff;
+  --text: #4d4b65;
+  --text-hover: #4d4b65;
+  --text-muted: #6f6f74;
+  --arr-queue-color: #598c15;
+  --plex-poster-unwatched: #c65c00;
+  --petio-spinner: invert(78%) sepia(40%) saturate(3426%) hue-rotate(202deg) brightness(90%) contrast(90%);
+  --gitea-color-primary-dark-4: 23, 76, 151;
+  --overseerr-gradient: linear-gradient(180deg, rgba(247, 247, 247, 0.17) 0%, rgba(247, 247, 247) 100%);
+}

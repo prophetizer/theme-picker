@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Ibracorp (light)
+ *
+ * Generated variant: light of 'ibracorp', theme.park's community theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'ibracorp'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#dd6a61'.
+ */
+:root {
+  --main-bg-color: #f1f4f5;
+  --modal-bg-color: #fafafa;
+  --modal-header-color: #efefef;
+  --modal-footer-color: #efefef;
+  --drop-down-menu-bg: #e9e9e9;
+  --button-color: #dd6a61;
+  --button-color-hover: #d16057;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 221, 106, 97;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #bb4c45;
+  --link-color-hover: #bb4c44;
+  --label-text-color: #000000;
+  --text: #7c0a0f;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #d16057;
+  --plex-poster-unwatched: #d16057;
+  --petio-spinner: invert(53%) sepia(63%) saturate(250%) hue-rotate(316deg) brightness(85%) contrast(174%);
+  --gitea-color-primary-dark-4: 221, 106, 97;
+  --overseerr-gradient: linear-gradient(180deg, rgba(236, 236, 236, 0.17) 0%, #ececec 100%);
+}

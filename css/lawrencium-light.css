@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Lawrencium (light)
+ *
+ * Generated variant: light of 'lawrencium', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'lawrencium'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#7e7dbe'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #e2e4fd 0%, #fefeff 50%, #f4f5ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #e2e4fd 0%, #fefeff 50%, #f4f5ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #e2e4fd 0%, #fefeff 50%, #f4f5ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #e2e4fd 0%, #fefeff 50%, #f4f5ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #f1f2ff;
+  --button-color: #7e7dbe;
+  --button-color-hover: #8081a6;
+  --button-text: #0f0c29;
+  --button-text-hover: #0f0c29;
+  --accent-color: 126, 125, 190;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #62619e;
+  --link-color-hover: #646488;
+  --label-text-color: #0f0c29;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #130a3b;
+  --arr-queue-color: #7e7ebd;
+  --plex-poster-unwatched: #8081a6;
+  --petio-spinner: invert(24%) sepia(37%) saturate(700%) hue-rotate(202deg) brightness(200%) contrast(61%);
+  --gitea-color-primary-dark-4: 126, 125, 190;
+  --overseerr-gradient: linear-gradient(180deg, rgba(244, 245, 255, 0.17) 0%, #f4f5ff 100%);
+}

@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Evergarden
+ *
+ * Palette source: everviolet/nvim lua/evergarden/palettes/fall.lua (Evergarden's default 'fall' variant: crust, base, surface0, text, subtext0, accents; cyan is aqua, magenta is pink)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#cbe3b3'.
+ */
+:root {
+  --main-bg-color: #1c2225;
+  --modal-bg-color: #232a2e;
+  --modal-header-color: #232a2e;
+  --modal-footer-color: #232a2e;
+  --drop-down-menu-bg: #232a2e;
+  --button-color: #cbe3b3;
+  --button-color-hover: #b3e3ca;
+  --button-text: #1c2225;
+  --button-text-hover: #1c2225;
+  --accent-color: 203, 227, 179;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #cbe3b3;
+  --link-color-hover: #b3e3ca;
+  --label-text-color: #1c2225;
+  --text: #f8f9e8;
+  --text-hover: #f8f9e8;
+  --text-muted: #96b4aa;
+  --arr-queue-color: #cbe3b3;
+  --plex-poster-unwatched: #f7a182;
+  --petio-spinner: invert(76%) sepia(37%) saturate(212%) hue-rotate(47deg) brightness(116%) contrast(78%);
+  --gitea-color-primary-dark-4: 203, 227, 179;
+  --overseerr-gradient: linear-gradient(180deg, rgba(28, 34, 37, 0.17) 0%, rgba(28, 34, 37) 100%);
+}

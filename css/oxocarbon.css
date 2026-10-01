@@ -1,0 +1,55 @@
+/*
+ * theme.park custom theme: Oxocarbon
+ *
+ * Based on oxocarbon.nvim by Nyoom Engineering
+ * (https://github.com/nyoom-engineering/oxocarbon.nvim), which implements
+ * IBM's Carbon Design System palette. 1.6k stars. Dark variant.
+ *
+ * base00/base01 are the canonical background and raised surface. The base
+ * ramp is IBM Carbon's grey scale (base00=gray-100, base01=gray-90,
+ * base03=gray-70), so --text-muted uses Carbon gray-60 #6F6F6F: oxocarbon's
+ * own comment colour (base03 #525252) lands at 1.9:1 on base01, below every
+ * other theme in this repo. gray-60 is the next step in the same canonical
+ * scale and reads at 3.0:1.
+ *
+ * Oxocarbon's dark palette has no yellow at all; --arr-queue-color uses its
+ * green rather than inventing one.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #161616;
+
+  --modal-bg-color: #262626;
+  --modal-header-color: #262626;
+  --modal-footer-color: #262626;
+
+  --drop-down-menu-bg: #262626;
+
+  --button-color: #78A9FF;
+  --button-color-hover: #BE95FF;
+  --button-text: #161616;
+  --button-text-hover: #161616;
+
+  --accent-color: 120, 169, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #33B1FF;
+  --link-color-hover: #82CFFF;
+  --label-text-color: #161616;
+
+  --text: #D0D0D0;
+  --text-hover: #ffffff;
+  --text-muted: #6F6F6F;
+
+  --arr-queue-color: #42BE65;
+  --plex-poster-unwatched: #78A9FF;
+  --petio-spinner: invert(51%) sepia(100%) saturate(212%) hue-rotate(181deg) brightness(99%) contrast(125%);
+  --gitea-color-primary-dark-4: 120, 169, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(22, 22, 22, 0.17) 0%, rgba(22, 22, 22) 100%);
+}

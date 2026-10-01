@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Ayu Mirage
+ *
+ * Palette source: ayu-theme/ayu-colors themes/mirage.yaml (master; published as ayu@9.1.0-beta.0 dist/generated/mirage.js)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #8291a4 is the palette's #6e7c8f with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#ffcd66'.
+ */
+:root {
+  --main-bg-color: #1f2430;
+  --modal-bg-color: #242936;
+  --modal-header-color: #242936;
+  --modal-footer-color: #242936;
+  --drop-down-menu-bg: #242936;
+  --button-color: #ffcd66;
+  --button-color-hover: #ffa659;
+  --button-text: #1f2430;
+  --button-text-hover: #1f2430;
+  --accent-color: 255, 205, 102;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #73d0ff;
+  --link-color-hover: #dfbfff;
+  --label-text-color: #1f2430;
+  --text: #cccac2;
+  --text-hover: #cccac2;
+  --text-muted: #8291a4;
+  --arr-queue-color: #d5ff80;
+  --plex-poster-unwatched: #ffa659;
+  --petio-spinner: invert(36%) sepia(100%) saturate(184%) hue-rotate(360deg) brightness(168%) contrast(136%);
+  --gitea-color-primary-dark-4: 255, 205, 102;
+  --overseerr-gradient: linear-gradient(180deg, rgba(31, 36, 48, 0.17) 0%, rgba(31, 36, 48) 100%);
+}

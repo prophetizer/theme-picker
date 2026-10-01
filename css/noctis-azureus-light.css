@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Noctis Azureus (light)
+ *
+ * Generated variant: light of 'noctis-azureus', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'noctis-azureus'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#007b95'.
+ */
+:root {
+  --main-bg-color: #e8f6ff;
+  --modal-bg-color: #f8fcff;
+  --modal-header-color: #f8fcff;
+  --modal-footer-color: #f8fcff;
+  --drop-down-menu-bg: #f8fcff;
+  --button-color: #007b95;
+  --button-color-hover: #0077af;
+  --button-text: #ebf7ff;
+  --button-text-hover: #ebf7ff;
+  --accent-color: 0, 123, 149;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0077ae;
+  --link-color-hover: #007c89;
+  --label-text-color: #ebf7ff;
+  --text: #030e15;
+  --text-hover: #000001;
+  --text-muted: #00334c;
+  --arr-queue-color: #00a26c;
+  --plex-poster-unwatched: #ce7655;
+  --petio-spinner: invert(21%) sepia(79%) saturate(507%) hue-rotate(140deg) brightness(162%) contrast(137%);
+  --gitea-color-primary-dark-4: 0, 123, 149;
+  --overseerr-gradient: linear-gradient(180deg, rgba(232, 246, 255, 0.17) 0%, #e8f6ff 100%);
+}

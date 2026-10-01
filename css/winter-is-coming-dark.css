@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Winter is Coming (Dark Blue)
+ *
+ * Palette source: johnpapa/vscode-winteriscoming themes/WinterIsComing-dark-blue-color-theme.json
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * Seasonal pick (winter): deep night-sky navy with ice-blue text, by design a
+ * winter theme.
+ * A GRADIENT theme in the shape of theme.park's own: a hero gradient built
+ * from the palette's own background tones on the page, a matching -90deg
+ * gradient on panels, and a SOLID drop-down menu (a gradient in a small menu
+ * reads as a slice).
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#219fd5'.
+ */
+:root {
+  --main-bg-color: linear-gradient(165deg, #010e1a 0%, #0b2942 55%, #011627 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #011627 0%, #010e1a 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #011627 0%, #010e1a 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #011627 0%, #010e1a 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #011627;
+  --button-color: #219fd5;
+  --button-color-hover: #80cbc4;
+  --button-text: #010e1a;
+  --button-text-hover: #010e1a;
+  --accent-color: 33, 159, 213;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #80cbc4;
+  --link-color-hover: #c792ea;
+  --label-text-color: #010e1a;
+  --text: #a7dbf7;
+  --text-hover: #ffffff;
+  --text-muted: #999999;
+  --arr-queue-color: #22da6e;
+  --plex-poster-unwatched: #f7ecb5;
+  --petio-spinner: invert(40%) sepia(100%) saturate(220%) hue-rotate(153deg) brightness(108%) contrast(173%);
+  --gitea-color-primary-dark-4: 33, 159, 213;
+  --overseerr-gradient: linear-gradient(180deg, rgba(1, 14, 26, 0.17) 0%, rgba(1, 14, 26) 100%);
+}

@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Vaporwave
+ *
+ * Palette source: original gradient theme -- no upstream scheme to cite.
+ * A GRADIENT theme, following the shape of theme.park's own hotpink,
+ * aquamarine, hotline and maroon: a hero gradient on the page background, a
+ * matching -90deg linear gradient on panels, and a SOLID colour for the
+ * drop-down menu -- a gradient in a small menu renders as a flat slice and
+ * looks broken.
+ *
+ * Diagonal 45deg like theme.park's own hotpink, so the saturated corner is
+ * away from the main content column. Distinct from hotline, which runs
+ * pink straight into blue with no violet midpoint.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#ff6ad5'.
+ */
+:root {
+  --main-bg-color: linear-gradient(45deg, #ff6ad5 0%, #5b3fa8 40%, #0d1b3e 97%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #2a1b52 0%, #0d1b3e 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #2a1b52 0%, #0d1b3e 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #2a1b52 0%, #0d1b3e 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #1b1240;
+  --button-color: #ff6ad5;
+  --button-color-hover: #01cdfe;
+  --button-text: #0d1b3e;
+  --button-text-hover: #0d1b3e;
+  --accent-color: 255, 106, 213;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #01cdfe;
+  --link-color-hover: #6ee7ff;
+  --label-text-color: #0d1b3e;
+  --text: #e8e3f5;
+  --text-hover: #ffffff;
+  --text-muted: #a99ec9;
+  --arr-queue-color: #05ffa1;
+  --plex-poster-unwatched: #ff6ad5;
+  --petio-spinner: invert(50%) sepia(93%) saturate(295%) hue-rotate(264deg) brightness(92%) contrast(128%);
+  --gitea-color-primary-dark-4: 255, 106, 213;
+  --overseerr-gradient: linear-gradient(45deg, rgba(255,106,213,.9) 0%, rgba(91,63,168,.9) 40%, rgba(13,27,62,.9) 97%) center center/cover no-repeat fixed;
+}

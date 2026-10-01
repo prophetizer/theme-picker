@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Dawnfox (dark)
+ *
+ * Generated variant: dark of 'dawnfox', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'dawnfox'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#35758f'.
+ */
+:root {
+  --main-bg-color: #1b1814;
+  --modal-bg-color: #282420;
+  --modal-header-color: #282420;
+  --modal-footer-color: #282420;
+  --drop-down-menu-bg: #282420;
+  --button-color: #35758f;
+  --button-color-hover: #6e698e;
+  --button-text: #faf4ed;
+  --button-text-hover: #faf4ed;
+  --accent-color: 53, 117, 143;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5393ae;
+  --link-color-hover: #9881b1;
+  --label-text-color: #faf4ed;
+  --text: #afaad6;
+  --text-hover: #afaad2;
+  --text-muted: #8d8899;
+  --arr-queue-color: #618774;
+  --plex-poster-unwatched: #d7827e;
+  --petio-spinner: invert(51%) sepia(84%) saturate(245%) hue-rotate(152deg) brightness(70%) contrast(111%);
+  --gitea-color-primary-dark-4: 53, 117, 143;
+  --overseerr-gradient: linear-gradient(180deg, rgba(27, 24, 20, 0.17) 0%, #1b1814 100%);
+}

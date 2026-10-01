@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Aurora (light)
+ *
+ * Generated variant: light of 'aurora', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'aurora'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#4a808f'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse 90% 45% at 50% 122%, rgba(254, 255, 253, 0.4) 0%, rgba(254, 255, 253, 0) 70%), radial-gradient(ellipse at 50% 112%, #ffffff 0%, #dadfeb 45%, #d1d6df 80%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #dadfeb 0%, #d1d6df 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #dadfeb 0%, #d1d6df 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #dadfeb 0%, #d1d6df 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #d1d6df;
+  --button-color: #4a808f;
+  --button-color-hover: #558080;
+  --button-text: #0a0a0a;
+  --button-text-hover: #0a0a0a;
+  --accent-color: 74, 128, 143;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #42607d;
+  --link-color-hover: #2d6473;
+  --label-text-color: #0a0a0a;
+  --text: #020308;
+  --text-hover: #000001;
+  --text-muted: #161e2c;
+  --arr-queue-color: #678051;
+  --plex-poster-unwatched: #4a808f;
+  --petio-spinner: invert(47%) sepia(69%) saturate(299%) hue-rotate(146deg) brightness(84%) contrast(79%);
+  --gitea-color-primary-dark-4: 74, 128, 143;
+  --overseerr-gradient: radial-gradient(ellipse 90% 45% at 50% 122%, rgba(254, 255, 253, 0.36) 0%, rgba(254, 255, 253, 0) 70%), radial-gradient(ellipse at 50% 112%, rgba(255, 255, 255, 0.9) 0%, rgba(218, 223, 235, 0.9) 45%, rgba(209, 214, 223, 0.9) 80%) center center/cover no-repeat fixed;
+}

@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Duskfox
+ *
+ * Palette source: EdenEast/nightfox.nvim lua/nightfox/palette/duskfox.lua (bg0-bg2, fg1/fg0, comment, accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #8b86a6 is the palette's #817c9c with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#c4a7e7'.
+ */
+:root {
+  --main-bg-color: #191726;
+  --modal-bg-color: #232136;
+  --modal-header-color: #232136;
+  --modal-footer-color: #232136;
+  --drop-down-menu-bg: #232136;
+  --button-color: #c4a7e7;
+  --button-color-hover: #569fba;
+  --button-text: #191726;
+  --button-text-hover: #191726;
+  --accent-color: 196, 167, 231;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #9ccfd8;
+  --link-color-hover: #c4a7e7;
+  --label-text-color: #191726;
+  --text: #e0def4;
+  --text-hover: #eae8ff;
+  --text-muted: #8b86a6;
+  --arr-queue-color: #a3be8c;
+  --plex-poster-unwatched: #ea9a97;
+  --petio-spinner: invert(33%) sepia(9%) saturate(700%) hue-rotate(225deg) brightness(178%) contrast(200%);
+  --gitea-color-primary-dark-4: 196, 167, 231;
+  --overseerr-gradient: linear-gradient(180deg, rgba(25, 23, 38, 0.17) 0%, rgba(25, 23, 38) 100%);
+}

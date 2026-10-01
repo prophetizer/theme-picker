@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Radical (light)
+ *
+ * Generated variant: light of 'radical', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'radical'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#fd408d'.
+ */
+:root {
+  --main-bg-color: #f2f2ff;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #fd408d;
+  --button-color-hover: #779900;
+  --button-text: #141322;
+  --button-text-hover: #141322;
+  --accent-color: 253, 64, 141;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007c81;
+  --link-color-hover: #007e6f;
+  --label-text-color: #141322;
+  --text: #072531;
+  --text-hover: #000000;
+  --text-muted: #045659;
+  --arr-queue-color: #779900;
+  --plex-poster-unwatched: #fd408d;
+  --petio-spinner: invert(39%) sepia(100%) saturate(281%) hue-rotate(284deg) brightness(97%) contrast(175%);
+  --gitea-color-primary-dark-4: 253, 64, 141;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 242, 255, 0.17) 0%, #f2f2ff 100%);
+}

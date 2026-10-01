@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Embark (light)
+ *
+ * Generated variant: light of 'embark', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'embark'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#9783bf'.
+ */
+:root {
+  --main-bg-color: #f2f2ff;
+  --modal-bg-color: #fefeff;
+  --modal-header-color: #fefeff;
+  --modal-footer-color: #fefeff;
+  --drop-down-menu-bg: #fefeff;
+  --button-color: #9783bf;
+  --button-color-hover: #cf6e90;
+  --button-text: #1e1c31;
+  --button-text-hover: #1e1c31;
+  --accent-color: 151, 131, 191;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #297896;
+  --link-color-hover: #2c7b7a;
+  --label-text-color: #1e1c31;
+  --text: #000506;
+  --text-hover: #000506;
+  --text-muted: #3e3c4e;
+  --arr-queue-color: #4e9b81;
+  --plex-poster-unwatched: #9783bf;
+  --petio-spinner: invert(37%) sepia(13%) saturate(700%) hue-rotate(219deg) brightness(140%) contrast(142%);
+  --gitea-color-primary-dark-4: 151, 131, 191;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 242, 255, 0.17) 0%, #f2f2ff 100%);
+}

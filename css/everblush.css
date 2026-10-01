@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Everblush
+ *
+ * Palette source: Everblush/everblush.vim colors/everblush.vim (16-colour palette)
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted was chosen/adjusted for legibility against --modal-bg-color
+ * (WCAG contrast checked at author time, >= 4.0:1); where the upstream
+ * palette published a lighter grey, that one is used rather than a new value.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#8CCF7E'.
+ */
+:root {
+  --main-bg-color: #141B1E;
+  --modal-bg-color: #232A2D;
+  --modal-header-color: #232A2D;
+  --modal-footer-color: #232A2D;
+  --drop-down-menu-bg: #232A2D;
+  --button-color: #8CCF7E;
+  --button-color-hover: #67B0E8;
+  --button-text: #141B1E;
+  --button-text-hover: #141B1E;
+  --accent-color: 140, 207, 126;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #67CBE7;
+  --link-color-hover: #96D988;
+  --label-text-color: #141B1E;
+  --text: #B3B9B8;
+  --text-hover: #DADEDC;
+  --text-muted: #7F8B8D;
+  --arr-queue-color: #8CCF7E;
+  --plex-poster-unwatched: #8CCF7E;
+  --petio-spinner: invert(74%) sepia(100%) saturate(141%) hue-rotate(59deg) brightness(77%) contrast(130%);
+  --gitea-color-primary-dark-4: 140, 207, 126;
+  --overseerr-gradient: linear-gradient(180deg, rgba(20, 27, 30, 0.17) 0%, rgba(20, 27, 30) 100%);
+}

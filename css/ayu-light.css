@@ -1,0 +1,66 @@
+/*
+ * theme.park custom theme: Ayu Light
+ *
+ * LIGHT THEME. Based on the Ayu color scheme by Ike Ku (dempfi)
+ * (https://github.com/ayu-theme/ayu-colors), canonical hex values from
+ * themes/light.yaml, resolved via the published ayu npm package. Variant:
+ * light. Sibling of the ayu-dark theme already in this repo.
+ *
+ * --accent-color is common.accent.on #804B00, NOT the signature tint
+ * #F29718. Every one of Ayu Light's syntax accents fails 4.5:1 on its own
+ * background -- the tint manages only 2.16:1, and 2.28:1 under white text,
+ * so it cannot carry a button or a label. accent.on is Ayu's own published
+ * token for exactly this situation (7.18:1 under white). The tint is kept on
+ * --plex-poster-unwatched, where it is decorative and Ayu still looks like
+ * Ayu.
+ *
+ * Ayu publishes no foreground darker than editor.fg, so --text-hover repeats
+ * --text, following theme.park's own light themes (catppuccin-latte and
+ * rose-pine-dawn both set --text-hover to var(--text)).
+ *
+ * Light themes invert several conventions used by the dark themes in this
+ * repo: --text-hover must NOT be #ffffff, --button-text and
+ * --label-text-color are white ON the accent, and the modal is darker.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ *
+ * Contrast fix 2026-09-22: --text-muted was ui.fg #828e9f, 2.9:1 on the #ebeef0
+ * panels. Now ui.line #6b7d8f (ayu-colors light.yaml), 3.6:1 -- Ayu Light has no
+ * grey between that and the body text, so this is the only canonical option.
+ */
+
+:root {
+  --main-bg-color: #FCFCFC;
+
+  --modal-bg-color: #EBEEF0;
+  --modal-header-color: #EBEEF0;
+  --modal-footer-color: #EBEEF0;
+
+  --drop-down-menu-bg: #EBEEF0;
+
+  --button-color: #804B00;
+  --button-color-hover: #5C6166;
+  --button-text: #FFFFFF;
+  --button-text-hover: #FFFFFF;
+
+  --accent-color: 128, 75, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #804B00;
+  --link-color-hover: #5C6166;
+  --label-text-color: #FFFFFF;
+
+  --text: #5C6166;
+  --text-hover: #5C6166;
+  --text-muted: #6b7d8f;
+
+  --arr-queue-color: #86B300;
+  --plex-poster-unwatched: #F29718;
+  --petio-spinner: invert(74%) sepia(90%) saturate(481%) hue-rotate(343deg) brightness(50%) contrast(177%);
+  --gitea-color-primary-dark-4: 128, 75, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(252, 252, 252, 0.17) 0%, rgba(252, 252, 252) 100%);
+}

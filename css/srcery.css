@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Srcery
+ *
+ * Palette source: srcery-colors/srcery-vim colors/srcery.vim
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted was chosen/adjusted for legibility against --modal-bg-color
+ * (WCAG contrast checked at author time, >= 4.0:1); where the upstream
+ * palette published a lighter grey, that one is used rather than a new value.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#FBB829'.
+ */
+:root {
+  --main-bg-color: #1C1B19;
+  --modal-bg-color: #262523;
+  --modal-header-color: #262523;
+  --modal-footer-color: #262523;
+  --drop-down-menu-bg: #262523;
+  --button-color: #FBB829;
+  --button-color-hover: #EF2F27;
+  --button-text: #1C1B19;
+  --button-text-hover: #1C1B19;
+  --accent-color: 251, 184, 41;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #2C78BF;
+  --link-color-hover: #0AAEB3;
+  --label-text-color: #1C1B19;
+  --text: #C5B088;
+  --text-hover: #FCE8C3;
+  --text-muted: #918175;
+  --arr-queue-color: #519F50;
+  --plex-poster-unwatched: #FBB829;
+  --petio-spinner: invert(73%) sepia(70%) saturate(559%) hue-rotate(342deg) brightness(101%) contrast(97%);
+  --gitea-color-primary-dark-4: 251, 184, 41;
+  --overseerr-gradient: linear-gradient(180deg, rgba(28, 27, 25, 0.17) 0%, rgba(28, 27, 25) 100%);
+}

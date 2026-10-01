@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Dawnfox
+ *
+ * Palette source: EdenEast/nightfox.nvim lua/nightfox/palette/dawnfox.lua
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #4b466c is the palette's #575279 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #4b4668 is the palette's #4c4769 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #696575 is the palette's #9893a5 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #745e8b is the palette's #907aa9 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#286983'.
+ */
+:root {
+  --main-bg-color: #ebe5df;
+  --modal-bg-color: #faf4ed;
+  --modal-header-color: #faf4ed;
+  --modal-footer-color: #faf4ed;
+  --drop-down-menu-bg: #faf4ed;
+  --button-color: #286983;
+  --button-color-hover: #4c4769;
+  --button-text: #faf4ed;
+  --button-text-hover: #faf4ed;
+  --accent-color: 40, 105, 131;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #286983;
+  --link-color-hover: #745e8b;
+  --label-text-color: #faf4ed;
+  --text: #4b466c;
+  --text-hover: #4b4668;
+  --text-muted: #696575;
+  --arr-queue-color: #618774;
+  --plex-poster-unwatched: #d7827e;
+  --petio-spinner: invert(41%) sepia(68%) saturate(467%) hue-rotate(152deg) brightness(74%) contrast(87%);
+  --gitea-color-primary-dark-4: 40, 105, 131;
+  --overseerr-gradient: linear-gradient(180deg, rgba(235, 229, 223, 0.17) 0%, rgba(235, 229, 223) 100%);
+}

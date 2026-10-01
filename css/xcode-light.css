@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Xcode Light
+ *
+ * Palette source: lunacookies/vim-colors-xcode colors/xcodelight.vim (Normal, Pmenu, Comment, Underlined and the terminal colours)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #63727e is the palette's #8a99a6 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0f68a0'.
+ */
+:root {
+  --main-bg-color: #f4f4f4;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #0f68a0;
+  --button-color-hover: #0b4f79;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 15, 104, 160;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0f68a0;
+  --link-color-hover: #ad3da4;
+  --label-text-color: #ffffff;
+  --text: #262626;
+  --text-hover: #262626;
+  --text-muted: #63727e;
+  --arr-queue-color: #23575c;
+  --plex-poster-unwatched: #78492a;
+  --petio-spinner: invert(66%) sepia(89%) saturate(564%) hue-rotate(163deg) brightness(86%) contrast(101%);
+  --gitea-color-primary-dark-4: 15, 104, 160;
+  --overseerr-gradient: linear-gradient(180deg, rgba(244, 244, 244, 0.17) 0%, rgba(244, 244, 244) 100%);
+}

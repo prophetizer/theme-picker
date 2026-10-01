@@ -1,0 +1,51 @@
+/*
+ * theme.park custom theme: Aurora
+ *
+ * Palette source: original gradient theme, built from the canonical Nord palette
+ * (nordtheme.com / arcticicestudio's published spec): polar night nord0
+ * #2E3440 and nord1 #3B4252, frost nord8 #88C0D0 / nord9 #81A1C1 /
+ * nord10 #5E81AC, aurora nord14 #A3BE8C, snow storm nord4 #D8DEE9 and
+ * nord6 #ECEFF4.
+ * A GRADIENT theme, following the shape of theme.park's own hotpink,
+ * aquamarine, hotline and maroon: a hero gradient on the page background, a
+ * matching -90deg linear gradient on panels, and a SOLID colour for the
+ * drop-down menu -- a gradient in a small menu renders as a flat slice and
+ * looks broken.
+ *
+ * The aurora green is a translucent lobe layered over the frost blues rather
+ * than a gradient stop of its own: at full strength nord14 #A3BE8C put body
+ * text at 1.5:1, worse than any of theme.park's four gradient themes
+ * (2.1-3.0:1). At 40% over nord10 it measures 2.3:1.
+ * --text-muted #A8B3C6 sits between nord3 and nord4. Nord's own comment
+ * grey #616E88 reaches only 2.3:1 against the lit end of the panel
+ * gradient; this gives 4.8:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#88C0D0'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse 90% 45% at 50% 122%, rgba(163,190,140,.40) 0%, rgba(163,190,140,0) 70%), radial-gradient(ellipse at 50% 112%, #5E81AC 0%, #3B4252 45%, #2E3440 80%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #3B4252 0%, #2E3440 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #3B4252 0%, #2E3440 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #3B4252 0%, #2E3440 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #2E3440;
+  --button-color: #88C0D0;
+  --button-color-hover: #8FBCBB;
+  --button-text: #2E3440;
+  --button-text-hover: #2E3440;
+  --accent-color: 136, 192, 208;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #81A1C1;
+  --link-color-hover: #88C0D0;
+  --label-text-color: #2E3440;
+  --text: #D8DEE9;
+  --text-hover: #ECEFF4;
+  --text-muted: #A8B3C6;
+  --arr-queue-color: #A3BE8C;
+  --plex-poster-unwatched: #88C0D0;
+  --petio-spinner: invert(73%) sepia(88%) saturate(127%) hue-rotate(148deg) brightness(81%) contrast(102%);
+  --gitea-color-primary-dark-4: 136, 192, 208;
+  --overseerr-gradient: radial-gradient(ellipse 90% 45% at 50% 122%, rgba(163,190,140,.36) 0%, rgba(163,190,140,0) 70%), radial-gradient(ellipse at 50% 112%, rgba(94,129,172,.9) 0%, rgba(59,66,82,.9) 45%, rgba(46,52,64,.9) 80%) center center/cover no-repeat fixed;
+}

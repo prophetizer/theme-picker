@@ -1,0 +1,51 @@
+/*
+ * theme.park custom theme: Monokai (classic)
+ *
+ * Based on the classic Monokai color scheme (originally by Wimer Hazenberg),
+ * canonical hex values as used in the widely-ported Sublime Text/TextMate
+ * bundles.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ *
+ * Known contrast gap, left deliberately: --text-muted is Monokai's comment colour
+ * #75715e, 2.2:1 on the #3e3d32 panels. Classic Monokai (Wimer Hazenberg's
+ * original Monokai.tmTheme) defines exactly one grey, so there is no canonical
+ * tone to move to short of the body text itself. The picker's contrast badge on
+ * this theme is accurate.
+ */
+
+:root {
+  --main-bg-color: #272822;
+
+  --modal-bg-color: #3E3D32;
+  --modal-header-color: #3E3D32;
+  --modal-footer-color: #3E3D32;
+
+  --drop-down-menu-bg: #3E3D32;
+
+  --button-color: #F92672;
+  --button-color-hover: #FD971F;
+  --button-text: #272822;
+  --button-text-hover: #272822;
+
+  --accent-color: 249, 38, 114;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #66D9EF;
+  --link-color-hover: #A6E22E;
+  --label-text-color: #272822;
+
+  --text: #F8F8F2;
+  --text-hover: #ffffff;
+  --text-muted: #75715e;
+
+  --arr-queue-color: #A6E22E;
+  --plex-poster-unwatched: #F92672;
+  --petio-spinner: invert(53%) sepia(38%) saturate(698%) hue-rotate(287deg) brightness(74%) contrast(197%);
+  --gitea-color-primary-dark-4: 249, 38, 114;
+  --overseerr-gradient: linear-gradient(180deg, rgba(39, 40, 34, 0.17) 0%, rgba(39, 40, 34) 100%);
+}

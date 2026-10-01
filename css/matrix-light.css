@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Matrix (light)
+ *
+ * Generated variant: light of 'matrix', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'matrix'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#489e28'.
+ */
+:root {
+  --main-bg-color: linear-gradient(165deg, #eaf2f4 0%, #f3fcff 55%, #eaf2f4 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #f3fcff 0%, #eaf2f4 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #f3fcff 0%, #eaf2f4 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #f3fcff 0%, #eaf2f4 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #f3fcff;
+  --button-color: #489e28;
+  --button-color-hover: #589c20;
+  --button-text: #0f191c;
+  --button-text-hover: #0f191c;
+  --accent-color: 72, 158, 40;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4a7b00;
+  --link-color-hover: #00800a;
+  --label-text-color: #0f191c;
+  --text: #062a0b;
+  --text-hover: #000200;
+  --text-muted: #2f4628;
+  --arr-queue-color: #489e28;
+  --plex-poster-unwatched: #a48900;
+  --petio-spinner: invert(48%) sepia(91%) saturate(423%) hue-rotate(59deg) brightness(89%) contrast(83%);
+  --gitea-color-primary-dark-4: 72, 158, 40;
+  --overseerr-gradient: linear-gradient(180deg, rgba(234, 242, 244, 0.17) 0%, #eaf2f4 100%);
+}

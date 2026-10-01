@@ -1,0 +1,57 @@
+/*
+ * theme.park custom theme: 2077
+ *
+ * HIGH-CHROMA THEME. Based on the 2077 theme by endormi
+ * (https://github.com/endormi/vscode-2077-theme), canonical hex values from
+ * "theme/2077 theme-color-theme.json". ~654k VS Code installs.
+ *
+ * Not to be confused with prometheux-ar/cyberpunk, also in this repo as
+ * "cyberpunk" -- different author, different palette, no shared lineage.
+ *
+ * --text-muted uses upstream's comment colour #0098DF, which is a saturated
+ * blue rather than a grey: this theme publishes no neutral muted tone at
+ * all, and inventing one would break the canonical-source rule. It reads at
+ * 5.32:1 on the card, so it is legible even though it is unusual.
+ *
+ * The theme name is numeric. themes.yml is written with yaml.safe_dump,
+ * which quotes it ("theme: '2077'") so Traefik's plugin still receives a
+ * string -- verified, not assumed.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #030D22;
+
+  --modal-bg-color: #1C1347;
+  --modal-header-color: #1C1347;
+  --modal-footer-color: #1C1347;
+
+  --drop-down-menu-bg: #1C1347;
+
+  --button-color: #FF2CF1;
+  --button-color-hover: #0EF3FF;
+  --button-text: #030D22;
+  --button-text-hover: #030D22;
+
+  --accent-color: 255, 44, 241;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0EF3FF;
+  --link-color-hover: #FFD400;
+  --label-text-color: #030D22;
+
+  --text: #FDFEFF;
+  --text-hover: #FFFFFF;
+  --text-muted: #0098DF;
+
+  --arr-queue-color: #3DD69C;
+  --plex-poster-unwatched: #FF2CF1;
+  --petio-spinner: invert(37%) sepia(100%) saturate(365%) hue-rotate(255deg) brightness(102%) contrast(193%);
+  --gitea-color-primary-dark-4: 255, 44, 241;
+  --overseerr-gradient: linear-gradient(180deg, rgba(3, 13, 34, 0.17) 0%, rgba(3, 13, 34) 100%);
+}

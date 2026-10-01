@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Solarized Light
+ *
+ * Palette source: altercation/solarized README (base3, base2, base00, base01, base1, accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #3a4f57 is the palette's #657b83 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #3a4f56 is the palette's #586e75 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #5e6b6b is the palette's #93a1a1 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #006dad is the palette's #268bd2 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #c22274 is the palette's #d33682 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #0d2127 is the palette's #586e75 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#268bd2'.
+ */
+:root {
+  --main-bg-color: #eee8d5;
+  --modal-bg-color: #fdf6e3;
+  --modal-header-color: #fdf6e3;
+  --modal-footer-color: #fdf6e3;
+  --drop-down-menu-bg: #fdf6e3;
+  --button-color: #268bd2;
+  --button-color-hover: #2aa198;
+  --button-text: #0d2127;
+  --button-text-hover: #0d2127;
+  --accent-color: 38, 139, 210;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #006dad;
+  --link-color-hover: #c22274;
+  --label-text-color: #0d2127;
+  --text: #3a4f57;
+  --text-hover: #3a4f56;
+  --text-muted: #5e6b6b;
+  --arr-queue-color: #859900;
+  --plex-poster-unwatched: #cb4b16;
+  --petio-spinner: invert(46%) sepia(92%) saturate(453%) hue-rotate(162deg) brightness(86%) contrast(92%);
+  --gitea-color-primary-dark-4: 38, 139, 210;
+  --overseerr-gradient: linear-gradient(180deg, rgba(238, 232, 213, 0.17) 0%, rgba(238, 232, 213) 100%);
+}

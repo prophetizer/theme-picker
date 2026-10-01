@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Darcula (light)
+ *
+ * Generated variant: light of 'darcula', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'darcula'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#cc7832'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #f7f9fa;
+  --modal-header-color: #f7f9fa;
+  --modal-footer-color: #f7f9fa;
+  --drop-down-menu-bg: #f7f9fa;
+  --button-color: #cc7832;
+  --button-color-hover: #b88321;
+  --button-text: #262626;
+  --button-text-hover: #262626;
+  --accent-color: 204, 120, 50;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #1b6fce;
+  --link-color-hover: #457496;
+  --label-text-color: #262626;
+  --text: #0a151f;
+  --text-hover: #141414;
+  --text-muted: #313131;
+  --arr-queue-color: #629755;
+  --plex-poster-unwatched: #cc7832;
+  --petio-spinner: invert(30%) sepia(51%) saturate(3694%) hue-rotate(341deg) brightness(86%) contrast(82%);
+  --gitea-color-primary-dark-4: 204, 120, 50;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

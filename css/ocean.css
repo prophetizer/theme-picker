@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Ocean
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Ocean (macOS Terminal's 'Ocean' profile: background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #cdcdcd is the palette's #bfbfbf with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#00e5e5'.
+ */
+:root {
+  --main-bg-color: #224fbc;
+  --modal-bg-color: #224fbc;
+  --modal-header-color: #224fbc;
+  --modal-footer-color: #224fbc;
+  --drop-down-menu-bg: #224fbc;
+  --button-color: #00e5e5;
+  --button-color-hover: #e5e500;
+  --button-text: #224fbc;
+  --button-text-hover: #224fbc;
+  --accent-color: 0, 229, 229;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00e5e5;
+  --link-color-hover: #e5e500;
+  --label-text-color: #224fbc;
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-muted: #cdcdcd;
+  --arr-queue-color: #00d900;
+  --plex-poster-unwatched: #e5e500;
+  --petio-spinner: invert(59%) sepia(100%) saturate(343%) hue-rotate(131deg) brightness(92%) contrast(129%);
+  --gitea-color-primary-dark-4: 0, 229, 229;
+  --overseerr-gradient: linear-gradient(180deg, rgba(34, 79, 188, 0.17) 0%, rgba(34, 79, 188) 100%);
+}

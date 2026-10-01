@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: VS Code High Contrast Light
+ *
+ * HIGH CONTRAST: every text role meets WCAG AAA (7:1) against its surface --
+ * text 13.0:1, muted 7.1:1, links 8.0:1, button labels 9.0:1.
+ * The theme picker's "high contrast" badge measures exactly this bar.
+ *
+ * Palette source:
+ * microsoft/vscode, extensions/theme-defaults/themes/hc_light.json plus the
+ * hcLight values in src/vs/platform/theme/common/colors/*.ts (main, commit
+ * 1fe7285a1162).
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * VS Code paints widgets white on white and relies on #0f4a85 borders, which
+ * theme.park cannot draw, so panels use textBlockQuote.background #f2f2f2.
+ * Muted is the comment colour #515151: disabledForeground #7f7f7f reaches
+ * only 3.6:1 on those panels. Queue colour is charts.green #374e06.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#0f4a85'.
+ */
+:root {
+  --main-bg-color: #ffffff;
+  --modal-bg-color: #f2f2f2;
+  --modal-header-color: #f2f2f2;
+  --modal-footer-color: #f2f2f2;
+  --drop-down-menu-bg: #f2f2f2;
+  --button-color: #0f4a85;
+  --button-color-hover: #006bbd;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 15, 74, 133;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0f4a85;
+  --link-color-hover: #006bbd;
+  --label-text-color: #ffffff;
+  --text: #292929;
+  --text-hover: #000000;
+  --text-muted: #515151;
+  --arr-queue-color: #374e06;
+  --plex-poster-unwatched: #0f4a85;
+  --petio-spinner: invert(49%) sepia(64%) saturate(563%) hue-rotate(169deg) brightness(52%) contrast(116%);
+  --gitea-color-primary-dark-4: 15, 74, 133;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.17) 0%, rgba(255, 255, 255) 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Stormfront (light)
+ *
+ * Generated variant: light of 'stormfront', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'stormfront'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#6883a6'.
+ */
+:root {
+  --main-bg-color: linear-gradient(190deg, #ffffff 0%, #ecf3fc 45%, #dfe2e8 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #eef6ff 0%, #e2e6ec 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #eef6ff 0%, #e2e6ec 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #eef6ff 0%, #e2e6ec 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #dfe2e8;
+  --button-color: #6883a6;
+  --button-color-hover: #6c839e;
+  --button-text: #10141a;
+  --button-text-hover: #10141a;
+  --accent-color: 104, 131, 166;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #46688a;
+  --link-color-hover: #4f687e;
+  --label-text-color: #10141a;
+  --text: #04080e;
+  --text-hover: #000000;
+  --text-muted: #2c3642;
+  --arr-queue-color: #4b8f5c;
+  --plex-poster-unwatched: #6883a6;
+  --petio-spinner: invert(21%) sepia(100%) saturate(174%) hue-rotate(174deg) brightness(200%) contrast(80%);
+  --gitea-color-primary-dark-4: 104, 131, 166;
+  --overseerr-gradient: linear-gradient(190deg, rgba(255, 255, 255, 0.9) 0%, rgba(236, 243, 252, 0.9) 45%, rgba(223, 226, 232, 0.9) 100%) center center/cover no-repeat fixed;
+}

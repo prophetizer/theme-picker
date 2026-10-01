@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Tokyo Night (light)
+ *
+ * Generated variant: light of 'tokyo-night', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'tokyo-night'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#6289dc'.
+ */
+:root {
+  --main-bg-color: #f1f3fc;
+  --modal-bg-color: #efeff6;
+  --modal-header-color: #efeff6;
+  --modal-footer-color: #efeff6;
+  --drop-down-menu-bg: #efeff6;
+  --button-color: #6289dc;
+  --button-color-hover: #9b7ad4;
+  --button-text: #1a1b26;
+  --button-text-hover: #1a1b26;
+  --accent-color: 98, 137, 220;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #926516;
+  --link-color-hover: #1a75a0;
+  --label-text-color: #16161e;
+  --text: #060725;
+  --text-hover: #000000;
+  --text-muted: #42476c;
+  --arr-queue-color: #6a9732;
+  --plex-poster-unwatched: #6289dc;
+  --petio-spinner: invert(51%) sepia(75%) saturate(381%) hue-rotate(183deg) brightness(90%) contrast(91%);
+  --gitea-color-primary-dark-4: 98, 137, 220;
+  --overseerr-gradient: linear-gradient(180deg, rgba(241, 243, 252, 0.17) 0%, #f1f3fc 100%);
+}

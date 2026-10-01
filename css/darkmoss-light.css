@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Darkmoss (light)
+ *
+ * Generated variant: light of 'darkmoss', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'darkmoss'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#499180'.
+ */
+:root {
+  --main-bg-color: #eff5f5;
+  --modal-bg-color: #f9feff;
+  --modal-header-color: #f9feff;
+  --modal-footer-color: #f9feff;
+  --drop-down-menu-bg: #f9feff;
+  --button-color: #499180;
+  --button-color-hover: #498091;
+  --button-text: #050b0c;
+  --button-text-hover: #050b0c;
+  --accent-color: 73, 145, 128;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #337c6b;
+  --link-color-hover: #007b8d;
+  --label-text-color: #050b0c;
+  --text: #131200;
+  --text-hover: #030300;
+  --text-muted: #313d30;
+  --arr-queue-color: #499180;
+  --plex-poster-unwatched: #9b8f1f;
+  --petio-spinner: invert(67%) sepia(51%) saturate(533%) hue-rotate(116deg) brightness(68%) contrast(57%);
+  --gitea-color-primary-dark-4: 73, 145, 128;
+  --overseerr-gradient: linear-gradient(180deg, rgba(239, 245, 245, 0.17) 0%, #eff5f5 100%);
+}

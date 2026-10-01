@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: VS Code Dark Modern
+ *
+ * Palette source: microsoft/vscode extensions/theme-defaults/themes/dark_modern.json (editor, side bar, dropdown, button, link, tab colours) + dark_plus.json / dark_vs.json syntax colours
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0078d4'.
+ */
+:root {
+  --main-bg-color: #181818;
+  --modal-bg-color: #1f1f1f;
+  --modal-header-color: #1f1f1f;
+  --modal-footer-color: #1f1f1f;
+  --drop-down-menu-bg: #1f1f1f;
+  --button-color: #0078d4;
+  --button-color-hover: #026ec1;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 0, 120, 212;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4daafc;
+  --link-color-hover: #9cdcfe;
+  --label-text-color: #ffffff;
+  --text: #cccccc;
+  --text-hover: #ffffff;
+  --text-muted: #9d9d9d;
+  --arr-queue-color: #6a9955;
+  --plex-poster-unwatched: #ce9178;
+  --petio-spinner: invert(67%) sepia(86%) saturate(1331%) hue-rotate(183deg) brightness(90%) contrast(106%);
+  --gitea-color-primary-dark-4: 0, 120, 212;
+  --overseerr-gradient: linear-gradient(180deg, rgba(24, 24, 24, 0.17) 0%, rgba(24, 24, 24) 100%);
+}

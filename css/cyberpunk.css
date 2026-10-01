@@ -1,0 +1,64 @@
+/*
+ * theme.park custom theme: Cyberpunk
+ *
+ * HIGH-CHROMA THEME. Based on Cyberpunk by max-SS, canonical hex values from
+ * https://github.com/prometheux-ar/cyberpunk (themes/cyberpunk-color-theme.json).
+ * That repo is the authoritative home, not a fork -- the extension ships as
+ * max-SS.cyberpunk (~464k installs) and the repo moved to the author's org.
+ * Variant: the default "Cyberpunk". Last published 2021; effectively
+ * unmaintained, so the repo is the source of truth over the marketplace build.
+ *
+ * Two corrections against commonly-quoted values: editor.foreground is
+ * #00FF9C and #EEFFFF is a variables token, so --text uses colors.foreground
+ * #FFFFFF; and #EE6DFF is only entity.other.attribute-name -- the keyword
+ * purple is #D57BFF. #EE6DFF is used here for --button-color-hover on its
+ * chroma, which is the higher of the two.
+ *
+ * Provenance note: roughly half this theme's syntax tokens are unmodified
+ * Material Theme (Default/Oceanic, not Palenight) with a neon chrome layer
+ * over them. theme.park's 22 variables express the chrome, not the syntax,
+ * so this does not overlap the palenight theme already in this repo.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ *
+ * Contrast fix 2026-09-22: --text-muted was the comment colour #6766b3, 2.5:1 on
+ * the #372963 panels. Now #bbbbbb (sideBarTitle.foreground,
+ * prometheux-ar/cyberpunk, formerly max-SS), 6.6:1. The purple #7877b3 reached
+ * only 3.1:1.
+ */
+
+:root {
+  --main-bg-color: #261D45;
+
+  --modal-bg-color: #372963;
+  --modal-header-color: #372963;
+  --modal-footer-color: #372963;
+
+  --drop-down-menu-bg: #372963;
+
+  --button-color: #00FF9C;
+  --button-color-hover: #EE6DFF;
+  --button-text: #261D45;
+  --button-text-hover: #261D45;
+
+  --accent-color: 0, 255, 156;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00FFC8;
+  --link-color-hover: #FFFC58;
+  --label-text-color: #261D45;
+
+  --text: #FFFFFF;
+  --text-hover: #FFFFFF;
+  --text-muted: #bbbbbb;
+
+  --arr-queue-color: #00FF9C;
+  --plex-poster-unwatched: #FF5680;
+  --petio-spinner: invert(47%) sepia(96%) saturate(344%) hue-rotate(107deg) brightness(116%) contrast(162%);
+  --gitea-color-primary-dark-4: 0, 255, 156;
+  --overseerr-gradient: linear-gradient(180deg, rgba(38, 29, 69, 0.17) 0%, rgba(38, 29, 69) 100%);
+}

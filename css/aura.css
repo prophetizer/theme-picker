@@ -1,0 +1,56 @@
+/*
+ * theme.park custom theme: Aura Dark
+ *
+ * Based on Aura by Dalton Menezes (https://github.com/daltonmenezes/aura-theme),
+ * canonical hex values from packages/color-palettes/aura-colors.css, with UI
+ * surfaces from packages/vscode/themes/aura-dark-color-theme.json.
+ * 3.8k stars, ~610k VS Code installs. Variant: Aura Dark -- the unqualified
+ * base variant, not Aura Soft Dark (which has its own background #21202e).
+ *
+ * Aura's own elevated surfaces go DARKER than the editor background, the
+ * opposite of theme.park's convention. --modal-bg-color therefore uses
+ * list.activeSelectionBackground #2E2B38, the only lighter surface upstream
+ * publishes.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ *
+ * Contrast fix 2026-09-22: --text-muted was Aura's gray #6d6d6d, 2.7:1 on the
+ * #2e2b38 panels. Now #adacae (statusBar.foreground, aura-dark-color-theme.json),
+ * 6.1:1 -- the dimmest canonical tone that clears 3.5:1.
+ */
+
+:root {
+  --main-bg-color: #15141B;
+
+  --modal-bg-color: #2E2B38;
+  --modal-header-color: #2E2B38;
+  --modal-footer-color: #2E2B38;
+
+  --drop-down-menu-bg: #2E2B38;
+
+  --button-color: #A277FF;
+  --button-color-hover: #61FFCA;
+  --button-text: #15141B;
+  --button-text-hover: #15141B;
+
+  --accent-color: 162, 119, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #61FFCA;
+  --link-color-hover: #82E2FF;
+  --label-text-color: #15141B;
+
+  --text: #EDECEE;
+  --text-hover: #ffffff;
+  --text-muted: #adacae;
+
+  --arr-queue-color: #61FFCA;
+  --plex-poster-unwatched: #A277FF;
+  --petio-spinner: invert(33%) sepia(100%) saturate(205%) hue-rotate(217deg) brightness(132%) contrast(175%);
+  --gitea-color-primary-dark-4: 162, 119, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(21, 20, 27, 0.17) 0%, rgba(21, 20, 27) 100%);
+}

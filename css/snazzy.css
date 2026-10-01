@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Snazzy
+ *
+ * Palette source: sindresorhus/hyper-snazzy index.js (foreground, background, border, lightBlack and the ANSI colours)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #919191 is the palette's #686868 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#57c7ff'.
+ */
+:root {
+  --main-bg-color: #222430;
+  --modal-bg-color: #282a36;
+  --modal-header-color: #282a36;
+  --modal-footer-color: #282a36;
+  --drop-down-menu-bg: #282a36;
+  --button-color: #57c7ff;
+  --button-color-hover: #ff6ac1;
+  --button-text: #282a36;
+  --button-text-hover: #282a36;
+  --accent-color: 87, 199, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #9aedfe;
+  --link-color-hover: #ff6ac1;
+  --label-text-color: #282a36;
+  --text: #eff0eb;
+  --text-hover: #f1f1f0;
+  --text-muted: #919191;
+  --arr-queue-color: #5af78e;
+  --plex-poster-unwatched: #f3f99d;
+  --petio-spinner: invert(36%) sepia(86%) saturate(523%) hue-rotate(171deg) brightness(100%) contrast(102%);
+  --gitea-color-primary-dark-4: 87, 199, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(34, 36, 48, 0.17) 0%, rgba(34, 36, 48) 100%);
+}

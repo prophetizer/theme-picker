@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Kanagawa Dragon (light)
+ *
+ * Generated variant: light of 'kanagawa-dragon', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'kanagawa-dragon'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#9d8c65'.
+ */
+:root {
+  --main-bg-color: #f4f4f1;
+  --modal-bg-color: #f8f6f6;
+  --modal-header-color: #f8f6f6;
+  --modal-footer-color: #f8f6f6;
+  --drop-down-menu-bg: #f8f6f6;
+  --button-color: #9d8c65;
+  --button-color-hover: #aa866f;
+  --button-text: #12120f;
+  --button-text-hover: #12120f;
+  --accent-color: 157, 140, 101;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5c747f;
+  --link-color-hover: #a75a55;
+  --label-text-color: #12120f;
+  --text: #0d100d;
+  --text-hover: #0d100d;
+  --text-muted: #434b43;
+  --arr-queue-color: #839274;
+  --plex-poster-unwatched: #aa866f;
+  --petio-spinner: invert(83%) sepia(73%) saturate(438%) hue-rotate(324deg) brightness(72%) contrast(53%);
+  --gitea-color-primary-dark-4: 157, 140, 101;
+  --overseerr-gradient: linear-gradient(180deg, rgba(244, 244, 241, 0.17) 0%, #f4f4f1 100%);
+}

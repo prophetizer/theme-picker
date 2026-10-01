@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Vitesse Dark
+ *
+ * Palette source: antfu/vscode-theme-vitesse scripts/colors.ts (VitesseThemes, dark index) + extra/xterm-vitesse-dark.json (bright white)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#4d9375'.
+ */
+:root {
+  --main-bg-color: #121212;
+  --modal-bg-color: #181818;
+  --modal-header-color: #181818;
+  --modal-footer-color: #181818;
+  --drop-down-menu-bg: #181818;
+  --button-color: #4d9375;
+  --button-color-hover: #5eaab5;
+  --button-text: #121212;
+  --button-text-hover: #121212;
+  --accent-color: 77, 147, 117;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5eaab5;
+  --link-color-hover: #e6cc77;
+  --label-text-color: #121212;
+  --text: #dbd7ca;
+  --text-hover: #ffffff;
+  --text-muted: #758575;
+  --arr-queue-color: #4d9375;
+  --plex-poster-unwatched: #d4976c;
+  --petio-spinner: invert(36%) sepia(85%) saturate(509%) hue-rotate(104deg) brightness(119%) contrast(40%);
+  --gitea-color-primary-dark-4: 77, 147, 117;
+  --overseerr-gradient: linear-gradient(180deg, rgba(18, 18, 18, 0.17) 0%, rgba(18, 18, 18) 100%);
+}

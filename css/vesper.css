@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Vesper
+ *
+ * Palette source: raunofreiberg/vesper themes/Vesper-dark-color-theme.json (editor colours and token rules: the peppermint #99FFE4 and orange #FFC799 are its only accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * HIGH CONTRAST: every text role (body, muted, links, button label) is meant
+ * to reach WCAG AAA 7:1 on the panels.
+ * --text-muted #a1a1a1 is the palette's #8b8b8b with its lightness nudged to
+ * reach 7:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#ffc799'.
+ */
+:root {
+  --main-bg-color: #101010;
+  --modal-bg-color: #161616;
+  --modal-header-color: #161616;
+  --modal-footer-color: #161616;
+  --drop-down-menu-bg: #161616;
+  --button-color: #ffc799;
+  --button-color-hover: #99ffe4;
+  --button-text: #101010;
+  --button-text-hover: #101010;
+  --accent-color: 255, 199, 153;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #ffc799;
+  --link-color-hover: #99ffe4;
+  --label-text-color: #101010;
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-muted: #a1a1a1;
+  --arr-queue-color: #99ffe4;
+  --plex-poster-unwatched: #ffc799;
+  --petio-spinner: invert(48%) sepia(77%) saturate(240%) hue-rotate(327deg) brightness(137%) contrast(151%);
+  --gitea-color-primary-dark-4: 255, 199, 153;
+  --overseerr-gradient: linear-gradient(180deg, rgba(16, 16, 16, 0.17) 0%, rgba(16, 16, 16) 100%);
+}

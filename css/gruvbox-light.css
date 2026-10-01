@@ -1,0 +1,46 @@
+/*
+ * theme.park custom theme: Gruvbox Light
+ *
+ * Palette source: morhetz/gruvbox, colors/gruvbox.vim (the light0_hard background variant).
+ * The repo README only links palette images; the vim file is the canonical
+ * text definition.
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted uses dark3 #665c54 rather than gray_245 #928374. The grey
+ * is gruvbox's published comment colour but reaches only 2.6:1 against
+ * light1 #ebdbb2; dark3 is from the same palette and gives 4.7:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#af3a03'.
+ *
+ * --arr-queue-color is the scheme's faded_aqua #427b58, not its green #79740e.
+ * theme.park's CONTRIBUTING forbids orange/yellow here: the colour collides
+ * with the *arr queue-ERROR colour, and this scheme's green sits at hue
+ * 57 deg, squarely in that band. Both values are canonical to the scheme.
+ */
+:root {
+  --main-bg-color: #f9f5d7;
+  --modal-bg-color: #ebdbb2;
+  --modal-header-color: #ebdbb2;
+  --modal-footer-color: #ebdbb2;
+  --drop-down-menu-bg: #ebdbb2;
+  --button-color: #af3a03;
+  --button-color-hover: #8f3f71;
+  --button-text: #f9f5d7;
+  --button-text-hover: #f9f5d7;
+  --accent-color: 175, 58, 3;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #076678;
+  --link-color-hover: #458588;
+  --label-text-color: #f9f5d7;
+  --text: #3c3836;
+  --text-hover: #282828;
+  --text-muted: #665c54;
+  --arr-queue-color: #427b58;
+  --plex-poster-unwatched: #af3a03;
+  --petio-spinner: invert(52%) sepia(100%) saturate(324%) hue-rotate(333deg) brightness(62%) contrast(161%);
+  --gitea-color-primary-dark-4: 175, 58, 3;
+  --overseerr-gradient: linear-gradient(180deg, rgba(249, 245, 215, 0.17) 0%, rgba(249, 245, 215) 100%);
+}

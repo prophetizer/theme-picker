@@ -1,0 +1,48 @@
+/*
+ * theme.park custom theme: Man of Steel
+ *
+ * Gradient source: Ghosh/uiGradients gradients.json, 'Man of Steel' (#780206 -> #061161), MIT.
+ * uiGradients gives only the gradient's colours, so every role below is
+ * one of them (lightness moved where noted), a black veil over them, or a
+ * near-white tinted toward them: text is not taken from anywhere else.
+ *
+ * A GRADIENT theme in the shape of theme.park's own: the gradient on the
+ * page, the same stops at -90deg on panels, and a SOLID drop-down menu.
+ * --button-color #ff9689 is uiGradients' #780206 lightened so buttons stand
+ * out on the gradient.
+ * --button-color-hover #96b5ff is uiGradients' #061161 lightened so buttons
+ * stand out on the gradient.
+ * --link-color #f58072 is uiGradients' #780206 with its lightness moved to
+ * read at 4.5:1 on every panel colour.
+ * --link-color-hover #7b9ff9 is uiGradients' #061161 with its lightness moved
+ * to read at 4.5:1 on every panel colour.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ff9689'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #780206 0%, #061161 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #780206 0%, #061161 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #780206 0%, #061161 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #780206 0%, #061161 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #42213f;
+  --button-color: #ff9689;
+  --button-color-hover: #96b5ff;
+  --button-text: #061161;
+  --button-text-hover: #061161;
+  --accent-color: 255, 150, 137;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #f58072;
+  --link-color-hover: #7b9ff9;
+  --label-text-color: #061161;
+  --text: #ffeffd;
+  --text-hover: #ffffff;
+  --text-muted: #dfa9d9;
+  --arr-queue-color: #f58072;
+  --plex-poster-unwatched: #96b5ff;
+  --petio-spinner: invert(20%) sepia(70%) saturate(1331%) hue-rotate(302deg) brightness(97%) contrast(118%);
+  --gitea-color-primary-dark-4: 255, 150, 137;
+  --overseerr-gradient: linear-gradient(180deg, rgba(6, 17, 97, 0.17) 0%, rgba(6, 17, 97) 100%);
+}

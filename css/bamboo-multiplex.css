@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Bamboo Multiplex
+ *
+ * Palette source: ribru17/bamboo.nvim lua/bamboo/palette.lua (multiplex: bg_d, bg0, bg1, fg, light_grey, accents; magenta is bright_purple)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #8a908a is the palette's #818781 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#81af58'.
+ */
+:root {
+  --main-bg-color: #171f17;
+  --modal-bg-color: #232923;
+  --modal-header-color: #232923;
+  --modal-footer-color: #232923;
+  --drop-down-menu-bg: #232923;
+  --button-color: #81af58;
+  --button-color-hover: #ceba49;
+  --button-text: #171f17;
+  --button-text-hover: #171f17;
+  --accent-color: 129, 175, 88;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #81af58;
+  --link-color-hover: #ceba49;
+  --label-text-color: #171f17;
+  --text: #ece1c0;
+  --text-hover: #ece1c0;
+  --text-muted: #8a908a;
+  --arr-queue-color: #81af58;
+  --plex-poster-unwatched: #ef9946;
+  --petio-spinner: invert(88%) sepia(100%) saturate(597%) hue-rotate(30deg) brightness(99%) contrast(38%);
+  --gitea-color-primary-dark-4: 129, 175, 88;
+  --overseerr-gradient: linear-gradient(180deg, rgba(23, 31, 23, 0.17) 0%, rgba(23, 31, 23) 100%);
+}

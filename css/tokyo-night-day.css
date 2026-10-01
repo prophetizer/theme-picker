@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Tokyo Night Day
+ *
+ * Palette source: folke/tokyonight.nvim extras/lua/tokyonight_day.lua (generated from colors/day.lua with the default config)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #153894 is the palette's #3760bf with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #153894 is the palette's #3760bf with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #535a80 is the palette's #848cb5 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #0059be is the palette's #2e7de9 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #7b30ce is the palette's #9854f1 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #e7e8ed is the palette's #e1e2e7 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#007197'.
+ */
+:root {
+  --main-bg-color: #d0d5e3;
+  --modal-bg-color: #e1e2e7;
+  --modal-header-color: #e1e2e7;
+  --modal-footer-color: #e1e2e7;
+  --drop-down-menu-bg: #e1e2e7;
+  --button-color: #007197;
+  --button-color-hover: #7847bd;
+  --button-text: #e7e8ed;
+  --button-text-hover: #e7e8ed;
+  --accent-color: 0, 113, 151;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0059be;
+  --link-color-hover: #7b30ce;
+  --label-text-color: #e7e8ed;
+  --text: #153894;
+  --text-hover: #153894;
+  --text-muted: #535a80;
+  --arr-queue-color: #587539;
+  --plex-poster-unwatched: #b15c00;
+  --petio-spinner: invert(54%) sepia(44%) saturate(550%) hue-rotate(146deg) brightness(70%) contrast(184%);
+  --gitea-color-primary-dark-4: 0, 113, 151;
+  --overseerr-gradient: linear-gradient(180deg, rgba(208, 213, 227, 0.17) 0%, rgba(208, 213, 227) 100%);
+}

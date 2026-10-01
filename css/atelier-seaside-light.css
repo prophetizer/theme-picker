@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Atelier Seaside Light
+ *
+ * Palette source: tinted-theming/schemes base16/atelier-seaside-light.yaml (Bram de Haan; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #3c4b3c is the palette's #5e6e5e with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #556955 is the palette's #687d68 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #007506 is the palette's #29a329 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #3354e7 is the palette's #3d62f5 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#29a329'.
+ */
+:root {
+  --main-bg-color: #cfe8cf;
+  --modal-bg-color: #f4fbf4;
+  --modal-header-color: #f4fbf4;
+  --modal-footer-color: #f4fbf4;
+  --drop-down-menu-bg: #f4fbf4;
+  --button-color: #29a329;
+  --button-color-hover: #1999b3;
+  --button-text: #131513;
+  --button-text-hover: #131513;
+  --accent-color: 41, 163, 41;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007506;
+  --link-color-hover: #3354e7;
+  --label-text-color: #131513;
+  --text: #3c4b3c;
+  --text-hover: #131513;
+  --text-muted: #556955;
+  --arr-queue-color: #29a329;
+  --plex-poster-unwatched: #87711d;
+  --petio-spinner: invert(64%) sepia(100%) saturate(256%) hue-rotate(71deg) brightness(65%) contrast(148%);
+  --gitea-color-primary-dark-4: 41, 163, 41;
+  --overseerr-gradient: linear-gradient(180deg, rgba(207, 232, 207, 0.17) 0%, rgba(207, 232, 207) 100%);
+}

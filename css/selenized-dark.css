@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Selenized Dark
+ *
+ * Palette source: jan-warchol/selenized, the-values.md (sRGB column -- the file also lists
+ * an AppleRGB column with different hexes). Selenized is the author's
+ * redesign of Solarized with corrected perceptual lightness.
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * Selenized is deliberately low-contrast. dim_0 #72898f is its comment colour
+ * but reaches only 2.7:1 against bg_1, so the two foreground steps are used
+ * instead: fg_1 #cad8d9 for text, fg_0 #adbcbc for muted (5.0:1).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#41c7b9'.
+ */
+:root {
+  --main-bg-color: #103c48;
+  --modal-bg-color: #184956;
+  --modal-header-color: #184956;
+  --modal-footer-color: #184956;
+  --drop-down-menu-bg: #184956;
+  --button-color: #41c7b9;
+  --button-color-hover: #ed8649;
+  --button-text: #103c48;
+  --button-text-hover: #103c48;
+  --accent-color: 65, 199, 185;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4695f7;
+  --link-color-hover: #58a3ff;
+  --label-text-color: #103c48;
+  --text: #cad8d9;
+  --text-hover: #cad8d9;
+  --text-muted: #adbcbc;
+  --arr-queue-color: #75b938;
+  --plex-poster-unwatched: #41c7b9;
+  --petio-spinner: invert(70%) sepia(71%) saturate(414%) hue-rotate(119deg) brightness(90%) contrast(78%);
+  --gitea-color-primary-dark-4: 65, 199, 185;
+  --overseerr-gradient: linear-gradient(180deg, rgba(16, 60, 72, 0.17) 0%, rgba(16, 60, 72) 100%);
+}

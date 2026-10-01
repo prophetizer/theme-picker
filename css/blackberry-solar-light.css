@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Blackberry Solar (light)
+ *
+ * Generated variant: light of 'blackberry-solar', theme.park's community theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'blackberry-solar'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#9e8000'.
+ */
+:root {
+  --main-bg-color: radial-gradient(at top left, rgba(209, 209, 209, 0.31), rgba(241, 230, 230, 0.9), #d6d1d1) center center/cover no-repeat fixed, linear-gradient(120deg, #fffffe 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --modal-header-color: var(--main-bg-color);
+  --modal-footer-color: var(--main-bg-color);
+  --drop-down-menu-bg: var(--main-bg-color);
+  --button-color: #9e8000;
+  --button-color-hover: #a25a25;
+  --button-text: rgba(15, 10, 10, 0.95);
+  --button-text-hover: rgba(0, 0, 0, 0.95);
+  --accent-color: 158, 128, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7d6400;
+  --link-color-hover: rgba(125, 100, 0, 0.8);
+  --label-text-color: rgba(15, 10, 10, 0.95);
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #40952d;
+  --plex-poster-unwatched: #9e8000;
+  --petio-spinner: invert(59%) sepia(81%) saturate(385%) hue-rotate(11deg) brightness(71%) contrast(127%);
+  --gitea-color-primary-dark-4: 158, 128, 0;
+  --overseerr-gradient: radial-gradient(at top left, rgba(209, 209, 209, 0.31), rgba(241, 230, 230, 0.9), #d6d1d1) center center/cover no-repeat fixed, linear-gradient(120deg, rgba(255, 255, 254, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%) center center/cover no-repeat fixed;
+}

@@ -1,0 +1,55 @@
+/*
+ * theme.park custom theme: Outrun Electric
+ *
+ * HIGH-CHROMA THEME. Based on doom-outrun-electric by the Doom Emacs theme
+ * pack (https://github.com/doomemacs/themes), canonical hex values from
+ * themes/doom-outrun-electric-theme.el. Note this is an Emacs theme, not a
+ * VS Code one -- the VS Code "Outrun" extensions are unrelated third-party
+ * ports.
+ *
+ * The palette names its surfaces, so the mapping is upstream's own: bg is
+ * the page, base1 the raised card, grey the muted foreground. Richest
+ * surface ramp of the neon themes surveyed.
+ *
+ * Quirk worth knowing: upstream's "teal" token is #A875FF, which is
+ * actually purple. It is used here as --link-color-hover on its colour, not
+ * its name.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #0C0A20;
+
+  --modal-bg-color: #1F1147;
+  --modal-header-color: #1F1147;
+  --modal-footer-color: #1F1147;
+
+  --drop-down-menu-bg: #1F1147;
+
+  --button-color: #FF2AFC;
+  --button-color-hover: #FFD400;
+  --button-text: #0C0A20;
+  --button-text-hover: #0C0A20;
+
+  --accent-color: 255, 42, 252;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #42C6FF;
+  --link-color-hover: #A875FF;
+  --label-text-color: #0C0A20;
+
+  --text: #F2F3F7;
+  --text-hover: #FFFFFF;
+  --text-muted: #546A90;
+
+  --arr-queue-color: #A7DA1E;
+  --plex-poster-unwatched: #FF2AFC;
+  --petio-spinner: invert(38%) sepia(100%) saturate(365%) hue-rotate(252deg) brightness(97%) contrast(200%);
+  --gitea-color-primary-dark-4: 255, 42, 252;
+  --overseerr-gradient: linear-gradient(180deg, rgba(12, 10, 32, 0.17) 0%, rgba(12, 10, 32) 100%);
+}

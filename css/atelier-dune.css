@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Atelier Dune
+ *
+ * Palette source: tinted-theming/schemes base16/atelier-dune.yaml (Bram de Haan; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #b8b49d is the palette's #a6a28c with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --link-color #6b8ae7 is the palette's #6684e1 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #c864e5 is the palette's #b854d4 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6684e1'.
+ */
+:root {
+  --main-bg-color: #20201d;
+  --modal-bg-color: #292824;
+  --modal-header-color: #292824;
+  --modal-footer-color: #292824;
+  --drop-down-menu-bg: #292824;
+  --button-color: #6684e1;
+  --button-color-hover: #1fad83;
+  --button-text: #20201d;
+  --button-text-hover: #20201d;
+  --accent-color: 102, 132, 225;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #6b8ae7;
+  --link-color-hover: #c864e5;
+  --label-text-color: #20201d;
+  --text: #b8b49d;
+  --text-hover: #fefbec;
+  --text-muted: #999580;
+  --arr-queue-color: #60ac39;
+  --plex-poster-unwatched: #b65611;
+  --petio-spinner: invert(44%) sepia(21%) saturate(1311%) hue-rotate(189deg) brightness(89%) contrast(98%);
+  --gitea-color-primary-dark-4: 102, 132, 225;
+  --overseerr-gradient: linear-gradient(180deg, rgba(32, 32, 29, 0.17) 0%, rgba(32, 32, 29) 100%);
+}

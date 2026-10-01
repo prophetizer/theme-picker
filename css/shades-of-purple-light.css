@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Shades of Purple (light)
+ *
+ * Generated variant: light of 'shades-of-purple', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'shades-of-purple'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#b362ff'.
+ */
+:root {
+  --main-bg-color: #f1f2ff;
+  --modal-bg-color: #fdfdff;
+  --modal-header-color: #fdfdff;
+  --modal-footer-color: #fdfdff;
+  --drop-down-menu-bg: #fdfdff;
+  --button-color: #b362ff;
+  --button-color-hover: #a78a00;
+  --button-text: #000000;
+  --button-text-hover: #1e1d40;
+  --accent-color: 179, 98, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #856d00;
+  --link-color-hover: #007c7f;
+  --label-text-color: #14132a;
+  --text: #0f0f0f;
+  --text-hover: #000000;
+  --text-muted: #2a165b;
+  --arr-queue-color: #29a200;
+  --plex-poster-unwatched: #b362ff;
+  --petio-spinner: invert(39%) sepia(72%) saturate(682%) hue-rotate(227deg) brightness(112%) contrast(111%);
+  --gitea-color-primary-dark-4: 179, 98, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(241, 242, 255, 0.17) 0%, #f1f2ff 100%);
+}

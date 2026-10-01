@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Blackberry Abyss (light)
+ *
+ * Generated variant: light of 'blackberry-abyss', theme.park's community theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'blackberry-abyss'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#5e7287'.
+ */
+:root {
+  --main-bg-color: linear-gradient(to bottom, rgba(209, 209, 209, 0.45), rgba(209, 209, 209, 0), rgba(209, 209, 209, 0.35)) center center/cover no-repeat fixed, radial-gradient(at bottom center, rgba(209, 209, 209, 0.4) 0%, rgba(255, 255, 255, 0.55), rgba(224, 226, 228, 0)) center center/cover no-repeat fixed, linear-gradient(to right, #e0e2e4, #ffffff, #e0e2e4) center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --modal-header-color: var(--main-bg-color);
+  --modal-footer-color: var(--main-bg-color);
+  --drop-down-menu-bg: var(--main-bg-color);
+  --button-color: #5e7287;
+  --button-color-hover: rgba(94, 114, 135, 0.55);
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 104, 130, 157;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4d6680;
+  --link-color-hover: #536579;
+  --label-text-color: #ffffff;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #3c9129;
+  --plex-poster-unwatched: #68829d;
+  --petio-spinner: invert(18%) sepia(100%) saturate(86%) hue-rotate(170deg) brightness(200%) contrast(118%);
+  --gitea-color-primary-dark-4: 104, 130, 157;
+  --overseerr-gradient: linear-gradient(to bottom, rgba(209, 209, 209, 0.45), rgba(209, 209, 209, 0), rgba(209, 209, 209, 0.35)) center center/cover no-repeat fixed, radial-gradient(at bottom center, rgba(209, 209, 209, 0.4) 0%, rgba(255, 255, 255, 0.55), rgba(224, 226, 228, 0)) center center/cover no-repeat fixed, linear-gradient(to right, rgba(224, 226, 228, 0.9), rgba(255, 255, 255, 0.9), rgba(223, 226, 228, 0.9)) center center/cover no-repeat fixed;
+}

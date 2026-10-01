@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Blackberry Martian (light)
+ *
+ * Generated variant: light of 'blackberry-martian', theme.park's community theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'blackberry-martian'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#2e5135'.
+ */
+:root {
+  --main-bg-color: linear-gradient(to right, rgba(209, 209, 209, 0.15), rgba(209, 209, 209, 0), rgba(209, 209, 209, 0.45)) center center/cover no-repeat fixed, radial-gradient(at right center, rgba(209, 209, 209, 0.3) 10%, rgba(251, 240, 240, 0.6), #e0dbdb 95%) center center/cover no-repeat fixed, linear-gradient(to right, #fefffe 0%, #dfffe4 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --modal-header-color: var(--main-bg-color);
+  --modal-footer-color: var(--main-bg-color);
+  --drop-down-menu-bg: var(--main-bg-color);
+  --button-color: #2e5135;
+  --button-color-hover: #043815;
+  --button-text: #eeeeee;
+  --button-text-hover: rgba(255, 255, 255, 0.95);
+  --accent-color: 0, 151, 69;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007735;
+  --link-color-hover: #2e5135;
+  --label-text-color: rgba(210, 203, 203, 0.95);
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #40942d;
+  --plex-poster-unwatched: #009745;
+  --petio-spinner: invert(45%) sepia(88%) saturate(259%) hue-rotate(80deg) brightness(46%) contrast(86%);
+  --gitea-color-primary-dark-4: 0, 151, 69;
+  --overseerr-gradient: linear-gradient(to right, rgba(209, 209, 209, 0.15), rgba(209, 209, 209, 0), rgba(209, 209, 209, 0.45)) center center/cover no-repeat fixed, radial-gradient(at right center, rgba(209, 209, 209, 0.3) 10%, rgba(251, 240, 240, 0.6), #e0dbdb 95%) center center/cover no-repeat fixed, linear-gradient(to right, rgba(254, 255, 254, 0.9) 0%, rgba(223, 255, 228, 0.9) 100%) center center/cover no-repeat fixed;
+}

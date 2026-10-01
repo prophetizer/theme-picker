@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Kanagawa Lotus (dark)
+ *
+ * Generated variant: dark of 'kanagawa-lotus', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'kanagawa-lotus'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#78629b'.
+ */
+:root {
+  --main-bg-color: linear-gradient(165deg, #282403 0%, #1b1500 55%, #151100 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #282403 0%, #151100 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #282403 0%, #151100 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #282403 0%, #151100 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #282403;
+  --button-color: #78629b;
+  --button-color-hover: #516d9f;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 120, 98, 155;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #6d8abf;
+  --link-color-hover: #e55b6a;
+  --label-text-color: #ffffff;
+  --text: #acacbf;
+  --text-hover: #a9aada;
+  --text-muted: #8b8a81;
+  --arr-queue-color: #6f894e;
+  --plex-poster-unwatched: #cc6d00;
+  --petio-spinner: invert(27%) sepia(12%) saturate(700%) hue-rotate(221deg) brightness(166%) contrast(174%);
+  --gitea-color-primary-dark-4: 120, 98, 155;
+  --overseerr-gradient: linear-gradient(180deg, rgba(21, 17, 0, 0.17) 0%, #151100 100%);
+}

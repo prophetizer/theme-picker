@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Patina (light)
+ *
+ * Generated variant: light of 'patina', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'patina'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#17846f'.
+ */
+:root {
+  --main-bg-color: linear-gradient(35deg, #ffffff 0%, #f7fffe 45%, #c9d3d2 95%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #d2e2df 0%, #c9d3d2 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #d2e2df 0%, #c9d3d2 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #d2e2df 0%, #c9d3d2 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #c9d3d2;
+  --button-color: #17846f;
+  --button-color-hover: #a36739;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 23, 132, 111;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00665a;
+  --link-color-hover: #26645b;
+  --label-text-color: #ffffff;
+  --text: #000302;
+  --text-hover: #000000;
+  --text-muted: #182d29;
+  --arr-queue-color: #368624;
+  --plex-poster-unwatched: #17846f;
+  --petio-spinner: invert(49%) sepia(43%) saturate(662%) hue-rotate(118deg) brightness(78%) contrast(98%);
+  --gitea-color-primary-dark-4: 23, 132, 111;
+  --overseerr-gradient: linear-gradient(35deg, rgba(255, 255, 255, 0.9) 0%, rgba(247, 255, 254, 0.9) 45%, rgba(201, 211, 210, 0.9) 95%) center center/cover no-repeat fixed;
+}

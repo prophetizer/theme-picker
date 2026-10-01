@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Moonlit Asteroid (light)
+ *
+ * Generated variant: light of 'moonlit-asteroid', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'moonlit-asteroid'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#60889a'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #d9e6ec 0%, #e5f8ff 50%, #feffff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #d9e6ec 0%, #e5f8ff 50%, #feffff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #d9e6ec 0%, #e5f8ff 50%, #feffff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #d9e6ec 0%, #e5f8ff 50%, #feffff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #e4f7ff;
+  --button-color: #60889a;
+  --button-color-hover: #6a8791;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 96, 136, 154;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #446b7d;
+  --link-color-hover: #4f6a74;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #001924;
+  --arr-queue-color: #60889b;
+  --plex-poster-unwatched: #6a8791;
+  --petio-spinner: invert(21%) sepia(100%) saturate(274%) hue-rotate(154deg) brightness(200%) contrast(46%);
+  --gitea-color-primary-dark-4: 96, 136, 154;
+  --overseerr-gradient: linear-gradient(180deg, rgba(254, 255, 255, 0.17) 0%, #feffff 100%);
+}

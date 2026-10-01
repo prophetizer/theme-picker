@@ -1,0 +1,51 @@
+/*
+ * theme.park custom theme: Everforest Light
+ *
+ * Palette source: sainnhe/everforest autoload/everforest.vim (light, medium background)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * Seasonal pick (summer): warm parchment and leaf greens under a bright sky
+ * -- summer.
+ * --text #424f57 is the palette's #5c6a72 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #424f57 is the palette's #5c6a72 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #5f6e5e is the palette's #829181 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #0271a0 is the palette's #3a94c5 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #cc262d is the palette's #f85552 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #1b272e is the palette's #5c6a72 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#8da101'.
+ */
+:root {
+  --main-bg-color: #efebd4;
+  --modal-bg-color: #fdf6e3;
+  --modal-header-color: #fdf6e3;
+  --modal-footer-color: #fdf6e3;
+  --drop-down-menu-bg: #fdf6e3;
+  --button-color: #8da101;
+  --button-color-hover: #3a94c5;
+  --button-text: #1b272e;
+  --button-text-hover: #1b272e;
+  --accent-color: 141, 161, 1;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0271a0;
+  --link-color-hover: #cc262d;
+  --label-text-color: #1b272e;
+  --text: #424f57;
+  --text-hover: #424f57;
+  --text-muted: #5f6e5e;
+  --arr-queue-color: #8da101;
+  --plex-poster-unwatched: #f57d26;
+  --petio-spinner: invert(50%) sepia(74%) saturate(392%) hue-rotate(28deg) brightness(95%) contrast(132%);
+  --gitea-color-primary-dark-4: 141, 161, 1;
+  --overseerr-gradient: linear-gradient(180deg, rgba(239, 235, 212, 0.17) 0%, rgba(239, 235, 212) 100%);
+}

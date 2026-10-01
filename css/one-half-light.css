@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: One Half Light
+ *
+ * Palette source: sonph/onehalf vim/colors/onehalflight.vim (the scheme has no orange or magenta)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #6c6d73 is the palette's #a0a1a7 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #0074a6 is the palette's #0184bc with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#a626a4'.
+ */
+:root {
+  --main-bg-color: #f0f0f0;
+  --modal-bg-color: #fafafa;
+  --modal-header-color: #fafafa;
+  --modal-footer-color: #fafafa;
+  --drop-down-menu-bg: #fafafa;
+  --button-color: #a626a4;
+  --button-color-hover: #a626a4;
+  --button-text: #fafafa;
+  --button-text-hover: #fafafa;
+  --accent-color: 166, 38, 164;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0074a6;
+  --link-color-hover: #a626a4;
+  --label-text-color: #fafafa;
+  --text: #383a42;
+  --text-hover: #383a42;
+  --text-muted: #6c6d73;
+  --arr-queue-color: #50a14f;
+  --plex-poster-unwatched: #c18401;
+  --petio-spinner: invert(31%) sepia(100%) saturate(382%) hue-rotate(252deg) brightness(96%) contrast(145%);
+  --gitea-color-primary-dark-4: 166, 38, 164;
+  --overseerr-gradient: linear-gradient(180deg, rgba(240, 240, 240, 0.17) 0%, rgba(240, 240, 240) 100%);
+}

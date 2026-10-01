@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Velvet (light)
+ *
+ * Generated variant: light of 'velvet', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'velvet'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#d6476f'.
+ */
+:root {
+  --main-bg-color: radial-gradient(circle farthest-corner at 50% 108%, #ffffff 0%, #ffe9ef 40%, #e4d6dc 85%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #fadde6 0%, #e4d6dc 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #fadde6 0%, #e4d6dc 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #fadde6 0%, #e4d6dc 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #e4d6dc;
+  --button-color: #d6476f;
+  --button-color-hover: #c55676;
+  --button-text: #14060d;
+  --button-text-hover: #14060d;
+  --accent-color: 214, 71, 111;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #9e3f5f;
+  --link-color-hover: #8d4c60;
+  --label-text-color: #14060d;
+  --text: #050102;
+  --text-hover: #000000;
+  --text-muted: #442933;
+  --arr-queue-color: #278d4b;
+  --plex-poster-unwatched: #d6476f;
+  --petio-spinner: invert(31%) sepia(24%) saturate(673%) hue-rotate(292deg) brightness(138%) contrast(200%);
+  --gitea-color-primary-dark-4: 214, 71, 111;
+  --overseerr-gradient: radial-gradient(circle farthest-corner at 50% 108%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 233, 239, 0.9) 40%, rgba(228, 214, 220, 0.9) 85%) center center/cover no-repeat fixed;
+}

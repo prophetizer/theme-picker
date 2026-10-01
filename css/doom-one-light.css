@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Doom One (light)
+ *
+ * Generated variant: light of 'doom-one', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'doom-one'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#3394d2'.
+ */
+:root {
+  --main-bg-color: #f1f3f9;
+  --modal-bg-color: #f6f9ff;
+  --modal-header-color: #f6f9ff;
+  --modal-footer-color: #f6f9ff;
+  --drop-down-menu-bg: #f6f9ff;
+  --button-color: #3394d2;
+  --button-color-hover: #009ab9;
+  --button-text: #21242b;
+  --button-text-hover: #21242b;
+  --accent-color: 51, 148, 210;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0076b1;
+  --link-color-hover: #9c50b2;
+  --label-text-color: #21242b;
+  --text: #0f131c;
+  --text-hover: #030303;
+  --text-muted: #33393f;
+  --arr-queue-color: #74983f;
+  --plex-poster-unwatched: #cc783a;
+  --petio-spinner: invert(34%) sepia(100%) saturate(473%) hue-rotate(161deg) brightness(124%) contrast(75%);
+  --gitea-color-primary-dark-4: 51, 148, 210;
+  --overseerr-gradient: linear-gradient(180deg, rgba(241, 243, 249, 0.17) 0%, #f1f3f9 100%);
+}

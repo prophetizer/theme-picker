@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Atelier Heath
+ *
+ * Palette source: tinted-theming/schemes base16/atelier-heath.yaml (Bram de Haan; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #bbaaba is the palette's #ab9bab with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --link-color #6682ff is the palette's #516aec with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #9a79e3 is the palette's #7b59c0 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #050405 is the palette's #f7f3f7 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#516aec'.
+ */
+:root {
+  --main-bg-color: #1b181b;
+  --modal-bg-color: #292329;
+  --modal-header-color: #292329;
+  --modal-footer-color: #292329;
+  --drop-down-menu-bg: #292329;
+  --button-color: #516aec;
+  --button-color-hover: #159393;
+  --button-text: #050405;
+  --button-text-hover: #050405;
+  --accent-color: 81, 106, 236;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #6682ff;
+  --link-color-hover: #9a79e3;
+  --label-text-color: #050405;
+  --text: #bbaaba;
+  --text-hover: #f7f3f7;
+  --text-muted: #9e8f9e;
+  --arr-queue-color: #918b3b;
+  --plex-poster-unwatched: #a65926;
+  --petio-spinner: invert(61%) sepia(47%) saturate(4202%) hue-rotate(219deg) brightness(96%) contrast(92%);
+  --gitea-color-primary-dark-4: 81, 106, 236;
+  --overseerr-gradient: linear-gradient(180deg, rgba(27, 24, 27, 0.17) 0%, rgba(27, 24, 27) 100%);
+}

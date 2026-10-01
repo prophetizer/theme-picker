@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Modus Vivendi
+ *
+ * Palette source: protesilaos/modus-themes, modus-themes.el (modus-themes-vivendi-palette).
+ * The modus themes are built to meet WCAG AAA, which is why the background
+ * is pure black and the foreground pure white -- that is deliberate, not a
+ * placeholder.
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text and --text-hover are both #ffffff: fg-main is already pure white,
+ * so there is no brighter hover step to move to.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#2fafff'.
+ *
+ * AAA fix 2026-09-22: page and panels were swapped. This port originally put
+ * bg-dim #1e1e1e on the panels, where fg-dim measured 5.8:1 -- Modus pairs its
+ * dim text with bg-main, and the whole point of the theme is AAA. Now the page
+ * is bg-dim and panels are bg-main #000000: text 21:1, muted 7.3:1, links
+ * 8.9:1, button labels 8.7:1. Same pairing as Modus Operandi.
+ */
+:root {
+  --main-bg-color: #1e1e1e;
+  --modal-bg-color: #000000;
+  --modal-header-color: #000000;
+  --modal-footer-color: #000000;
+  --drop-down-menu-bg: #000000;
+  --button-color: #2fafff;
+  --button-color-hover: #feacd0;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 47, 175, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #79a8ff;
+  --link-color-hover: #00bcff;
+  --label-text-color: #000000;
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-muted: #989898;
+  --arr-queue-color: #44bc44;
+  --plex-poster-unwatched: #2fafff;
+  --petio-spinner: invert(53%) sepia(84%) saturate(311%) hue-rotate(160deg) brightness(91%) contrast(149%);
+  --gitea-color-primary-dark-4: 47, 175, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(30, 30, 30, 0.17) 0%, rgba(30, 30, 30) 100%);
+}

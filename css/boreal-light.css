@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Boreal (light)
+ *
+ * Generated variant: light of 'boreal', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'boreal'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#3f8745'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at 50% 115%, #fefffe 0%, #dbf1e8 45%, #cdd7d4 85%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #d8e8e2 0%, #cdd7d4 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #d8e8e2 0%, #cdd7d4 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #d8e8e2 0%, #cdd7d4 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #cdd7d4;
+  --button-color: #3f8745;
+  --button-color-hover: #4f8453;
+  --button-text: #0a0a0a;
+  --button-text-hover: #0a0a0a;
+  --accent-color: 63, 135, 69;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #1e6856;
+  --link-color-hover: #376557;
+  --label-text-color: #0a0a0a;
+  --text: #010201;
+  --text-hover: #000000;
+  --text-muted: #15271d;
+  --arr-queue-color: #598414;
+  --plex-poster-unwatched: #3f8745;
+  --petio-spinner: invert(35%) sepia(48%) saturate(668%) hue-rotate(74deg) brightness(112%) contrast(70%);
+  --gitea-color-primary-dark-4: 63, 135, 69;
+  --overseerr-gradient: radial-gradient(ellipse at 50% 115%, rgba(254, 255, 254, 0.9) 0%, rgba(219, 241, 232, 0.9) 45%, rgba(205, 215, 212, 0.9) 85%) center center/cover no-repeat fixed;
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Hotline (light)
+ *
+ * Generated variant: light of 'hotline', theme.park's official theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'hotline'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#c35c97'.
+ */
+:root {
+  --main-bg-color: linear-gradient(0deg, #ffffff 0%, #cae3ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #ffffff 0%, #cae3ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #ffffff 0%, #cae3ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #ffffff 0%, #cae3ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #e2e5ff;
+  --button-color: #c35c97;
+  --button-color-hover: #e7319c;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 195, 92, 151;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #914e76;
+  --link-color-hover: #466a6a;
+  --label-text-color: #000000;
+  --text: #040404;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #c35c97;
+  --plex-poster-unwatched: #d8489c;
+  --petio-spinner: invert(61%) sepia(54%) saturate(347%) hue-rotate(274deg) brightness(69%) contrast(136%);
+  --gitea-color-primary-dark-4: 98, 135, 134;
+  --overseerr-gradient: linear-gradient(0deg, rgba(255, 255, 255, 0.9) 0%, rgba(202, 227, 255, 0.9) 100%) center center/cover no-repeat fixed;
+}

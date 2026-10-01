@@ -1,0 +1,63 @@
+/*
+ * theme.park custom theme: Vibrant Ink
+ *
+ * HIGH-CHROMA THEME. Based on Vibrant Ink by Justin Palmer (2006), a
+ * TextMate theme with no surviving repo by the author. Canonical artefact is
+ * the .tmTheme, taken from filmgirl/TextMate-Themes (UUID
+ * 4B7A9AA6-C472-4460-BA48-199E2624956B), verified byte-identical against an
+ * independent copy in cartazio/sublime-text-2-packages-pile.
+ *
+ * The highest-chroma theme in this repo: mean CIELCh C* of 97 across its
+ * accent set, against a pure black page.
+ *
+ * NOTE: the iTerm2-Color-Schemes port gives green as #CCFF04, which appears
+ * nowhere in the tmTheme -- it is drift from the ruby-numeric #CCFF33. The
+ * theme's actual string green is #66FF00, used here. This is the second
+ * corrupt entry found in that collection (see electron-highlighter).
+ *
+ * --modal-bg-color is the theme's own lineHighlight #333300. Its neutral
+ * alternative, the scoped text background #0F0F0F, is only 1.10:1 against
+ * pure black and effectively invisible as a card.
+ *
+ * Palmer never defined a grey comment colour -- the tmTheme comment is a
+ * high-chroma purple -- so --text-muted uses the theme's own #AAAAAA
+ * (string escapes) rather than something invented.
+ *
+ * Deployed by homelab.git theme-switcher/sync-themes.sh, which copies
+ * themes/ into the theme-park container css/theme-options/ and re-runs
+ * themes.py to generate the per-app CSS under css/base/<app>/. You never
+ * edit theme.park base CSS, and never commit to the upstream mirror.
+ * Do not change the "R, G, B" syntax on --accent-color /
+ * --gitea-color-primary-dark-4.
+ */
+
+:root {
+  --main-bg-color: #000000;
+
+  --modal-bg-color: #333300;
+  --modal-header-color: #333300;
+  --modal-footer-color: #333300;
+
+  --drop-down-menu-bg: #333300;
+
+  --button-color: #FF6600;
+  --button-color-hover: #FFCC00;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+
+  --accent-color: 255, 102, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #66FF00;
+  --link-color-hover: #CCFF33;
+  --label-text-color: #000000;
+
+  --text: #FFFFFF;
+  --text-hover: #FFFFFF;
+  --text-muted: #AAAAAA;
+
+  --arr-queue-color: #66FF00;
+  --plex-poster-unwatched: #FF6600;
+  --petio-spinner: invert(52%) sepia(92%) saturate(383%) hue-rotate(345deg) brightness(80%) contrast(171%);
+  --gitea-color-primary-dark-4: 255, 102, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.17) 0%, rgba(0, 0, 0) 100%);
+}

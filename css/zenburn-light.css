@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Zenburn (light)
+ *
+ * Generated variant: light of 'zenburn', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'zenburn'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#97875a'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #ececec;
+  --modal-header-color: #ececec;
+  --modal-footer-color: #ececec;
+  --drop-down-menu-bg: #ececec;
+  --button-color: #97875a;
+  --button-color-hover: #ac7e60;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 151, 135, 90;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4d6e8f;
+  --link-color-hover: #317578;
+  --label-text-color: #11141b;
+  --text: #050500;
+  --text-hover: #000000;
+  --text-muted: #213d22;
+  --arr-queue-color: #6a9172;
+  --plex-poster-unwatched: #97875a;
+  --petio-spinner: invert(62%) sepia(100%) saturate(71%) hue-rotate(7deg) brightness(68%) contrast(200%);
+  --gitea-color-primary-dark-4: 151, 135, 90;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

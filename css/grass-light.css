@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Grass (light)
+ *
+ * Generated variant: light of 'grass', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'grass'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/css_filter_solver.py '#b38800'.
+ */
+:root {
+  --main-bg-color: #d8ffe0;
+  --modal-bg-color: #d8ffe0;
+  --modal-header-color: #d8ffe0;
+  --modal-footer-color: #d8ffe0;
+  --drop-down-menu-bg: #d8ffe0;
+  --button-color: #b38800;
+  --button-color-hover: #9d8f46;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 179, 136, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007e7e;
+  --link-color-hover: #717171;
+  --label-text-color: #11141b;
+  --text: #020000;
+  --text-hover: #000000;
+  --text-muted: #010101;
+  --arr-queue-color: #00a600;
+  --plex-poster-unwatched: #b38800;
+  --petio-spinner: invert(77%) sepia(97%) saturate(516%) hue-rotate(346deg) brightness(62%) contrast(172%);
+  --gitea-color-primary-dark-4: 179, 136, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(216, 255, 224, 0.17) 0%, #d8ffe0 100%);
+}

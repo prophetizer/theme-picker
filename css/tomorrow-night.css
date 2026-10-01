@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Tomorrow Night
+ *
+ * Palette source: chriskempson/tomorrow-theme vim/colors/Tomorrow-Night.vim (GUI values)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * HIGH CONTRAST: every text role (body, muted, links, button label) is meant
+ * to reach WCAG AAA 7:1 on the panels.
+ * --text-muted #b4b6b4 is the palette's #969896 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color #8bbfb8 is the palette's #8abeb7 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color-hover #c9abd3 is the palette's #b294bb with its lightness
+ * nudged to reach 7:1 on the panels.
+ * --button-text #181a1c is the palette's #1d1f21 with its lightness nudged to
+ * reach 7:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#f0c674'.
+ */
+:root {
+  --main-bg-color: #1d1f21;
+  --modal-bg-color: #282a2e;
+  --modal-header-color: #282a2e;
+  --modal-footer-color: #282a2e;
+  --drop-down-menu-bg: #282a2e;
+  --button-color: #f0c674;
+  --button-color-hover: #de935f;
+  --button-text: #181a1c;
+  --button-text-hover: #181a1c;
+  --accent-color: 240, 198, 116;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8bbfb8;
+  --link-color-hover: #c9abd3;
+  --label-text-color: #181a1c;
+  --text: #c5c8c6;
+  --text-hover: #c5c8c6;
+  --text-muted: #b4b6b4;
+  --arr-queue-color: #b5bd68;
+  --plex-poster-unwatched: #de935f;
+  --petio-spinner: invert(70%) sepia(37%) saturate(505%) hue-rotate(356deg) brightness(111%) contrast(88%);
+  --gitea-color-primary-dark-4: 240, 198, 116;
+  --overseerr-gradient: linear-gradient(180deg, rgba(29, 31, 33, 0.17) 0%, rgba(29, 31, 33) 100%);
+}

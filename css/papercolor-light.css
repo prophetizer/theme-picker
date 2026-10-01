@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: PaperColor Light
+ *
+ * Palette source: NLKNguyen/papercolor-theme, colors/PaperColor.vim ('default.light' table).
+ * Values are the upstream canonical hexes, not an approximation.
+ *
+ * --text-muted uses #6c6c6c from the theme's own grey ramp rather than color05
+ * #878787, which is the comment colour but reaches 2.8:1 against the
+ * cursorline surface #e4e4e4; #6c6c6c gives 4.1:1.
+ * --text and --text-hover are both color07 #444444 -- the light table has
+ * no stronger text colour.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#005f87'.
+ */
+:root {
+  --main-bg-color: #eeeeee;
+  --modal-bg-color: #e4e4e4;
+  --modal-header-color: #e4e4e4;
+  --modal-footer-color: #e4e4e4;
+  --drop-down-menu-bg: #e4e4e4;
+  --button-color: #005f87;
+  --button-color-hover: #d75f00;
+  --button-text: #eeeeee;
+  --button-text-hover: #eeeeee;
+  --accent-color: 0, 95, 135;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0087af;
+  --link-color-hover: #005faf;
+  --label-text-color: #eeeeee;
+  --text: #444444;
+  --text-hover: #444444;
+  --text-muted: #6c6c6c;
+  --arr-queue-color: #008700;
+  --plex-poster-unwatched: #005f87;
+  --petio-spinner: invert(53%) sepia(95%) saturate(562%) hue-rotate(148deg) brightness(52%) contrast(150%);
+  --gitea-color-primary-dark-4: 0, 95, 135;
+  --overseerr-gradient: linear-gradient(180deg, rgba(238, 238, 238, 0.17) 0%, rgba(238, 238, 238) 100%);
+}

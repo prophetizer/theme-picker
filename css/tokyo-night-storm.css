@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Tokyo Night Storm
+ *
+ * Palette source: folke/tokyonight.nvim lua/tokyonight/colors/storm.lua (bg, bg_dark, bg_highlight, fg, comment, accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #838ebb is the palette's #565f89 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#7aa2f7'.
+ */
+:root {
+  --main-bg-color: #1f2335;
+  --modal-bg-color: #24283b;
+  --modal-header-color: #24283b;
+  --modal-footer-color: #24283b;
+  --drop-down-menu-bg: #24283b;
+  --button-color: #7aa2f7;
+  --button-color-hover: #7dcfff;
+  --button-text: #1f2335;
+  --button-text-hover: #1f2335;
+  --accent-color: 122, 162, 247;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7dcfff;
+  --link-color-hover: #bb9af7;
+  --label-text-color: #1f2335;
+  --text: #c0caf5;
+  --text-hover: #c0caf5;
+  --text-muted: #838ebb;
+  --arr-queue-color: #9ece6a;
+  --plex-poster-unwatched: #ff9e64;
+  --petio-spinner: invert(45%) sepia(69%) saturate(287%) hue-rotate(183deg) brightness(118%) contrast(115%);
+  --gitea-color-primary-dark-4: 122, 162, 247;
+  --overseerr-gradient: linear-gradient(180deg, rgba(31, 35, 53, 0.17) 0%, rgba(31, 35, 53) 100%);
+}

@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: GitHub Dark Dimmed
+ *
+ * Palette source: primer/github-vscode-theme src/theme.js + @primer/primitives 7.10.0 dist/json/colors/dark_dimmed.json (canvas, fg and ANSI scales; orange is severe.fg)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #828f9c is the palette's #768390 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/css_filter_solver.py '#539bf5'.
+ */
+:root {
+  --main-bg-color: #1c2128;
+  --modal-bg-color: #22272e;
+  --modal-header-color: #22272e;
+  --modal-footer-color: #22272e;
+  --drop-down-menu-bg: #22272e;
+  --button-color: #539bf5;
+  --button-color-hover: #39c5cf;
+  --button-text: #1c2128;
+  --button-text-hover: #1c2128;
+  --accent-color: 83, 155, 245;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #539bf5;
+  --link-color-hover: #b083f0;
+  --label-text-color: #1c2128;
+  --text: #adbac7;
+  --text-hover: #cdd9e5;
+  --text-muted: #828f9c;
+  --arr-queue-color: #57ab5a;
+  --plex-poster-unwatched: #cc6b2c;
+  --petio-spinner: invert(57%) sepia(42%) saturate(699%) hue-rotate(177deg) brightness(92%) contrast(111%);
+  --gitea-color-primary-dark-4: 83, 155, 245;
+  --overseerr-gradient: linear-gradient(180deg, rgba(28, 33, 40, 0.17) 0%, rgba(28, 33, 40) 100%);
+}
