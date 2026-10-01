@@ -19,6 +19,10 @@ than "By section" pools them into one list.*
 
 ## Install
 
+**Just want to look?** The [live demo](https://prophetizer.github.io/theme-picker/)
+is the real page with sample data: pick themes, open the editor, try the
+filters. Nothing is applied anywhere.
+
 **Just want to try it?** The [starter stack](starter/) runs Traefik,
 theme.park, the picker and a demo app on `http://*.localhost` with one
 `docker compose up -d`.
