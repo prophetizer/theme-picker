@@ -182,6 +182,36 @@ class Variants(SandboxCase):
         self.add_custom("orphan-dark", self.VARIANT)                  # source gone: no pair
         self.assertEqual(themes.variant_pairs(), {"nord": "nord-light"})
 
+    def test_added_timestamps_keep_the_new_badge_and_the_time(self):
+        import json
+        from datetime import datetime, timezone
+        from picker import render, state
+        self.add_custom("fresh-one", fixture("high_contrast.css"))
+        self.add_custom("old-one", fixture("high_contrast.css"))
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        state.DATES_FILE.write_text(json.dumps({"fresh-one": now, "old-one": "2020-01-01"}))
+        page = render.render_page()
+        tile = lambda n: page[page.index(f'data-theme="{n}"'):page.index("</button>", page.index(f'data-theme="{n}"'))]
+        self.assertIn(f'data-added="{now}"', tile("fresh-one"))           # the full time, for sorting
+        self.assertIn('data-new="1"', tile("fresh-one"))                   # a timestamp still counts as new
+        self.assertIn(f'title="Added {render.added_day(now)}"', tile("fresh-one"))
+        self.assertIn('data-new="0"', tile("old-one"))
+
+    def test_added_day_is_the_local_day(self):
+        import os, time as _t
+        from picker import render
+        old = os.environ.get("TZ")
+        os.environ["TZ"] = "America/Chicago"; _t.tzset()
+        try:
+            self.assertEqual(render.added_day("2026-09-30T02:01:20Z"), "2026-09-29")   # 21:01 CDT
+            self.assertEqual(render.added_day("2026-09-30T12:00:00Z"), "2026-09-30")
+            self.assertEqual(render.added_day("2026-08-31"), "2026-08-31")            # older day-only value
+            self.assertEqual(render.added_day("garbage-T"), "")
+        finally:
+            if old is None: os.environ.pop("TZ", None)
+            else: os.environ["TZ"] = old
+            _t.tzset()
+
     def test_twin_follows_its_source_in_the_same_section_and_is_never_new(self):
         import json
         from datetime import date

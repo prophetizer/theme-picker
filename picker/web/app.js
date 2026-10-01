@@ -67,6 +67,8 @@ const SORTS = {
   dark:   (a, b) => a.dataset.lum - b.dataset.lum,
   hue:    (a, b) => (FAM_ORDER.indexOf(a.dataset.family) - FAM_ORDER.indexOf(b.dataset.family))
                     || (a.dataset.hue - b.dataset.hue),
+  // ISO text sorts by time: full UTC timestamps order same-day additions;
+  // an older day-only value sorts before any timestamp of that day.
   newest: (a, b) => (b.dataset.added || '').localeCompare(a.dataset.added || '')
                     || a.dataset.theme.localeCompare(b.dataset.theme),
 };
@@ -266,7 +268,9 @@ function openLightbox(btn) {
   const bits = [];
   if (btn.dataset.mode) bits.push(btn.dataset.mode);
   if (btn.dataset.gradient === '1') bits.push('gradient');
-  if (btn.dataset.added) bits.push('added ' + btn.dataset.added);
+  // A UTC timestamp shows as the viewer's own calendar day.
+  const added = btn.dataset.added || '';
+  if (added) bits.push('added ' + (added.includes('T') ? new Date(added).toLocaleDateString() : added));
   $('#lb-meta').textContent = bits.join(' · ');
   const warn = $('#lb-warn');
   warn.textContent = btn.dataset.warn ? 'Contrast: ' + btn.dataset.warn : '';

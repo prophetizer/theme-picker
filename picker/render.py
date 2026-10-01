@@ -3,7 +3,7 @@
 import hashlib
 import html
 from concurrent.futures import ThreadPoolExecutor
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 from . import config, deploy, schedule, shots, state, themes
@@ -48,6 +48,18 @@ def swatch_html(theme):
     return f'<span class="swatch">{cells}</span>' if cells else ""
 
 
+def added_day(added):
+    """The local calendar day of a theme-dates.json value ("" if none): a UTC
+    timestamp committed at 21:00 local on the 29th is the 29th here, not the
+    30th."""
+    if "T" in added:
+        try:
+            return datetime.fromisoformat(added.replace("Z", "+00:00")).astimezone().date().isoformat()
+        except ValueError:
+            return ""
+    return added[:10]
+
+
 def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin="", twin_of=""):
     """One theme tile. A theme with a light/dark twin carries data-twin; the
     twin itself data-twin-of, and sits right after it in the same section.
@@ -55,11 +67,16 @@ def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin
     the sidebar's "show every theme as"); without JavaScript both show."""
     m = theme_metrics(t)
     grad = themes.is_gradient(t)
-    added = dates.get(t, "")
+    # theme-dates.json holds when each theme was first committed: a UTC
+    # timestamp ("2026-09-29T02:05:11Z", so Newest orders themes added the
+    # same day) or, from older sync-themes.sh runs, just the day. The badge
+    # and tooltips use the day; data-added keeps it all for sorting.
+    added = str(dates.get(t, ""))
+    day = added_day(added)
     try:
         # Generated variants arrive a hundred at a time; badging them "new"
         # would bury the themes that really are.
-        fresh = not twin_of and section != "variants" and bool(added) and (today - date.fromisoformat(added)).days <= NEW_DAYS
+        fresh = not twin_of and section != "variants" and bool(day) and (today - date.fromisoformat(day)).days <= NEW_DAYS
     except ValueError:
         fresh = False
     apps = shot_idx.get(t, [])
@@ -77,7 +94,7 @@ def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin
         tags.append(f'<span class="tag hc" title="WCAG AAA for every text role. Text {r["--text"]}:1, muted {r["--text-muted"]}:1, '
                     f'links {r["--link-color"]}:1, buttons {r["--button-text"]}:1">high contrast</span>')
     if fresh:
-        tags.append(f'<span class="tag new" title="Added {e(added)}">new</span>')
+        tags.append(f'<span class="tag new" title="Added {e(day)}">new</span>')
     if grad:
         tags.append('<span class="tag grad">gradient</span>')
     peek = (f'<span class="peek" title="Preview {len(apps)} screenshots (P)" aria-label="Screenshots">&#9635;</span>'
