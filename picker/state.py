@@ -20,7 +20,7 @@ FAVS_FILE = config.STATE_DIR / "theme-favourites.json"
 HIDDEN_FILE = config.STATE_DIR / "theme-hidden.json"
 STATE_LOCK = threading.Lock()
 
-# When each custom theme first landed in homelab-themes -- written by
+# When each custom theme first landed in the themes repo -- written by
 # sync-themes.sh from git history (the container has no git). Drives the
 # "new" badge. Upstream themes are absent from it and are never "new".
 DATES_FILE = config.THEME_DIR / "theme-dates.json"
@@ -87,15 +87,28 @@ def recent_themes(active):
 
 # --- apps, overrides, favourites -----------------------------------------
 def load_apps():
-    """Themed apps from apps.yml, with the public hostname each lives at."""
-    try:
-        apps = (yaml.safe_load(APPS_FILE.read_text()) or {}).get("apps", [])
-    except (OSError, yaml.YAMLError):
-        return []
-    return [{"name": a["name"], "theme_app": a.get("theme_app", a["name"]),
-             "host": a.get("host", a["name"]),
-             "addons": [x for x in (a.get("addons") or []) if isinstance(x, str)]}
-            for a in apps if "name" in a]
+    """Themed apps: picker.yml's `apps` if set, else apps.yml. Each gets its
+    theme_app (default: name), host (default: name) and, if given, a full
+    url (dropped unless http(s)). apps.yml can be writable by the picker's
+    container, so names are checked again where they become middleware names
+    (renderer._apps) and hosts where they become requests (coverage)."""
+    apps = config.SETTINGS["apps"]
+    if apps is None:
+        try:
+            apps = (yaml.safe_load(APPS_FILE.read_text()) or {}).get("apps", [])
+        except (OSError, yaml.YAMLError, AttributeError):
+            return []
+    out = []
+    for a in apps if isinstance(apps, list) else []:
+        if not isinstance(a, dict) or "name" not in a:
+            continue
+        app = {"name": a["name"], "theme_app": a.get("theme_app", a["name"]),
+               "host": a.get("host", a["name"]), "url": a.get("url") or "",
+               "addons": [x for x in (a.get("addons") or []) if isinstance(x, str)]}
+        if app["url"] and not (isinstance(app["url"], str) and config._URL.match(app["url"])):
+            app["url"] = ""
+        out.append(app)
+    return out
 
 
 def read_overrides():

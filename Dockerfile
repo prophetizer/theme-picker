@@ -3,7 +3,7 @@
 #
 # The base is pinned by digest (python:3.12-slim, multi-arch index) and the one
 # dependency by hash, so a rebuild of the same tag gets the same bits.
-FROM python:3.12-slim@sha256:2f17fc044b579bab302c2e8054d3a686e2cb9a83de48e70534b94cd8ebbe06a9
+FROM python:3.12-slim@sha256:dddfd7e07f9d15aeeca61529320492139d21cac7f0070c00609243e51e4e0016
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -13,6 +13,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 # pip is only needed for this one install. It is removed afterwards: nothing
 # at runtime uses it, and the base image's copy carries CVEs that image
 # scanners (rightly) report against anything that ships it.
+# Debian security updates newer than the pinned base (PCRE2 at the time of
+# writing). The distribution's own fixes, so not pinned.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends --only-upgrade libpcre2-8-0 \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir --require-hashes -r /tmp/requirements.txt \
     && rm /tmp/requirements.txt \

@@ -42,9 +42,17 @@ listen:
 
 screenshots:
   # Apps the capture script photographs in every theme, in lightbox order.
-  # Pick apps whose themed page shows without a login wall.
-  # Env: APPS (space-separated)
-  apps: [dozzle, nzbhydra2, forgejo, grafana, portainer, jellyfin, emby, sabnzbd, tautulli, guacamole]
+  # Pick apps whose themed page shows without a login wall. Empty: every
+  # themed app. Env: APPS (space-separated)
+  apps: []
+  # chrome: the installed Google Chrome. chromium: Playwright's own build, as
+  # in the capture image. Env: CAPTURE_BROWSER
+  browser: chrome
+  # Run the browser with its own sandbox. Keep it on for a capture on a host;
+  # the capture image turns it off, since Docker's default seccomp profile
+  # does not let Chromium make its namespaces -- the container is the
+  # boundary there. Env: CAPTURE_SANDBOX
+  sandbox: true
 
 coverage:
   # Seconds between scheduled checks that every themed app is served its
@@ -64,8 +72,9 @@ backend:
   # theme-switcher directory, else dynamic/themes.yml there. Relative paths
   # are relative to the theme-switcher directory. Env: THEME_OUTPUT_FILE
   output_file: /path/to/traefik/dynamic/themes.yml
-  # Which apps are themed: name, theme_app, optional host and addons.
+  # Which apps are themed: name, theme_app, optional host, url and addons.
   # Default: apps.yml in the theme-switcher directory. Env: THEME_APPS_FILE
+  # Ignored when `apps` (below) is set.
   apps_file: apps.yml
   # Written before any theme has been picked. Env: THEME_DEFAULT
   default_theme: dark
@@ -96,3 +105,27 @@ custom_themes:
   # changes. The editor then saves straight into `dir`. Leave empty when
   # something else deploys your themes. Env: THEME_PARK_WWW
   theme_park_www: ""
+  # With theme_park_www set: also make every theme's opposite-mode twin --
+  # a light one of each dark theme and the reverse, theme.park's own themes
+  # included -- written into `dir` as <name>-light.css / <name>-dark.css and
+  # deployed with the rest. Skipped where a real twin exists (gruvbox-light).
+  # Only files the picker generated are ever replaced or removed.
+  # Env: CUSTOM_THEMES_TWINS
+  twins: true
+
+# The themed apps, right here instead of in an apps.yml. Set, it replaces
+# backend.apps_file. Each app is a name, "name:theme_app", or a mapping:
+#   name       the middleware becomes <name>-theme (lowercase, digits, -)
+#   theme_app  theme.park's name for the app (default: name)
+#   host       it lives at <host>.<domain> (default: name)
+#   url        or its full address, for an app elsewhere (another domain,
+#              a port, a path); used by the coverage check and the Apps tab
+#   addons     theme.park addons for it
+# Env: THEME_APPS, the short forms separated by spaces or commas
+# ("sonarr radarr jellyseerr:overseerr"). Changing it needs a restart (and
+# of the themes-renderer too, with backend.type state).
+apps:
+#  - sonarr
+#  - jellyseerr:overseerr
+#  - name: grafana
+#    url: https://grafana.example.com:3000/

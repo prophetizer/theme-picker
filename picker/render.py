@@ -193,7 +193,7 @@ def apps_html(active):
         cur = pinned.get(a["name"], "")
         cards.append(
             f'<div class="app-card" data-app="{n}">'
-            f'<a href="https://{html.escape(a["host"])}.{html.escape(config.DOMAIN)}/" '
+            f'<a href="{html.escape(config.app_url(a))}" '
             f'target="_blank" rel="noopener">{n}</a>'
             f'<select class="pin" data-app="{n}" data-current="{html.escape(cur)}" aria-label="Theme for {n}">'
             f'<option value="">follows the live theme</option>{opts}</select>'
@@ -323,7 +323,7 @@ def render_page(message="", preview=""):
     hidden = frozenset(state.read_hidden())
     pairs = themes.variant_pairs()
     grid = lambda names, sect: theme_grid(names, sect, active, shot_idx, dates, today, favs, pairs, hidden)
-    app_opts = "".join(f'<option value="{a}">{a} screenshots</option>' for a in shots.APP_ORDER)
+    app_opts = "".join(f'<option value="{a}">{a} screenshots</option>' for a in shots.screenshot_apps())
     base_opts = "".join(f'<option value="{html.escape(t)}"{" selected" if t == active else ""}>'
                         f'{html.escape(t)}</option>' for t in sorted(themes.allowed_themes()))
     fams = "".join(
@@ -335,7 +335,7 @@ def render_page(message="", preview=""):
         grid_official=grid(themes.official_themes(), "official"),
         grid_community=grid(themes.community_themes(), "community"),
         **{f"grid_{g.replace('-', '_')}": grid(names, g) for g, names in custom_groups(pairs).items()},
-        ed_twin_note=("" if deploy.enabled() else
+        ed_twin_note=("" if deploy.enabled() and not config.MAKE_TWINS else
                       '<span class="count" id="ed-twin-note">A light/dark twin of it is made automatically.</span>'),
         live_swatch=swatch_html(active),
         msg_hidden=msg_hidden, msg_text=msg_text, preview_banner=preview_banner,

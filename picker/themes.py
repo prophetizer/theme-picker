@@ -45,9 +45,9 @@ FALLBACK_COMMUNITY = [
     "rose-pine", "soul", "space", "time", "trueblack",
 ]
 
-# Custom themes live in the homelab-themes repo, cloned at
-# theme-switcher/themes-src/ and deployed into the theme-park container by
-# sync-themes.sh. Discovered from that directory at request time rather
+# Custom themes live in custom_themes.dir (default: a theme-park-themes clone
+# at theme-switcher/themes-src/), deployed into theme.park by sync-themes.sh
+# or, in portable mode, by deploy.py. Discovered from that directory at request time rather
 # than listed here, so adding a theme to that repo is enough -- this list
 # can't drift from what's actually deployed.
 CUSTOM_THEMES_DIR = config.CUSTOM_DIR
@@ -138,8 +138,8 @@ def custom_themes():
     )
 
 
-# Written into the header of every theme homelab-themes' tools/make_variants.py
-# generates (a light version of each dark theme and vice versa). They are
+# Written into the header of every theme theme-park-themes' tools/make_variants.py
+# (or twins.py) generates (a light version of each dark theme and vice versa). They are
 # custom themes like any other, listed in a section of their own.
 VARIANT_MARK = "Generated variant:"
 
@@ -153,7 +153,7 @@ def mode_counterparts(name):
     """Names that would be `name`'s opposite-mode counterpart: "dark" and
     "light" swapped at any one position (github-dark-high-contrast ->
     github-light-high-contrast), a trailing one dropped (gruvbox-light ->
-    gruvbox), or one appended (gruvbox -> gruvbox-light). homelab-themes'
+    gruvbox), or one appended (gruvbox -> gruvbox-light). theme-park-themes'
     tools/make_variants.py uses the same rule to decide a real twin exists."""
     toks = name.split("-")
     out = []

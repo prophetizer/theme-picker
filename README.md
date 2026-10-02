@@ -50,7 +50,8 @@ in [`picker.example.yml`](picker.example.yml).
   favourites, accent colour), sorting, keyboard navigation, "surprise me"
 - Contrast audit on every theme: *low contrast* and *high contrast* (WCAG AAA
   for every text role) badges, measured rather than claimed
-- Lightbox of real screenshots per theme, captured by a headless-Chrome job
+- Lightbox of real screenshots per theme, captured nightly by an optional
+  headless-Chromium container (or a host cron job)
 - Recent-theme history chips and usage stats
 - Per-app theme pins, with a coverage check that every app actually received
   the theme it should

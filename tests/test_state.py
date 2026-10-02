@@ -1,7 +1,7 @@
 import json
 from unittest import mock
 
-from picker import state
+from picker import config, state
 from tests.support import SandboxCase
 
 
@@ -66,9 +66,31 @@ class AppsPinsFavourites(SandboxCase):
 
     def test_load_apps(self):
         self.assertEqual(state.load_apps(), [
-            {"name": "sonarr", "theme_app": "sonarr", "host": "sonarr", "addons": []},
-            {"name": "forgejo", "theme_app": "gitea", "host": "forgejo", "addons": []},
-            {"name": "authelia", "theme_app": "authelia", "host": "auth", "addons": []}])
+            {"name": "sonarr", "theme_app": "sonarr", "host": "sonarr", "url": "", "addons": []},
+            {"name": "forgejo", "theme_app": "gitea", "host": "forgejo", "url": "", "addons": []},
+            {"name": "authelia", "theme_app": "authelia", "host": "auth", "url": "", "addons": []}])
+
+    def test_apps_in_picker_yml_replace_apps_yml(self):
+        inline = [{"name": "files", "theme_app": "filebrowser"},
+                  {"name": "grafana", "url": "https://grafana.example.com:3000/"}]
+        with mock.patch.dict(config.SETTINGS, {"apps": inline}):
+            apps = state.load_apps()
+        self.assertEqual([a["name"] for a in apps], ["files", "grafana"])
+        self.assertEqual(apps[0]["theme_app"], "filebrowser")
+        self.assertEqual(apps[1]["url"], "https://grafana.example.com:3000/")
+
+    def test_a_url_that_is_not_http_is_dropped(self):
+        state.APPS_FILE.write_text("apps:\n  - name: x\n    url: 'javascript:alert(1)'\n")
+        self.assertEqual(state.load_apps()[0]["url"], "")
+
+    def test_app_url(self):
+        with mock.patch.object(config, "DOMAIN", "example.com"), \
+             mock.patch.object(config, "PICKER_URL", "http://theme-picker.localhost:8088/"):
+            self.assertEqual(config.app_url({"host": "files", "url": ""}), "http://files.example.com:8088/")
+            self.assertEqual(config.app_url({"host": "x", "url": "https://elsewhere.test/app/"}),
+                             "https://elsewhere.test/app/")
+        with mock.patch.object(config, "DOMAIN", "example.com"), mock.patch.object(config, "PICKER_URL", None):
+            self.assertEqual(config.app_url({"host": "sonarr", "url": ""}), "https://sonarr.example.com/")
 
     def test_overrides_are_filtered(self):
         state.OVERRIDES_FILE.write_text(json.dumps(

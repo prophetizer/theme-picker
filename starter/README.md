@@ -32,6 +32,18 @@ then use `http://picker.localhost:8088` and `http://files.localhost:8088`.
 The picker keeps its state (history, favourites, pins, and the `themes.yml`
 Traefik reads) in the `picker-data` volume.
 
+## Screenshots (optional)
+
+```bash
+docker compose --profile capture up -d
+```
+
+This adds `capture` (`ghcr.io/prophetizer/theme-picker-capture:1`, about
+3.7 GB). It photographs the demo app in every theme for the picker's preview
+lightbox: once now, then nightly at 04:30. While it runs, it switches the live
+theme through all of them and puts yours back at the end. It takes about ten
+minutes.
+
 ## Add your own app
 
 1. Add it to `apps.yml`: a `name`, theme.park's name for it as `theme_app`

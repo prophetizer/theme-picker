@@ -1,6 +1,6 @@
 """Deploy custom themes into a self-hosted theme.park -- the portable path.
 
-Off unless custom_themes.theme_park_www is set: the homelab deploys with
+Off unless custom_themes.theme_park_www is set: the author's setup deploys with
 theme-switcher's sync-themes.sh and theme-worker.sh instead, which need a
 host shell, git and docker exec. With it set, this module does the same job
 from inside the picker, needing only theme.park's served www/ directory
@@ -14,6 +14,10 @@ mounted read-write:
      css/base/<app>/<theme>.css wrapper: the same output as theme.park's
      container init, not a reimplementation of it
   4. check each deployed theme now has its per-app file
+
+Before step 1, unless custom_themes.twins is false, twins.sync() makes the
+light/dark twin of every theme (yours and theme.park's) in CUSTOM_DIR, so
+they deploy like the rest.
 
 A custom theme may not take a name theme.park itself ships: its container
 init copies its own files over www/ on every start, so the two would fight.
@@ -35,7 +39,7 @@ import time
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from . import config, state
+from . import config, state, twins
 
 MANIFEST_FILE = config.STATE_DIR / "custom-deployed.json"
 CHECK_EVERY = 60            # seconds between checks for changed or missing themes
@@ -111,7 +115,8 @@ def deploy(force=False):
     from . import themes                              # themes imports config only
     with _LOCK:
         result = {"at": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "ok": False, "deployed": [],
-                  "removed": [], "refused": [], "unchanged": 0, "error": ""}
+                  "removed": [], "refused": [], "unchanged": 0, "error": "",
+                  "twins_made": [], "twins_removed": [], "twins_error": ""}
         try:
             www = _www()
             opts, community = www / "css" / "theme-options", www / "css" / "community-theme-options"
@@ -119,6 +124,12 @@ def deploy(force=False):
                 raise RuntimeError(f"{opts} not found -- is theme_park_www theme.park's www directory?")
             ours = set(n for n in state.read_json(MANIFEST_FILE, []) if isinstance(n, str)
                        and config.SAFE_NAME.match(n))
+            if config.MAKE_TWINS:
+                try:                                  # a twin failing never blocks the themes themselves
+                    tw = twins.sync(themes.CUSTOM_THEMES_DIR, www, ours)
+                    result["twins_made"], result["twins_removed"] = tw["made"], tw["removed"]
+                except Exception as e:
+                    result["twins_error"] = str(e)[:300]
             shipped = ({p.stem for p in opts.glob("*.css")} | {p.stem for p in community.glob("*.css")}) - ours
             wanted, changed = [], False
             for name in themes.custom_themes():
@@ -172,10 +183,12 @@ def deploy(force=False):
             result["error"] = str(e)[:300]
         LAST.clear()
         LAST.update(result)
-        if result["deployed"] or result["removed"] or result["error"] or result["refused"]:
+        if result["deployed"] or result["removed"] or result["error"] or result["refused"] or result["twins_error"]:
             print(f"custom themes: deployed {len(result['deployed'])}, removed {len(result['removed'])}, "
+                  f"twins made {len(result['twins_made'])}, twins removed {len(result['twins_removed'])}, "
                   f"refused {result['refused'] or 'none'}"
-                  + (f", ERROR {result['error']}" if result["error"] else ""), file=sys.stderr, flush=True)
+                  + (f", ERROR {result['error']}" if result["error"] else "")
+                  + (f", TWINS ERROR {result['twins_error']}" if result["twins_error"] else ""), file=sys.stderr, flush=True)
         return dict(result)
 
 

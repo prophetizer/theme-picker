@@ -1,4 +1,4 @@
-"""Theme picker: a web UI for switching a homelab's theme.park theme.
+"""Theme picker: a web UI for switching the theme.park theme of every app behind Traefik.
 
 Module map -- config (paths, env), colour (pure colour maths), themes
 (discovery, stylesheets, palettes), metrics (contrast audit), state (history,

@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from unittest import mock
 
-from picker import config, deploy, editor
+from picker import config, deploy, editor, themes, twins, variants
 from tests.support import SandboxCase
 
 STUB = '''
@@ -24,6 +24,9 @@ json.dump({"themes": {t.capitalize(): {"url": f"https://{os.environ.get('TP_DOMA
 open("ran.log", "a").write("run\\n")
 '''
 CSS = ":root { --main-bg-color: #101010; }\n"
+FIX = Path(__file__).parent / "fixtures"
+DARK = (FIX / "high_contrast.css").read_text().replace(
+    "}", "  --petio-spinner: invert(100%);\n}")          # make_variants recomputes it for the twin
 
 
 class Deploy(SandboxCase):
@@ -135,6 +138,75 @@ class Deploy(SandboxCase):
         self.assertTrue((self.www / "css/base/sonarr/made-here.css").exists())
         self.assertFalse(editor.QUEUE_DIR.exists())
         self.assertEqual(editor.editor_status("made-here")["state"], "deployed")
+
+
+class Twins(Deploy):
+    """Portable mode makes every theme's light/dark twin (picker/twins.py)."""
+
+    def twin(self, name):
+        p = self.custom_dir / f"{name}.css"
+        return p.read_text() if p.exists() else None
+
+    def test_a_dark_theme_gets_a_light_twin_that_deploys(self):
+        self.assertEqual(variants.mode_of(variants.declarations(DARK)), "dark")
+        self.add_custom("mine", DARK)
+        r = deploy.deploy()
+        self.assertTrue(r["ok"], r)
+        self.assertEqual(r["twins_made"], ["mine-light"])
+        css = self.twin("mine-light")
+        self.assertIn(f"{variants.MARK} light of 'mine'", css)
+        self.assertEqual(variants.mode_of(variants.declarations(css)), "light")
+        self.assertRegex(css, r"--petio-spinner: invert\(")
+        self.assertIn("mine-light", r["deployed"])
+        self.assertTrue((self.www / "css/base/sonarr/mine-light.css").exists())
+        self.assertIn("mine-light", themes.variant_themes())
+
+    def test_unchanged_source_is_not_remade_and_a_changed_one_is(self):
+        self.add_custom("mine", DARK)
+        deploy.deploy()
+        self.assertEqual(deploy.deploy()["twins_made"], [])
+        self.add_custom("mine", DARK.replace("--text:", "--text-hover: #eeeeee;\n  --text:"))
+        self.assertEqual(deploy.deploy()["twins_made"], ["mine-light"])
+
+    def test_a_removed_source_takes_its_twin_with_it(self):
+        self.add_custom("mine", DARK)
+        deploy.deploy()
+        (self.custom_dir / "mine.css").unlink()
+        r = deploy.deploy()
+        self.assertEqual(r["twins_removed"], ["mine-light"])
+        self.assertIsNone(self.twin("mine-light"))
+        self.assertFalse((self.www / "css/theme-options/mine-light.css").exists())
+
+    def test_a_real_twin_means_no_generated_one(self):
+        self.add_custom("mine", DARK)
+        deploy.deploy()
+        light = self.twin("mine-light").replace(variants.MARK, "hand made")
+        self.add_custom("mine-light", light)                # now a real twin, written by hand
+        r = deploy.deploy()
+        self.assertEqual((r["twins_made"], r["twins_removed"]), ([], []))
+        self.assertEqual(self.twin("mine-light"), light)
+
+    def test_never_overwrites_a_hand_made_theme(self):
+        self.add_custom("mine", DARK)
+        self.add_custom("mine-light", DARK)                 # dark, so not a twin -- and not ours
+        r = twins.sync(self.custom_dir, self.www)
+        self.assertNotIn("mine-light", r["made"])           # (it gets its own twin, mine-light-light)
+        self.assertIn(("mine", "'mine-light' is taken"), r["skipped"])
+        self.assertEqual(self.twin("mine-light"), DARK)
+
+    def test_theme_parks_own_themes_get_twins_but_twins_do_not(self):
+        (self.www / "css/community-theme-options/dusk.css").write_text(DARK)
+        r = deploy.deploy()
+        self.assertEqual(r["twins_made"], ["dusk-light"])
+        self.assertIn("community theme", self.twin("dusk-light"))
+        self.assertEqual(deploy.deploy()["twins_made"], [])     # no dusk-light-dark
+
+    def test_off_with_the_setting(self):
+        self.add_custom("mine", DARK)
+        with mock.patch.object(config, "MAKE_TWINS", False):
+            r = deploy.deploy()
+        self.assertEqual(r["twins_made"], [])
+        self.assertIsNone(self.twin("mine-light"))
 
 
 class Disabled(SandboxCase):

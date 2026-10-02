@@ -1,7 +1,10 @@
-# Only server.py, picker/, LICENSE and requirements.txt go into the image.
+# Only what the two images copy: server.py, picker/, LICENSE and
+# requirements.txt (the picker); the capture script and capture/ (the capture).
 *
 !server.py
 !picker/
 !LICENSE
 !requirements.txt
+!capture_theme_screenshots.py
+!capture/
 **/__pycache__

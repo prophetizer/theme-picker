@@ -111,6 +111,29 @@ class Files(unittest.TestCase):
         self.assertEqual(documented, {".".join(k) for k in config.KEYS})
 
 
+class AppsSetting(unittest.TestCase):
+    def test_unset_means_apps_yml(self):
+        self.assertIsNone(quiet_resolve({}, {})[0]["apps"])
+        self.assertIsNone(quiet_resolve({}, {"apps": None})[0]["apps"])
+
+    def test_short_and_long_forms(self):
+        s, _ = quiet_resolve({}, {"apps": ["sonarr", "jellyseerr:overseerr",
+                                           {"name": "grafana", "url": "https://g.example.com/", "addons": []}]})
+        self.assertEqual(s["apps"], [{"name": "sonarr"}, {"name": "jellyseerr", "theme_app": "overseerr"},
+                                     {"name": "grafana", "url": "https://g.example.com/", "addons": []}])
+
+    def test_env_takes_the_short_forms(self):
+        s, _ = quiet_resolve({"THEME_APPS": "sonarr, radarr jellyseerr:overseerr"}, {})
+        self.assertEqual([a["name"] for a in s["apps"]], ["sonarr", "radarr", "jellyseerr"])
+
+    def test_refuses_what_could_reach_traefik_or_a_request(self):
+        for bad in (["Sonarr"], ["a b"], [{"theme_app": "x"}], [{"name": "x", "evil": 1}],
+                    [{"name": "x", "host": "a/b"}], [{"name": "x", "url": "file:///etc"}],
+                    [{"name": "x", "addons": "y"}], "sonarr:x:y", 5):
+            with self.subTest(bad=bad), self.assertRaises(config.ConfigError):
+                quiet_resolve({}, {"apps": bad})
+
+
 class Urls(unittest.TestCase):
     def test_config_env_base_url_must_be_http(self):
         d = Path(tempfile.mkdtemp()); self.addCleanup(__import__("shutil").rmtree, d)

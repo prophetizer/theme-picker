@@ -4,7 +4,7 @@ turning a submission into a theme file queued for deployment.
 The picker cannot deploy a theme itself: its container has no git and no
 Docker access. A saved theme is written to editor-queue/, and
 theme-worker.sh -- run every minute from the host's crontab -- commits it to
-homelab-themes, pushes, and deploys with sync-themes.sh, recording the
+the themes repo, pushes, and deploys with sync-themes.sh, recording the
 outcome in editor-status.json.
 
 Security: the theme file is served to every themed app, so it is built here

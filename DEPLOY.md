@@ -63,9 +63,14 @@ apps:
     addons: []            # optional: theme.park addons for this app
 ```
 
-`host` defaults to `name`. It is only used by the coverage check, which
-requests `https://<host>.<domain>/` to confirm each app really receives its
-theme.
+`host` defaults to `name`. The coverage check requests `https://<host>.<domain>/`
+to confirm each app really receives its theme, and the Apps tab links there.
+It uses the scheme and port of `picker_url`. An app that lives somewhere else
+(another domain, a port, a path) takes a full `url:` instead.
+
+You can also skip the file and list the apps in `picker.yml` under `apps:`.
+Each one is a name, `name:theme_app`, or the same mapping as above. They also
+fit in one environment variable: `THEME_APPS="sonarr radarr jellyseerr:overseerr"`.
 
 **`picker.yml`**: settings. Every key is optional; `picker.example.yml`
 documents them all.
@@ -195,18 +200,51 @@ picker writes `baseUrl` from `theme_park_url`). If an app sends its own
 
 ### Screenshots
 
-By default each tile shows colour bands. Real screenshots come from
-`capture-theme-screenshots.sh`, which runs **on the host** rather than in the
-container:
+By default each tile shows colour bands. Real screenshots come from the
+capture, an optional second container. While it runs, it cycles the live
+theme through every theme, so everyone sees it change. It photographs
+`screenshots.apps` from `picker.yml`; pick apps whose themed page shows
+without a login screen.
 
-- It drives an installed Chrome through Playwright, in a pinned venv it
-  creates from `capture-requirements.txt`.
-- It cycles the live theme through every theme, so everyone sees it change
-  while it runs.
-- It photographs `screenshots.apps` from `picker.yml`. Pick apps whose themed
-  page shows without a login screen.
+The image is `ghcr.io/prophetizer/theme-picker-capture`, tagged like the
+picker. It holds Playwright and its Chromium, so it is large (about 3.7 GB).
+Give it the picker's settings and mounts: it switches the theme through the
+same files, and writes the screenshots into `/data/screenshots`, where the
+picker reads them.
 
-`install-cron.sh` schedules it nightly.
+```yaml
+  theme-picker-capture:
+    image: ghcr.io/prophetizer/theme-picker-capture:1
+    user: "1000:1000"                  # the same user as the picker
+    environment:
+      - TZ=Europe/London
+      - CAPTURE_AT=04:30               # nightly at this local time; empty = once, then exit
+    volumes:                           # the picker's volumes, exactly
+      - ./theme-picker-data:/data
+      - ./traefik/dynamic:/traefik-dynamic
+    shm_size: 1gb                      # Chromium needs more than Docker's 64 MB
+    networks:
+      - proxy
+    restart: unless-stopped
+```
+
+- **First start:** it shoots straight away when there are no screenshots
+  yet (`CAPTURE_ON_START=0` turns that off). After that, a run re-shoots only
+  what is missing, plus custom themes whose file changed.
+- **Reaching your apps:** the capture loads each app at the address the
+  coverage check uses. From inside the container, your apps' names must
+  lead to Traefik.
+- **`*.localhost` names:** Chromium always sends these to its own loopback.
+  Use `CAPTURE_HOST_RULES="MAP *.localhost traefik"` to send them to the
+  proxy instead. The [starter stack](starter/) does this.
+- **Sandbox:** Chromium's own sandbox is off in the image, because Docker's
+  default seccomp profile does not let it start. The container is the
+  boundary. It needs no secrets, so don't give it the picker's token files.
+
+**On a host instead:** `capture-theme-screenshots.sh` runs the same script
+against an installed Chrome, in a pinned venv it creates from
+`capture-requirements.txt`, with Chrome's sandbox on. `install-cron.sh`
+schedules it nightly. That's how the author runs it.
 
 ### Notifications (ntfy)
 
@@ -292,6 +330,19 @@ at start and every minute:
 Adding a theme means dropping a file into the folder. The editor's *Save &
 deploy* writes straight into the folder and deploys immediately.
 `/api/custom-themes` reports the last run.
+
+**Light/dark twins.** Before each run, the picker also makes every theme's
+opposite-mode twin, so each one comes in a light and a dark form. That covers
+your themes and theme.park's own: `<name>-light.css` for a dark theme,
+`<name>-dark.css` for a light one. The twins are written into the same folder
+and deployed with the rest.
+- A theme that already has a real twin (`gruvbox` and `gruvbox-light`) gets
+  no generated one.
+- A twin is remade when its source changes, and removed when the source is.
+- The picker only ever replaces or removes files it generated. Those carry
+  `Generated variant:` in their header, so a theme you wrote is never touched.
+- Set `custom_themes.twins: false` to turn this off. Expect about 40 twins
+  for theme.park's own themes on the first run, which takes a few seconds.
 
 What it refuses, and why:
 - **A name theme.park already uses** (e.g. `nord.css`). theme.park copies its

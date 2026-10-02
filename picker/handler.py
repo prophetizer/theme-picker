@@ -15,7 +15,7 @@ from .render import STATIC, STATIC_TYPES, render_page
 from .summary import current_summary
 
 
-# Sent with every response. The picker changes the whole homelab with one
+# Sent with every response. The picker changes every themed app with one
 # click and, on the LAN, needs no login -- so it must not be frameable
 # (clickjacking) and its responses must not be MIME-sniffed.
 SECURITY_HEADERS = {

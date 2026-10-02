@@ -10,6 +10,11 @@
 #
 # For trying it out, not for production: plain HTTP and no login in front of
 # the picker. DEPLOY.md covers a real setup.
+#
+# Screenshots in the picker's lightbox (optional, a 3.7 GB image):
+#   docker compose --profile capture up -d
+# shoots File Browser in every theme once now, then nightly at 04:30. While it
+# runs it cycles the live theme through all of them.
 
 name: theme-picker-starter
 
@@ -81,9 +86,35 @@ services:
       - THEME_APPS_FILE=/config/apps.yml
       - THEME_OUTPUT_FILE=/data/proxy/themes.yml
       - THEME_DEFAULT=dark
-    volumes:
+      - APPS=files                    # the apps the capture photographs
+    volumes: &picker-volumes
       - ./apps.yml:/config/apps.yml:ro
-      - picker-data:/data             # history, favourites, pins; proxy/themes.yml
+      - picker-data:/data             # history, favourites, pins; proxy/themes.yml; screenshots/
+    restart: unless-stopped
+
+  capture:
+    # Optional (--profile capture): screenshots for the picker's lightbox.
+    # Same settings and data as the picker; it switches the theme through
+    # the same files.
+    image: ${CAPTURE_IMAGE:-ghcr.io/prophetizer/theme-picker-capture:1}
+    profiles: [capture]
+    environment:
+      - DOMAIN=localhost
+      - PICKER_URL=http://picker.localhost:${STARTER_PORT:-80}/
+      - THEME_PARK_URL=http://themepark.localhost:${STARTER_PORT:-80}
+      - THEME_APPS_FILE=/config/apps.yml
+      - THEME_OUTPUT_FILE=/data/proxy/themes.yml
+      - THEME_DEFAULT=dark
+      - APPS=files
+      # Chromium keeps *.localhost to itself; send those names to Traefik.
+      - CAPTURE_HOST_RULES=MAP *.localhost traefik
+    volumes: *picker-volumes
+    shm_size: 1gb                     # Chromium needs more than Docker's 64 MB
+    depends_on:
+      picker:
+        condition: service_healthy
+      routes:
+        condition: service_completed_successfully
     restart: unless-stopped
 
   files:

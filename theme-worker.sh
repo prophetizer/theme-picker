@@ -6,10 +6,10 @@
 # so it cannot commit a theme or run sync-themes.sh. It writes the finished
 # CSS to editor-queue/<name>.css and this picks it up:
 #
-#   1. move it into themes-src/themes/ (the homelab-themes clone)
+#   1. move it into themes-src/themes/ (a theme-park-themes clone)
 #   2. generate its light/dark twin (tools/make_variants.py): every theme
 #      ships with one
-#   3. rebuild previews, commit, push to Forgejo
+#   3. rebuild previews, commit, push
 #   4. ./sync-themes.sh -- deploy into theme-park, regenerate, record dates
 #   5. record the outcome in editor-status.json, which the picker polls
 #

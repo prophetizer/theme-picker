@@ -2,8 +2,8 @@
 
 picker.yml sits in this checkout (gitignored; picker.example.yml documents
 every key) or wherever PICKER_CONFIG points. Every key is optional and no
-file at all is valid -- the defaults are what the homelab ran on before the
-file existed. Environment variables win so a compose file can still override
+file at all is valid -- the defaults are what the author's setup ran on before
+the file existed. Environment variables win so a compose file can still override
 anything. The capture script reads the same file, so the domain and the
 screenshot app list live in one place.
 
@@ -16,6 +16,8 @@ import re
 import sys
 from pathlib import Path
 
+from urllib.parse import urlsplit
+
 import yaml  # installed into /tmp/pylibs at container start (see compose file)
 
 REPO_DIR = Path(__file__).resolve().parent.parent
@@ -27,8 +29,8 @@ _APP = re.compile(r"^[a-z0-9-]+\Z")
 _URL = re.compile(r"^https?://[^\s/]+(/\S*)?\Z")
 _HOST = re.compile(r"^[A-Za-z0-9.-]{1,253}\Z")
 
-DEFAULT_SCREENSHOT_APPS = ["dozzle", "nzbhydra2", "forgejo", "grafana", "portainer",
-                           "jellyfin", "emby", "sabnzbd", "tautulli", "guacamole"]
+# Empty: every themed app (shots.screenshot_apps()).
+DEFAULT_SCREENSHOT_APPS = []
 
 # file key path -> (env var, default)
 KEYS = {
@@ -41,6 +43,8 @@ KEYS = {
     ("listen", "host"): ("LISTEN_HOST", "0.0.0.0"),
     ("listen", "port"): ("LISTEN_PORT", 8090),
     ("screenshots", "apps"): ("APPS", DEFAULT_SCREENSHOT_APPS),
+    ("screenshots", "browser"): ("CAPTURE_BROWSER", "chrome"),
+    ("screenshots", "sandbox"): ("CAPTURE_SANDBOX", True),
     ("coverage", "interval"): ("COVERAGE_INTERVAL", 900),
     ("ntfy", "url"): ("NTFY_URL", ""),
     ("ntfy", "topic"): ("NTFY_TOPIC", ""),
@@ -52,6 +56,8 @@ KEYS = {
     ("hooks", "token_file"): ("HOOK_TOKEN_FILE", ""),
     ("custom_themes", "dir"): ("CUSTOM_THEMES_DIR", None),
     ("custom_themes", "theme_park_www"): ("THEME_PARK_WWW", None),
+    ("custom_themes", "twins"): ("CUSTOM_THEMES_TWINS", True),
+    ("apps",): ("THEME_APPS", None),
 }
 BACKENDS = ("traefik-file", "script", "state")
 
@@ -146,6 +152,17 @@ def resolve(env, data, repo_dir=REPO_DIR):
     if not isinstance(apps, list) or not all(isinstance(a, str) and _APP.match(a) for a in apps):
         fail("screenshots.apps", "expected a list of app names (lowercase letters, digits, hyphens)")
     out["screenshots.apps"] = apps
+    if out["apps"] is not None:
+        out["apps"] = _apps_setting(out["apps"], fail)
+    for name in ("custom_themes.twins", "screenshots.sandbox"):
+        flag = out[name]
+        if isinstance(flag, str) and flag.strip().lower() in ("1", "true", "yes", "on", "0", "false", "no", "off"):
+            flag = flag.strip().lower() in ("1", "true", "yes", "on")
+        if not isinstance(flag, bool):
+            fail(name, "expected true or false")
+        out[name] = flag
+    if out["screenshots.browser"] not in ("chrome", "chromium"):
+        fail("screenshots.browser", "expected chrome or chromium")
     tsd = out["theme_switcher_dir"]
     out["theme_switcher_dir"] = (Path(repo_dir) / tsd).resolve() if tsd else Path(repo_dir).parent
     if out["backend.type"] not in BACKENDS:
@@ -164,13 +181,45 @@ def resolve(env, data, repo_dir=REPO_DIR):
     return out
 
 
+APP_KEYS = ("name", "theme_app", "host", "url", "addons")
+
+
+def _apps_setting(value, fail):
+    """The `apps` setting as a list of dicts. Each item is a name ("sonarr"),
+    "name:theme_app" ("jellyseerr:overseerr"), or a mapping with name and
+    optional theme_app, host, url, addons. The env var THEME_APPS takes the
+    string forms, separated by spaces or commas."""
+    if isinstance(value, str):
+        value = value.replace(",", " ").split()
+    if not isinstance(value, list):
+        fail("apps", "expected a list of apps")
+    out = []
+    for item in value:
+        if isinstance(item, str):
+            name, _, theme_app = item.partition(":")
+            item = {"name": name, **({"theme_app": theme_app} if theme_app else {})}
+        if not isinstance(item, dict) or set(item) - set(APP_KEYS) or "name" not in item:
+            fail("apps", f"each app is a name or a mapping of {', '.join(APP_KEYS)} with a name")
+        for k in ("name", "theme_app"):
+            if k in item and not (isinstance(item[k], str) and _APP.match(item[k])):
+                fail("apps", f"{k} must be lowercase letters, digits and hyphens")
+        if "host" in item and not (isinstance(item["host"], str) and _HOST.match(item["host"])):
+            fail("apps", "host must be a plain host name")
+        if "url" in item and not (isinstance(item["url"], str) and _URL.match(item["url"])):
+            fail("apps", "url must be an http(s) URL")
+        if not isinstance(item.get("addons", []), list):
+            fail("apps", "addons must be a list")
+        out.append(item)
+    return out
+
+
 CONFIG_PATH = Path(os.environ.get("PICKER_CONFIG") or REPO_DIR / "picker.yml")
 SETTINGS = resolve(os.environ, read_file(CONFIG_PATH))
 
 # The theme-switcher directory whose scripts and state this drives
 # (set-theme.sh, apps.yml, themes-src/, screenshots/, the *.json state files).
-# Defaults to the parent of this repo's checkout, which is where the homelab
-# clones it; relative paths in picker.yml are relative to this checkout.
+# Defaults to the parent of this repo's checkout, which is where the author's
+# setup clones it; relative paths in picker.yml are relative to this checkout.
 THEME_DIR = SETTINGS["theme_switcher_dir"]
 SETTINGS_FILE = THEME_DIR / "config.env"
 
@@ -204,14 +253,16 @@ CONFIG_FILE = STATE_DIR / "current-theme.env"
 
 SET_THEME_SCRIPT = THEME_DIR / "set-theme.sh"
 
-# Custom themes: one <name>.css per theme. Default: the homelab's clone of its
-# themes repo. Anyone else can point this at a checkout of theme-park-themes.
+# Custom themes: one <name>.css per theme. Default: themes-src/themes in the
+# theme-switcher directory. Anyone else can point this at a checkout of theme-park-themes.
 CUSTOM_DIR = SETTINGS["custom_themes.dir"] or THEME_DIR / "themes-src" / "themes"
 # theme.park's served www/ directory (its container's /config/www), mounted
 # into the picker. Set, the picker deploys CUSTOM_DIR into it itself (see
 # deploy.py) and the editor saves straight to CUSTOM_DIR. Unset, deploying is
-# someone else's job -- in the homelab, sync-themes.sh and theme-worker.sh.
+# someone else's job -- in the author's setup, sync-themes.sh and theme-worker.sh.
 THEME_PARK_WWW = SETTINGS["custom_themes.theme_park_www"]
+# Portable mode also makes every theme's light/dark twin (picker/twins.py).
+MAKE_TWINS = SETTINGS["custom_themes.twins"]
 
 DOMAIN = SETTINGS["domain"]
 THEME_PARK_URL = SETTINGS["theme_park_url"]
@@ -269,6 +320,17 @@ def output_file():
 
 def apps_file():
     return SETTINGS["backend.apps_file"] or THEME_DIR / "apps.yml"
+
+
+def app_url(app):
+    """Where an app lives: its `url` if it has one, else <host>.<domain> with
+    the scheme and port of the picker's own address (https and 443 normally,
+    http://...:8088 in the starter stack)."""
+    if app.get("url"):
+        return app["url"]
+    own = urlsplit(picker_url() or "https://x/")
+    port = f":{own.port}" if own.port else ""
+    return f"{own.scheme or 'https'}://{app['host']}.{DOMAIN}{port}/"
 
 
 def picker_url():

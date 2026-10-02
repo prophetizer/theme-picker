@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Capture real screenshots of themed apps, one set per theme, for the picker.
 
-For each theme: switch the live theme with set-theme.sh, give Traefik's file
-provider time to reload, then load each app in headless Chrome and screenshot
-it. The theme picker shows these in its lightbox.
+For each theme: switch the live theme through the picker's backend, give
+Traefik's file provider time to reload, then load each app in headless Chrome
+(or Chromium, screenshots.browser) and screenshot it. The theme picker shows
+these in its lightbox.
 
-THIS CHANGES THE LIVE THEME while it runs -- every themed app in the homelab
+THIS CHANGES THE LIVE THEME while it runs -- every themed app
 restyles once per theme. The theme that was live at the start is restored on
 exit, including Ctrl-C and SIGTERM.
 
@@ -32,6 +33,7 @@ the CLI cannot express it.
 """
 import json
 import os
+import re
 import signal
 import sys
 import tempfile
@@ -41,7 +43,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from picker import backend, config
+from picker import backend, config, shots, state
 from playwright.sync_api import sync_playwright
 
 # The theme-switcher directory holding set-theme.sh, current-theme.env,
@@ -64,7 +66,7 @@ RELOAD_WAIT = 4        # seconds; Traefik's file provider picks up themes.yml in
 # `Accept: text/html` -- the traefik-themepark plugin only injects its <link>
 # for HTML requests, so a probe without that header reports every app as
 # unthemed and looks exactly like theming being broken.
-APPS = config.SCREENSHOT_APPS          # screenshots.apps in picker.yml, or APPS
+APPS = shots.screenshot_apps()         # screenshots.apps in picker.yml (or APPS), else every app
 
 
 def all_themes():
@@ -88,7 +90,21 @@ def set_theme(name, ignore_overrides=True):
     backend.get().apply(name, ignore_pins=ignore_overrides)
 
 
-CUSTOM_DIR = THEME_DIR / "themes-src" / "themes"
+CUSTOM_DIR = config.CUSTOM_DIR
+# Where each app is loaded: its address from the app list (config.app_url),
+# else https://<app>.<domain>/ for a screenshot app that isn't themed by name.
+URLS = {a["name"]: config.app_url(a) for a in state.load_apps()}
+# Chromium answers *.localhost itself (always loopback), so inside a container
+# those names never reach the proxy. CAPTURE_HOST_RULES sends them on, e.g.
+# "MAP *.localhost traefik" in the starter stack. Chromium's
+# --host-resolver-rules syntax; a rule is letters, digits, * . : - and spaces.
+HOST_RULES = os.environ.get("CAPTURE_HOST_RULES", "").strip()
+if HOST_RULES and not re.fullmatch(r"[A-Za-z0-9*.:, -]{1,200}", HOST_RULES):
+    sys.exit("capture: CAPTURE_HOST_RULES has characters outside A-Z a-z 0-9 * . : , - and space")
+# The stylesheet the traefik-themepark plugin injects:
+# <theme.park>/css/base/<app>/<theme>.css, whatever theme.park's host is.
+THEME_LINK_JS = ("() => (Array.from(document.querySelectorAll('link[rel~=\"stylesheet\"]'))"
+                 ".map(l => l.href).find(h => h.includes('/css/base/')) || '')")
 
 
 def needs_shot(app, theme, force=False):
@@ -139,9 +155,9 @@ def main():
         print("    out:   ", OUT_DIR)
         return 0
 
-    original = current_theme()
-    if not original:
-        sys.exit("could not read the current theme; refusing to run")
+    # Nothing picked yet (a fresh install): the apps wear the default theme,
+    # so that is what to put back.
+    original = current_theme() or config.SETTINGS["backend.default_theme"]
     print(f"==> Live theme is '{original}'; it will be restored when this finishes.")
 
     def on_signal(signum, _frame):
@@ -169,7 +185,13 @@ def main():
     started = time.time()
     try:
         with sync_playwright() as p:
-            browser = p.chromium.launch(channel="chrome", args=["--no-sandbox"])
+            # The browser's own sandbox on unless screenshots.sandbox is off
+            # (the capture image): Playwright adds --no-sandbox by itself
+            # otherwise, and on a host these pages render as the host user.
+            browser = p.chromium.launch(
+                channel="chrome" if config.SETTINGS["screenshots.browser"] == "chrome" else None,
+                chromium_sandbox=config.SETTINGS["screenshots.sandbox"],
+                args=[f"--host-resolver-rules={HOST_RULES}"] if HOST_RULES else [])
             for i, theme in enumerate(themes, 1):
                 pending = [a for a in APPS if needs_shot(a, theme, force)]
                 if not pending:
@@ -191,19 +213,17 @@ def main():
                     page = ctx.new_page()
                     try:
                         # domcontentloaded, NOT networkidle: Dozzle never goes idle.
-                        page.goto(f"https://{app}.{DOMAIN}/", wait_until="domcontentloaded",
-                                  timeout=30000)
+                        page.goto(URLS.get(app) or f"https://{app}.{DOMAIN}/",
+                                  wait_until="domcontentloaded", timeout=30000)
                         page.wait_for_timeout(SETTLE_MS)
                         # Refuse to record a shot of the WRONG theme. If Traefik
                         # had not reloaded yet the page carries the previous
                         # theme's stylesheet, and the lightbox would lie.
-                        href = page.evaluate(
-                            "() => (document.querySelector('link[href*=\"theme-park\"]') || {}).href || ''")
+                        href = page.evaluate(THEME_LINK_JS)
                         if f"/{theme}.css" not in href:
                             page.reload(wait_until="domcontentloaded", timeout=30000)
                             page.wait_for_timeout(SETTLE_MS)
-                            href = page.evaluate(
-                                "() => (document.querySelector('link[href*=\"theme-park\"]') || {}).href || ''")
+                            href = page.evaluate(THEME_LINK_JS)
                         if f"/{theme}.css" not in href:
                             mismatched.append(f"{app}_{theme}")
                             print(f"    {app:11} SKIPPED (page has {href.rsplit('/', 1)[-1] or 'no theme link'})")

@@ -7,8 +7,8 @@ from pathlib import Path
 
 from . import config
 
-# ntfy.* in picker.yml, or NTFY_* in the environment (the homelab sets them
-# in compose/primary/theme-picker.yml). Unset means no notifications.
+# ntfy.* in picker.yml, or NTFY_* in the environment (e.g. in the picker's
+# compose service). Unset means no notifications.
 NTFY_URL = config.SETTINGS["ntfy.url"]
 NTFY_TOPIC = config.SETTINGS["ntfy.topic"]
 NTFY_TOKEN_FILE = config.SETTINGS["ntfy.token_file"]
@@ -49,7 +49,7 @@ def _send_notify(theme, by, url, tried):
     if tried > 1:
         body += f", after trying {tried} themes"
     body += f".\nChanged by {by}."
-    send("Homelab theme changed", body, tags="art", click=url)
+    send("Theme changed", body, tags="art", click=url)
 
 
 def enabled():

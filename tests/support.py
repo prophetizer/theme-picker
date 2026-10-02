@@ -38,7 +38,7 @@ class FakeBackend:
 class SandboxCase(unittest.TestCase):
     """Repoints every path the picker reads or writes at a fresh temp dir and
     empties the per-process caches, so tests cannot see each other's state
-    or the live homelab's. No config.env means no theme-park base URL, so
+    or a live install's. No config.env means no theme-park base URL, so
     nothing goes to the network and the fallback theme lists are used."""
 
     def setUp(self):

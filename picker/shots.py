@@ -4,12 +4,18 @@ thumbs/<app>_<theme>.jpg for the lightbox grid. Gitignored, regenerable."""
 
 import re
 
-from . import config
+from . import config, state
 
 SHOT_DIR = config.THEME_DIR / "screenshots"
 SHOT_NAME = re.compile(r"^([a-z0-9-]+)_([a-z0-9.-]+)\Z")
-# Screenshot apps, in lightbox order: picker.yml's screenshots.apps.
-APP_ORDER = config.SCREENSHOT_APPS
+
+
+def screenshot_apps():
+    """The apps screenshots are taken of, in lightbox order: picker.yml's
+    screenshots.apps, or every themed app when that is empty."""
+    return list(config.SCREENSHOT_APPS) or [a["name"] for a in state.load_apps()]
+
+
 KINDS = {"thumb": ("thumbs", ".jpg", "image/jpeg"),
          "full": ("per-app", ".png", "image/png")}
 
@@ -21,7 +27,7 @@ def screenshot_index():
         m = SHOT_NAME.match(p.stem)
         if m and (SHOT_DIR / "per-app" / f"{p.stem}.png").is_file():
             idx.setdefault(m.group(2), []).append(m.group(1))
-    rank = {a: i for i, a in enumerate(APP_ORDER)}
+    rank = {a: i for i, a in enumerate(screenshot_apps())}
     return {t: sorted(apps, key=lambda a: (rank.get(a, 99), a)) for t, apps in idx.items()}
 
 
