@@ -879,12 +879,12 @@ $('#daily-save').addEventListener('click', async () => {
 });
 
 // --- the other-mode twin, live ------------------------------------------------
-// The same maths as homelab-themes' tools/make_variants.py (build()), on the
+// The same maths as theme-park-themes' tools/make_variants.py (build()), on the
 // editor's flat fields: surfaces flip lightness around the page, keeping hue
 // with softened chroma; text is inverted then moved only as far as 7:1 (muted
 // 4.5:1) on every panel and page colour; accents keep their colour and move
-// only as far as contrast needs; the button label is re-picked. In this
-// homelab the worker generates the real twin on save with the Python tool.
+// only as far as contrast needs; the button label is re-picked. On save, the
+// real twin comes from the Python (the host worker, or picker/twins.py).
 function fromOklab(L, a, b) {
   L = Math.min(1, Math.max(0, L));
   const raw = (k) => {
@@ -974,7 +974,7 @@ function updateTwin() {
 // Xresources, Windows Terminal JSON, iTerm2 .itermcolors, VS Code themes.
 // Each becomes one palette ({bg, panel, fg, fgBright, muted, accents, button,
 // buttonText, link, name}), and that maps onto the editor's fields the way
-// homelab-themes' tools/port_palette.py does: every text colour moved only
+// theme-park-themes' tools/port_palette.py does: every text colour moved only
 // in lightness until it reads (body 7:1, muted, links and labels 4.5:1).
 // #rrggbb, also from #rgb and #rrggbbaa (VS Code themes use both).
 const hex6 = v => {

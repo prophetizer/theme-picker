@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Fruit Soda (dark)
+ *
+ * Generated variant: dark of 'fruit-soda', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'fruit-soda'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7c49f2'.
+ */
+:root {
+  --main-bg-color: #191819;
+  --modal-bg-color: #272427;
+  --modal-header-color: #272427;
+  --modal-footer-color: #272427;
+  --drop-down-menu-bg: #272427;
+  --button-color: #7c49f2;
+  --button-color-hover: #3e5aff;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 124, 73, 242;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #3d90d7;
+  --link-color-hover: #9473ff;
+  --label-text-color: #ffffff;
+  --text: #afafaf;
+  --text-hover: #b0afaf;
+  --text-muted: #8c8a8d;
+  --arr-queue-color: #47f74c;
+  --plex-poster-unwatched: #fe6d08;
+  --petio-spinner: invert(62%) sepia(98%) saturate(5214%) hue-rotate(249deg) brightness(100%) contrast(90%);
+  --gitea-color-primary-dark-4: 124, 73, 242;
+  --overseerr-gradient: linear-gradient(180deg, rgba(25, 24, 25, 0.17) 0%, #191819 100%);
+}

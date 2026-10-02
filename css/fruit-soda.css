@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Fruit Soda
+ *
+ * Palette source: tinted-theming/schemes base16/fruit-soda.yaml (jozip; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #464646 is the palette's #515151 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #646265 is the palette's #979598 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #0066aa is the palette's #0f9cfd with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#611fce'.
+ */
+:root {
+  --main-bg-color: #e0dee0;
+  --modal-bg-color: #f1ecf1;
+  --modal-header-color: #f1ecf1;
+  --modal-footer-color: #f1ecf1;
+  --drop-down-menu-bg: #f1ecf1;
+  --button-color: #611fce;
+  --button-color-hover: #2931df;
+  --button-text: #f1ecf1;
+  --button-text-hover: #f1ecf1;
+  --accent-color: 97, 31, 206;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0066aa;
+  --link-color-hover: #611fce;
+  --label-text-color: #f1ecf1;
+  --text: #464646;
+  --text-hover: #2d2c2c;
+  --text-muted: #646265;
+  --arr-queue-color: #47f74c;
+  --plex-poster-unwatched: #fe6d08;
+  --petio-spinner: invert(80%) sepia(73%) saturate(6150%) hue-rotate(261deg) brightness(80%) contrast(104%);
+  --gitea-color-primary-dark-4: 97, 31, 206;
+  --overseerr-gradient: linear-gradient(180deg, rgba(224, 222, 224, 0.17) 0%, rgba(224, 222, 224) 100%);
+}

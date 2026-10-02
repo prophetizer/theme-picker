@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Atelier Forest
+ *
+ * Palette source: tinted-theming/schemes base16/atelier-forest.yaml (Bram de Haan; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #b6afad is the palette's #a8a19f with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --link-color-hover #ec5f2e is the palette's #df5320 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#df5320'.
+ */
+:root {
+  --main-bg-color: #1b1918;
+  --modal-bg-color: #2c2421;
+  --modal-header-color: #2c2421;
+  --modal-footer-color: #2c2421;
+  --drop-down-menu-bg: #2c2421;
+  --button-color: #df5320;
+  --button-color-hover: #c38418;
+  --button-text: #1b1918;
+  --button-text-hover: #1b1918;
+  --accent-color: 223, 83, 32;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #c38418;
+  --link-color-hover: #ec5f2e;
+  --label-text-color: #1b1918;
+  --text: #b6afad;
+  --text-hover: #f1efee;
+  --text-muted: #9c9491;
+  --arr-queue-color: #7b9726;
+  --plex-poster-unwatched: #df5320;
+  --petio-spinner: invert(55%) sepia(34%) saturate(5668%) hue-rotate(350deg) brightness(91%) contrast(92%);
+  --gitea-color-primary-dark-4: 223, 83, 32;
+  --overseerr-gradient: linear-gradient(180deg, rgba(27, 25, 24, 0.17) 0%, rgba(27, 25, 24) 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Sagelight (dark)
+ *
+ * Generated variant: dark of 'sagelight', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'sagelight'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#a0a7d2'.
+ */
+:root {
+  --main-bg-color: #181818;
+  --modal-bg-color: #262626;
+  --modal-header-color: #262626;
+  --modal-footer-color: #262626;
+  --drop-down-menu-bg: #262626;
+  --button-color: #a0a7d2;
+  --button-color-hover: #a2d6f5;
+  --button-text: #181818;
+  --button-text-hover: #181818;
+  --accent-color: 160, 167, 210;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #6092af;
+  --link-color-hover: #a57fb0;
+  --label-text-color: #181818;
+  --text: #b0b0b0;
+  --text-hover: #bbbbbb;
+  --text-muted: #8c8c8c;
+  --arr-queue-color: #a0d2c8;
+  --plex-poster-unwatched: #ffaa61;
+  --petio-spinner: invert(22%) sepia(7%) saturate(1464%) hue-rotate(195deg) brightness(86%) contrast(89%);
+  --gitea-color-primary-dark-4: 160, 167, 210;
+  --overseerr-gradient: linear-gradient(180deg, rgba(24, 24, 24, 0.17) 0%, #181818 100%);
+}

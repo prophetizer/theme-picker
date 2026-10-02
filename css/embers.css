@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Embers
+ *
+ * Palette source: tinted-theming/schemes base16/embers.yaml (Jannik Siebert; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #bab0a6 is the palette's #a39a90 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #968c80 is the palette's #8a8075 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #7f9468 is the palette's #6d8257 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #909064 is the palette's #828257 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #120f0b is the palette's #16130f with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#828257'.
+ */
+:root {
+  --main-bg-color: #16130f;
+  --modal-bg-color: #2c2620;
+  --modal-header-color: #2c2620;
+  --modal-footer-color: #2c2620;
+  --drop-down-menu-bg: #2c2620;
+  --button-color: #828257;
+  --button-color-hover: #6d8257;
+  --button-text: #120f0b;
+  --button-text-hover: #120f0b;
+  --accent-color: 130, 130, 87;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7f9468;
+  --link-color-hover: #909064;
+  --label-text-color: #120f0b;
+  --text: #bab0a6;
+  --text-hover: #dbd6d1;
+  --text-muted: #968c80;
+  --arr-queue-color: #57826d;
+  --plex-poster-unwatched: #828257;
+  --petio-spinner: invert(48%) sepia(8%) saturate(1621%) hue-rotate(21deg) brightness(95%) contrast(83%);
+  --gitea-color-primary-dark-4: 130, 130, 87;
+  --overseerr-gradient: linear-gradient(180deg, rgba(22, 19, 15, 0.17) 0%, rgba(22, 19, 15) 100%);
+}

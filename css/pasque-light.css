@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Pasque (light)
+ *
+ * Generated variant: light of 'pasque', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'pasque'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#c165c8'.
+ */
+:root {
+  --main-bg-color: #f5f1ff;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #c165c8;
+  --button-color-hover: #8f7ec7;
+  --button-text: #271c3a;
+  --button-text-hover: #271c3a;
+  --accent-color: 193, 101, 200;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7465ac;
+  --link-color-hover: #a54bac;
+  --label-text-color: #271c3a;
+  --text: #040304;
+  --text-hover: #23123a;
+  --text-muted: #171618;
+  --arr-queue-color: #b7833c;
+  --plex-poster-unwatched: #918889;
+  --petio-spinner: invert(19%) sepia(42%) saturate(7486%) hue-rotate(241deg) brightness(84%) contrast(82%);
+  --gitea-color-primary-dark-4: 193, 101, 200;
+  --overseerr-gradient: linear-gradient(180deg, rgba(245, 241, 255, 0.17) 0%, #f5f1ff 100%);
+}

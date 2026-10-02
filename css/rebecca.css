@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Rebecca
+ *
+ * Palette source: tinted-theming/schemes base16/rebecca.yaml (Victor Borja; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-hover #f2e6fe is the palette's #53495d with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #bbbbe1 is the palette's #a0a0c5 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #9fc0f2 is the palette's #8eaee0 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #9ebeff is the palette's #7aa5ff with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7aa5ff'.
+ */
+:root {
+  --main-bg-color: #292a44;
+  --modal-bg-color: #663399;
+  --modal-header-color: #663399;
+  --modal-footer-color: #663399;
+  --drop-down-menu-bg: #663399;
+  --button-color: #7aa5ff;
+  --button-color-hover: #2de0a7;
+  --button-text: #292a44;
+  --button-text-hover: #292a44;
+  --accent-color: 122, 165, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #9fc0f2;
+  --link-color-hover: #9ebeff;
+  --label-text-color: #292a44;
+  --text: #f1eff8;
+  --text-hover: #f2e6fe;
+  --text-muted: #bbbbe1;
+  --arr-queue-color: #6dfedf;
+  --plex-poster-unwatched: #efe4a1;
+  --petio-spinner: invert(48%) sepia(97%) saturate(273%) hue-rotate(184deg) brightness(102%) contrast(101%);
+  --gitea-color-primary-dark-4: 122, 165, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(41, 42, 68, 0.17) 0%, rgba(41, 42, 68) 100%);
+}

@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Unikitty Dark
+ *
+ * Palette source: tinted-theming/schemes base16/unikitty-dark.yaml (Josh W Lewis; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #e2e0e4 is the palette's #bcbabe with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #b7b5ba is the palette's #9f9da2 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #4fc0ff is the palette's #149bda with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #db9dff is the palette's #bb60ea with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #17141a is the palette's #2e2a31 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#bb60ea'.
+ */
+:root {
+  --main-bg-color: #2e2a31;
+  --modal-bg-color: #4a464d;
+  --modal-header-color: #4a464d;
+  --modal-footer-color: #4a464d;
+  --drop-down-menu-bg: #4a464d;
+  --button-color: #bb60ea;
+  --button-color-hover: #796af5;
+  --button-text: #17141a;
+  --button-text-hover: #17141a;
+  --accent-color: 187, 96, 234;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4fc0ff;
+  --link-color-hover: #db9dff;
+  --label-text-color: #17141a;
+  --text: #e2e0e4;
+  --text-hover: #f5f4f7;
+  --text-muted: #b7b5ba;
+  --arr-queue-color: #17ad98;
+  --plex-poster-unwatched: #d65407;
+  --petio-spinner: invert(43%) sepia(52%) saturate(5933%) hue-rotate(247deg) brightness(99%) contrast(86%);
+  --gitea-color-primary-dark-4: 187, 96, 234;
+  --overseerr-gradient: linear-gradient(180deg, rgba(46, 42, 49, 0.17) 0%, rgba(46, 42, 49) 100%);
+}

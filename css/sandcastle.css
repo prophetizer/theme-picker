@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Sandcastle
+ *
+ * Palette source: tinted-theming/schemes base16/sandcastle.yaml (George Essig; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #ccbda7 is the palette's #a89984 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #a69687 is the palette's #928374 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #b69451 is the palette's #a07e3b with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #b69451 is the palette's #a07e3b with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #181c23 is the palette's #282c34 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#a07e3b'.
+ */
+:root {
+  --main-bg-color: #282c34;
+  --modal-bg-color: #2c323b;
+  --modal-header-color: #2c323b;
+  --modal-footer-color: #2c323b;
+  --drop-down-menu-bg: #2c323b;
+  --button-color: #a07e3b;
+  --button-color-hover: #a07e3b;
+  --button-text: #181c23;
+  --button-text-hover: #181c23;
+  --accent-color: 160, 126, 59;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #b69451;
+  --link-color-hover: #b69451;
+  --label-text-color: #181c23;
+  --text: #ccbda7;
+  --text-hover: #fdf4c1;
+  --text-muted: #a69687;
+  --arr-queue-color: #528b8b;
+  --plex-poster-unwatched: #a07e3b;
+  --petio-spinner: invert(55%) sepia(61%) saturate(405%) hue-rotate(1deg) brightness(100%) contrast(88%);
+  --gitea-color-primary-dark-4: 160, 126, 59;
+  --overseerr-gradient: linear-gradient(180deg, rgba(40, 44, 52, 0.17) 0%, rgba(40, 44, 52) 100%);
+}

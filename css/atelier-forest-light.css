@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Atelier Forest (light)
+ *
+ * Generated variant: light of 'atelier-forest', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'atelier-forest'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#df5320'.
+ */
+:root {
+  --main-bg-color: #f5f3f2;
+  --modal-bg-color: #fffbfa;
+  --modal-header-color: #fffbfa;
+  --modal-footer-color: #fffbfa;
+  --drop-down-menu-bg: #fffbfa;
+  --button-color: #df5320;
+  --button-color-hover: #bf8010;
+  --button-text: #1b1918;
+  --button-text-hover: #1b1918;
+  --accent-color: 223, 83, 32;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #996500;
+  --link-color-hover: #c94000;
+  --label-text-color: #1b1918;
+  --text: #231e1d;
+  --text-hover: #000000;
+  --text-muted: #3a3331;
+  --arr-queue-color: #7b9726;
+  --plex-poster-unwatched: #df5320;
+  --petio-spinner: invert(55%) sepia(34%) saturate(5668%) hue-rotate(350deg) brightness(91%) contrast(92%);
+  --gitea-color-primary-dark-4: 223, 83, 32;
+  --overseerr-gradient: linear-gradient(180deg, rgba(245, 243, 242, 0.17) 0%, #f5f3f2 100%);
+}

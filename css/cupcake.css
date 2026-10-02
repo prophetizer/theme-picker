@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Cupcake
+ *
+ * Palette source: tinted-theming/schemes base16/cupcake.yaml (Chris Kempson; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #574d63 is the palette's #8b8198 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #564e60 is the palette's #585062 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #736b7c is the palette's #a59daf with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #387877 is the palette's #69a9a7 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #84657e is the palette's #bb99b4 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #31293a is the palette's #585062 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#bb99b4'.
+ */
+:root {
+  --main-bg-color: #f2f1f4;
+  --modal-bg-color: #fbf1f2;
+  --modal-header-color: #fbf1f2;
+  --modal-footer-color: #fbf1f2;
+  --drop-down-menu-bg: #fbf1f2;
+  --button-color: #bb99b4;
+  --button-color-hover: #7297b9;
+  --button-text: #31293a;
+  --button-text-hover: #31293a;
+  --accent-color: 187, 153, 180;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #387877;
+  --link-color-hover: #84657e;
+  --label-text-color: #31293a;
+  --text: #574d63;
+  --text-hover: #564e60;
+  --text-muted: #736b7c;
+  --arr-queue-color: #a3b367;
+  --plex-poster-unwatched: #ebb790;
+  --petio-spinner: invert(34%) sepia(4%) saturate(1892%) hue-rotate(260deg) brightness(98%) contrast(88%);
+  --gitea-color-primary-dark-4: 187, 153, 180;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 241, 244, 0.17) 0%, rgba(242, 241, 244) 100%);
+}

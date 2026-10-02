@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Silk Dark
+ *
+ * Palette source: tinted-theming/schemes base16/silk-dark.yaml (Gabriel Fontes; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #c9dddf is the palette's #c7dbdd with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --link-color #4ebfc6 is the palette's #3fb2b9 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #b4aacb is the palette's #756b8a with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#46bddd'.
+ */
+:root {
+  --main-bg-color: #0e3c46;
+  --modal-bg-color: #1d494e;
+  --modal-header-color: #1d494e;
+  --modal-footer-color: #1d494e;
+  --drop-down-menu-bg: #1d494e;
+  --button-color: #46bddd;
+  --button-color-hover: #3fb2b9;
+  --button-text: #0e3c46;
+  --button-text-hover: #0e3c46;
+  --accent-color: 70, 189, 221;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4ebfc6;
+  --link-color-hover: #b4aacb;
+  --label-text-color: #0e3c46;
+  --text: #c9dddf;
+  --text-hover: #d2faff;
+  --text-muted: #9dc8cd;
+  --arr-queue-color: #73d8ad;
+  --plex-poster-unwatched: #fcab74;
+  --petio-spinner: invert(27%) sepia(67%) saturate(902%) hue-rotate(160deg) brightness(88%) contrast(95%);
+  --gitea-color-primary-dark-4: 70, 189, 221;
+  --overseerr-gradient: linear-gradient(180deg, rgba(14, 60, 70, 0.17) 0%, rgba(14, 60, 70) 100%);
+}

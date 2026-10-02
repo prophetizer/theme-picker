@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Darktooth
+ *
+ * Palette source: tinted-theming/schemes base16/darktooth.yaml (Jason Milkins; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #cbbba6 is the palette's #a89984 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #a49586 is the palette's #928374 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#fe8625'.
+ */
+:root {
+  --main-bg-color: #1d2021;
+  --modal-bg-color: #32302f;
+  --modal-header-color: #32302f;
+  --modal-footer-color: #32302f;
+  --drop-down-menu-bg: #32302f;
+  --button-color: #fe8625;
+  --button-color-hover: #fac03b;
+  --button-text: #1d2021;
+  --button-text-hover: #1d2021;
+  --accent-color: 254, 134, 37;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #fac03b;
+  --link-color-hover: #fe8625;
+  --label-text-color: #1d2021;
+  --text: #cbbba6;
+  --text-hover: #fdf4c1;
+  --text-muted: #a49586;
+  --arr-queue-color: #95c085;
+  --plex-poster-unwatched: #fe8625;
+  --petio-spinner: invert(29%) sepia(76%) saturate(3967%) hue-rotate(344deg) brightness(105%) contrast(99%);
+  --gitea-color-primary-dark-4: 254, 134, 37;
+  --overseerr-gradient: linear-gradient(180deg, rgba(29, 32, 33, 0.17) 0%, rgba(29, 32, 33) 100%);
+}

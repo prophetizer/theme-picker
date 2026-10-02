@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Pasque
+ *
+ * Palette source: tinted-theming/schemes base16/pasque.yaml (Gabriel Fontes; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #8c7ec7 is the palette's #7263aa with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #c165c8 is the palette's #953b9d with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #c165c8 is the palette's #953b9d with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #8f7ec7 is the palette's #8e7dc6 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#c165c8'.
+ */
+:root {
+  --main-bg-color: #100323;
+  --modal-bg-color: #271c3a;
+  --modal-header-color: #271c3a;
+  --modal-footer-color: #271c3a;
+  --drop-down-menu-bg: #271c3a;
+  --button-color: #c165c8;
+  --button-color-hover: #8f7ec7;
+  --button-text: #271c3a;
+  --button-text-hover: #271c3a;
+  --accent-color: 193, 101, 200;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8c7ec7;
+  --link-color-hover: #c165c8;
+  --label-text-color: #271c3a;
+  --text: #dedcdf;
+  --text-hover: #bbaadd;
+  --text-muted: #bebcbf;
+  --arr-queue-color: #c6914b;
+  --plex-poster-unwatched: #918889;
+  --petio-spinner: invert(19%) sepia(42%) saturate(7486%) hue-rotate(241deg) brightness(84%) contrast(82%);
+  --gitea-color-primary-dark-4: 193, 101, 200;
+  --overseerr-gradient: linear-gradient(180deg, rgba(16, 3, 35, 0.17) 0%, rgba(16, 3, 35) 100%);
+}

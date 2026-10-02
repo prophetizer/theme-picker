@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Darktooth (light)
+ *
+ * Generated variant: light of 'darktooth', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'darktooth'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#dd6e00'.
+ */
+:root {
+  --main-bg-color: #f1f4f5;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #dd6e00;
+  --button-color-hover: #b48500;
+  --button-text: #1d2021;
+  --button-text-hover: #1d2021;
+  --accent-color: 221, 110, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #906a00;
+  --link-color-hover: #b15700;
+  --label-text-color: #1d2021;
+  --text: #1f1404;
+  --text-hover: #010000;
+  --text-muted: #3d3124;
+  --arr-queue-color: #6f985f;
+  --plex-poster-unwatched: #dd6e00;
+  --petio-spinner: invert(43%) sepia(75%) saturate(5401%) hue-rotate(15deg) brightness(100%) contrast(103%);
+  --gitea-color-primary-dark-4: 221, 110, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(241, 244, 245, 0.17) 0%, #f1f4f5 100%);
+}

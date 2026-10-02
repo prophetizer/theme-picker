@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Synth Midnight Terminal Light
+ *
+ * Palette source: tinted-theming/schemes base16/synth-midnight-light.yaml (Michaël Ball; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #006562 is the palette's #42fff9 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #a2009d is the palette's #ea5ce2 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ea5ce2'.
+ */
+:root {
+  --main-bg-color: #cfd1d2;
+  --modal-bg-color: #dddfe0;
+  --modal-header-color: #dddfe0;
+  --modal-footer-color: #dddfe0;
+  --drop-down-menu-bg: #dddfe0;
+  --button-color: #ea5ce2;
+  --button-color-hover: #03aeff;
+  --button-text: #050608;
+  --button-text-hover: #050608;
+  --accent-color: 234, 92, 226;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #006562;
+  --link-color-hover: #a2009d;
+  --label-text-color: #050608;
+  --text: #28292a;
+  --text-hover: #050608;
+  --text-muted: #474849;
+  --arr-queue-color: #06ea61;
+  --plex-poster-unwatched: #ea770d;
+  --petio-spinner: invert(31%) sepia(59%) saturate(5428%) hue-rotate(273deg) brightness(97%) contrast(89%);
+  --gitea-color-primary-dark-4: 234, 92, 226;
+  --overseerr-gradient: linear-gradient(180deg, rgba(207, 209, 210, 0.17) 0%, rgba(207, 209, 210) 100%);
+}

@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Woodland
+ *
+ * Palette source: tinted-theming/schemes base16/woodland.yaml (Jay Cornwall; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color-hover #cc8134 is the palette's #ca7f32 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ca7f32'.
+ */
+:root {
+  --main-bg-color: #231e18;
+  --modal-bg-color: #302b25;
+  --modal-header-color: #302b25;
+  --modal-footer-color: #302b25;
+  --drop-down-menu-bg: #302b25;
+  --button-color: #ca7f32;
+  --button-color-hover: #e0ac16;
+  --button-text: #231e18;
+  --button-text-hover: #231e18;
+  --accent-color: 202, 127, 50;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #e0ac16;
+  --link-color-hover: #cc8134;
+  --label-text-color: #231e18;
+  --text: #cabcb1;
+  --text-hover: #e4d4c8;
+  --text-muted: #b4a490;
+  --arr-queue-color: #b7ba53;
+  --plex-poster-unwatched: #ca7f32;
+  --petio-spinner: invert(43%) sepia(18%) saturate(1658%) hue-rotate(349deg) brightness(91%) contrast(88%);
+  --gitea-color-primary-dark-4: 202, 127, 50;
+  --overseerr-gradient: linear-gradient(180deg, rgba(35, 30, 24, 0.17) 0%, rgba(35, 30, 24) 100%);
+}

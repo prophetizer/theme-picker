@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Windows High Contrast Light
+ *
+ * Palette source: tinted-theming/schemes base16/windows-highcontrast-light.yaml (Fergus Collins; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * HIGH CONTRAST: every text role (body, muted, links, button label) is meant
+ * to reach WCAG AAA 7:1 on the panels.
+ * --text #4c4c4c is the palette's #545454 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #4c4c4c is the palette's #7e7e7e with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color #005555 is the palette's #008080 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --button-color-hover #006262 is the palette's #008080 with its lightness
+ * nudged to reach 7:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#000080'.
+ */
+:root {
+  --main-bg-color: #e8e8e8;
+  --modal-bg-color: #fcfcfc;
+  --modal-header-color: #fcfcfc;
+  --modal-footer-color: #fcfcfc;
+  --drop-down-menu-bg: #fcfcfc;
+  --button-color: #000080;
+  --button-color-hover: #006262;
+  --button-text: #fcfcfc;
+  --button-text-hover: #fcfcfc;
+  --accent-color: 0, 0, 128;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #005555;
+  --link-color-hover: #800080;
+  --label-text-color: #fcfcfc;
+  --text: #4c4c4c;
+  --text-hover: #000000;
+  --text-muted: #4c4c4c;
+  --arr-queue-color: #008000;
+  --plex-poster-unwatched: #fcfc54;
+  --petio-spinner: invert(91%) sepia(66%) saturate(4760%) hue-rotate(237deg) brightness(99%) contrast(129%);
+  --gitea-color-primary-dark-4: 0, 0, 128;
+  --overseerr-gradient: linear-gradient(180deg, rgba(232, 232, 232, 0.17) 0%, rgba(232, 232, 232) 100%);
+}

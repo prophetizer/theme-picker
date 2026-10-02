@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Embers (light)
+ *
+ * Generated variant: light of 'embers', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'embers'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#828257'.
+ */
+:root {
+  --main-bg-color: #f6f3ef;
+  --modal-bg-color: #fffffe;
+  --modal-header-color: #fffffe;
+  --modal-footer-color: #fffffe;
+  --drop-down-menu-bg: #fffffe;
+  --button-color: #828257;
+  --button-color-hover: #6d8257;
+  --button-text: #120f0b;
+  --button-text-hover: #120f0b;
+  --accent-color: 130, 130, 87;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #62764b;
+  --link-color-hover: #727247;
+  --label-text-color: #120f0b;
+  --text: #251d15;
+  --text-hover: #080504;
+  --text-muted: #433a30;
+  --arr-queue-color: #57826d;
+  --plex-poster-unwatched: #828257;
+  --petio-spinner: invert(48%) sepia(8%) saturate(1621%) hue-rotate(21deg) brightness(95%) contrast(83%);
+  --gitea-color-primary-dark-4: 130, 130, 87;
+  --overseerr-gradient: linear-gradient(180deg, rgba(246, 243, 239, 0.17) 0%, #f6f3ef 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Woodland (light)
+ *
+ * Generated variant: light of 'woodland', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'woodland'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#c77c2e'.
+ */
+:root {
+  --main-bg-color: #f7f3ee;
+  --modal-bg-color: #fffcf7;
+  --modal-header-color: #fffcf7;
+  --modal-footer-color: #fffcf7;
+  --drop-down-menu-bg: #fffcf7;
+  --button-color: #c77c2e;
+  --button-color-hover: #b28700;
+  --button-text: #231e18;
+  --button-text-hover: #231e18;
+  --accent-color: 199, 124, 46;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8d6b00;
+  --link-color-hover: #a55f00;
+  --label-text-color: #231e18;
+  --text: #1d130b;
+  --text-hover: #0c0401;
+  --text-muted: #312514;
+  --arr-queue-color: #909225;
+  --plex-poster-unwatched: #c77c2e;
+  --petio-spinner: invert(44%) sepia(78%) saturate(441%) hue-rotate(349deg) brightness(81%) contrast(91%);
+  --gitea-color-primary-dark-4: 199, 124, 46;
+  --overseerr-gradient: linear-gradient(180deg, rgba(247, 243, 238, 0.17) 0%, #f7f3ee 100%);
+}

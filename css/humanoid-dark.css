@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Humanoid dark
+ *
+ * Palette source: tinted-theming/schemes base16/humanoid-dark.yaml (Thomas; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * HIGH CONTRAST: every text role (body, muted, links, button label) is meant
+ * to reach WCAG AAA 7:1 on the panels.
+ * --text-muted #cbcbc8 is the palette's #c0c0bd with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color #25e1dd is the palette's #0dd9d6 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color-hover #ffb1f4 is the palette's #f15ee3 with its lightness
+ * nudged to reach 7:1 on the panels.
+ * --button-text #0f1215 is the palette's #232629 with its lightness nudged to
+ * reach 7:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#00a6fb'.
+ */
+:root {
+  --main-bg-color: #232629;
+  --modal-bg-color: #333b3d;
+  --modal-header-color: #333b3d;
+  --modal-footer-color: #333b3d;
+  --drop-down-menu-bg: #333b3d;
+  --button-color: #00a6fb;
+  --button-color-hover: #0dd9d6;
+  --button-text: #0f1215;
+  --button-text-hover: #0f1215;
+  --accent-color: 0, 166, 251;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #25e1dd;
+  --link-color-hover: #ffb1f4;
+  --label-text-color: #0f1215;
+  --text: #f8f8f2;
+  --text-hover: #fcfcfc;
+  --text-muted: #cbcbc8;
+  --arr-queue-color: #02d849;
+  --plex-poster-unwatched: #ff9505;
+  --petio-spinner: invert(56%) sepia(41%) saturate(2032%) hue-rotate(169deg) brightness(100%) contrast(110%);
+  --gitea-color-primary-dark-4: 0, 166, 251;
+  --overseerr-gradient: linear-gradient(180deg, rgba(35, 38, 41, 0.17) 0%, rgba(35, 38, 41) 100%);
+}

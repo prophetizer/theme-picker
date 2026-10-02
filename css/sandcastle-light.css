@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Sandcastle (light)
+ *
+ * Generated variant: light of 'sandcastle', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'sandcastle'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#a07e3b'.
+ */
+:root {
+  --main-bg-color: #f0f3fa;
+  --modal-bg-color: #f3f8ff;
+  --modal-header-color: #f3f8ff;
+  --modal-footer-color: #f3f8ff;
+  --drop-down-menu-bg: #f3f8ff;
+  --button-color: #a07e3b;
+  --button-color-hover: #a07e3b;
+  --button-text: #181c23;
+  --button-text-hover: #181c23;
+  --accent-color: 160, 126, 59;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8b6a25;
+  --link-color-hover: #8b6a25;
+  --label-text-color: #181c23;
+  --text: #1d1303;
+  --text-hover: #010000;
+  --text-muted: #3c2f23;
+  --arr-queue-color: #528b8b;
+  --plex-poster-unwatched: #a07e3b;
+  --petio-spinner: invert(55%) sepia(61%) saturate(405%) hue-rotate(1deg) brightness(100%) contrast(88%);
+  --gitea-color-primary-dark-4: 160, 126, 59;
+  --overseerr-gradient: linear-gradient(180deg, rgba(240, 243, 250, 0.17) 0%, #f0f3fa 100%);
+}

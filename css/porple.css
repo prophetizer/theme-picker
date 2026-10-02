@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Porple
+ *
+ * Palette source: tinted-theming/schemes base16/porple.yaml (Niek den Breeje; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #7fa3ab is the palette's #64878f with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #e875b5 is the palette's #b74989 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #dd6cab is the palette's #b74989 with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #8b8cd5 is the palette's #8485ce with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#dd6cab'.
+ */
+:root {
+  --main-bg-color: #292c36;
+  --modal-bg-color: #333344;
+  --modal-header-color: #333344;
+  --modal-footer-color: #333344;
+  --drop-down-menu-bg: #333344;
+  --button-color: #dd6cab;
+  --button-color-hover: #8b8cd5;
+  --button-text: #292c36;
+  --button-text-hover: #292c36;
+  --accent-color: 221, 108, 171;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7fa3ab;
+  --link-color-hover: #e875b5;
+  --label-text-color: #292c36;
+  --text: #d8d8d8;
+  --text-hover: #f8f8f8;
+  --text-muted: #b8b8b8;
+  --arr-queue-color: #95c76f;
+  --plex-poster-unwatched: #d28e5d;
+  --petio-spinner: invert(41%) sepia(47%) saturate(634%) hue-rotate(283deg) brightness(88%) contrast(97%);
+  --gitea-color-primary-dark-4: 221, 108, 171;
+  --overseerr-gradient: linear-gradient(180deg, rgba(41, 44, 54, 0.17) 0%, rgba(41, 44, 54) 100%);
+}

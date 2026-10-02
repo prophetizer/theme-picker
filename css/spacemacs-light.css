@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Spacemacs (light)
+ *
+ * Generated variant: light of 'spacemacs', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'spacemacs'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ce50dc'.
+ */
+:root {
+  --main-bg-color: #f2f3f5;
+  --modal-bg-color: #f9f9f9;
+  --modal-header-color: #f9f9f9;
+  --modal-footer-color: #f9f9f9;
+  --drop-down-menu-bg: #f9f9f9;
+  --button-color: #ce50dc;
+  --button-color-hover: #4a92d1;
+  --button-text: #1f2022;
+  --button-text-hover: #1f2022;
+  --accent-color: 206, 80, 220;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #027f5f;
+  --link-color-hover: #b434c2;
+  --label-text-color: #1f2022;
+  --text: #1e1e1e;
+  --text-hover: #000000;
+  --text-muted: #1a1a1a;
+  --arr-queue-color: #589e00;
+  --plex-poster-unwatched: #c47e00;
+  --petio-spinner: invert(34%) sepia(100%) saturate(5187%) hue-rotate(266deg) brightness(93%) contrast(84%);
+  --gitea-color-primary-dark-4: 206, 80, 220;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 243, 245, 0.17) 0%, #f2f3f5 100%);
+}
