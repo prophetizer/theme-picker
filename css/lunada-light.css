@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Lunada (light)
+ *
+ * Generated variant: light of 'lunada', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'lunada'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7880cb'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #eef0ff 0%, #eaf8ff 50%, #d7ffe6 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #eef0ff 0%, #eaf8ff 50%, #d7ffe6 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #eef0ff 0%, #eaf8ff 50%, #d7ffe6 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #eef0ff 0%, #eaf8ff 50%, #d7ffe6 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #cce6ff;
+  --button-color: #7880cb;
+  --button-color-hover: #008fc4;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 120, 128, 203;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5f659c;
+  --link-color-hover: #00719b;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #001225;
+  --arr-queue-color: #7b82bb;
+  --plex-poster-unwatched: #008fc4;
+  --petio-spinner: invert(48%) sepia(87%) saturate(265%) hue-rotate(196deg) brightness(84%) contrast(90%);
+  --gitea-color-primary-dark-4: 120, 128, 203;
+  --overseerr-gradient: linear-gradient(180deg, rgba(215, 255, 230, 0.17) 0%, #d7ffe6 100%);
+}

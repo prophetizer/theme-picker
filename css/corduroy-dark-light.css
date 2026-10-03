@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Corduroy Dark (light)
+ *
+ * Generated variant: light of 'corduroy-dark', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'corduroy-dark'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#c07889'.
+ */
+:root {
+  --main-bg-color: #f5f2f7;
+  --modal-bg-color: #fbf6fe;
+  --modal-header-color: #fbf6fe;
+  --modal-footer-color: #fbf6fe;
+  --drop-down-menu-bg: #fbf6fe;
+  --button-color: #c07889;
+  --button-color-hover: #bf7b6f;
+  --button-text: #141016;
+  --button-text-hover: #141016;
+  --accent-color: 192, 120, 137;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #9f5e53;
+  --link-color-hover: #925f88;
+  --label-text-color: #141016;
+  --text: #060407;
+  --text-hover: #2e2634;
+  --text-muted: #3e3342;
+  --arr-queue-color: #4d9999;
+  --plex-poster-unwatched: #bf7b6f;
+  --petio-spinner: invert(38%) sepia(10%) saturate(1602%) hue-rotate(295deg) brightness(86%) contrast(84%);
+  --gitea-color-primary-dark-4: 192, 120, 137;
+  --overseerr-gradient: linear-gradient(180deg, rgba(245, 242, 247, 0.17) 0%, #f5f2f7 100%);
+}

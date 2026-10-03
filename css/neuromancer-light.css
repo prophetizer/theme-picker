@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Neuromancer (light)
+ *
+ * Generated variant: light of 'neuromancer', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'neuromancer'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ce5aa7'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fff4fa 0%, #ffe8f1 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #fff4fa 0%, #ffe8f1 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #fff4fa 0%, #ffe8f1 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #fff4fa 0%, #ffe8f1 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffd4e9;
+  --button-color: #ce5aa7;
+  --button-color-hover: #cc6091;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 206, 90, 167;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #994e7f;
+  --link-color-hover: #985170;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #210013;
+  --arr-queue-color: #b86b9d;
+  --plex-poster-unwatched: #cc6091;
+  --petio-spinner: invert(37%) sepia(20%) saturate(6434%) hue-rotate(288deg) brightness(86%) contrast(86%);
+  --gitea-color-primary-dark-4: 206, 90, 167;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 232, 241, 0.17) 0%, #ffe8f1 100%);
+}

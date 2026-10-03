@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Sin City Red (light)
+ *
+ * Generated variant: light of 'sin-city-red', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'sin-city-red'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#c76360'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fffdfd 0%, #ffe1dc 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #fffdfd 0%, #ffe1dc 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #fffdfd 0%, #ffe1dc 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #fffdfd 0%, #ffe1dc 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffdad6;
+  --button-color: #c76360;
+  --button-color-hover: #c76456;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 199, 99, 96;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #95524f;
+  --link-color-hover: #965248;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #250001;
+  --arr-queue-color: #b56e6a;
+  --plex-poster-unwatched: #c76456;
+  --petio-spinner: invert(41%) sepia(6%) saturate(3242%) hue-rotate(314deg) brightness(80%) contrast(118%);
+  --gitea-color-primary-dark-4: 199, 99, 96;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 225, 220, 0.17) 0%, #ffe1dc 100%);
+}

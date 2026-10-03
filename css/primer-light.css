@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Primer Light
+ *
+ * Palette source: tinted-theming/schemes base16/primer-light.yaml (Jimmy Lin; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #2a68a9 is the palette's #79b8ff with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #be1584 is the palette's #ea4aaa with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color-hover #3976b9 is the palette's #79b8ff with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0366d6'.
+ */
+:root {
+  --main-bg-color: #e1e4e8;
+  --modal-bg-color: #fafbfc;
+  --modal-header-color: #fafbfc;
+  --modal-footer-color: #fafbfc;
+  --drop-down-menu-bg: #fafbfc;
+  --button-color: #0366d6;
+  --button-color-hover: #3976b9;
+  --button-text: #fafbfc;
+  --button-text-hover: #fafbfc;
+  --accent-color: 3, 102, 214;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #2a68a9;
+  --link-color-hover: #be1584;
+  --label-text-color: #fafbfc;
+  --text: #2f363d;
+  --text-hover: #1b1f23;
+  --text-muted: #444d56;
+  --arr-queue-color: #28a745;
+  --plex-poster-unwatched: #f66a0a;
+  --petio-spinner: invert(78%) sepia(87%) saturate(3615%) hue-rotate(203deg) brightness(93%) contrast(98%);
+  --gitea-color-primary-dark-4: 3, 102, 214;
+  --overseerr-gradient: linear-gradient(180deg, rgba(225, 228, 232, 0.17) 0%, rgba(225, 228, 232) 100%);
+}

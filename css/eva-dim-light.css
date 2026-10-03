@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Eva Dim (light)
+ *
+ * Generated variant: light of 'eva-dim', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'eva-dim'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#009e9a'.
+ */
+:root {
+  --main-bg-color: #ebf5ff;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #009e9a;
+  --button-color-hover: #4b8f77;
+  --button-text: #0c1c2c;
+  --button-text-hover: #0c1c2c;
+  --accent-color: 0, 158, 154;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #377c65;
+  --link-color-hover: #7f64a1;
+  --label-text-color: #0c1c2c;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #04101e;
+  --arr-queue-color: #00a41e;
+  --plex-poster-unwatched: #d57340;
+  --petio-spinner: invert(60%) sepia(50%) saturate(4936%) hue-rotate(156deg) brightness(98%) contrast(102%);
+  --gitea-color-primary-dark-4: 0, 158, 154;
+  --overseerr-gradient: linear-gradient(180deg, rgba(235, 245, 255, 0.17) 0%, #ebf5ff 100%);
+}

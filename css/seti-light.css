@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Seti UI (light)
+ *
+ * Generated variant: light of 'seti', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'seti'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#3498bd'.
+ */
+:root {
+  --main-bg-color: #f2f4f5;
+  --modal-bg-color: #feffff;
+  --modal-header-color: #feffff;
+  --modal-footer-color: #feffff;
+  --drop-down-menu-bg: #feffff;
+  --button-color: #3498bd;
+  --button-color-hover: #00a086;
+  --button-text: #151718;
+  --button-text-hover: #151718;
+  --accent-color: 52, 152, 189;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007f6a;
+  --link-color-hover: #895eab;
+  --label-text-color: #151718;
+  --text: #060606;
+  --text-hover: #000000;
+  --text-muted: #00374e;
+  --arr-queue-color: #729a1d;
+  --plex-poster-unwatched: #d3744e;
+  --petio-spinner: invert(47%) sepia(61%) saturate(502%) hue-rotate(150deg) brightness(89%) contrast(88%);
+  --gitea-color-primary-dark-4: 52, 152, 189;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 244, 245, 0.17) 0%, #f2f4f5 100%);
+}

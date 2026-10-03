@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: UwUnicorn (light)
+ *
+ * Generated variant: light of 'uwunicorn', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'uwunicorn'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6093aa'.
+ */
+:root {
+  --main-bg-color: #f8f0fa;
+  --modal-bg-color: #fefdff;
+  --modal-header-color: #fefdff;
+  --modal-footer-color: #fefdff;
+  --drop-down-menu-bg: #fefdff;
+  --button-color: #6093aa;
+  --button-color-hover: #9c5fce;
+  --button-text: #140c16;
+  --button-text-hover: #140c16;
+  --accent-color: 96, 147, 170;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #9052c1;
+  --link-color-hover: #4e7865;
+  --label-text-color: #140c16;
+  --text: #0b0103;
+  --text-hover: #110406;
+  --text-muted: #442949;
+  --arr-queue-color: #c965bf;
+  --plex-poster-unwatched: #de5b44;
+  --petio-spinner: invert(46%) sepia(12%) saturate(1085%) hue-rotate(154deg) brightness(97%) contrast(95%);
+  --gitea-color-primary-dark-4: 96, 147, 170;
+  --overseerr-gradient: linear-gradient(180deg, rgba(248, 240, 250, 0.17) 0%, #f8f0fa 100%);
+}

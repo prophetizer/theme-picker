@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Vice City (light)
+ *
+ * Generated variant: light of 'vice-city', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'vice-city'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#cf6098'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #e7f3ff 0%, #fff1f7 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #e7f3ff 0%, #fff1f7 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #e7f3ff 0%, #fff1f7 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #e7f3ff 0%, #fff1f7 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #e9dbfc;
+  --button-color: #cf6098;
+  --button-color-hover: #468ac9;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 207, 96, 152;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #995374;
+  --link-color-hover: #3b6d9b;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #17002b;
+  --arr-queue-color: #b97091;
+  --plex-poster-unwatched: #468ac9;
+  --petio-spinner: invert(51%) sepia(31%) saturate(893%) hue-rotate(277deg) brightness(91%) contrast(88%);
+  --gitea-color-primary-dark-4: 207, 96, 152;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 241, 247, 0.17) 0%, #fff1f7 100%);
+}

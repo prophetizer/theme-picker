@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Corduroy
+ *
+ * Palette source: tinted-theming/schemes base16/corduroy.yaml (taysatte; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-hover #b2a7ba is the palette's #504757 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #908394 is the palette's #887b8c with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#d27f91'.
+ */
+:root {
+  --main-bg-color: #1d1920;
+  --modal-bg-color: #261e2a;
+  --modal-header-color: #261e2a;
+  --modal-footer-color: #261e2a;
+  --drop-down-menu-bg: #261e2a;
+  --button-color: #d27f91;
+  --button-color-hover: #e99d90;
+  --button-text: #1d1920;
+  --button-text-hover: #1d1920;
+  --accent-color: 210, 127, 145;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #e99d90;
+  --link-color-hover: #c285b2;
+  --label-text-color: #1d1920;
+  --text: #cdc8d0;
+  --text-hover: #b2a7ba;
+  --text-muted: #908394;
+  --arr-queue-color: #4b8686;
+  --plex-poster-unwatched: #e99d90;
+  --petio-spinner: invert(33%) sepia(11%) saturate(1652%) hue-rotate(298deg) brightness(87%) contrast(89%);
+  --gitea-color-primary-dark-4: 210, 127, 145;
+  --overseerr-gradient: linear-gradient(180deg, rgba(29, 25, 32, 0.17) 0%, rgba(29, 25, 32) 100%);
+}

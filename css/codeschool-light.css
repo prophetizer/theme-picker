@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Codeschool (light)
+ *
+ * Generated variant: light of 'codeschool', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'codeschool'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#484d79'.
+ */
+:root {
+  --main-bg-color: #eef5f9;
+  --modal-bg-color: #f7fbff;
+  --modal-header-color: #f7fbff;
+  --modal-footer-color: #f7fbff;
+  --drop-down-menu-bg: #f7fbff;
+  --button-color: #484d79;
+  --button-color-hover: #b02f30;
+  --button-text: #bbdefc;
+  --button-text-hover: #bbdefc;
+  --accent-color: 72, 77, 121;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #c54341;
+  --link-color-hover: #8e6b00;
+  --label-text-color: #bbdefc;
+  --text: #0d1313;
+  --text-hover: #000915;
+  --text-muted: #2b2f32;
+  --arr-queue-color: #237986;
+  --plex-poster-unwatched: #43820d;
+  --petio-spinner: invert(69%) sepia(10%) saturate(2035%) hue-rotate(196deg) brightness(95%) contrast(93%);
+  --gitea-color-primary-dark-4: 72, 77, 121;
+  --overseerr-gradient: linear-gradient(180deg, rgba(238, 245, 249, 0.17) 0%, #eef5f9 100%);
+}

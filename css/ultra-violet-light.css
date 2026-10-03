@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Ultra Voilet (light)
+ *
+ * Generated variant: light of 'ultra-violet', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'ultra-violet'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#8b77ca'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #eeebff 0%, #fff6fa 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #eeebff 0%, #fff6fa 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #eeebff 0%, #fff6fa 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #eeebff 0%, #fff6fa 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #eedbf8;
+  --button-color: #8b77ca;
+  --button-color-hover: #ab748c;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 139, 119, 202;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #6c5f9a;
+  --link-color-hover: #8c586f;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #1b0027;
+  --arr-queue-color: #887bb9;
+  --plex-poster-unwatched: #ab748c;
+  --petio-spinner: invert(41%) sepia(11%) saturate(4838%) hue-rotate(214deg) brightness(85%) contrast(82%);
+  --gitea-color-primary-dark-4: 139, 119, 202;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 246, 250, 0.17) 0%, #fff6fa 100%);
+}

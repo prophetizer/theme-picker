@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: DanQing Light
+ *
+ * Palette source: tinted-theming/schemes base16/danqing-light.yaml (Wenhan Zhu; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #4e5451 is the palette's #5a605d with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #68726d is the palette's #9da8a3 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #007b88 is the palette's #30dff3 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #87619c is the palette's #cca4e3 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#b0a4e3'.
+ */
+:root {
+  --main-bg-color: #ecf6f2;
+  --modal-bg-color: #fcfefd;
+  --modal-header-color: #fcfefd;
+  --modal-footer-color: #fcfefd;
+  --drop-down-menu-bg: #fcfefd;
+  --button-color: #b0a4e3;
+  --button-color-hover: #30dff3;
+  --button-text: #2d302f;
+  --button-text-hover: #2d302f;
+  --accent-color: 176, 164, 227;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007b88;
+  --link-color-hover: #87619c;
+  --label-text-color: #2d302f;
+  --text: #4e5451;
+  --text-hover: #2d302f;
+  --text-muted: #68726d;
+  --arr-queue-color: #8ab361;
+  --plex-poster-unwatched: #b38a61;
+  --petio-spinner: invert(29%) sepia(17%) saturate(823%) hue-rotate(210deg) brightness(96%) contrast(84%);
+  --gitea-color-primary-dark-4: 176, 164, 227;
+  --overseerr-gradient: linear-gradient(180deg, rgba(236, 246, 242, 0.17) 0%, rgba(236, 246, 242) 100%);
+}

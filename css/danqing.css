@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: DanQing
+ *
+ * Palette source: tinted-theming/schemes base16/danqing.yaml (Wenhan Zhu; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color-hover #cea6e5 is the palette's #cca4e3 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#b0a4e3'.
+ */
+:root {
+  --main-bg-color: #2d302f;
+  --modal-bg-color: #434846;
+  --modal-header-color: #434846;
+  --modal-footer-color: #434846;
+  --drop-down-menu-bg: #434846;
+  --button-color: #b0a4e3;
+  --button-color-hover: #30dff3;
+  --button-text: #2d302f;
+  --button-text-hover: #2d302f;
+  --accent-color: 176, 164, 227;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #30dff3;
+  --link-color-hover: #cea6e5;
+  --label-text-color: #2d302f;
+  --text: #e0f0ef;
+  --text-hover: #fcfefd;
+  --text-muted: #cad8d2;
+  --arr-queue-color: #8ab361;
+  --plex-poster-unwatched: #b38a61;
+  --petio-spinner: invert(29%) sepia(17%) saturate(823%) hue-rotate(210deg) brightness(96%) contrast(84%);
+  --gitea-color-primary-dark-4: 176, 164, 227;
+  --overseerr-gradient: linear-gradient(180deg, rgba(45, 48, 47, 0.17) 0%, rgba(45, 48, 47) 100%);
+}

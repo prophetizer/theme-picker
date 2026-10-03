@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Codeschool
+ *
+ * Palette source: tinted-theming/schemes base16/codeschool.yaml (blockloop; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #bdc6c5 is the palette's #9ea7a6 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #999ea1 is the palette's #84898c with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #fa736d is the palette's #b02f30 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --button-text #bbdefc is the palette's #b5d8f6 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#484d79'.
+ */
+:root {
+  --main-bg-color: #232c31;
+  --modal-bg-color: #1c3657;
+  --modal-header-color: #1c3657;
+  --modal-footer-color: #1c3657;
+  --drop-down-menu-bg: #1c3657;
+  --button-color: #484d79;
+  --button-color-hover: #b02f30;
+  --button-text: #bbdefc;
+  --button-text-hover: #bbdefc;
+  --accent-color: 72, 77, 121;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #fa736d;
+  --link-color-hover: #c59820;
+  --label-text-color: #bbdefc;
+  --text: #bdc6c5;
+  --text-hover: #b5d8f6;
+  --text-muted: #999ea1;
+  --arr-queue-color: #237986;
+  --plex-poster-unwatched: #43820d;
+  --petio-spinner: invert(69%) sepia(10%) saturate(2035%) hue-rotate(196deg) brightness(95%) contrast(93%);
+  --gitea-color-primary-dark-4: 72, 77, 121;
+  --overseerr-gradient: linear-gradient(180deg, rgba(35, 44, 49, 0.17) 0%, rgba(35, 44, 49) 100%);
+}

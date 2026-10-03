@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Solar Flare
+ *
+ * Palette source: tinted-theming/schemes base16/solarflare.yaml (Chuck Harmston; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #b0bac3 is the palette's #a6afb8 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #8795a0 is the palette's #85939e with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #b777eb is the palette's #a363d5 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#33b5e1'.
+ */
+:root {
+  --main-bg-color: #18262f;
+  --modal-bg-color: #222e38;
+  --modal-header-color: #222e38;
+  --modal-footer-color: #222e38;
+  --drop-down-menu-bg: #222e38;
+  --button-color: #33b5e1;
+  --button-color-hover: #52cbb0;
+  --button-text: #18262f;
+  --button-text-hover: #18262f;
+  --accent-color: 51, 181, 225;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #52cbb0;
+  --link-color-hover: #b777eb;
+  --label-text-color: #18262f;
+  --text: #b0bac3;
+  --text-hover: #f5f7fa;
+  --text-muted: #8795a0;
+  --arr-queue-color: #7cc844;
+  --plex-poster-unwatched: #e66b2b;
+  --petio-spinner: invert(35%) sepia(22%) saturate(1347%) hue-rotate(152deg) brightness(91%) contrast(93%);
+  --gitea-color-primary-dark-4: 51, 181, 225;
+  --overseerr-gradient: linear-gradient(180deg, rgba(24, 38, 47, 0.17) 0%, rgba(24, 38, 47) 100%);
+}

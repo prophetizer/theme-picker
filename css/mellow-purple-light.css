@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Mellow Purple (light)
+ *
+ * Generated variant: light of 'mellow-purple', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'mellow-purple'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#550068'.
+ */
+:root {
+  --main-bg-color: #faefff;
+  --modal-bg-color: #f6f2ff;
+  --modal-header-color: #f6f2ff;
+  --modal-footer-color: #f6f2ff;
+  --drop-down-menu-bg: #f6f2ff;
+  --button-color: #550068;
+  --button-color-hover: #b900b1;
+  --button-text: #ffeeff;
+  --button-text-hover: #ffeeff;
+  --accent-color: 85, 0, 104;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #c31bba;
+  --link-color-hover: #666d95;
+  --label-text-color: #ffeeff;
+  --text: #010001;
+  --text-hover: #100013;
+  --text-muted: #6f1c6b;
+  --arr-queue-color: #00a405;
+  --plex-poster-unwatched: #aa00a3;
+  --petio-spinner: invert(85%) sepia(27%) saturate(7478%) hue-rotate(277deg) brightness(79%) contrast(121%);
+  --gitea-color-primary-dark-4: 85, 0, 104;
+  --overseerr-gradient: linear-gradient(180deg, rgba(250, 239, 255, 0.17) 0%, #faefff 100%);
+}

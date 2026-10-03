@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Eva Dim
+ *
+ * Palette source: tinted-theming/schemes base16/eva-dim.yaml (kjakapat; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #f3f6fa is the palette's #9fa2a6 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #b7cade is the palette's #7e90a3 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #90d5bb is the palette's #4b8f77 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #d8bbff is the palette's #9c6cd3 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #0c1c2c is the palette's #2a3b4d with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#1ae1dc'.
+ */
+:root {
+  --main-bg-color: #2a3b4d;
+  --modal-bg-color: #3d566f;
+  --modal-header-color: #3d566f;
+  --modal-footer-color: #3d566f;
+  --drop-down-menu-bg: #3d566f;
+  --button-color: #1ae1dc;
+  --button-color-hover: #4b8f77;
+  --button-text: #0c1c2c;
+  --button-text-hover: #0c1c2c;
+  --accent-color: 26, 225, 220;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #90d5bb;
+  --link-color-hover: #d8bbff;
+  --label-text-color: #0c1c2c;
+  --text: #f3f6fa;
+  --text-hover: #ffffff;
+  --text-muted: #b7cade;
+  --arr-queue-color: #5de561;
+  --plex-poster-unwatched: #ff9966;
+  --petio-spinner: invert(29%) sepia(98%) saturate(363%) hue-rotate(118deg) brightness(86%) contrast(107%);
+  --gitea-color-primary-dark-4: 26, 225, 220;
+  --overseerr-gradient: linear-gradient(180deg, rgba(42, 59, 77, 0.17) 0%, rgba(42, 59, 77) 100%);
+}
