@@ -254,9 +254,34 @@ def read_hidden():
     return [t for t in read_json(HIDDEN_FILE, []) if isinstance(t, str) and SAFE_NAME.match(t)]
 
 
+def _lead(theme):
+    """The theme a light/dark pair is filed under (the tile that carries it)."""
+    for lead, twin in themes.variant_pairs().items():
+        if twin == theme:
+            return lead
+    return theme
+
+
+def hidden_set():
+    """Every theme hidden, both forms of each pair: hiding is per pair (the
+    grid hides a tile and its twin together), so the random picks must skip
+    the twin too -- they used to skip only the exact name, and could still
+    land on dracula-light after Dracula was hidden."""
+    pairs = themes.variant_pairs()
+    out = set()
+    for t in read_hidden():
+        out.add(t)
+        lead = _lead(t)
+        out.add(lead)
+        if lead in pairs:
+            out.add(pairs[lead])
+    return out
+
+
 def set_hidden(theme, on):
     if theme not in themes.allowed_themes():
         return False
+    theme = _lead(theme)                        # a twin is hidden with its pair
     with STATE_LOCK:
         hidden = [t for t in read_hidden() if t != theme]
         if on:

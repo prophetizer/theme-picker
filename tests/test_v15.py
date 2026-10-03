@@ -214,3 +214,21 @@ class RatingStats(SandboxCase):
         page = render.ratings_html()
         self.assertIn("Of 3 random picks", page)
         self.assertIn("1 were made before their theme was disliked", page)
+
+
+class HiddenPairs(SandboxCase):
+    def test_hiding_a_pair_keeps_both_forms_out_of_random_picks(self):
+        light = ":root {\n  --main-bg-color: #f5f5f5;\n  --text: #111111;\n}\n"
+        dark = ":root {\n  --main-bg-color: #101010;\n  --text: #eeeeee;\n}\n"
+        self.add_custom("mine-dark", dark)
+        self.add_custom("mine-light", light)
+        from picker import themes as th
+        pairs = th.variant_pairs()
+        lead = next(k for k, v in pairs.items() if {k, v} == {"mine-dark", "mine-light"})
+        twin = pairs[lead]
+        self.assertTrue(state.set_hidden(twin, True))             # hiding the twin hides the pair
+        self.assertEqual(state.read_hidden(), [lead])
+        self.assertTrue({"mine-dark", "mine-light"} <= state.hidden_set())
+        pool = schedule.pool_themes("all")
+        self.assertNotIn("mine-dark", pool)
+        self.assertNotIn("mine-light", pool)

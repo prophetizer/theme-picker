@@ -66,6 +66,8 @@ in [`picker.example.yml`](picker.example.yml).
   serves
 - Start a theme from any image (colours extracted in the browser)
 - A token-protected hook so Home Assistant or any automation can set the theme
+  ([Home Assistant recipes](docs/home-assistant.md): by the sun's height,
+  when someone comes home, dashboard buttons, the media player)
 - Schedules: day/night by the clock or by sunrise and sunset, a theme of the
   day, or a rotation every few hours, random or through your own ordered list
 - Installs as an app on phones and desktops (web app manifest)

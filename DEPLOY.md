@@ -171,8 +171,11 @@ the proxy, with the proxy's auth, timeouts and connection limits. The
 picker's own server is simple: it caps request bodies and idle time, but it
 has no rate limiting or connection cap of its own.
 
-`/dashboards/*.css` is the one path that is safe to leave unauthenticated: it
-serves only the live theme's colours. See [Dashboards](#dashboards-follow-the-theme).
+Two paths are safe to leave out of the proxy's authentication:
+- `/dashboards/*.css` serves only the live theme's colours. See
+  [Dashboards](#dashboards-follow-the-theme).
+- `/api/hook/theme` needs its own bearer token, compared in constant time,
+  and is off without one. See [Automation hook](#automation-hook).
 
 ## 6. Check that it works
 
@@ -263,7 +266,13 @@ curl -X POST https://theme-picker.example.com/api/hook/theme \
   -d '{"theme": "nord"}'          # or "random-favourite"
 ```
 
-Without a token file the endpoint returns 404.
+Without a token file the endpoint returns 404. Ready-made Home Assistant
+automations (by the sun's height, presence, dashboard buttons, the media
+player) are in [docs/home-assistant.md](docs/home-assistant.md).
+
+The screenshot capture posts to the same ntfy topic when a nightly run leaves
+shots missing, cannot put the live theme back, or crashes: give it the same
+`ntfy.*` settings (or `NTFY_*` variables) as the picker.
 
 ### Dashboards follow the theme
 

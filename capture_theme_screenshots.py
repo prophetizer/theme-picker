@@ -43,7 +43,7 @@ from pathlib import Path
 
 from PIL import Image
 
-from picker import backend, config, shots, state
+from picker import backend, config, ntfy, shots, state
 from playwright.sync_api import sync_playwright
 
 # The theme-switcher directory holding set-theme.sh, current-theme.env,
@@ -143,6 +143,21 @@ def make_thumb(src, dst):
     save_atomic(dst, lambda p: thumb.save(p, "JPEG", quality=82, optimize=True))
 
 
+def alert(title, body, priority=""):
+    """An ntfy message about this run, when ntfy is configured (picker.yml's
+    ntfy.* or NTFY_*); otherwise nothing. The cron's dead-man's switch only
+    hears about a run that crashes -- a run that finished but left shots
+    behind exits 0 and would go unnoticed."""
+    try:
+        ntfy.send(title, body, tags="camera,warning", priority=priority, click=config.picker_url())
+    except Exception as e:                       # an alert must never break the run
+        print(f"    (ntfy alert not sent: {e})", file=sys.stderr)
+
+
+def summarise(names, n=6):
+    return ", ".join(names[:n]) + (f" and {len(names) - n} more" if len(names) > n else "")
+
+
 def main():
     themes = sys.argv[1:] or all_themes()
     force = os.environ.get("FORCE") == "1"
@@ -174,7 +189,7 @@ def main():
     # still the one this script last set. If not, a person changed it, and
     # THAT is what gets restored. (Their clicks cannot pollute the gallery:
     # each shot is checked against the intended theme's stylesheet.)
-    restore_to = {"theme": original, "last_set": None}
+    restore_to = {"theme": original, "last_set": None, "human": False}
 
     def note_human_change():
         live = current_theme()
@@ -182,6 +197,7 @@ def main():
             print(f"==> Live theme was changed to '{live}' by someone else; "
                   f"will restore that instead of '{restore_to['theme']}'.", flush=True)
             restore_to["theme"] = live
+            restore_to["human"] = True
     started = time.time()
     try:
         with sync_playwright() as p:
@@ -248,8 +264,11 @@ def main():
         print(f"==> Restoring '{target}'")
         try:
             set_theme(target, ignore_overrides=False)
-        except Exception:
+        except Exception as e:
             print(f"!! RESTORE FAILED -- run: {THEME_DIR / 'set-theme.sh'} {target}", file=sys.stderr)
+            alert("Screenshot capture could not restore the theme",
+                  f"Every app may still show the last theme it captured. Put '{target}' back from the "
+                  f"picker. ({type(e).__name__}: {str(e)[:150]})", priority="high")
 
     # Thumbnails for any full-size shot that predates thumbnailing.
     for png in SHOTS.glob("*.png"):
@@ -263,8 +282,21 @@ def main():
         print(f"    failed ({len(failed)}):", " ".join(failed))
     if mismatched:
         print(f"    wrong theme on page, not saved ({len(mismatched)}):", " ".join(mismatched))
+    if failed or mismatched:
+        lines = []
+        if failed:
+            lines.append(f"{len(failed)} shot(s) failed: {summarise(failed)}.")
+        if mismatched:
+            lines.append(f"{len(mismatched)} page(s) still showed another theme, not saved: {summarise(mismatched)}."
+                         + (" Someone changed the theme during the run, which explains these." if restore_to["human"] else ""))
+        lines.append("The next run retries them.")
+        alert(f"Screenshot capture: {len(failed) + len(mismatched)} shot(s) missing", "\n".join(lines))
     return 1 if failed else 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except Exception as e:
+        alert("Screenshot capture crashed", f"{type(e).__name__}: {str(e)[:300]}", priority="high")
+        raise

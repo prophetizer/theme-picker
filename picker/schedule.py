@@ -205,7 +205,7 @@ def pool_themes(pool):
     minus hidden ones and the live one. (state.pick() then leaves out the
     disliked ones and favours the liked.)"""
     allowed = set(themes.allowed_themes())
-    hidden = set(state.read_hidden())
+    hidden = state.hidden_set()
     base = state.read_favourites() if pool == "favourites" else sorted(allowed)
     live = themes.current_theme()
     return [t for t in base if t in allowed and t not in hidden and t != live]
@@ -279,7 +279,7 @@ def tick_daily(now=None, apply_fn=None, rng=random):
 
 def rotate_list(sch):
     """The playlist's themes that can still be applied (known, not hidden)."""
-    allowed, hidden = set(themes.allowed_themes()), set(state.read_hidden())
+    allowed, hidden = set(themes.allowed_themes()), state.hidden_set()
     return [t for t in sch["rotate_list"] if t in allowed and t not in hidden]
 
 
