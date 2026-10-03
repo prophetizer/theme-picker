@@ -128,7 +128,8 @@ class CrossSite(ServerCase):
         self.assertEqual(self.backend.applied, [])
 
     def test_cross_site_api_calls_are_refused(self):
-        for path in ("/api/favourite", "/api/override", "/api/editor/save", "/api/schedule"):
+        for path in ("/api/favourite", "/api/override", "/api/editor/save", "/api/schedule",
+                     "/api/daily", "/api/rotate", "/api/hide"):
             with self.subTest(path=path):
                 status, _, _ = self.request("POST", path, b'{"theme": "nord", "on": true}',
                                             {"Content-Type": "application/json",
@@ -414,3 +415,26 @@ class PreviewLink(ServerCase):
         self.assertIn("javascript", ctype)
         self.assertIn(b"classList.add('js')", body)
 
+
+
+class RotateRoute(ServerCase):
+    def test_turns_rotation_on_and_reports_every_schedule(self):
+        status, _, body = self.post_json("/api/rotate", {"enabled": True, "every": 3, "pool": "all"})
+        data = json.loads(body)
+        self.assertEqual(status, 200, data)
+        self.assertTrue(data["ok"])
+        self.assertEqual((data["schedule"]["rotate_enabled"], data["schedule"]["rotate_every"]), (True, 3))
+        self.assertFalse(data["schedule"]["enabled"])
+        status, _, body = self.post_json("/api/rotate", {"enabled": True, "every": 0, "pool": "all"})
+        self.assertEqual((status, json.loads(body)["ok"]), (400, False))
+
+
+class ThemeCssRoute(ServerCase):
+    def test_serves_a_known_themes_stylesheet_only(self):
+        self.add_custom("my-theme", ":root {\n  --main-bg-color: #101010;\n}\n")
+        status, headers, body = self.request("GET", "/api/theme-css?theme=my-theme")
+        self.assertEqual(status, 200)
+        self.assertIn("--main-bg-color: #101010", body if isinstance(body, str) else body.decode())
+        for bad in ("../../etc/passwd", "nope", ""):
+            with self.subTest(bad=bad):
+                self.assertEqual(self.request("GET", f"/api/theme-css?theme={bad}")[0], 400)

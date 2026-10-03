@@ -11,14 +11,25 @@ straight away.
 
 Times are naive local wall-clock times (the container's TZ): "19:00" means
 19:00 on the clock, including across a DST change.
+
+Sun mode: day starts at sunrise and night at sunset, each moved by an offset
+in minutes, computed here from a latitude and longitude (sun_times(); no
+network). Coordinates are stored rounded to 2 decimals (about 1 km). Where
+the sun doesn't rise or set that day (polar summer or winter), the clock
+times stand in.
+
+Rotation: a random theme every N hours from the favourites or all themes,
+like the theme of the day. The three schedules are exclusive: turning one on
+turns the others off.
 """
 
+import math
 import random
 import re
 import sys
 import threading
 import time
-from datetime import datetime, time as dtime, timedelta
+from datetime import datetime, time as dtime, timedelta, timezone
 
 from . import apply, config, state, themes
 
@@ -30,7 +41,11 @@ DEFAULTS = {"enabled": False, "day": "", "night": "", "day_at": "07:00", "night_
             # Theme of the day: a random pick once a day, at daily_at, from
             # the favourites or every theme -- never a hidden one or the live
             # one. Exclusive with day/night: enabling one turns the other off.
-            "daily_enabled": False, "daily_at": "08:00", "daily_pool": "favourites", "daily_handled": ""}
+            "daily_enabled": False, "daily_at": "08:00", "daily_pool": "favourites", "daily_handled": "",
+            # Day/night at sunrise and sunset instead of day_at/night_at.
+            "sun": False, "lat": 0.0, "lon": 0.0, "day_offset": 0, "night_offset": 0,
+            # Rotation: a random pick every rotate_every hours.
+            "rotate_enabled": False, "rotate_every": 6, "rotate_pool": "favourites", "rotate_handled": ""}
 POOLS = ("favourites", "all")
 _LOCK = threading.Lock()
 
@@ -39,8 +54,57 @@ def read():
     data = state.read_json(SCHEDULE_FILE, {})
     out = dict(DEFAULTS)
     if isinstance(data, dict):
-        out.update({k: data[k] for k in DEFAULTS if k in data and isinstance(data[k], type(DEFAULTS[k]))})
+        for k in DEFAULTS:
+            v = data.get(k)
+            if isinstance(DEFAULTS[k], float) and isinstance(v, int) and not isinstance(v, bool):
+                v = float(v)
+            if v is not None and type(v) is type(DEFAULTS[k]):
+                out[k] = v
     return out
+
+
+# --- sunrise and sunset -----------------------------------------------------------
+def sun_times(day, lat, lon):
+    """(sunrise, sunset) as UTC datetimes for a date at a place, by the
+    standard sunrise equation (to within a minute or two). "up" or "down"
+    instead when the sun stays above or below the horizon all day."""
+    jd0 = day.toordinal() + 1721424.5                 # Julian date at 00:00 UTC
+    n = round(jd0 + 0.5 - 2451545.0 + 0.0008)
+    j_star = n - lon / 360
+    m = (357.5291 + 0.98560028 * j_star) % 360
+    mr = math.radians(m)
+    c = 1.9148 * math.sin(mr) + 0.0200 * math.sin(2 * mr) + 0.0003 * math.sin(3 * mr)
+    lam = math.radians((m + c + 180 + 102.9372) % 360)
+    transit = 2451545.0 + j_star + 0.0053 * math.sin(mr) - 0.0069 * math.sin(2 * lam)
+    sin_d = math.sin(lam) * math.sin(math.radians(23.4397))
+    cos_d = math.cos(math.asin(sin_d))
+    phi = math.radians(lat)
+    cos_w = (math.sin(math.radians(-0.833)) - math.sin(phi) * sin_d) / (math.cos(phi) * cos_d)
+    if cos_w < -1:
+        return "up"
+    if cos_w > 1:
+        return "down"
+    w = math.degrees(math.acos(cos_w)) / 360
+    at = lambda j: datetime(2000, 1, 1, 12, tzinfo=timezone.utc) + timedelta(days=j - 2451545.0)
+    return at(transit - w), at(transit + w)
+
+
+def _local(utc):
+    """A UTC datetime as naive local wall-clock time (the container's TZ)."""
+    return utc.astimezone().replace(tzinfo=None, second=0, microsecond=0)
+
+
+def slot_times(sch, day):
+    """{slot: datetime} of the two switches on a date: sunrise and sunset in
+    sun mode (with the offsets), else the clock times."""
+    clock = {slot: datetime.combine(day, _at(sch[f"{slot}_at"])) for slot in ("day", "night")}
+    if not sch.get("sun"):
+        return clock
+    st = sun_times(day, sch["lat"], sch["lon"])
+    if isinstance(st, str):
+        return clock
+    return {"day": _local(st[0]) + timedelta(minutes=sch["day_offset"]),
+            "night": _local(st[1]) + timedelta(minutes=sch["night_offset"])}
 
 
 def _at(hhmm):
@@ -53,8 +117,7 @@ def switches(sch, now):
     out = []
     for days in (-1, 0, 1):
         d = (now + timedelta(days=days)).date()
-        for slot in ("day", "night"):
-            out.append((datetime.combine(d, _at(sch[f"{slot}_at"])), slot))
+        out += [(when, slot) for slot, when in slot_times(sch, d).items()]
     return sorted(out)
 
 
@@ -82,8 +145,25 @@ def validate(data):
         sch[slot], sch[f"{slot}_at"] = t, at
     if sch["day_at"] == sch["night_at"]:
         return None, "Day and night need different switch times."
+    sch["sun"] = bool(data.get("sun"))
+    if sch["sun"] or any(data.get(k) not in (None, "") for k in ("lat", "lon")):
+        try:
+            lat, lon = float(data.get("lat")), float(data.get("lon"))
+        except (TypeError, ValueError):
+            return None, "Latitude and longitude must be numbers, e.g. 51.51 and -0.13."
+        if not (math.isfinite(lat) and math.isfinite(lon) and -90 <= lat <= 90 and -180 <= lon <= 180):
+            return None, "Latitude must be -90 to 90 and longitude -180 to 180."
+        sch["lat"], sch["lon"] = round(lat, 2), round(lon, 2)   # about 1 km: enough for the sun
+    for k in ("day_offset", "night_offset"):
+        try:
+            v = int(data.get(k) or 0)
+        except (TypeError, ValueError):
+            return None, "Offsets are whole minutes."
+        if not -180 <= v <= 180:
+            return None, "Offsets must be within 3 hours (-180 to 180 minutes)."
+        sch[k] = v
     if sch["enabled"]:
-        sch["daily_enabled"] = False                 # one schedule at a time
+        sch["daily_enabled"] = sch["rotate_enabled"] = False     # one schedule at a time
     return sch, None
 
 
@@ -101,8 +181,13 @@ def save(data, now=None):
     applied = tick(now)
     now = now or datetime.now()
     when, slot = next_switch(sch, now)
-    msg = (f"Schedule on: {sch['day']} from {sch['day_at']}, {sch['night']} from {sch['night_at']}. "
-           f"Next switch: {sch[slot]} at {when.strftime('%H:%M')}.")
+    if sch["sun"]:
+        times = slot_times(sch, now.date())
+        msg = (f"Schedule on: {sch['day']} from sunrise ({times['day']:%H:%M} today), "
+               f"{sch['night']} from sunset ({times['night']:%H:%M}). ")
+    else:
+        msg = f"Schedule on: {sch['day']} from {sch['day_at']}, {sch['night']} from {sch['night_at']}. "
+    msg += f"Next switch: {sch[slot]} at {when.strftime('%H:%M')}."
     if applied and applied[2]:
         msg += f" Applied {applied[1]} ({applied[0]}) now."
     elif applied:
@@ -110,14 +195,18 @@ def save(data, now=None):
     return True, msg
 
 
-def daily_pool(sch):
-    """The themes the theme of the day picks from: favourites (or every
-    theme), minus hidden ones and the live one."""
+def pool_themes(pool):
+    """The themes a random pick chooses from: favourites (or every theme),
+    minus hidden ones and the live one."""
     allowed = set(themes.allowed_themes())
     hidden = set(state.read_hidden())
-    base = state.read_favourites() if sch["daily_pool"] == "favourites" else sorted(allowed)
+    base = state.read_favourites() if pool == "favourites" else sorted(allowed)
     live = themes.current_theme()
     return [t for t in base if t in allowed and t not in hidden and t != live]
+
+
+def daily_pool(sch):
+    return pool_themes(sch["daily_pool"])
 
 
 def daily_due(sch, now):
@@ -138,7 +227,7 @@ def save_daily(data, now=None, rng=random):
         sch = read()
         sch.update(daily_enabled=on, daily_at=at, daily_pool=pool, daily_handled="")
         if on:
-            sch["enabled"] = False                   # one schedule at a time
+            sch["enabled"] = sch["rotate_enabled"] = False      # one schedule at a time
         state.write_json(SCHEDULE_FILE, sch)
     if not on:
         return True, "Theme of the day off."
@@ -183,6 +272,71 @@ def tick_daily(now=None, apply_fn=None, rng=random):
         return result
 
 
+def save_rotate(data, now=None, rng=random):
+    """Validate and store the rotation; enabling it turns the other schedules
+    off and picks a theme now. Returns (ok, message)."""
+    pool, on = str(data.get("pool", "")), bool(data.get("enabled"))
+    try:
+        every = int(data.get("every"))
+    except (TypeError, ValueError):
+        return False, "Every how many hours? A whole number, 1 to 168."
+    if not 1 <= every <= 168:
+        return False, "Every 1 to 168 hours (a week)."
+    if pool not in POOLS:
+        return False, "Pick from favourites or all themes."
+    with _LOCK:
+        sch = read()
+        sch.update(rotate_enabled=on, rotate_every=every, rotate_pool=pool, rotate_handled="")
+        if on:
+            sch["enabled"] = sch["daily_enabled"] = False       # one schedule at a time
+        state.write_json(SCHEDULE_FILE, sch)
+    if not on:
+        return True, "Rotation off."
+    src = "your favourites" if pool == "favourites" else "all themes"
+    if not pool_themes(pool):
+        return True, ("Rotation on, but there is nothing to pick from yet: "
+                      + ("star some favourites." if pool == "favourites" else "every theme is hidden."))
+    picked = tick_rotate(now, rng=rng)
+    msg = f"Rotation on: a new theme from {src} every {every} hour{'s' if every != 1 else ''}."
+    if picked and picked[1]:
+        msg += f" Now: {picked[0]}."
+    return True, msg
+
+
+def rotate_due(sch, now):
+    """True when the rotation should pick: never picked, or rotate_every
+    hours since the last pick."""
+    try:
+        last = datetime.fromisoformat(sch["rotate_handled"]) if sch["rotate_handled"] else None
+    except ValueError:
+        last = None
+    return last is None or now >= last + timedelta(hours=sch["rotate_every"])
+
+
+def tick_rotate(now=None, apply_fn=None, rng=random):
+    """Pick and apply the next theme if the rotation is due.
+    Returns (theme, ok, message) when it acted, else None."""
+    apply_fn = apply_fn or apply.apply_theme
+    now = now or datetime.now()
+    with _LOCK:
+        sch = read()
+        if not sch["rotate_enabled"] or not rotate_due(sch, now):
+            return None
+        pool = pool_themes(sch["rotate_pool"])
+        result = None
+        if pool:
+            theme = rng.choice(pool)
+            ok, message, status = apply_fn(theme, "schedule (rotation)")
+            result = (theme, ok, message)
+            if not ok:
+                print(f"schedule: {message}", file=sys.stderr, flush=True)
+                if status != 400:
+                    return result                    # retry next tick
+        sch["rotate_handled"] = now.replace(second=0, microsecond=0).isoformat()
+        state.write_json(SCHEDULE_FILE, sch)
+        return result
+
+
 def tick(now=None, apply_fn=None):
     """Apply the current slot's theme if its switch has not been handled.
     Returns (slot, theme, ok, message) when it acted, else None."""
@@ -218,7 +372,24 @@ def status(now=None):
     """The schedule plus where it is now, for the page and /api/schedule."""
     sch = read()
     out = {k: sch[k] for k in ("enabled", "day", "night", "day_at", "night_at",
-                               "daily_enabled", "daily_at", "daily_pool")}
+                               "daily_enabled", "daily_at", "daily_pool",
+                               "sun", "lat", "lon", "day_offset", "night_offset",
+                               "rotate_enabled", "rotate_every", "rotate_pool")}
+    now_ = now or datetime.now()
+    if sch["sun"]:
+        st = sun_times(now_.date(), sch["lat"], sch["lon"])
+        if isinstance(st, str):
+            out["sun_today"] = f"the sun stays {st} today; the clock times apply"
+        else:
+            out["sun_today"] = f"sunrise {_local(st[0]):%H:%M}, sunset {_local(st[1]):%H:%M} today"
+    if sch["rotate_enabled"]:
+        out["rotate_pool_size"] = len(pool_themes(sch["rotate_pool"]))
+        try:
+            last = datetime.fromisoformat(sch["rotate_handled"]) if sch["rotate_handled"] else None
+        except ValueError:
+            last = None
+        if last:
+            out["rotate_next"] = (last + timedelta(hours=sch["rotate_every"])).strftime("%a %H:%M")
     if sch["daily_enabled"]:
         now_ = now or datetime.now()
         out["daily_next"] = (daily_due(sch, now_) + timedelta(days=1)).strftime("%a %H:%M")
@@ -236,6 +407,7 @@ def _loop():
         try:
             tick()
             tick_daily()
+            tick_rotate()
         except Exception as e:                   # never let the scheduler die
             print(f"schedule: {e}", file=sys.stderr, flush=True)
         time.sleep(TICK)

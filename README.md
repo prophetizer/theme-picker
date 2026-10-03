@@ -50,8 +50,10 @@ in [`picker.example.yml`](picker.example.yml).
   favourites, accent colour), sorting, keyboard navigation, "surprise me"
 - Contrast audit on every theme: *low contrast* and *high contrast* (WCAG AAA
   for every text role) badges, measured rather than claimed
-- Lightbox of real screenshots per theme, captured nightly by an optional
-  headless-Chromium container (or a host cron job)
+- A preview of each theme: real screenshots of your apps (captured nightly by
+  an optional headless-Chromium container, or a host cron job), the themes
+  that look like it, a colour-vision check, and export to base16 and
+  terminal formats
 - Recent-theme history chips and usage stats
 - Per-app theme pins, with a coverage check that every app actually received
   the theme it should
@@ -62,7 +64,9 @@ in [`picker.example.yml`](picker.example.yml).
   serves
 - Start a theme from any image (colours extracted in the browser)
 - A token-protected hook so Home Assistant or any automation can set the theme
-- Day/night schedule, undo, side-by-side screenshot compare
+- Schedules: day/night by the clock or by sunrise and sunset, a theme of the
+  day, or a rotation every few hours
+- Undo, side-by-side screenshot compare
 
 ## A tour of the tabs
 
@@ -82,13 +86,11 @@ preview, and every one comes in a light and a dark form. The sidebar narrows
 the list:
 - search
 - readable only, high contrast, gradients, favourites, new
+- accent colour
 - **closest to a colour**: pick any colour and the themes that use it come first
 - hidden themes: **hide** a theme you never want (in its preview, or **H**) and
   it leaves the grid, Surprise me and the theme of the day; "Show hidden
   themes" brings them back
-
-A theme's preview also lists the five themes that **look most like it**.
-- accent colour
 
 It also sorts the list by section, name, lightness, accent colour or date
 added. Click a tile to apply it everywhere. The ☀/☾ switch on a tile flips
@@ -104,6 +106,21 @@ Badges come from a real contrast audit of each theme's CSS:
 - **low contrast**: body text under 4.5:1, or muted text or button labels
   under 3:1.
 - **high contrast**: every text role at WCAG AAA, 7:1.
+
+### A theme's preview
+
+The ▣ on any tile (or **P**) opens a theme's preview:
+- **screenshots** of your apps in that theme, if the capture runs, side by side
+  with another theme on request
+- the five themes that **look most like it**
+- **colour vision**: the screenshots and the theme's colours as seen with
+  protanopia, deuteranopia or tritanopia, and a warning when links blur into
+  text, or buttons into links or panels
+- **export as** theme.park CSS, base16 YAML, or a Ghostty, Kitty, Alacritty,
+  Windows Terminal or Xresources scheme, to take the theme to your terminal
+- **Edit a copy**, **Hide**, and a link that shows the picker in that theme
+
+![A theme's preview in deuteranopia: each colour as designed and as seen](docs/screenshots/preview.png)
 
 ### Apps & coverage
 
@@ -122,11 +139,14 @@ is missing its theme.
 
 ### Schedule
 
-A day theme and a night theme, switched at the times you set. A theme picked
+A day theme and a night theme, switched at the times you set, or at **sunrise
+and sunset** where you are (worked out in the picker from your coordinates,
+nothing looked up online), each moved by an offset if you like. A theme picked
 by hand holds until the next switch, then the schedule takes over again.
 
-Or a **theme of the day**: a random pick every morning, from your favourites
-or from every theme, never a hidden one. One schedule runs at a time.
+Or a **theme of the day**: a random pick every morning. Or a **rotation**: a
+new random theme every few hours. Both pick from your favourites or from
+every theme, never a hidden one. One schedule runs at a time.
 
 ![Day/night schedule: Catppuccin Latte from 07:00, Catppuccin Mocha from 19:30](docs/screenshots/schedule.png)
 

@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from unittest import mock
 
 from picker import apply, config, render, schedule, state
@@ -217,3 +217,116 @@ class ThemeOfTheDay(ScheduleCase):
         self.assertTrue(st["daily_enabled"])
         self.assertEqual(st["daily_pool_size"], 2)                     # favourites minus the live one
         self.assertIn("next pick", render.daily_summary(st))
+
+
+class LocalTZ:
+    """Run with the process's local time zone set to `tz`."""
+    def __init__(self, tz):
+        self.tz = tz
+
+    def __enter__(self):
+        import os, time
+        self.old = os.environ.get("TZ")
+        os.environ["TZ"] = self.tz
+        time.tzset()
+
+    def __exit__(self, *exc):
+        import os, time
+        if self.old is None:
+            os.environ.pop("TZ", None)
+        else:
+            os.environ["TZ"] = self.old
+        time.tzset()
+
+
+class SunMode(ScheduleCase):
+    LONDON = {"sun": True, "lat": "51.5072", "lon": "-0.1276"}
+
+    def test_sun_times_match_published_tables(self):
+        from datetime import date
+        rise, sset = schedule.sun_times(date(2026, 6, 21), 51.51, -0.13)
+        self.assertEqual((rise.strftime("%H:%M"), sset.strftime("%H:%M")), ("03:43", "20:21"))   # UTC
+        rise, sset = schedule.sun_times(date(2026, 1, 1), -33.87, 151.21)                        # Sydney
+        self.assertEqual((rise.strftime("%d %H:%M"), sset.strftime("%d %H:%M")), ("31 18:47", "01 09:09"))
+        self.assertEqual(schedule.sun_times(date(2026, 6, 21), 69.65, 18.96), "up")             # Tromsø
+        self.assertEqual(schedule.sun_times(date(2026, 12, 21), 69.65, 18.96), "down")
+
+    def test_switches_at_local_sunrise_and_sunset_with_offsets(self):
+        with LocalTZ("Europe/London"):
+            ok, msg = self.enable(D(12, day=23), **self.LONDON, day_offset="-30", night_offset="15")
+            self.assertTrue(ok, msg)
+            sch = schedule.read()
+            self.assertEqual((sch["lat"], sch["lon"]), (51.51, -0.13))        # rounded, about 1 km
+            t = schedule.slot_times(sch, D(0).date())
+            rise, sset = (schedule._local(x) for x in schedule.sun_times(D(0).date(), 51.51, -0.13))
+            self.assertEqual((rise.hour, sset.hour), (6, 18))                  # BST, not UTC
+            self.assertEqual((t["day"], t["night"]),
+                             (rise - timedelta(minutes=30), sset + timedelta(minutes=15)))
+            self.assertIn(f"from sunrise ({t['day']:%H:%M} today)", msg)
+            self.assertEqual(schedule.current_slot(sch, t["night"] - timedelta(minutes=1))[1], "day")
+            self.assertEqual(schedule.current_slot(sch, t["night"])[1], "night")
+
+    def test_polar_days_fall_back_to_the_clock(self):
+        with LocalTZ("Europe/Oslo"):
+            sch = dict(schedule.read(), sun=True, lat=69.65, lon=18.96, day_at="08:00", night_at="20:00")
+            t = schedule.slot_times(sch, datetime(2026, 6, 21).date())
+            self.assertEqual((t["day"].hour, t["night"].hour), (8, 20))
+
+    def test_bad_coordinates(self):
+        for over in ({"lat": "north"}, {"lat": "91"}, {"lon": "-181"}, {"lat": "nan"}, {"lat": ""},
+                     {"day_offset": "200"}, {"night_offset": "x"}):
+            with self.subTest(over=over):
+                ok, _ = self.enable(D(12), **dict(self.LONDON, **over))
+                self.assertFalse(ok)
+
+    def test_status_says_when_the_sun_rises(self):
+        with LocalTZ("Europe/London"):
+            self.enable(D(12), **self.LONDON)
+            st = schedule.status(D(12))
+        self.assertRegex(st["sun_today"], r"^sunrise 06:[0-9]{2}, sunset 18:[0-9]{2} today\Z")
+        self.assertIn("by the sun", render.schedule_summary(st))
+
+
+class Rotation(ScheduleCase):
+    def setUp(self):
+        super().setUp()
+        for t in ("dracula", "catppuccin-latte", "nord"):
+            state.set_favourite(t, True)
+
+    def rotate(self, now, **over):
+        data = {"enabled": True, "every": 6, "pool": "favourites", **over}
+        return schedule.save_rotate(data, now=now, rng=FirstPick)
+
+    def test_enabling_picks_now_then_every_n_hours(self):
+        ok, msg = self.rotate(D(9))
+        self.assertTrue(ok, msg)
+        self.assertIn("every 6 hours", msg)
+        self.assertEqual(self.applied, [("catppuccin-latte", "schedule (rotation)")])
+        schedule.tick_rotate(D(14, 59), rng=FirstPick)                     # not yet
+        self.assertEqual(len(self.applied), 1)
+        schedule.tick_rotate(D(15), rng=FirstPick)                         # 6 hours on
+        self.assertEqual([t for t, _ in self.applied], ["catppuccin-latte", "dracula"])
+        self.assertEqual(schedule.status(D(15, 30))["rotate_next"], "Wed 21:00")
+
+    def test_one_schedule_at_a_time(self):
+        self.enable(D(9))
+        self.rotate(D(10))
+        sch = schedule.read()
+        self.assertEqual((sch["enabled"], sch["daily_enabled"], sch["rotate_enabled"]), (False, False, True))
+        schedule.save_daily({"enabled": True, "at": "08:00", "pool": "favourites"}, now=D(11), rng=FirstPick)
+        self.assertFalse(schedule.read()["rotate_enabled"])
+        self.rotate(D(12))
+        self.enable(D(13))
+        self.assertFalse(schedule.read()["rotate_enabled"])
+
+    def test_bad_input(self):
+        for over in ({"every": 0}, {"every": 169}, {"every": "x"}, {"pool": "mine"}):
+            with self.subTest(over=over):
+                self.assertFalse(self.rotate(D(9), **over)[0])
+
+    def test_off(self):
+        self.rotate(D(9))
+        ok, msg = self.rotate(D(10), enabled=False)
+        self.assertEqual((ok, msg), (True, "Rotation off."))
+        schedule.tick_rotate(D(23), rng=FirstPick)
+        self.assertEqual(len(self.applied), 1)

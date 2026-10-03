@@ -110,8 +110,10 @@ def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin
         tags.append(f'<span class="tag new" title="Added {e(day)}">new</span>')
     if grad:
         tags.append('<span class="tag grad">gradient</span>')
-    peek = (f'<span class="peek" title="Preview {len(apps)} screenshots (P)" aria-label="Screenshots">&#9635;</span>'
-            if apps else "")
+    # Every tile: the preview also holds export, colour vision, "looks like"
+    # and "edit a copy", not only the screenshots.
+    peek = (f'<span class="peek" title="Preview: {len(apps)} screenshot{"s" if len(apps) != 1 else ""}, '
+            f'export, colour vision (P)" aria-label="Preview">&#9635;</span>')
     light = m["mode"] == "light"
     pair_attrs = (f' data-twin="{e(twin)}"' if twin else "") + (f' data-twin-of="{e(twin_of)}"' if twin_of else "")
     if twin or twin_of:
@@ -240,10 +242,23 @@ def schedule_html():
         f'<label>from <input type="time" id="sch-day-at" value="{e(st["day_at"])}"></label></div>'
         f'<div class="ed-row"><label>Night <select id="sch-night">{opts(st["night"])}</select></label>'
         f'<label>from <input type="time" id="sch-night-at" value="{e(st["night_at"])}"></label></div>'
+        f'<div class="ed-row"><label><input type="checkbox" id="sch-sun"{" checked" if st["sun"] else ""}> '
+        f'Follow sunrise and sunset instead</label>'
+        f'<span id="sch-sun-today" class="count">{e(st.get("sun_today", ""))}</span></div>'
+        f'<div class="ed-row sun-row"><label>Latitude <input type="number" id="sch-lat" step="0.01" min="-90" max="90" '
+        f'value="{e(st["lat"]) if st["sun"] else ""}" placeholder="51.51"></label>'
+        f'<label>Longitude <input type="number" id="sch-lon" step="0.01" min="-180" max="180" '
+        f'value="{e(st["lon"]) if st["sun"] else ""}" placeholder="-0.13"></label></div>'
+        f'<div class="ed-row sun-row"><label>Day starts <input type="number" id="sch-day-off" step="5" min="-180" max="180" '
+        f'value="{e(st["day_offset"])}"> min after sunrise</label>'
+        f'<label>Night starts <input type="number" id="sch-night-off" step="5" min="-180" max="180" '
+        f'value="{e(st["night_offset"])}"> min after sunset</label></div>'
         f'<div class="ed-row"><button type="button" id="sch-save">Save</button>'
         f'<span id="sch-status" class="count"></span></div>'
         f'<p class="count">A theme picked by hand stays until the next switch time; then the '
-        f'schedule takes over again. Scheduled switches are not announced on ntfy.</p>'
+        f'schedule takes over again. Scheduled switches are not announced on ntfy. Sunrise and '
+        f'sunset are worked out here, from the coordinates (kept to 2 decimals, about 1 km); '
+        f'nothing is looked up online. Use a negative offset for earlier.</p>'
         f'<h2 class="tab-title">Theme of the day '
         f'<span id="daily-state" class="count">{e(daily_summary(st))}</span></h2>'
         f'<div class="ed-row"><label><input type="checkbox" id="daily-enabled"'
@@ -254,8 +269,28 @@ def schedule_html():
         f'<option value="all"{" selected" if st["daily_pool"] == "all" else ""}>all themes</option></select></label></div>'
         f'<div class="ed-row"><button type="button" id="daily-save">Save</button>'
         f'<span id="daily-status" class="count"></span></div>'
-        f'<p class="count">Never picks a hidden theme or the one already live. Turning this on '
-        f'turns the day/night schedule off, and the other way round.</p></div>')
+        f'<p class="count">Never picks a hidden theme or the one already live.</p>'
+        f'<h2 class="tab-title">Rotation '
+        f'<span id="rotate-state" class="count">{e(rotate_summary(st))}</span></h2>'
+        f'<div class="ed-row"><label><input type="checkbox" id="rotate-enabled"'
+        f'{" checked" if st["rotate_enabled"] else ""}> Change theme every</label>'
+        f'<label><input type="number" id="rotate-every" min="1" max="168" step="1" value="{e(st["rotate_every"])}"> hours</label>'
+        f'<label>from <select id="rotate-pool">'
+        f'<option value="favourites"{" selected" if st["rotate_pool"] == "favourites" else ""}>my favourites</option>'
+        f'<option value="all"{" selected" if st["rotate_pool"] == "all" else ""}>all themes</option></select></label></div>'
+        f'<div class="ed-row"><button type="button" id="rotate-save">Save</button>'
+        f'<span id="rotate-status" class="count"></span></div>'
+        f'<p class="count">A random pick each time, never a hidden theme or the one already live. '
+        f'Day/night, theme of the day and rotation take turns: turning one on turns the others off.</p></div>')
+
+
+def rotate_summary(st):
+    if not st["rotate_enabled"]:
+        return "off"
+    pool = "favourites" if st["rotate_pool"] == "favourites" else "all themes"
+    every = st["rotate_every"]
+    return (f"on · every {every} hour{'s' if every != 1 else ''} from {pool} ({st.get('rotate_pool_size', 0)})"
+            + (f" · next {st['rotate_next']}" if st.get("rotate_next") else ""))
 
 
 def daily_summary(st):
@@ -270,8 +305,8 @@ def schedule_summary(st):
         return "off"
     if "slot" not in st:
         return "on, but a theme is missing"
-    return (f"on · now {st['slot']} ({st[st['slot']]}) · next: {st['next_theme']} "
-            f"at {st['next_at']}")
+    return (f"on{' · by the sun' if st.get('sun') else ''} · now {st['slot']} ({st[st['slot']]}) · "
+            f"next: {st['next_theme']} at {st['next_at']}")
 
 
 def _dur(sec):

@@ -233,6 +233,22 @@ class Handler(BaseHTTPRequestHandler):
             if t not in themes.allowed_themes():
                 return self._send_json({"error": "unknown theme"}, status=400)
             self._send_json(editor.theme_vars(t))
+        elif path == "/api/theme-css":
+            # The stylesheet itself, for the preview's "Export as theme.park
+            # CSS": the page can't fetch theme.park cross-origin (CSP).
+            q = parse_qs(urlsplit(self.path).query)
+            t = (q.get("theme") or [""])[0]
+            if t not in themes.allowed_themes():
+                return self._send_json({"error": "unknown theme"}, status=400)
+            css = themes.theme_css(t)
+            if not css:
+                return self._send_json({"error": "stylesheet unavailable"}, status=502)
+            data = css.encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "text/css; charset=utf-8")
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
         elif path == "/api/schedule":
             self._send_json(schedule.status())
         elif path == "/api/editor/status":
@@ -344,9 +360,11 @@ class Handler(BaseHTTPRequestHandler):
                     return self._send_json({"ok": False, "message": "bad or missing token"}, status=401)
                 ok, msg, status, theme = hooks.set_theme(data)
                 return self._send_json({"ok": ok, "message": msg, "theme": theme}, status=status)
-            if path in ("/api/schedule", "/api/daily"):
+            if path in ("/api/schedule", "/api/daily", "/api/rotate"):
                 before = themes.current_theme()
-                ok, msg = (schedule.save if path == "/api/schedule" else schedule.save_daily)(data)
+                save = {"/api/schedule": schedule.save, "/api/daily": schedule.save_daily,
+                        "/api/rotate": schedule.save_rotate}[path]
+                ok, msg = save(data)
                 now = themes.current_theme()
                 return self._send_json(
                     {"ok": ok, "message": msg, "schedule": schedule.status(),

@@ -39,6 +39,9 @@ def sample_state(d, custom):
     (d / "theme-overrides.json").write_text(json.dumps({"prowlarr": "nord"}))
     (d / "theme-favourites.json").write_text(json.dumps(["tokyo-night", "everforest", "cosmic-fusion", "nord"]))
     (d / "current-theme.env").write_text(f"CURRENT_THEME={LIVE}\n")
+    (d / "theme-schedule.json").write_text(json.dumps({          # shown, never run: no server
+        "enabled": True, "day": "catppuccin-latte", "night": "catppuccin-mocha",
+        "day_at": "07:00", "night_at": "19:30"}))
     rng, t, hist = random.Random(7), datetime.now().astimezone() - timedelta(days=21), []
     pool = ["tokyo-night"] * 5 + ["everforest"] * 4 + ["catppuccin-mocha"] * 4 + ["catppuccin-latte"] * 3 + \
            ["nord", "gruvbox", "cosmic-fusion", "night-owl", "kanagawa", "frost", "dracula"]

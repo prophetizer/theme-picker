@@ -113,7 +113,8 @@ class Http(ServerCase):
 
     def test_non_object_json_gets_an_answer(self):
         for body in (b"[]", b'"x"', b"3", b"null"):
-            for path in ("/api/favourite", "/api/schedule", "/api/override", "/api/editor/save"):
+            for path in ("/api/favourite", "/api/schedule", "/api/override", "/api/editor/save",
+                         "/api/daily", "/api/rotate", "/api/hide"):
                 with self.subTest(path=path, body=body):
                     r = self.raw("POST", path, body, {"Content-Type": "application/json"})
                     self.assertEqual(r.status, 415)

@@ -159,12 +159,34 @@
         <button type="button" id="lb-hide" title="Leave this theme out of the grid, Surprise me and the theme of the day (H)">Hide</button>
         <button type="button" id="lb-edit" title="Open this theme's colours in the editor, to save under a new name">Edit a copy</button>
         <button type="button" id="lb-readable" title="Open a copy in the editor with every text role made readable (lightness only)" hidden>Make a readable copy</button>
+        <select id="lb-export" title="Download this theme for another app">
+          <option value="">Export as...</option>
+          <option value="css">theme.park CSS</option>
+          <option value="base16">base16 YAML</option>
+          <option value="ghostty">Ghostty</option>
+          <option value="kitty">Kitty</option>
+          <option value="alacritty">Alacritty (TOML)</option>
+          <option value="wt">Windows Terminal (JSON)</option>
+          <option value="xresources">Xresources</option></select>
+        <select id="lb-vision" title="See this theme as people with colour-vision deficiency do">
+          <option value="">Normal vision</option>
+          <option value="protan">Protanopia (red-blind)</option>
+          <option value="deutan">Deuteranopia (green-blind)</option>
+          <option value="tritan">Tritanopia (blue-blind)</option></select>
         <button type="button" id="lb-close" aria-label="Close">Close</button></div>
       <p id="lb-warn" hidden></p>
       <p id="lb-similar" class="lb-similar" hidden></p>
+      <div id="lb-cvd" class="lb-cvd" hidden></div>
       <div id="lb-body"></div>
     </div>
   </div>
+<!-- Colour-vision simulation (Machado, Oliveira and Fernandes 2009, severity
+     1.0), applied to the preview's screenshots. The same matrices are in app.js. -->
+<svg class="sr-svg" aria-hidden="true" focusable="false">
+  <filter id="cvd-protan" color-interpolation-filters="linearRGB"><feColorMatrix type="matrix" values="0.152286 1.052583 -0.204868 0 0  0.114503 0.786281 0.099216 0 0  -0.003882 -0.048116 1.051998 0 0  0 0 0 1 0"/></filter>
+  <filter id="cvd-deutan" color-interpolation-filters="linearRGB"><feColorMatrix type="matrix" values="0.367322 0.860646 -0.227968 0 0  0.280085 0.672501 0.047413 0 0  -0.011820 0.042940 0.968881 0 0  0 0 0 1 0"/></filter>
+  <filter id="cvd-tritan" color-interpolation-filters="linearRGB"><feColorMatrix type="matrix" values="1.255528 -0.076749 -0.178779 0 0  -0.078411 0.930809 0.147602 0 0  0.004733 0.691367 0.303900 0 0  0 0 0 1 0"/></filter>
+</svg>
 <script src="/static/app.js?v={script_v}"></script>
 </body>
 </html>

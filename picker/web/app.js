@@ -364,8 +364,8 @@ function showGrid() {
   const T = lbTile.dataset.theme, C = lbCmp.value, t = esc(T), c = esc(C);
   if (!lbApps.length) {
     lbBody.innerHTML = c ? `<p class="lb-empty">${t} and ${c} have no app screenshots in common.</p>`
-      : '<p class="lb-empty">No screenshots of this theme yet. They come from '
-        + '<code>theme-switcher/capture-theme-screenshots.sh</code>.</p>';
+      : '<p class="lb-empty">No screenshots of this theme yet. They come from the screenshot '
+        + 'capture, an optional extra (see DEPLOY.md).</p>';
     return;
   }
   lbBody.innerHTML = C
@@ -845,19 +845,39 @@ $('#ed-save').addEventListener('click', async () => {
 function schSummary(s) {
   if (!s.enabled) return 'off';
   if (!s.slot) return 'on, but a theme is missing';
-  return `on · now ${s.slot} (${s[s.slot]}) · next: ${s.next_theme} at ${s.next_at}`;
+  return `on${s.sun ? ' · by the sun' : ''} · now ${s.slot} (${s[s.slot]}) · next: ${s.next_theme} at ${s.next_at}`;
 }
+function rotateSummary(s) {
+  if (!s.rotate_enabled) return 'off';
+  const pool = s.rotate_pool === 'favourites' ? 'favourites' : 'all themes';
+  return `on · every ${s.rotate_every} hour${s.rotate_every === 1 ? '' : 's'} from ${pool} (${s.rotate_pool_size || 0})`
+    + (s.rotate_next ? ` · next ${s.rotate_next}` : '');
+}
+// After any schedule save: every card's summary and on/off box, since
+// turning one schedule on turns the others off.
+function showSchedules(s) {
+  $('#sch-state').textContent = schSummary(s);
+  $('#daily-state').textContent = dailySummary(s);
+  $('#rotate-state').textContent = rotateSummary(s);
+  $('#sch-enabled').checked = s.enabled;
+  $('#daily-enabled').checked = s.daily_enabled;
+  $('#rotate-enabled').checked = s.rotate_enabled;
+  $('#sch-sun-today').textContent = s.sun_today || '';
+}
+const sunRows = () => document.querySelectorAll('.sun-row').forEach(r => { r.hidden = !$('#sch-sun').checked; });
+$('#sch-sun').addEventListener('change', sunRows);
+sunRows();
 $('#sch-save').addEventListener('click', async () => {
   const st = $('#sch-status');
   st.textContent = 'Saving...';
   const data = await postJSON('/api/schedule', {
     enabled: $('#sch-enabled').checked, day: $('#sch-day').value, night: $('#sch-night').value,
-    day_at: $('#sch-day-at').value, night_at: $('#sch-night-at').value});
+    day_at: $('#sch-day-at').value, night_at: $('#sch-night-at').value,
+    sun: $('#sch-sun').checked, lat: $('#sch-lat').value, lon: $('#sch-lon').value,
+    day_offset: $('#sch-day-off').value, night_offset: $('#sch-night-off').value});
   st.textContent = data.message;
   if (!data.ok) return;
-  $('#sch-state').textContent = schSummary(data.schedule);
-  $('#daily-state').textContent = dailySummary(data.schedule);
-  $('#daily-enabled').checked = data.schedule.daily_enabled;
+  showSchedules(data.schedule);
   if (data.theme !== data.previous) markApplied(data.previous, data.theme, data.css);
 });
 function dailySummary(s) {
@@ -872,9 +892,17 @@ $('#daily-save').addEventListener('click', async () => {
     enabled: $('#daily-enabled').checked, at: $('#daily-at').value, pool: $('#daily-pool').value});
   st.textContent = data.message;
   if (!data.ok) return;
-  $('#daily-state').textContent = dailySummary(data.schedule);
-  $('#sch-state').textContent = schSummary(data.schedule);
-  $('#sch-enabled').checked = data.schedule.enabled;
+  showSchedules(data.schedule);
+  if (data.theme !== data.previous) markApplied(data.previous, data.theme, data.css);
+});
+$('#rotate-save').addEventListener('click', async () => {
+  const st = $('#rotate-status');
+  st.textContent = 'Saving...';
+  const data = await postJSON('/api/rotate', {
+    enabled: $('#rotate-enabled').checked, every: +$('#rotate-every').value, pool: $('#rotate-pool').value});
+  st.textContent = data.message;
+  if (!data.ok) return;
+  showSchedules(data.schedule);
   if (data.theme !== data.previous) markApplied(data.previous, data.theme, data.css);
 });
 
@@ -1205,3 +1233,157 @@ layout();
 refresh();
 applyPreview();
 runCoverage();
+
+// --- export and colour vision (theme preview) ----------------------------------
+// Both work from /api/theme-vars: the theme's own role colours (page, panels,
+// text, muted, button, link, queue...), the same fields the editor uses.
+const varsCache = {};
+async function themeVars(t) {
+  if (!varsCache[t]) {
+    const r = await fetch('/api/theme-vars?theme=' + encodeURIComponent(t));
+    varsCache[t] = r.ok ? await r.json() : null;
+  }
+  return varsCache[t];
+}
+
+// Colour-vision deficiency: Machado, Oliveira and Fernandes (2009), severity
+// 1.0, on linear RGB -- the same matrices as the page's SVG filters.
+const CVD = {
+  protan: [[0.152286, 1.052583, -0.204868], [0.114503, 0.786281, 0.099216], [-0.003882, -0.048116, 1.051998]],
+  deutan: [[0.367322, 0.860646, -0.227968], [0.280085, 0.672501, 0.047413], [-0.011820, 0.042940, 0.968881]],
+  tritan: [[1.255528, -0.076749, -0.178779], [-0.078411, 0.930809, 0.147602], [0.004733, 0.691367, 0.303900]],
+};
+const CVD_NAME = {protan: 'protanopia', deutan: 'deuteranopia', tritan: 'tritanopia'};
+function simulate(hex, kind) {
+  const c = [1, 3, 5].map(i => lin(parseInt(hex.slice(i, i + 2), 16)));
+  const m = CVD[kind];
+  const gam = x => { x = Math.min(1, Math.max(0, x)); return 255 * (x <= 0.0031308 ? 12.92 * x : 1.055 * x ** (1 / 2.4) - 0.055); };
+  return rgbHex(m.map(row => gam(row[0] * c[0] + row[1] * c[1] + row[2] * c[2])));
+}
+// Pairs that must stay apart: [a, b, what goes wrong if they merge].
+const CVD_PAIRS = [['link', 'text', 'links look like body text'],
+                   ['button', 'link', 'buttons and links look the same'],
+                   ['queue', 'button', 'the queue colour looks like a button'],
+                   ['button', 'panel_bg', 'buttons fade into the panels']];
+const CVD_ROLES = [['page_bg', 'page'], ['panel_bg', 'panels'], ['text', 'text'], ['muted', 'muted'],
+                   ['button', 'button'], ['link', 'link'], ['queue', 'queue']];
+function cvdReport(v, kind) {
+  const sim = Object.fromEntries(CVD_ROLES.map(([k]) => [k, v[k] ? simulate(v[k], kind) : '']));
+  const alike = CVD_PAIRS.filter(([a, b]) => v[a] && v[b] && dLab(oklab(v[a]), oklab(v[b])) >= 0.08
+                                  && dLab(oklab(sim[a]), oklab(sim[b])) < 0.05).map(p => p[2]);
+  const low = hexCon(sim.text, sim.panel_bg) < 4.5 ? ['body text drops below 4.5:1'] : [];
+  return {sim, problems: alike.concat(low)};
+}
+async function showVision() {
+  const kind = $('#lb-vision').value, box = $('#lb-cvd');
+  lbBody.classList.remove('cvd-protan', 'cvd-deutan', 'cvd-tritan');
+  if (!kind || !lbTile) { box.hidden = true; return; }
+  lbBody.classList.add('cvd-' + kind);
+  const v = await themeVars(lbTile.dataset.theme);
+  if (!v) { box.hidden = true; return; }
+  const {sim, problems} = cvdReport(v, kind);
+  box.innerHTML = (problems.length
+      ? `<span class="alike">With ${CVD_NAME[kind]}: ${esc(problems.join('; '))}.</span>`
+      : `With ${CVD_NAME[kind]}, every role stays distinct.`)
+    + ' Each pair below is the colour as designed, then as seen.'
+    + '<div class="roles">' + CVD_ROLES.filter(([k]) => v[k]).map(([k, label]) =>
+        `<span class="role"><i><b style="background:${esc(v[k])}"></b><b style="background:${esc(sim[k])}"></b></i>${esc(label)}</span>`).join('')
+    + '</div>';
+  box.hidden = false;
+}
+$('#lb-vision').addEventListener('change', showVision);
+
+// Terminal palettes: the theme's own accents where one sits near an ANSI
+// hue (within 30 degrees, with some colour), otherwise one made at that hue
+// with the theme's typical accent lightness and chroma. Each is then moved,
+// in lightness only, to 3:1 on the background -- the same rule as the
+// editor's import, the other way round.
+const ANSI_HUES = [['red', 29], ['green', 142], ['yellow', 100], ['blue', 264], ['magenta', 328], ['cyan', 195],
+                   ['orange', 55]];                     // orange: base16's base09, not a terminal colour
+function ansiPalette(v) {
+  const bg = v.page_bg, light = hexLum(bg) > 0.35;
+  const accents = ['button', 'button_hover', 'link', 'link_hover', 'queue'].map(k => v[k]).filter(Boolean)
+    .map(h => { const [L, a, b] = oklab(h); return {h, L, C: Math.hypot(a, b), hue: (Math.atan2(b, a) * 180 / Math.PI + 360) % 360}; })
+    .filter(x => x.C >= 0.04);
+  const med = xs => { const s = xs.slice().sort((p, q) => p - q); return s.length ? s[Math.floor(s.length / 2)] : null; };
+  const L = med(accents.map(x => x.L)) ?? (light ? 0.5 : 0.72), C = Math.max(0.1, med(accents.map(x => x.C)) ?? 0.12);
+  // Each accent fills at most one slot, closest match first, so two ANSI
+  // colours never come out the same.
+  const hueGap = (x, y) => Math.min(Math.abs(x - y), 360 - Math.abs(x - y));
+  const pairs = [];
+  ANSI_HUES.forEach(([name, hue]) => accents.forEach((x, i) => pairs.push([hueGap(x.hue, hue), name, i])));
+  const own = {}, used = new Set();
+  for (const [d, name, i] of pairs.sort((p, q) => p[0] - q[0])) {
+    if (d > 30 || own[name] !== undefined || used.has(i)) continue;
+    own[name] = i; used.add(i);
+  }
+  const out = {};
+  for (const [name, hue] of ANSI_HUES) {
+    const base = own[name] !== undefined ? accents[own[name]].h
+      : fromOklab(L, C * Math.cos(hue * Math.PI / 180), C * Math.sin(hue * Math.PI / 180));
+    const normal = fixLab(base, [bg], 3) || base;
+    const [nL, a, b] = oklab(normal);
+    const bright = fixLab(fromOklab(light ? nL - 0.07 : nL + 0.07, a, b), [bg], 3) || normal;
+    out[name] = [normal, bright];
+  }
+  const black = light ? v.text : (v.panel_bg || bg), white = light ? (v.panel_bg || bg) : v.text;
+  out.black = [black, light ? v.muted || black : fixLab(v.muted || black, [bg], 3) || black];
+  out.white = [white, light ? bg : (v.text_hover || white)];
+  return out;
+}
+function exportScheme(v, name, title, fmt) {
+  const p = ansiPalette(v), fg = v.text, bg = v.page_bg, cur = v.button, sel = v.panel_bg || bg;
+  const n16 = [0, 1].flatMap(i => ANSI.map(c => p[c][i]));          // color0..15
+  const plain = h => h.slice(1);
+  const head = `Theme Picker export of the theme.park theme "${title}" (${name})`;
+  if (fmt === 'base16') {
+    // base02 (selection) sits between the panels and the muted text;
+    // base03 (comments) is the muted text too; base0F is the second link.
+    const mid = (x, y) => { const p1 = oklab(x), p2 = oklab(y); return fromOklab((p1[0] + p2[0]) / 2, (p1[1] + p2[1]) / 2, (p1[2] + p2[2]) / 2); };
+    const muted = v.muted || fg;
+    const b = [bg, sel, mid(sel, muted), muted, muted, fg, v.text_hover || fg, v.text_hover || fg,
+               p.red[0], p.orange[0], p.yellow[0], p.green[0], p.cyan[0], p.blue[0], p.magenta[0],
+               v.link_hover || p.red[1]];
+    return [`${name}.yaml`, `# ${head}\nsystem: "base16"\nname: "${title}"\nauthor: "theme-park export"\n`
+      + `variant: "${hexLum(bg) > 0.35 ? 'light' : 'dark'}"\npalette:\n`
+      + b.map((h, i) => `  base0${i.toString(16).toUpperCase()}: "${h}"`).join('\n') + '\n'];
+  }
+  if (fmt === 'ghostty') return [name, `# ${head}\nbackground = ${plain(bg)}\nforeground = ${plain(fg)}\ncursor-color = ${plain(cur)}\n`
+      + `selection-background = ${plain(sel)}\nselection-foreground = ${plain(fg)}\n`
+      + n16.map((h, i) => `palette = ${i}=${h}`).join('\n') + '\n'];
+  if (fmt === 'kitty') return [`${name}.conf`, `# ${head}\nbackground ${bg}\nforeground ${fg}\ncursor ${cur}\n`
+      + `selection_background ${sel}\nselection_foreground ${fg}\nurl_color ${v.link || fg}\n`
+      + n16.map((h, i) => `color${i} ${h}`).join('\n') + '\n'];
+  if (fmt === 'alacritty') return [`${name}.toml`, `# ${head}\n[colors.primary]\nbackground = "${bg}"\nforeground = "${fg}"\n\n`
+      + `[colors.cursor]\ncursor = "${cur}"\ntext = "${bg}"\n\n[colors.selection]\nbackground = "${sel}"\ntext = "${fg}"\n\n`
+      + ['normal', 'bright'].map((k, i) => `[colors.${k}]\n` + ANSI.map(c => `${c} = "${p[c][i]}"`).join('\n')).join('\n\n') + '\n'];
+  if (fmt === 'wt') {
+    const cap = s => s[0].toUpperCase() + s.slice(1);
+    const o = {name: title, background: bg, foreground: fg, cursorColor: cur, selectionBackground: sel};
+    ANSI.forEach(c => { o[c === 'magenta' ? 'purple' : c] = p[c][0]; o['bright' + cap(c === 'magenta' ? 'purple' : c)] = p[c][1]; });
+    return [`${name}.json`, JSON.stringify(o, null, 2) + '\n'];
+  }
+  if (fmt === 'xresources') return [`${name}.Xresources`, `! ${head}\n*.background: ${bg}\n*.foreground: ${fg}\n*.cursorColor: ${cur}\n`
+      + n16.map((h, i) => `*.color${i}: ${h}`).join('\n') + '\n'];
+  return null;
+}
+function download(filename, text, type = 'text/plain') {
+  const url = URL.createObjectURL(new Blob([text], {type}));
+  const a = document.createElement('a');
+  a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+$('#lb-export').addEventListener('change', async ev => {
+  const fmt = ev.target.value; ev.target.value = '';
+  if (!fmt || !lbTile) return;
+  const t = lbTile.dataset.theme;
+  if (fmt === 'css') {
+    const r = await fetch('/api/theme-css?theme=' + encodeURIComponent(t));
+    if (r.ok) download(`${t}.css`, await r.text(), 'text/css');
+    return;
+  }
+  const v = await themeVars(t);
+  if (!v) return;
+  const out = exportScheme(v, t, t.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()), fmt);
+  if (out) download(out[0], out[1]);
+});
