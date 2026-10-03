@@ -7,7 +7,7 @@
 (() => {
   const DEMO = JSON.parse(document.getElementById('demo-data').textContent);
   const live = () => document.querySelector('.current b').textContent;
-  const favs = new Set(DEMO.favourites), hidden = new Set();
+  const favs = new Set(DEMO.favourites), hidden = new Set(), ratings = {};
   const json = (body, status = 200) => new Response(JSON.stringify(body),
     {status, headers: {'Content-Type': 'application/json'}});
   const off = what => json({ok: false, message: `Demo: ${what} is off here. Install Theme Picker to use it.`});
@@ -41,8 +41,16 @@
       data.on ? hidden.add(data.theme) : hidden.delete(data.theme);
       return json({ok: true, hidden: [...hidden].sort()});
     }
+    if (path === '/api/rate') {
+      const r = +data.rating;
+      if (![-1, 0, 1].includes(r) || !(data.theme in DEMO.css)) return json({ok: false}, 400);
+      r ? ratings[data.theme] = r : delete ratings[data.theme];
+      return json({ok: true, ratings});
+    }
     if (path === '/api/override') return off('pinning an app');
-    if (path === '/api/schedule' || path === '/api/daily') return off('the schedule');
+    if (path === '/api/group') return off('app groups');
+    if (path === '/api/schedule' || path === '/api/daily' || path === '/api/rotate') return off('the schedule');
+    if (path === '/api/theme-css') return realFetch(DEMO.css[url.searchParams.get('theme')] || 'missing.css');
     if (path === '/api/editor/save') return off('saving themes');
     return realFetch(input, init);
   };
