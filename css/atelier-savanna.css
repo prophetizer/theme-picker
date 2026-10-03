@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Atelier Savanna
+ *
+ * Palette source: tinted-theming/schemes base16/atelier-savanna.yaml (Bram de Haan; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #abb6ae is the palette's #87928a with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #839388 is the palette's #78877d with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #ac8a47 is the palette's #a07e3b with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #b58550 is the palette's #9f713c with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#489963'.
+ */
+:root {
+  --main-bg-color: #171c19;
+  --modal-bg-color: #232a25;
+  --modal-header-color: #232a25;
+  --modal-footer-color: #232a25;
+  --drop-down-menu-bg: #232a25;
+  --button-color: #489963;
+  --button-color-hover: #a07e3b;
+  --button-text: #171c19;
+  --button-text-hover: #171c19;
+  --accent-color: 72, 153, 99;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #ac8a47;
+  --link-color-hover: #b58550;
+  --label-text-color: #171c19;
+  --text: #abb6ae;
+  --text-hover: #ecf4ee;
+  --text-muted: #839388;
+  --arr-queue-color: #489963;
+  --plex-poster-unwatched: #9f713c;
+  --petio-spinner: invert(51%) sepia(14%) saturate(1517%) hue-rotate(87deg) brightness(102%) contrast(81%);
+  --gitea-color-primary-dark-4: 72, 153, 99;
+  --overseerr-gradient: linear-gradient(180deg, rgba(23, 28, 25, 0.17) 0%, rgba(23, 28, 25) 100%);
+}

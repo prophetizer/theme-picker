@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Grayscale Light
+ *
+ * Palette source: tinted-theming/schemes base16/grayscale-light.yaml (Alexandre Gavioli; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #656565 is the palette's #868686 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #656565 is the palette's #747474 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color-hover #717171 is the palette's #868686 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#686868'.
+ */
+:root {
+  --main-bg-color: #e3e3e3;
+  --modal-bg-color: #f7f7f7;
+  --modal-header-color: #f7f7f7;
+  --modal-footer-color: #f7f7f7;
+  --drop-down-menu-bg: #f7f7f7;
+  --button-color: #686868;
+  --button-color-hover: #717171;
+  --button-text: #f7f7f7;
+  --button-text-hover: #f7f7f7;
+  --accent-color: 104, 104, 104;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #656565;
+  --link-color-hover: #656565;
+  --label-text-color: #f7f7f7;
+  --text: #464646;
+  --text-hover: #101010;
+  --text-muted: #525252;
+  --arr-queue-color: #8e8e8e;
+  --plex-poster-unwatched: #999999;
+  --petio-spinner: invert(60%) sepia(26%) saturate(0%) hue-rotate(164deg) brightness(96%) contrast(97%);
+  --gitea-color-primary-dark-4: 104, 104, 104;
+  --overseerr-gradient: linear-gradient(180deg, rgba(227, 227, 227, 0.17) 0%, rgba(227, 227, 227) 100%);
+}

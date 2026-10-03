@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Da One Sea (light)
+ *
+ * Generated variant: light of 'da-one-sea', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'da-one-sea'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#239ba5'.
+ */
+:root {
+  --main-bg-color: #eff3ff;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #239ba5;
+  --button-color-hover: #4492d6;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 35, 155, 165;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007c84;
+  --link-color-hover: #2273b5;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #0f0f0f;
+  --arr-queue-color: #6f9850;
+  --plex-poster-unwatched: #b98146;
+  --petio-spinner: invert(57%) sepia(96%) saturate(358%) hue-rotate(136deg) brightness(99%) contrast(88%);
+  --gitea-color-primary-dark-4: 35, 155, 165;
+  --overseerr-gradient: linear-gradient(180deg, rgba(239, 243, 255, 0.17) 0%, #eff3ff 100%);
+}

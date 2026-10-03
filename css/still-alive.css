@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Still Alive
+ *
+ * Palette source: tinted-theming/schemes base16/still-alive.yaml (Derrick McKee; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #00667f is the palette's #36d3ff with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #7f15ea is the palette's #9036ff with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #345bfc is the palette's #365eff with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #007794 is the palette's #36d3ff with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#345bfc'.
+ */
+:root {
+  --main-bg-color: #d6d6d6;
+  --modal-bg-color: #f0f0f0;
+  --modal-header-color: #f0f0f0;
+  --modal-footer-color: #f0f0f0;
+  --drop-down-menu-bg: #f0f0f0;
+  --button-color: #345bfc;
+  --button-color-hover: #007794;
+  --button-text: #f0f0f0;
+  --button-text-hover: #f0f0f0;
+  --accent-color: 52, 91, 252;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00667f;
+  --link-color-hover: #7f15ea;
+  --label-text-color: #f0f0f0;
+  --text: #4c383b;
+  --text-hover: #140c0d;
+  --text-muted: #605758;
+  --arr-queue-color: #30a860;
+  --plex-poster-unwatched: #f0d848;
+  --petio-spinner: invert(67%) sepia(66%) saturate(6287%) hue-rotate(227deg) brightness(105%) contrast(98%);
+  --gitea-color-primary-dark-4: 52, 91, 252;
+  --overseerr-gradient: linear-gradient(180deg, rgba(214, 214, 214, 0.17) 0%, rgba(214, 214, 214) 100%);
+}

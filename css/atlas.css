@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Atlas
+ *
+ * Palette source: tinted-theming/schemes base16/atlas.yaml (Alex Lende; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #c2c2bb is the palette's #a1a19a with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #8e9e9e is the palette's #869696 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #53a7b1 is the palette's #14747e with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color-hover #3f959f is the palette's #14747e with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5dd7b9'.
+ */
+:root {
+  --main-bg-color: #002635;
+  --modal-bg-color: #00384d;
+  --modal-header-color: #00384d;
+  --modal-footer-color: #00384d;
+  --drop-down-menu-bg: #00384d;
+  --button-color: #5dd7b9;
+  --button-color-hover: #3f959f;
+  --button-text: #002635;
+  --button-text-hover: #002635;
+  --accent-color: 93, 215, 185;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5dd7b9;
+  --link-color-hover: #53a7b1;
+  --label-text-color: #002635;
+  --text: #c2c2bb;
+  --text-hover: #fafaf8;
+  --text-muted: #8e9e9e;
+  --arr-queue-color: #7fc06e;
+  --plex-poster-unwatched: #f08e48;
+  --petio-spinner: invert(27%) sepia(55%) saturate(368%) hue-rotate(113deg) brightness(94%) contrast(88%);
+  --gitea-color-primary-dark-4: 93, 215, 185;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 38, 53, 0.17) 0%, rgba(0, 38, 53) 100%);
+}

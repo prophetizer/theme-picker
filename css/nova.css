@@ -1,0 +1,52 @@
+/*
+ * theme.park custom theme: Nova
+ *
+ * Palette source: tinted-theming/schemes base16/nova.yaml (George Essig; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * Nova's own background is a mid blue-grey (#3c4c55): even white text can't
+ * reach 7:1 on it, so body text aims for 5.5:1 instead (still above WCAG AA's
+ * 4.5:1).
+ * --text #f2faff is the palette's #c5d4dd with its lightness nudged to reach
+ * 5.5:1 on the panels.
+ * --text-hover #f2faff is the palette's #556873 with its lightness nudged to
+ * reach 5.5:1 on the panels.
+ * --text-muted #d2e6f1 is the palette's #899ba6 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #ffddb8 is the palette's #f2c38f with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #cfe5ff is the palette's #83afe5 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #33434c is the palette's #3c4c55 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#f2c38f'.
+ */
+:root {
+  --main-bg-color: #3c4c55;
+  --modal-bg-color: #556873;
+  --modal-header-color: #556873;
+  --modal-footer-color: #556873;
+  --drop-down-menu-bg: #556873;
+  --button-color: #f2c38f;
+  --button-color-hover: #83afe5;
+  --button-text: #33434c;
+  --button-text-hover: #33434c;
+  --accent-color: 242, 195, 143;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #ffddb8;
+  --link-color-hover: #cfe5ff;
+  --label-text-color: #33434c;
+  --text: #f2faff;
+  --text-hover: #f2faff;
+  --text-muted: #d2e6f1;
+  --arr-queue-color: #7fc1ca;
+  --plex-poster-unwatched: #7fc1ca;
+  --petio-spinner: invert(10%) sepia(10%) saturate(7410%) hue-rotate(309deg) brightness(128%) contrast(90%);
+  --gitea-color-primary-dark-4: 242, 195, 143;
+  --overseerr-gradient: linear-gradient(180deg, rgba(60, 76, 85, 0.17) 0%, rgba(60, 76, 85) 100%);
+}

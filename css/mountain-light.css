@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Mountain (light)
+ *
+ * Generated variant: light of 'mountain', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'mountain'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#749575'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #fbfbfb;
+  --modal-header-color: #fbfbfb;
+  --modal-footer-color: #fbfbfb;
+  --drop-down-menu-bg: #fbfbfb;
+  --button-color: #749575;
+  --button-color-hover: #918e70;
+  --button-text: #0f0f0f;
+  --button-text-hover: #0f0f0f;
+  --accent-color: 116, 149, 117;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #747153;
+  --link-color-hover: #866b44;
+  --label-text-color: #0f0f0f;
+  --text: #0d0d0d;
+  --text-hover: #000000;
+  --text-muted: #474747;
+  --arr-queue-color: #749575;
+  --plex-poster-unwatched: #a48961;
+  --petio-spinner: invert(40%) sepia(15%) saturate(602%) hue-rotate(72deg) brightness(90%) contrast(85%);
+  --gitea-color-primary-dark-4: 116, 149, 117;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

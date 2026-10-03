@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Mountain
+ *
+ * Palette source: tinted-theming/schemes base16/mountain.yaml (gnsfujiwara; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #818181 is the palette's #4c4c4c with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#8aac8b'.
+ */
+:root {
+  --main-bg-color: #0f0f0f;
+  --modal-bg-color: #191919;
+  --modal-header-color: #191919;
+  --modal-footer-color: #191919;
+  --drop-down-menu-bg: #191919;
+  --button-color: #8aac8b;
+  --button-color-hover: #aca98a;
+  --button-text: #0f0f0f;
+  --button-text-hover: #0f0f0f;
+  --accent-color: 138, 172, 139;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #aca98a;
+  --link-color-hover: #ceb188;
+  --label-text-color: #0f0f0f;
+  --text: #cacaca;
+  --text-hover: #f0f0f0;
+  --text-muted: #818181;
+  --arr-queue-color: #8aac8b;
+  --plex-poster-unwatched: #ceb188;
+  --petio-spinner: invert(31%) sepia(27%) saturate(292%) hue-rotate(72deg) brightness(90%) contrast(88%);
+  --gitea-color-primary-dark-4: 138, 172, 139;
+  --overseerr-gradient: linear-gradient(180deg, rgba(15, 15, 15, 0.17) 0%, rgba(15, 15, 15) 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Atlas (light)
+ *
+ * Generated variant: light of 'atlas', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'atlas'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#08a084'.
+ */
+:root {
+  --main-bg-color: #e5f7ff;
+  --modal-bg-color: #feffff;
+  --modal-header-color: #feffff;
+  --modal-footer-color: #feffff;
+  --drop-down-menu-bg: #feffff;
+  --button-color: #08a084;
+  --button-color-hover: #3f959f;
+  --button-text: #002635;
+  --button-text-hover: #002635;
+  --accent-color: 8, 160, 132;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007f68;
+  --link-color-hover: #207b85;
+  --label-text-color: #002635;
+  --text: #14140f;
+  --text-hover: #000000;
+  --text-muted: #263434;
+  --arr-queue-color: #5d9d4c;
+  --plex-poster-unwatched: #d4752b;
+  --petio-spinner: invert(60%) sepia(93%) saturate(495%) hue-rotate(121deg) brightness(100%) contrast(94%);
+  --gitea-color-primary-dark-4: 8, 160, 132;
+  --overseerr-gradient: linear-gradient(180deg, rgba(229, 247, 255, 0.17) 0%, #e5f7ff 100%);
+}

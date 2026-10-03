@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Sequoia Monochrome Dark
+ *
+ * Palette source: tinted-theming/schemes base16/sequoia-monochrome-dark.yaml (Micheal Andreuzza; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #9d9ea8 is the palette's #868690 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #9d9ea4 is the palette's #0f1014 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #7b7c85 is the palette's #575861 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7c829d'.
+ */
+:root {
+  --main-bg-color: #0f1014;
+  --modal-bg-color: #111216;
+  --modal-header-color: #111216;
+  --modal-footer-color: #111216;
+  --drop-down-menu-bg: #111216;
+  --button-color: #7c829d;
+  --button-color-hover: #b6bac8;
+  --button-text: #0f1014;
+  --button-text-hover: #0f1014;
+  --accent-color: 124, 130, 157;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #b6bac8;
+  --link-color-hover: #d3d5de;
+  --label-text-color: #0f1014;
+  --text: #9d9ea8;
+  --text-hover: #9d9ea4;
+  --text-muted: #7b7c85;
+  --arr-queue-color: #626983;
+  --plex-poster-unwatched: #999eb2;
+  --petio-spinner: invert(49%) sepia(14%) saturate(569%) hue-rotate(192deg) brightness(97%) contrast(84%);
+  --gitea-color-primary-dark-4: 124, 130, 157;
+  --overseerr-gradient: linear-gradient(180deg, rgba(15, 16, 20, 0.17) 0%, rgba(15, 16, 20) 100%);
+}

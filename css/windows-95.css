@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Windows 95
+ *
+ * Palette source: tinted-theming/schemes base16/windows-95.yaml (Fergus Collins; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #848484 is the palette's #7e7e7e with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --button-color #5a5fff is the palette's #5454fc with its lightness nudged
+ * to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5a5fff'.
+ */
+:root {
+  --main-bg-color: #000000;
+  --modal-bg-color: #1c1c1c;
+  --modal-header-color: #1c1c1c;
+  --modal-footer-color: #1c1c1c;
+  --drop-down-menu-bg: #1c1c1c;
+  --button-color: #5a5fff;
+  --button-color-hover: #54fcfc;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 90, 95, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #54fcfc;
+  --link-color-hover: #fc54fc;
+  --label-text-color: #000000;
+  --text: #a8a8a8;
+  --text-hover: #fcfcfc;
+  --text-muted: #848484;
+  --arr-queue-color: #54fc54;
+  --plex-poster-unwatched: #a85400;
+  --petio-spinner: invert(71%) sepia(79%) saturate(2650%) hue-rotate(230deg) brightness(106%) contrast(100%);
+  --gitea-color-primary-dark-4: 90, 95, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.17) 0%, rgba(0, 0, 0) 100%);
+}

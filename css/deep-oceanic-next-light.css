@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Deep Oceanic Next (light)
+ *
+ * Generated variant: light of 'deep-oceanic-next', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'deep-oceanic-next'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#309d94'.
+ */
+:root {
+  --main-bg-color: #e4f8fa;
+  --modal-bg-color: #f6feff;
+  --modal-header-color: #f6feff;
+  --modal-footer-color: #f6feff;
+  --drop-down-menu-bg: #f6feff;
+  --button-color: #309d94;
+  --button-color-hover: #568ccf;
+  --button-text: #001c1f;
+  --button-text-hover: #001c1f;
+  --accent-color: 48, 157, 148;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007e76;
+  --link-color-hover: #3c72b3;
+  --label-text-color: #001c1f;
+  --text: #000406;
+  --text-hover: #000000;
+  --text-muted: #004a53;
+  --arr-queue-color: #499e6c;
+  --plex-poster-unwatched: #db6e4b;
+  --petio-spinner: invert(47%) sepia(18%) saturate(6419%) hue-rotate(140deg) brightness(92%) contrast(62%);
+  --gitea-color-primary-dark-4: 48, 157, 148;
+  --overseerr-gradient: linear-gradient(180deg, rgba(228, 248, 250, 0.17) 0%, #e4f8fa 100%);
+}

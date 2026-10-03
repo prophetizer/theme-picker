@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Atelier Estuary Light
+ *
+ * Palette source: tinted-theming/schemes base16/atelier-estuary-light.yaml (Bram de Haan; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #4c4b3c is the palette's #5f5e4e with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #696857 is the palette's #6c6b5a with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #726800 is the palette's #a5980d with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #905c00 is the palette's #ae7313 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7d9726'.
+ */
+:root {
+  --main-bg-color: #e7e6df;
+  --modal-bg-color: #f4f3ec;
+  --modal-header-color: #f4f3ec;
+  --modal-footer-color: #f4f3ec;
+  --drop-down-menu-bg: #f4f3ec;
+  --button-color: #7d9726;
+  --button-color-hover: #a5980d;
+  --button-text: #22221b;
+  --button-text-hover: #22221b;
+  --accent-color: 125, 151, 38;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #726800;
+  --link-color-hover: #905c00;
+  --label-text-color: #22221b;
+  --text: #4c4b3c;
+  --text-hover: #22221b;
+  --text-muted: #696857;
+  --arr-queue-color: #7d9726;
+  --plex-poster-unwatched: #ae7313;
+  --petio-spinner: invert(53%) sepia(98%) saturate(292%) hue-rotate(33deg) brightness(94%) contrast(99%);
+  --gitea-color-primary-dark-4: 125, 151, 38;
+  --overseerr-gradient: linear-gradient(180deg, rgba(231, 230, 223, 0.17) 0%, rgba(231, 230, 223) 100%);
+}

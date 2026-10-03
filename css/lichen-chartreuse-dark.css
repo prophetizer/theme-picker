@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Lichen Chartreuse Dark
+ *
+ * Palette source: tinted-theming/schemes base16/lichen-chartreuse-dark.yaml (Aaron Colichia; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#83bda5'.
+ */
+:root {
+  --main-bg-color: #151613;
+  --modal-bg-color: #1c1e1a;
+  --modal-header-color: #1c1e1a;
+  --modal-footer-color: #1c1e1a;
+  --drop-down-menu-bg: #1c1e1a;
+  --button-color: #83bda5;
+  --button-color-hover: #b2d084;
+  --button-text: #151613;
+  --button-text-hover: #151613;
+  --accent-color: 131, 189, 165;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #b2d084;
+  --link-color-hover: #d5ad73;
+  --label-text-color: #151613;
+  --text: #e0e5da;
+  --text-hover: #fcfcfa;
+  --text-muted: #a0a598;
+  --arr-queue-color: #83bda5;
+  --plex-poster-unwatched: #d5ad73;
+  --petio-spinner: invert(19%) sepia(36%) saturate(292%) hue-rotate(103deg) brightness(84%) contrast(80%);
+  --gitea-color-primary-dark-4: 131, 189, 165;
+  --overseerr-gradient: linear-gradient(180deg, rgba(21, 22, 19, 0.17) 0%, rgba(21, 22, 19) 100%);
+}

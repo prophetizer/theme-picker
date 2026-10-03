@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Nova (light)
+ *
+ * Generated variant: light of 'nova', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'nova'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#b18553'.
+ */
+:root {
+  --main-bg-color: #eaf6fc;
+  --modal-bg-color: #feffff;
+  --modal-header-color: #feffff;
+  --modal-footer-color: #feffff;
+  --drop-down-menu-bg: #feffff;
+  --button-color: #b18553;
+  --button-color-hover: #6590c4;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 177, 133, 83;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #896b49;
+  --link-color-hover: #5e7289;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000306;
+  --arr-queue-color: #5697a0;
+  --plex-poster-unwatched: #5697a0;
+  --petio-spinner: invert(49%) sepia(74%) saturate(297%) hue-rotate(352deg) brightness(94%) contrast(81%);
+  --gitea-color-primary-dark-4: 177, 133, 83;
+  --overseerr-gradient: linear-gradient(180deg, rgba(234, 246, 252, 0.17) 0%, #eaf6fc 100%);
+}

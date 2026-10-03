@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Cerulean Signal Light
+ *
+ * Palette source: tinted-theming/schemes base16/cerulean-signal-light.yaml (Aaron Colichia; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#00727e'.
+ */
+:root {
+  --main-bg-color: #eef4fb;
+  --modal-bg-color: #f7f9fc;
+  --modal-header-color: #f7f9fc;
+  --modal-footer-color: #f7f9fc;
+  --drop-down-menu-bg: #f7f9fc;
+  --button-color: #00727e;
+  --button-color-hover: #006fa8;
+  --button-text: #f7f9fc;
+  --button-text-hover: #f7f9fc;
+  --accent-color: 0, 114, 126;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00727e;
+  --link-color-hover: #006fa8;
+  --label-text-color: #f7f9fc;
+  --text: #232b38;
+  --text-hover: #141d2a;
+  --text-muted: #566579;
+  --arr-queue-color: #17795e;
+  --plex-poster-unwatched: #9a4f00;
+  --petio-spinner: invert(75%) sepia(77%) saturate(1377%) hue-rotate(155deg) brightness(104%) contrast(102%);
+  --gitea-color-primary-dark-4: 0, 114, 126;
+  --overseerr-gradient: linear-gradient(180deg, rgba(238, 244, 251, 0.17) 0%, rgba(238, 244, 251) 100%);
+}

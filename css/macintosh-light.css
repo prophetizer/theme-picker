@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Macintosh (light)
+ *
+ * Generated variant: light of 'macintosh', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'macintosh'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#2d68ff'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #2d68ff;
+  --button-color-hover: #0097cf;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 45, 104, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0078a5;
+  --link-color-hover: #7262bd;
+  --label-text-color: #000000;
+  --text: #070707;
+  --text-hover: #000000;
+  --text-muted: #242424;
+  --arr-queue-color: #0da400;
+  --plex-poster-unwatched: #f15d00;
+  --petio-spinner: invert(54%) sepia(63%) saturate(7464%) hue-rotate(219deg) brightness(104%) contrast(101%);
+  --gitea-color-primary-dark-4: 45, 104, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

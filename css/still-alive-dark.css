@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Still Alive (dark)
+ *
+ * Generated variant: dark of 'still-alive', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'still-alive'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#406aff'.
+ */
+:root {
+  --main-bg-color: #181818;
+  --modal-bg-color: #2f2f2f;
+  --modal-header-color: #2f2f2f;
+  --modal-footer-color: #2f2f2f;
+  --drop-down-menu-bg: #2f2f2f;
+  --button-color: #406aff;
+  --button-color-hover: #1a819f;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 64, 106, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4fa0ba;
+  --link-color-hover: #a97dff;
+  --label-text-color: #000000;
+  --text: #ceb5b9;
+  --text-hover: #d2c5c6;
+  --text-muted: #9d9394;
+  --arr-queue-color: #30a860;
+  --plex-poster-unwatched: #f0d848;
+  --petio-spinner: invert(63%) sepia(18%) saturate(5790%) hue-rotate(212deg) brightness(100%) contrast(106%);
+  --gitea-color-primary-dark-4: 64, 106, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(24, 24, 24, 0.17) 0%, #181818 100%);
+}

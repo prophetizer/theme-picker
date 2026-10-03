@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Bosque (light)
+ *
+ * Generated variant: light of 'bosque', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'bosque'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#499f4a'.
+ */
+:root {
+  --main-bg-color: #f0f5f1;
+  --modal-bg-color: #f6fff9;
+  --modal-header-color: #f6fff9;
+  --modal-footer-color: #f6fff9;
+  --drop-down-menu-bg: #f6fff9;
+  --button-color: #499f4a;
+  --button-color-hover: #9e8e0f;
+  --button-text: #0e1410;
+  --button-text-hover: #0e1410;
+  --accent-color: 73, 159, 74;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7e7100;
+  --link-color-hover: #347f33;
+  --label-text-color: #0e1410;
+  --text: #000501;
+  --text-hover: #000100;
+  --text-muted: #1e2e20;
+  --arr-queue-color: #499f4a;
+  --plex-poster-unwatched: #539e51;
+  --petio-spinner: invert(48%) sepia(22%) saturate(1023%) hue-rotate(71deg) brightness(97%) contrast(95%);
+  --gitea-color-primary-dark-4: 73, 159, 74;
+  --overseerr-gradient: linear-gradient(180deg, rgba(240, 245, 241, 0.17) 0%, #f0f5f1 100%);
+}

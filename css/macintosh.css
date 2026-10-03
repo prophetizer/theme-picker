@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Macintosh
+ *
+ * Palette source: tinted-theming/schemes base16/macintosh.yaml (Rebecca Bettencourt; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #d5d5d5 is the palette's #c0c0c0 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #ababab is the palette's #808080 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #25b7f6 is the palette's #02abea with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #ac9fff is the palette's #4700a5 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #2d68ff is the palette's #0000d3 with its lightness nudged
+ * to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#2d68ff'.
+ */
+:root {
+  --main-bg-color: #000000;
+  --modal-bg-color: #404040;
+  --modal-header-color: #404040;
+  --modal-footer-color: #404040;
+  --drop-down-menu-bg: #404040;
+  --button-color: #2d68ff;
+  --button-color-hover: #02abea;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 45, 104, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #25b7f6;
+  --link-color-hover: #ac9fff;
+  --label-text-color: #000000;
+  --text: #d5d5d5;
+  --text-hover: #ffffff;
+  --text-muted: #ababab;
+  --arr-queue-color: #1fb714;
+  --plex-poster-unwatched: #ff6403;
+  --petio-spinner: invert(54%) sepia(63%) saturate(7464%) hue-rotate(219deg) brightness(104%) contrast(101%);
+  --gitea-color-primary-dark-4: 45, 104, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.17) 0%, rgba(0, 0, 0) 100%);
+}

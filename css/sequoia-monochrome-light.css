@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Sequoia Monochrome Light
+ *
+ * Palette source: tinted-theming/schemes base16/sequoia-monochrome-light.yaml (Micheal Andreuzza; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5f6370'.
+ */
+:root {
+  --main-bg-color: #e2e3e8;
+  --modal-bg-color: #edeef2;
+  --modal-header-color: #edeef2;
+  --modal-footer-color: #edeef2;
+  --drop-down-menu-bg: #edeef2;
+  --button-color: #5f6370;
+  --button-color-hover: #454752;
+  --button-text: #edeef2;
+  --button-text-hover: #edeef2;
+  --accent-color: 95, 99, 112;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #454752;
+  --link-color-hover: #50535e;
+  --label-text-color: #edeef2;
+  --text: #282930;
+  --text-hover: #0f1014;
+  --text-muted: #42434e;
+  --arr-queue-color: #2e3038;
+  --plex-poster-unwatched: #525666;
+  --petio-spinner: invert(59%) sepia(9%) saturate(592%) hue-rotate(188deg) brightness(90%) contrast(88%);
+  --gitea-color-primary-dark-4: 95, 99, 112;
+  --overseerr-gradient: linear-gradient(180deg, rgba(226, 227, 232, 0.17) 0%, rgba(226, 227, 232) 100%);
+}
