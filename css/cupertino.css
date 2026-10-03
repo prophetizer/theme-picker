@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Cupertino
+ *
+ * Palette source: tinted-theming/schemes base16/cupertino.yaml (Defman21; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #323232 is the palette's #404040 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #323232 is the palette's #5e5e5e with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #4f4f4f is the palette's #808080 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #005766 is the palette's #318495 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #94007e is the palette's #a90d91 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color-hover #2d8091 is the palette's #318495 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0000ff'.
+ */
+:root {
+  --main-bg-color: #c0c0c0;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #0000ff;
+  --button-color-hover: #2d8091;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 0, 0, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #005766;
+  --link-color-hover: #94007e;
+  --label-text-color: #ffffff;
+  --text: #323232;
+  --text-hover: #323232;
+  --text-muted: #4f4f4f;
+  --arr-queue-color: #007400;
+  --plex-poster-unwatched: #eb8500;
+  --petio-spinner: invert(91%) sepia(99%) saturate(7267%) hue-rotate(248deg) brightness(91%) contrast(144%);
+  --gitea-color-primary-dark-4: 0, 0, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(192, 192, 192, 0.17) 0%, rgba(192, 192, 192) 100%);
+}

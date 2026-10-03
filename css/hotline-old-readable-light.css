@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Hotline Old Readable (light)
+ *
+ * Generated variant: light of 'hotline-old-readable', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'hotline-old-readable'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#717171'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center, #ffffff 0%, #cde2ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: radial-gradient(ellipse at top, #ffffff 0%, #cde2ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: radial-gradient(ellipse at top, #ffffff 0%, #cde2ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: radial-gradient(ellipse at top, #ffffff 0%, #cde2ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: radial-gradient(ellipse at top, #ffffff 0%, #cde2ff 100%) center center/cover no-repeat fixed;
+  --button-color: rgba(113, 113, 113, 0.15);
+  --button-color-hover: rgba(113, 113, 113, 0.3);
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 237, 60, 48;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #646464;
+  --link-color-hover: #646464;
+  --label-text-color: #ffffff;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #0f0f0f;
+  --arr-queue-color: #3c912a;
+  --plex-poster-unwatched: #f72b1d;
+  --petio-spinner: invert(55%) sepia(0%) saturate(0%) hue-rotate(22deg) brightness(96%) contrast(88%);
+  --gitea-color-primary-dark-4: 237, 60, 48;
+  --overseerr-gradient: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.9) 0%, rgba(228, 239, 255, 0.9) 100%) center center/cover no-repeat fixed;
+}

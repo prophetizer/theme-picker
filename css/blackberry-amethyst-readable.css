@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Blackberry Amethyst Readable
+ *
+ * Readable copy of 'blackberry-amethyst', theme.park's community theme -- by tools/readable_copy.py.
+ * Only lightness moved (OKLab; hue and chroma kept), only where a contrast
+ * target was missed (body 7:1, muted and links 4.5:1, button labels 4.5:1).
+ *
+ * --text #f6f6f6 (was #eee): lightness moved to reach 7:1 on the panels.
+ * --text-muted #c8c8c8 (was #999): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --link-color #ffabfd (was rgb(199, 118, 197)): lightness moved to reach
+ *   4.5:1 on the panels.
+ * --link-color-hover #ecb6ec (was rgb(217, 164, 217)): lightness moved to
+ *   reach 4.5:1 on the panels.
+ */
+:root {
+  --main-bg-color: radial-gradient(at top center, rgba(0, 0, 0, 0.25), hsla(0, 14%, 18%, 0.55) , hsla(0, 18%, 5%, 0.9)) center center/cover no-repeat fixed, linear-gradient(to bottom, #df89de 0%, hsl(276, 100%, 3%) 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --modal-header-color: var(--main-bg-color);
+  --modal-footer-color: var(--main-bg-color);
+  --drop-down-menu-bg: var(--main-bg-color);
+  --button-color: rgb(134, 84, 132);
+  --button-color-hover: rgba(134, 84, 132, .8);
+  --button-text: #eee;
+  --button-text-hover: #FFF;
+  --accent-color: 217, 164, 217;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #ffabfd;
+  --link-color-hover: #ecb6ec;
+  --label-text-color: #fff;
+  --text: #f6f6f6;
+  --text-hover: #fff;
+  --text-muted: #c8c8c8;
+  --arr-queue-color: #6b5;
+  --plex-poster-unwatched: rgb(134, 84, 132);
+  --petio-spinner: invert(68%) sepia(13%) saturate(766%) hue-rotate(170deg) brightness(90%) contrast(79%);
+  --gitea-color-primary-dark-4: 134, 84, 132;
+  --overseerr-gradient: radial-gradient(at top center, rgba(0, 0, 0, 0.25), hsla(0, 14%, 18%, 0.55) , hsla(0, 18%, 5%, 0.9)) center center/cover no-repeat fixed, linear-gradient(to bottom, rgb(223, 137, 222, .85) 0%, hsl(276, 100%, 3%) 100%) center center/cover no-repeat fixed;
+}

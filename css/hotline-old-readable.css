@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Hotline Old Readable
+ *
+ * Readable copy of 'hotline-old', theme.park's community theme -- by tools/readable_copy.py.
+ * Only lightness moved (OKLab; hue and chroma kept), only where a contrast
+ * target was missed (body 7:1, muted and links 4.5:1, button labels 4.5:1).
+ *
+ * Surfaces darkened in 2 step(s) (lightness only): no text colour could reach
+ *   its target on the theme's own.
+ * --text #f5f5f5 (was #ddd): lightness moved to reach 7:1 on the panels.
+ * --text-muted #c7c7c7 (was #999): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --button-text #767676 (was #eee): reaches 4.5:1 on the button colours.
+ * --button-text-hover #767676 (was #FFF): reaches 4.5:1 on the button
+ *   colours.
+ * --label-text-color #767676 (was #fff): reaches 4.5:1 on the button colours.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center, #ab0003 0%, #001b42 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: radial-gradient(ellipse at top, #ab0003 0%, #001b42 100%) center center/cover no-repeat fixed;
+  --modal-header-color: radial-gradient(ellipse at top, #ab0003 0%, #001b42 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: radial-gradient(ellipse at top, #ab0003 0%, #001b42 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: radial-gradient(ellipse at top, #ab0003 0%, #001b42 100%) center center/cover no-repeat fixed;
+  --button-color: hsla(0,0%,100%,.15);
+  --button-color-hover: hsla(0,0%,100%,.30);
+  --button-text: #767676;
+  --button-text-hover: #767676;
+  --accent-color: 244, 67, 54;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #fff;
+  --link-color-hover: #fff;
+  --label-text-color: #767676;
+  --text: #f5f5f5;
+  --text-hover: #fff;
+  --text-muted: #c7c7c7;
+  --arr-queue-color: #6b5;
+  --plex-poster-unwatched: #FB3122;
+  --petio-spinner: invert(32%) sepia(35%) saturate(3786%) hue-rotate(341deg) brightness(100%) contrast(92%);
+  --gitea-color-primary-dark-4: 244, 67, 54;
+  --overseerr-gradient: radial-gradient(ellipse at center, rgb(244, 67, 54, .9) 0%, rgb(11, 49, 97, .9) 100%) center center/cover no-repeat fixed;
+}

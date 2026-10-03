@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Serendipity Sunset
+ *
+ * Palette source: tinted-theming/schemes base16/serendipity-sunset.yaml (Micheal Andreuzza; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-hover #b1b4c8 is the palette's #202231 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #8e909f is the palette's #6b6d7c with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#a0b6e8'.
+ */
+:root {
+  --main-bg-color: #202231;
+  --modal-bg-color: #272938;
+  --modal-header-color: #272938;
+  --modal-footer-color: #272938;
+  --drop-down-menu-bg: #272938;
+  --button-color: #a0b6e8;
+  --button-color-hover: #d6b4b4;
+  --button-text: #202231;
+  --button-text-hover: #202231;
+  --accent-color: 160, 182, 232;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #d6b4b4;
+  --link-color-hover: #a392dc;
+  --label-text-color: #202231;
+  --text: #dee0ef;
+  --text-hover: #b1b4c8;
+  --text-muted: #8e909f;
+  --arr-queue-color: #709bbd;
+  --plex-poster-unwatched: #d1918f;
+  --petio-spinner: invert(24%) sepia(8%) saturate(1643%) hue-rotate(186deg) brightness(96%) contrast(88%);
+  --gitea-color-primary-dark-4: 160, 182, 232;
+  --overseerr-gradient: linear-gradient(180deg, rgba(32, 34, 49, 0.17) 0%, rgba(32, 34, 49) 100%);
+}

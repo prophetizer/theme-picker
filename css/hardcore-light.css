@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Hardcore (light)
+ *
+ * Generated variant: light of 'hardcore', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'hardcore'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#9e6ffe'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #fefefe;
+  --modal-header-color: #fefefe;
+  --modal-footer-color: #fefefe;
+  --drop-down-menu-bg: #fefefe;
+  --button-color: #9e6ffe;
+  --button-color-hover: #708387;
+  --button-text: #171717;
+  --button-text-hover: #171717;
+  --accent-color: 158, 111, 254;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #607377;
+  --link-color-hover: #7b7100;
+  --label-text-color: #171717;
+  --text: #0b0b0b;
+  --text-hover: #000000;
+  --text-muted: #343434;
+  --arr-queue-color: #6e9a00;
+  --plex-poster-unwatched: #cf7700;
+  --petio-spinner: invert(51%) sepia(53%) saturate(3747%) hue-rotate(230deg) brightness(103%) contrast(99%);
+  --gitea-color-primary-dark-4: 158, 111, 254;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

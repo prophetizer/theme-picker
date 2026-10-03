@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Outrun Dark (light)
+ *
+ * Generated variant: light of 'outrun-dark', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'outrun-dark'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#f10596'.
+ */
+:root {
+  --main-bg-color: #eef4ff;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #f10596;
+  --button-color-hover: #009d9d;
+  --button-text: #00002a;
+  --button-text-hover: #00002a;
+  --accent-color: 241, 5, 150;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007d7d;
+  --link-color-hover: #7b7100;
+  --label-text-color: #00002a;
+  --text: #07031d;
+  --text-hover: #000000;
+  --text-muted: #1a1737;
+  --arr-queue-color: #00a43a;
+  --plex-poster-unwatched: #d87200;
+  --petio-spinner: invert(84%) sepia(100%) saturate(5663%) hue-rotate(314deg) brightness(96%) contrast(102%);
+  --gitea-color-primary-dark-4: 241, 5, 150;
+  --overseerr-gradient: linear-gradient(180deg, rgba(238, 244, 255, 0.17) 0%, #eef4ff 100%);
+}

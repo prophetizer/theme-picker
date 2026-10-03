@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Pine Shadow Readable (light)
+ *
+ * Generated variant: light of 'pine-shadow-readable', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'pine-shadow-readable'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#c37204'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fdffff, #e6e9eb) center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --modal-header-color: var(--main-bg-color);
+  --modal-footer-color: var(--main-bg-color);
+  --drop-down-menu-bg: var(--main-bg-color);
+  --button-color: #c37204;
+  --button-color-hover: #c17300;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 178, 123, 0;
+  --accent-color-hover: #aa7f00;
+  --link-color: #696969;
+  --link-color-hover: #696969;
+  --label-text-color: #11141b;
+  --text: #181818;
+  --text-hover: #000000;
+  --text-muted: #323232;
+  --arr-queue-color: #009b34;
+  --plex-poster-unwatched: #b27b00;
+  --petio-spinner: invert(55%) sepia(75%) saturate(3238%) hue-rotate(20deg) brightness(97%) contrast(97%);
+  --gitea-color-primary-dark-4: 170, 127, 0;
+  --overseerr-gradient: linear-gradient(135deg, rgba(253, 255, 255, 0.95), rgba(230, 233, 235, 0.95)) center center/cover no-repeat fixed;
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Time Readable (light)
+ *
+ * Generated variant: light of 'time-readable', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'time-readable'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#029000'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center bottom, rgba(254, 255, 254, 0.7) 0%, #e1e9e5 80%, #dadada 100%) center center/cover no-repeat fixed, url(/resources/time.jpg) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(180deg, #e9fbe7 0%, #e1e9e5 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(180deg, #e9fbe7 0%, #e1e9e5 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(180deg, #e9fbe7 0%, #e1e9e5 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: linear-gradient(180deg, #e9fbe7 0%, #e1e9e5 100%) center center/cover no-repeat fixed;
+  --button-color: #029000;
+  --button-color-hover: rgba(2, 144, 0, 0.8);
+  --button-text: #0e1118;
+  --button-text-hover: #0e1118;
+  --accent-color: 36, 143, 0;
+  --accent-color-hover: rgba(var(--accent-color), 0.8);
+  --link-color: #1a6f00;
+  --link-color-hover: rgba(26, 111, 0, 0.8);
+  --label-text-color: #000000;
+  --text: #030303;
+  --text-hover: #000000;
+  --text-muted: #1d1d1d;
+  --arr-queue-color: rgba(36, 143, 0, 0.8);
+  --plex-poster-unwatched: #248f00;
+  --petio-spinner: invert(64%) sepia(55%) saturate(1509%) hue-rotate(84deg) brightness(95%) contrast(107%);
+  --gitea-color-primary-dark-4: 36, 143, 0;
+  --overseerr-gradient: linear-gradient(rgba(var(--accent-color), 0.3) 0%, #dadada 100%);
+}

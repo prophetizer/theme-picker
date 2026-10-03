@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Aquamarine Readable (light)
+ *
+ * Generated variant: light of 'aquamarine-readable', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'aquamarine-readable'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#009284'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center, #feffff 0%, #d1e4ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #feffff 0%, #d1e4ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #feffff 0%, #d1e4ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #feffff 0%, #d1e4ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #e2f5ff;
+  --button-color: #009284;
+  --button-color-hover: #009185;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 0, 145, 133;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007267;
+  --link-color-hover: #007269;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #001413;
+  --arr-queue-color: #009284;
+  --plex-poster-unwatched: #009284;
+  --petio-spinner: invert(68%) sepia(85%) saturate(1455%) hue-rotate(149deg) brightness(94%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 145, 133;
+  --overseerr-gradient: radial-gradient(ellipse at center, rgba(254, 255, 255, 0.9) 0%, rgba(232, 242, 255, 0.9) 100%) center center/cover no-repeat fixed;
+}

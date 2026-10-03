@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Summerfruit Light
+ *
+ * Palette source: tinted-theming/schemes base16/summerfruit-light.yaml (Christopher Corley; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #006f70 is the palette's #1faaaa with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --button-text #0f0f0f is the palette's #101010 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#3777e6'.
+ */
+:root {
+  --main-bg-color: #e0e0e0;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #3777e6;
+  --button-color-hover: #1faaaa;
+  --button-text: #0f0f0f;
+  --button-text-hover: #0f0f0f;
+  --accent-color: 55, 119, 230;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #006f70;
+  --link-color-hover: #ad00a1;
+  --label-text-color: #0f0f0f;
+  --text: #101010;
+  --text-hover: #202020;
+  --text-muted: #000000;
+  --arr-queue-color: #00c918;
+  --plex-poster-unwatched: #fd8900;
+  --petio-spinner: invert(59%) sepia(45%) saturate(5349%) hue-rotate(207deg) brightness(99%) contrast(83%);
+  --gitea-color-primary-dark-4: 55, 119, 230;
+  --overseerr-gradient: linear-gradient(180deg, rgba(224, 224, 224, 0.17) 0%, rgba(224, 224, 224) 100%);
+}

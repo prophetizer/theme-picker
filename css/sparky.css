@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Sparky
+ *
+ * Palette source: tinted-theming/schemes base16/sparky.yaml (Leila Sother; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #409fb3 is the palette's #00778b with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#d59ed7'.
+ */
+:root {
+  --main-bg-color: #072b31;
+  --modal-bg-color: #00313c;
+  --modal-header-color: #00313c;
+  --modal-footer-color: #00313c;
+  --drop-down-menu-bg: #00313c;
+  --button-color: #d59ed7;
+  --button-color-hover: #2dccd3;
+  --button-text: #072b31;
+  --button-text-hover: #072b31;
+  --accent-color: 213, 158, 215;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #2dccd3;
+  --link-color-hover: #fbdd40;
+  --label-text-color: #072b31;
+  --text: #f4f5f0;
+  --text-hover: #ffffff;
+  --text-muted: #409fb3;
+  --arr-queue-color: #78d64b;
+  --plex-poster-unwatched: #ff8f1c;
+  --petio-spinner: invert(33%) sepia(28%) saturate(432%) hue-rotate(250deg) brightness(100%) contrast(87%);
+  --gitea-color-primary-dark-4: 213, 158, 215;
+  --overseerr-gradient: linear-gradient(180deg, rgba(7, 43, 49, 0.17) 0%, rgba(7, 43, 49) 100%);
+}

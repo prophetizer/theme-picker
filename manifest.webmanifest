@@ -1,0 +1,30 @@
+{
+ "name": "Theme Picker",
+ "short_name": "Themes",
+ "description": "Switch the theme.park theme of every app at once.",
+ "start_url": "./#themes",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#1a1b26",
+ "theme_color": "#1a1b26",
+ "icons": [
+  {
+   "src": "./static/icon-192.png?v=db5b8e7a0ddf",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "./static/icon-512.png?v=38b1a2fcb8e8",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "./static/icon-maskable-512.png?v=a329908a8add",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ]
+}

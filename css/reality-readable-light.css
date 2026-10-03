@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Reality Readable (light)
+ *
+ * Generated variant: light of 'reality-readable', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'reality-readable'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#e80c0b'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center bottom, rgba(255, 255, 255, 0.7) 0%, #ebe0f0 80%, #d8d8d8 100%) center center/cover no-repeat fixed, url(/resources/reality.jpg) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(180deg, #fffefe 0%, #d8d8d8 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(180deg, #fffefe 0%, #d8d8d8 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(180deg, #fffefe 0%, #d8d8d8 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: linear-gradient(180deg, #fffefe 0%, #d8d8d8 100%) center center/cover no-repeat fixed;
+  --button-color: #e80c0b;
+  --button-color-hover: rgba(232, 12, 11, 0.8);
+  --accent-color: 232, 12, 11;
+  --accent-color-hover: rgba(var(--accent-color), 0.8);
+  --link-color: #9b443a;
+  --link-color-hover: rgba(155, 68, 58, 0.8);
+  --label-text-color: #ffffff;
+  --text: #020202;
+  --text-hover: #000000;
+  --text-muted: #1a1a1a;
+  --arr-queue-color: #e80c0b;
+  --plex-poster-unwatched: #e80c0b;
+  --petio-spinner: invert(76%) sepia(70%) saturate(4042%) hue-rotate(350deg) brightness(86%) contrast(115%);
+  --gitea-color-primary-dark-4: 232, 12, 11;
+  --overseerr-gradient: linear-gradient(rgba(var(--accent-color), 0.3) 0%, #d8d8d8 100%);
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+}

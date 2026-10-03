@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Terracotta
+ *
+ * Palette source: tinted-theming/schemes base16/terracotta.yaml (Alexander Rossell Hayes; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #5f5a78 is the palette's #847f9e with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #834f5e is the palette's #8d5968 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color-hover #6b6684 is the palette's #847f9e with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#625574'.
+ */
+:root {
+  --main-bg-color: #dfd6d1;
+  --modal-bg-color: #efeae8;
+  --modal-header-color: #efeae8;
+  --modal-footer-color: #efeae8;
+  --drop-down-menu-bg: #efeae8;
+  --button-color: #625574;
+  --button-color-hover: #6b6684;
+  --button-text: #efeae8;
+  --button-text-hover: #efeae8;
+  --accent-color: 98, 85, 116;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5f5a78;
+  --link-color-hover: #834f5e;
+  --label-text-color: #efeae8;
+  --text: #473731;
+  --text-hover: #241c19;
+  --text-muted: #59453d;
+  --arr-queue-color: #7a894a;
+  --plex-poster-unwatched: #bd6942;
+  --petio-spinner: invert(65%) sepia(8%) saturate(1653%) hue-rotate(223deg) brightness(91%) contrast(83%);
+  --gitea-color-primary-dark-4: 98, 85, 116;
+  --overseerr-gradient: linear-gradient(180deg, rgba(223, 214, 209, 0.17) 0%, rgba(223, 214, 209) 100%);
+}

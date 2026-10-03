@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Penumbra Dark
+ *
+ * Palette source: tinted-theming/schemes base16/penumbra-dark.yaml (Zachary Weiss; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #c1c1c1 is the palette's #bebebe with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #9a9a9a is the palette's #8f8f8f with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #1aaab7 is the palette's #00a2af with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #a28fdb is the palette's #9481cc with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5794d0'.
+ */
+:root {
+  --main-bg-color: #24272b;
+  --modal-bg-color: #303338;
+  --modal-header-color: #303338;
+  --modal-footer-color: #303338;
+  --drop-down-menu-bg: #303338;
+  --button-color: #5794d0;
+  --button-color-hover: #00a2af;
+  --button-text: #24272b;
+  --button-text-hover: #24272b;
+  --accent-color: 87, 148, 208;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #1aaab7;
+  --link-color-hover: #a28fdb;
+  --label-text-color: #24272b;
+  --text: #c1c1c1;
+  --text-hover: #fffdfb;
+  --text-muted: #9a9a9a;
+  --arr-queue-color: #47a477;
+  --plex-poster-unwatched: #ba823a;
+  --petio-spinner: invert(43%) sepia(89%) saturate(673%) hue-rotate(183deg) brightness(86%) contrast(89%);
+  --gitea-color-primary-dark-4: 87, 148, 208;
+  --overseerr-gradient: linear-gradient(180deg, rgba(36, 39, 43, 0.17) 0%, rgba(36, 39, 43) 100%);
+}

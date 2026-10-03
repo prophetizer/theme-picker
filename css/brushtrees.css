@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Brush Trees
+ *
+ * Palette source: tinted-theming/schemes base16/brushtrees.yaml (Abraham White <abelincoln.white@gmail.com>; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #31444f is the palette's #6d828e with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #344352 is the palette's #485867 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #4c6169 is the palette's #8299a1 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #3a6566 is the palette's #86b3b3 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #7a5079 is the palette's #b386b2 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #202929 is the palette's #e3efef with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#868cb3'.
+ */
+:root {
+  --main-bg-color: #c9dbdc;
+  --modal-bg-color: #e3efef;
+  --modal-header-color: #e3efef;
+  --modal-footer-color: #e3efef;
+  --drop-down-menu-bg: #e3efef;
+  --button-color: #868cb3;
+  --button-color-hover: #86b3b3;
+  --button-text: #202929;
+  --button-text-hover: #202929;
+  --accent-color: 134, 140, 179;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #3a6566;
+  --link-color-hover: #7a5079;
+  --label-text-color: #202929;
+  --text: #31444f;
+  --text-hover: #344352;
+  --text-muted: #4c6169;
+  --arr-queue-color: #87b386;
+  --plex-poster-unwatched: #d8bba2;
+  --petio-spinner: invert(38%) sepia(11%) saturate(912%) hue-rotate(195deg) brightness(89%) contrast(84%);
+  --gitea-color-primary-dark-4: 134, 140, 179;
+  --overseerr-gradient: linear-gradient(180deg, rgba(201, 219, 220, 0.17) 0%, rgba(201, 219, 220) 100%);
+}

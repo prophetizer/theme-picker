@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Dracula Readable (light)
+ *
+ * Generated variant: light of 'dracula-readable', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'dracula-readable'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#9e74d7'.
+ */
+:root {
+  --main-bg-color: #f1f3fd;
+  --modal-bg-color: #eaecf4;
+  --modal-header-color: #eaecf4;
+  --modal-footer-color: #eaecf4;
+  --drop-down-menu-bg: #eaecf4;
+  --button-color: #9e74d7;
+  --button-color-hover: #db58a5;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 0, 158, 62;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #b93787;
+  --link-color-hover: #007688;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #283461;
+  --arr-queue-color: #009e3e;
+  --plex-poster-unwatched: #9e74d7;
+  --petio-spinner: invert(43%) sepia(5%) saturate(6315%) hue-rotate(219deg) brightness(92%) contrast(82%);
+  --gitea-color-primary-dark-4: 0, 158, 62;
+  --overseerr-gradient: linear-gradient(180deg, rgba(241, 243, 253, 0.17) 0%, #f1f3fd 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Serendipity Morning (dark)
+ *
+ * Generated variant: dark of 'serendipity-morning', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'serendipity-morning'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6288d8'.
+ */
+:root {
+  --main-bg-color: #18181a;
+  --modal-bg-color: #222225;
+  --modal-header-color: #222225;
+  --modal-footer-color: #222225;
+  --drop-down-menu-bg: #222225;
+  --button-color: #6288d8;
+  --button-color-hover: #e58678;
+  --button-text: #222326;
+  --button-text-hover: #222326;
+  --accent-color: 98, 136, 216;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #ca6f61;
+  --link-color-hover: #8e76eb;
+  --label-text-color: #222326;
+  --text: #a4aad0;
+  --text-hover: #acacb0;
+  --text-muted: #8187a9;
+  --arr-queue-color: #2f7aab;
+  --plex-poster-unwatched: #c25a4d;
+  --petio-spinner: invert(23%) sepia(43%) saturate(6264%) hue-rotate(195deg) brightness(87%) contrast(94%);
+  --gitea-color-primary-dark-4: 98, 136, 216;
+  --overseerr-gradient: linear-gradient(180deg, rgba(24, 24, 26, 0.17) 0%, #18181a 100%);
+}

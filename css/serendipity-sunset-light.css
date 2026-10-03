@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Serendipity Sunset (light)
+ *
+ * Generated variant: light of 'serendipity-sunset', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'serendipity-sunset'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#788dbc'.
+ */
+:root {
+  --main-bg-color: #f0f3ff;
+  --modal-bg-color: #f6f8ff;
+  --modal-header-color: #f6f8ff;
+  --modal-footer-color: #f6f8ff;
+  --drop-down-menu-bg: #f6f8ff;
+  --button-color: #788dbc;
+  --button-color-hover: #a58585;
+  --button-text: #202231;
+  --button-text-hover: #202231;
+  --accent-color: 120, 141, 188;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #876868;
+  --link-color-hover: #7665ab;
+  --label-text-color: #202231;
+  --text: #020207;
+  --text-hover: #191b29;
+  --text-muted: #363844;
+  --arr-queue-color: #6792b3;
+  --plex-poster-unwatched: #bb7d7b;
+  --petio-spinner: invert(38%) sepia(12%) saturate(1149%) hue-rotate(184deg) brightness(87%) contrast(90%);
+  --gitea-color-primary-dark-4: 120, 141, 188;
+  --overseerr-gradient: linear-gradient(180deg, rgba(240, 243, 255, 0.17) 0%, #f0f3ff 100%);
+}

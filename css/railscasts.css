@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Railscasts
+ *
+ * Palette source: tinted-theming/schemes base16/railscasts.yaml (Ryan Bates; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #55a353 is the palette's #519f50 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --button-text #252733 is the palette's #272935 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6d9cbe'.
+ */
+:root {
+  --main-bg-color: #272935;
+  --modal-bg-color: #2b2b2b;
+  --modal-header-color: #2b2b2b;
+  --modal-footer-color: #2b2b2b;
+  --drop-down-menu-bg: #2b2b2b;
+  --button-color: #6d9cbe;
+  --button-color-hover: #519f50;
+  --button-text: #252733;
+  --button-text-hover: #252733;
+  --accent-color: 109, 156, 190;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #55a353;
+  --link-color-hover: #b6b3eb;
+  --label-text-color: #252733;
+  --text: #e6e1dc;
+  --text-hover: #f9f7f3;
+  --text-muted: #d4cfc9;
+  --arr-queue-color: #a5c261;
+  --plex-poster-unwatched: #cc7833;
+  --petio-spinner: invert(36%) sepia(25%) saturate(575%) hue-rotate(162deg) brightness(88%) contrast(89%);
+  --gitea-color-primary-dark-4: 109, 156, 190;
+  --overseerr-gradient: linear-gradient(180deg, rgba(39, 41, 53, 0.17) 0%, rgba(39, 41, 53) 100%);
+}

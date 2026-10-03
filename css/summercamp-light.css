@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: summercamp (light)
+ *
+ * Generated variant: light of 'summercamp', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'summercamp'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#3d90e4'.
+ */
+:root {
+  --main-bg-color: #f6f3ec;
+  --modal-bg-color: #fffdf7;
+  --modal-header-color: #fffdf7;
+  --modal-footer-color: #fffdf7;
+  --drop-down-menu-bg: #fffdf7;
+  --button-color: #3d90e4;
+  --button-color-hover: #00a07a;
+  --button-text: #1c1810;
+  --button-text-hover: #1c1810;
+  --accent-color: 61, 144, 228;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007f60;
+  --link-color-hover: #bf474b;
+  --label-text-color: #1c1810;
+  --text: #241f08;
+  --text-hover: #000000;
+  --text-muted: #413d29;
+  --arr-queue-color: #00a410;
+  --plex-poster-unwatched: #c77c00;
+  --petio-spinner: invert(48%) sepia(91%) saturate(2210%) hue-rotate(188deg) brightness(95%) contrast(88%);
+  --gitea-color-primary-dark-4: 61, 144, 228;
+  --overseerr-gradient: linear-gradient(180deg, rgba(246, 243, 236, 0.17) 0%, #f6f3ec 100%);
+}

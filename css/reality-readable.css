@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Reality Readable
+ *
+ * Readable copy of 'reality', theme.park's community theme -- by tools/readable_copy.py.
+ * Only lightness moved (OKLab; hue and chroma kept), only where a contrast
+ * target was missed (body 7:1, muted and links 4.5:1, button labels 4.5:1).
+ *
+ * Surfaces darkened in 2 step(s) (lightness only): no text colour could reach
+ *   its target on the theme's own.
+ * --text #e3e3e3 (was #ddd): lightness moved to reach 7:1 on the panels.
+ * --text-muted #b8b8b8 (was #999): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --link-color #ff9e90 (was rgb(232, 12, 11)): lightness moved to reach 4.5:1
+ *   on the panels.
+ * --link-color-hover rgba(255, 158, 144, 0.8) (was rgba(232, 12, 11,.8)):
+ *   lightness moved to reach 4.5:1 on the panels.
+ * --button-text #ffffff (was (not set)): reaches 4.5:1 on the button colours.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center bottom, rgba(151, 0, 2, 0.7) 0%, #040007 80%, #000000 100%) center center/cover no-repeat fixed, url(/resources/reality.jpg) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(180deg, #410000 0%, #000000 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(180deg, #410000 0%, #000000 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(180deg, #410000 0%, #000000 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: linear-gradient(180deg, #410000 0%, #000000 100%) center center/cover no-repeat fixed;
+  --button-color: #e80c0b;
+  --button-color-hover: #e80c0bcc;
+  --accent-color: 232, 12, 11;
+  --accent-color-hover: rgba(var(--accent-color), 0.8);
+  --link-color: #ff9e90;
+  --link-color-hover: rgba(255, 158, 144, 0.8);
+  --label-text-color: #fff;
+  --text: #e3e3e3;
+  --text-hover: #fff;
+  --text-muted: #b8b8b8;
+  --arr-queue-color: #e80c0b;
+  --plex-poster-unwatched: rgb(232, 12, 11);
+  --petio-spinner: invert(14%) sepia(93%) saturate(3042%) hue-rotate(349deg) brightness(112%) contrast(116%);
+  --gitea-color-primary-dark-4: 232, 12, 11;
+  --overseerr-gradient: linear-gradient(rgba(var(--accent-color), 0.3) 0%, rgba(0, 0, 0) 100%);
+  --button-text: #ffffff;
+}

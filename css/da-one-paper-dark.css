@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Da One Paper (dark)
+ *
+ * Generated variant: dark of 'da-one-paper', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'da-one-paper'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5890f8'.
+ */
+:root {
+  --main-bg-color: #181818;
+  --modal-bg-color: #3d372b;
+  --modal-header-color: #3d372b;
+  --modal-footer-color: #3d372b;
+  --drop-down-menu-bg: #3d372b;
+  --button-color: #5890f8;
+  --button-color-hover: #64b5a7;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 88, 144, 248;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #62ada0;
+  --link-color-hover: #d182e1;
+  --label-text-color: #000000;
+  --text: #c7c7c7;
+  --text-hover: #ffffff;
+  --text-muted: #a5a5a5;
+  --arr-queue-color: #76a85d;
+  --plex-poster-unwatched: #ff9470;
+  --petio-spinner: invert(54%) sepia(100%) saturate(593%) hue-rotate(192deg) brightness(99%) contrast(97%);
+  --gitea-color-primary-dark-4: 88, 144, 248;
+  --overseerr-gradient: linear-gradient(180deg, rgba(24, 24, 24, 0.17) 0%, #181818 100%);
+}

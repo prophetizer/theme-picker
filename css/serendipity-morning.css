@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Serendipity Morning
+ *
+ * Palette source: tinted-theming/schemes base16/serendipity-morning.yaml (Micheal Andreuzza; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-hover #4d4d51 is the palette's #f6f7fb with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color #a85044 is the palette's #e58678 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #7157c8 is the palette's #785fd0 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #222326 is the palette's #f6f7fb with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6288d8'.
+ */
+:root {
+  --main-bg-color: #eaebee;
+  --modal-bg-color: #f6f7fb;
+  --modal-header-color: #f6f7fb;
+  --modal-footer-color: #f6f7fb;
+  --drop-down-menu-bg: #f6f7fb;
+  --button-color: #6288d8;
+  --button-color-hover: #e58678;
+  --button-text: #222326;
+  --button-text-hover: #222326;
+  --accent-color: 98, 136, 216;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #a85044;
+  --link-color-hover: #7157c8;
+  --label-text-color: #222326;
+  --text: #3f4363;
+  --text-hover: #4d4d51;
+  --text-muted: #505575;
+  --arr-queue-color: #2f7aab;
+  --plex-poster-unwatched: #c25a4d;
+  --petio-spinner: invert(23%) sepia(43%) saturate(6264%) hue-rotate(195deg) brightness(87%) contrast(94%);
+  --gitea-color-primary-dark-4: 98, 136, 216;
+  --overseerr-gradient: linear-gradient(180deg, rgba(234, 235, 238, 0.17) 0%, rgba(234, 235, 238) 100%);
+}

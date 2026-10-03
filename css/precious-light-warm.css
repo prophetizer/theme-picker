@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Precious Light Warm
+ *
+ * Palette source: tinted-theming/schemes base16/precious-light-warm.yaml (4lex4 <4lex49@zoho.com>; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #464a50 is the palette's #4e5359 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #464a50 is the palette's #4e5359 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color #067464 is the palette's #0e7767 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #784ec4 is the palette's #7a50c6 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#246da5'.
+ */
+:root {
+  --main-bg-color: #ece4d6;
+  --modal-bg-color: #fff5e5;
+  --modal-header-color: #fff5e5;
+  --modal-footer-color: #fff5e5;
+  --drop-down-menu-bg: #fff5e5;
+  --button-color: #246da5;
+  --button-color-hover: #0e7767;
+  --button-text: #fff5e5;
+  --button-text-hover: #fff5e5;
+  --accent-color: 36, 109, 165;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #067464;
+  --link-color-hover: #784ec4;
+  --label-text-color: #fff5e5;
+  --text: #464a50;
+  --text-hover: #464a50;
+  --text-muted: #5d6065;
+  --arr-queue-color: #557300;
+  --plex-poster-unwatched: #a25600;
+  --petio-spinner: invert(68%) sepia(97%) saturate(441%) hue-rotate(163deg) brightness(96%) contrast(88%);
+  --gitea-color-primary-dark-4: 36, 109, 165;
+  --overseerr-gradient: linear-gradient(180deg, rgba(236, 228, 214, 0.17) 0%, rgba(236, 228, 214) 100%);
+}

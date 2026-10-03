@@ -1,0 +1,36 @@
+/*
+ * theme.park custom theme: Pine Shadow Readable
+ *
+ * Readable copy of 'pine-shadow', theme.park's community theme -- by tools/readable_copy.py.
+ * Only lightness moved (OKLab; hue and chroma kept), only where a contrast
+ * target was missed (body 7:1, muted and links 4.5:1, button labels 4.5:1).
+ *
+ * --button-text #272727 (was #eee): reaches 4.5:1 on the button colours.
+ * --button-text-hover #272727 (was #fff): reaches 4.5:1 on the button
+ *   colours.
+ * --label-text-color #272727 (was #fff): reaches 4.5:1 on the button colours.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #252b2f, #090c0e) center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --modal-header-color: var(--main-bg-color);
+  --modal-footer-color: var(--main-bg-color);
+  --drop-down-menu-bg: var(--main-bg-color);
+  --button-color: #cc7b19;
+  --button-color-hover: #e59029;
+  --button-text: #272727;
+  --button-text-hover: #272727;
+  --accent-color: 229, 160, 13;
+  --accent-color-hover: #ffc107;
+  --link-color: #fff;
+  --link-color-hover: #fff;
+  --label-text-color: #272727;
+  --text: #bbb;
+  --text-hover: #fff;
+  --text-muted: #999;
+  --arr-queue-color: #27c24c;
+  --plex-poster-unwatched: rgb(229, 160, 13);
+  --petio-spinner: invert(0%) sepia(0%) saturate(100%) hue-rotate(0deg) brightness(100%) contrast(100%);
+  --gitea-color-primary-dark-4: 255, 193, 7;
+  --overseerr-gradient: linear-gradient(135deg, rgb(37, 43, 47, .95), rgb(9, 12, 14, .95)) center center/cover no-repeat fixed;
+}

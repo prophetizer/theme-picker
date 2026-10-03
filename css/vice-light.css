@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: vice (light)
+ *
+ * Generated variant: light of 'vice', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'vice'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#009f8b'.
+ */
+:root {
+  --main-bg-color: #f2f3f8;
+  --modal-bg-color: #fbfcff;
+  --modal-header-color: #fbfcff;
+  --modal-footer-color: #fbfcff;
+  --drop-down-menu-bg: #fbfcff;
+  --button-color: #009f8b;
+  --button-color-hover: #8265ff;
+  --button-text: #14161b;
+  --button-text-hover: #14161b;
+  --accent-color: 0, 159, 139;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #715ade;
+  --link-color-hover: #6a7620;
+  --label-text-color: #14161b;
+  --text: #121f39;
+  --text-hover: #000000;
+  --text-muted: #343d4d;
+  --arr-queue-color: #0095dd;
+  --plex-poster-unwatched: #009f84;
+  --petio-spinner: invert(58%) sepia(78%) saturate(2331%) hue-rotate(145deg) brightness(90%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 159, 139;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 243, 248, 0.17) 0%, #f2f3f8 100%);
+}

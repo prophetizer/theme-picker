@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Soul Readable
+ *
+ * Readable copy of 'soul', theme.park's community theme -- by tools/readable_copy.py.
+ * Only lightness moved (OKLab; hue and chroma kept), only where a contrast
+ * target was missed (body 7:1, muted and links 4.5:1, button labels 4.5:1).
+ *
+ * Surfaces darkened in 4 step(s) (lightness only): no text colour could reach
+ *   its target on the theme's own.
+ * --text #e0e0e0 (was #ddd): lightness moved to reach 7:1 on the panels.
+ * --text-muted #b5b5b5 (was #999): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --link-color #ff9f2d (was rgb(255, 153, 0)): lightness moved to reach 4.5:1
+ *   on the panels.
+ * --link-color-hover rgba(255, 159, 45, 0.8) (was rgb(255, 153, 0, 0.8)):
+ *   lightness moved to reach 4.5:1 on the panels.
+ * --button-text #444444 (was #eee): reaches 4.5:1 on the button colours.
+ * --button-text-hover #444444 (was #FFF): reaches 4.5:1 on the button
+ *   colours.
+ * --label-text-color #444444 (was #fff): reaches 4.5:1 on the button colours.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center bottom, rgba(106, 60, 0, 0.7) 0%, #140003 80%, #000000 100%) center center/cover no-repeat fixed, url(/resources/soul.jpg) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(180deg, #371300 0%, #140003 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(180deg, #371300 0%, #140003 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(180deg, #371300 0%, #140003 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: linear-gradient(180deg, #371300 0%, #140003 100%) center center/cover no-repeat fixed;
+  --button-color: rgb(255, 153, 0);
+  --button-color-hover: #f90c;
+  --button-text: #444444;
+  --button-text-hover: #444444;
+  --accent-color: 255, 153, 0;
+  --accent-color-hover: rgba(var(--accent-color), 0.8);
+  --link-color: #ff9f2d;
+  --link-color-hover: rgba(255, 159, 45, 0.8);
+  --label-text-color: #444444;
+  --text: #e0e0e0;
+  --text-hover: #fff;
+  --text-muted: #b5b5b5;
+  --arr-queue-color: rgb(255, 153, 0);
+  --plex-poster-unwatched: #880030;
+  --petio-spinner: invert(9%) sepia(44%) saturate(6901%) hue-rotate(327deg) brightness(101%) contrast(110%);
+  --gitea-color-primary-dark-4: 255, 153, 0;
+  --overseerr-gradient: linear-gradient(rgba(var(--accent-color), 0.3) 0%, rgba(0, 0, 0) 100%);
+}

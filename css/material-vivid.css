@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Material Vivid
+ *
+ * Palette source: tinted-theming/schemes base16/material-vivid.yaml (joshyrobot; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #aeb5ba is the palette's #80868b with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #8a9095 is the palette's #676c71 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #9f77f9 is the palette's #673ab7 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#2196f3'.
+ */
+:root {
+  --main-bg-color: #202124;
+  --modal-bg-color: #27292c;
+  --modal-header-color: #27292c;
+  --modal-footer-color: #27292c;
+  --drop-down-menu-bg: #27292c;
+  --button-color: #2196f3;
+  --button-color-hover: #00bcd4;
+  --button-text: #202124;
+  --button-text-hover: #202124;
+  --accent-color: 33, 150, 243;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00bcd4;
+  --link-color-hover: #9f77f9;
+  --label-text-color: #202124;
+  --text: #aeb5ba;
+  --text-hover: #ffffff;
+  --text-muted: #8a9095;
+  --arr-queue-color: #00e676;
+  --plex-poster-unwatched: #ff9800;
+  --petio-spinner: invert(52%) sepia(44%) saturate(2971%) hue-rotate(184deg) brightness(99%) contrast(92%);
+  --gitea-color-primary-dark-4: 33, 150, 243;
+  --overseerr-gradient: linear-gradient(180deg, rgba(32, 33, 36, 0.17) 0%, rgba(32, 33, 36) 100%);
+}

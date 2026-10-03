@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Dracula Readable
+ *
+ * Readable copy of 'dracula', theme.park's official theme -- by tools/readable_copy.py.
+ * Only lightness moved (OKLab; hue and chroma kept), only where a contrast
+ * target was missed (body 7:1, muted and links 4.5:1, button labels 4.5:1).
+ *
+ * --text-muted #7f90c4 (was #6272a4): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --button-text #3c3c3c (was #eee): reaches 4.5:1 on the button colours.
+ * --button-text-hover #3c3c3c (was #FFF): reaches 4.5:1 on the button
+ *   colours.
+ */
+:root {
+  --main-bg-color: #282a36;
+  --modal-bg-color: #1e2029;
+  --modal-header-color: #1e2029;
+  --modal-footer-color: #1e2029;
+  --drop-down-menu-bg: #1e2029;
+  --button-color: #bd93f9;
+  --button-color-hover: #ff79c6;
+  --button-text: #3c3c3c;
+  --button-text-hover: #3c3c3c;
+  --accent-color: 80, 250, 123;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #ff79c6;
+  --link-color-hover: #8be9fd;
+  --label-text-color: #282a36;
+  --text: #f8f8f2;
+  --text-hover: #fff;
+  --text-muted: #7f90c4;
+  --arr-queue-color: #50fa7b;
+  --plex-poster-unwatched: #bd93f9;
+  --petio-spinner: invert(79%) sepia(27%) saturate(1033%) hue-rotate(74deg) brightness(104%) contrast(96%);
+  --gitea-color-primary-dark-4: 80, 250, 123;
+  --overseerr-gradient: linear-gradient(180deg, rgba(40, 42, 54, 0.17) 0%, rgba(40, 42, 54) 100%);
+}

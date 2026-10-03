@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Tokyo City Light
+ *
+ * Palette source: tinted-theming/schemes base16/tokyo-city-light.yaml (Michaël Ball; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#34548a'.
+ */
+:root {
+  --main-bg-color: #f6f6f8;
+  --modal-bg-color: #fbfbfd;
+  --modal-header-color: #fbfbfd;
+  --modal-footer-color: #fbfbfd;
+  --drop-down-menu-bg: #fbfbfd;
+  --button-color: #34548a;
+  --button-color-hover: #4c505e;
+  --button-text: #fbfbfd;
+  --button-text-hover: #fbfbfd;
+  --accent-color: 52, 84, 138;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4c505e;
+  --link-color-hover: #5a4a78;
+  --label-text-color: #fbfbfd;
+  --text: #343b59;
+  --text-hover: #171d23;
+  --text-muted: #4c505e;
+  --arr-queue-color: #485e30;
+  --plex-poster-unwatched: #965027;
+  --petio-spinner: invert(71%) sepia(12%) saturate(2589%) hue-rotate(179deg) brightness(100%) contrast(92%);
+  --gitea-color-primary-dark-4: 52, 84, 138;
+  --overseerr-gradient: linear-gradient(180deg, rgba(246, 246, 248, 0.17) 0%, rgba(246, 246, 248) 100%);
+}

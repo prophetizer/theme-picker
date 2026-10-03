@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Icy Dark
+ *
+ * Palette source: tinted-theming/schemes base16/icy.yaml (icyphox; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #64aab6 is the palette's #095b67 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #31aec2 is the palette's #109cb0 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #52858e is the palette's #064048 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#00bcd4'.
+ */
+:root {
+  --main-bg-color: #021012;
+  --modal-bg-color: #031619;
+  --modal-header-color: #031619;
+  --modal-footer-color: #031619;
+  --drop-down-menu-bg: #031619;
+  --button-color: #00bcd4;
+  --button-color-hover: #26c6da;
+  --button-text: #021012;
+  --button-text-hover: #021012;
+  --accent-color: 0, 188, 212;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #26c6da;
+  --link-color-hover: #00acc1;
+  --label-text-color: #021012;
+  --text: #64aab6;
+  --text-hover: #31aec2;
+  --text-muted: #52858e;
+  --arr-queue-color: #4dd0e1;
+  --plex-poster-unwatched: #b3ebf2;
+  --petio-spinner: invert(41%) sepia(20%) saturate(5741%) hue-rotate(146deg) brightness(96%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 188, 212;
+  --overseerr-gradient: linear-gradient(180deg, rgba(2, 16, 18, 0.17) 0%, rgba(2, 16, 18) 100%);
+}

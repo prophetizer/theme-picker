@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Measured Light
+ *
+ * Palette source: tinted-theming/schemes base16/measured-light.yaml (Measured; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0158ad'.
+ */
+:root {
+  --main-bg-color: #f9f5f1;
+  --modal-bg-color: #fdf9f5;
+  --modal-header-color: #fdf9f5;
+  --modal-footer-color: #fdf9f5;
+  --drop-down-menu-bg: #fdf9f5;
+  --button-color: #0158ad;
+  --button-color-hover: #01716f;
+  --button-text: #fdf9f5;
+  --button-text-hover: #fdf9f5;
+  --accent-color: 1, 88, 173;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #01716f;
+  --link-color-hover: #6645c2;
+  --label-text-color: #fdf9f5;
+  --text: #292929;
+  --text-hover: #000000;
+  --text-muted: #404040;
+  --arr-queue-color: #0c680c;
+  --plex-poster-unwatched: #ad5601;
+  --petio-spinner: invert(78%) sepia(98%) saturate(1673%) hue-rotate(195deg) brightness(91%) contrast(99%);
+  --gitea-color-primary-dark-4: 1, 88, 173;
+  --overseerr-gradient: linear-gradient(180deg, rgba(249, 245, 241, 0.17) 0%, rgba(249, 245, 241) 100%);
+}

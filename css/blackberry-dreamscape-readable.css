@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Blackberry Dreamscape Readable
+ *
+ * Readable copy of 'blackberry-dreamscape', theme.park's community theme -- by tools/readable_copy.py.
+ * Only lightness moved (OKLab; hue and chroma kept), only where a contrast
+ * target was missed (body 7:1, muted and links 4.5:1, button labels 4.5:1).
+ *
+ * --text #fbfbfb (was #eee): lightness moved to reach 7:1 on the panels.
+ * --text-muted #cccccc (was #999): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --link-color #ffbac5 (was rgb(230, 125, 146)): lightness moved to reach
+ *   4.5:1 on the panels.
+ */
+:root {
+  --main-bg-color: radial-gradient(at top center, rgba(0, 0, 0, 0), hsla(0, 14%, 18%, 0.2), hsla(0, 18%, 5%, 1) 95%) center center/cover no-repeat fixed, radial-gradient(at bottom center, rgba(0, 0, 0, 0.15), hsla(0, 14%, 18%, 0.45), hsla(0, 18%, 5%, 0.6)) center center/cover no-repeat fixed, linear-gradient(to top, #e2c9cc 1%, #e7627d 46%, #b8235a 59%, #801357 71%, #3d1635 84%, #1c1a27 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: var(--main-bg-color);
+  --modal-header-color: var(--main-bg-color);
+  --modal-footer-color: var(--main-bg-color);
+  --drop-down-menu-bg: var(--main-bg-color);
+  --button-color: #3d1635;
+  --button-color-hover: #801357;
+  --button-text: #eee;
+  --button-text-hover: #FFF;
+  --accent-color: 231, 98, 125;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #ffbac5;
+  --link-color-hover: #e2c9cc;
+  --label-text-color: #fff;
+  --text: #fbfbfb;
+  --text-hover: #fff;
+  --text-muted: #cccccc;
+  --arr-queue-color: #6b5;
+  --plex-poster-unwatched: #e7627d;
+  --petio-spinner: invert(68%) sepia(13%) saturate(766%) hue-rotate(170deg) brightness(90%) contrast(79%);
+  --gitea-color-primary-dark-4: 231, 98, 125;
+  --overseerr-gradient: radial-gradient(at top center, rgba(0, 0, 0, 0), hsla(0, 14%, 18%, 0.2), hsla(0, 18%, 5%, 1) 95%) center center/cover no-repeat fixed, radial-gradient(at bottom center, rgba(0, 0, 0, 0.15), hsla(0, 14%, 18%, 0.45), hsla(0, 18%, 5%, 0.6)) center center/cover no-repeat fixed, linear-gradient(to top, rgb(226, 201, 204, .9) 1%, rgb(231, 98, 125, .9) 46%, rgb(184, 35, 90, .9) 59%, rgb(128, 19, 87, .9) 71%, rgb(61, 22, 53, .9) 84%, rgb(28, 26, 39, .9) 100%) center center/cover no-repeat fixed;
+}

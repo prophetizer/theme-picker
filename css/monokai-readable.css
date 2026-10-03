@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Monokai (classic) Readable
+ *
+ * Readable copy of 'monokai', this repo's theme -- by tools/readable_copy.py.
+ * Only lightness moved (OKLab; hue and chroma kept), only where a contrast
+ * target was missed (body 7:1, muted and links 4.5:1, button labels 4.5:1).
+ *
+ * --text-muted #aca793 (was #75715e): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --button-text #1b1c16 (was #272822): reaches 4.5:1 on the button colours.
+ * --button-text-hover #1b1c16 (was #272822): reaches 4.5:1 on the button
+ *   colours.
+ * --label-text-color #1b1c16 (was #272822): reaches 4.5:1 on the button
+ *   colours.
+ */
+:root {
+  --main-bg-color: #272822;
+  --modal-bg-color: #3E3D32;
+  --modal-header-color: #3E3D32;
+  --modal-footer-color: #3E3D32;
+  --drop-down-menu-bg: #3E3D32;
+  --button-color: #F92672;
+  --button-color-hover: #FD971F;
+  --button-text: #1b1c16;
+  --button-text-hover: #1b1c16;
+  --accent-color: 249, 38, 114;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #66D9EF;
+  --link-color-hover: #A6E22E;
+  --label-text-color: #1b1c16;
+  --text: #F8F8F2;
+  --text-hover: #ffffff;
+  --text-muted: #aca793;
+  --arr-queue-color: #A6E22E;
+  --plex-poster-unwatched: #F92672;
+  --petio-spinner: invert(53%) sepia(38%) saturate(698%) hue-rotate(287deg) brightness(74%) contrast(197%);
+  --gitea-color-primary-dark-4: 249, 38, 114;
+  --overseerr-gradient: linear-gradient(180deg, rgba(39, 40, 34, 0.17) 0%, rgba(39, 40, 34) 100%);
+}

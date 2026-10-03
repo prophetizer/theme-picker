@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Railscasts (light)
+ *
+ * Generated variant: light of 'railscasts', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'railscasts'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6492b4'.
+ */
+:root {
+  --main-bg-color: #f1f3fd;
+  --modal-bg-color: #f4f4f4;
+  --modal-header-color: #f4f4f4;
+  --modal-footer-color: #f4f4f4;
+  --drop-down-menu-bg: #f4f4f4;
+  --button-color: #6492b4;
+  --button-color-hover: #509e4f;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 100, 146, 180;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #307f30;
+  --link-color-hover: #6e6a9d;
+  --label-text-color: #11141b;
+  --text: #030201;
+  --text-hover: #000000;
+  --text-muted: #0c0906;
+  --arr-queue-color: #7c9734;
+  --plex-poster-unwatched: #cc7833;
+  --petio-spinner: invert(39%) sepia(14%) saturate(1135%) hue-rotate(163deg) brightness(88%) contrast(86%);
+  --gitea-color-primary-dark-4: 100, 146, 180;
+  --overseerr-gradient: linear-gradient(180deg, rgba(241, 243, 253, 0.17) 0%, #f1f3fd 100%);
+}

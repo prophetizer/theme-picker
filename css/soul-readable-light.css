@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Soul Readable (light)
+ *
+ * Generated variant: light of 'soul-readable', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'soul-readable'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#b06800'.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center bottom, rgba(255, 255, 254, 0.7) 0%, #fee3e6 80%, #d6d6d6 100%) center center/cover no-repeat fixed, url(/resources/soul.jpg) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(180deg, #fffefd 0%, #fee3e6 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(180deg, #fffefd 0%, #fee3e6 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(180deg, #fffefd 0%, #fee3e6 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: linear-gradient(180deg, #fffefd 0%, #fee3e6 100%) center center/cover no-repeat fixed;
+  --button-color: #b06800;
+  --button-color-hover: rgba(176, 104, 0, 0.8);
+  --button-text: #0c0c0c;
+  --button-text-hover: #0c0c0c;
+  --accent-color: 176, 104, 0;
+  --accent-color-hover: rgba(var(--accent-color), 0.8);
+  --link-color: #895000;
+  --link-color-hover: rgba(137, 80, 0, 0.8);
+  --label-text-color: #0c0c0c;
+  --text: #030303;
+  --text-hover: #000000;
+  --text-muted: #1c1c1c;
+  --arr-queue-color: #b06800;
+  --plex-poster-unwatched: #880030;
+  --petio-spinner: invert(50%) sepia(63%) saturate(5250%) hue-rotate(24deg) brightness(90%) contrast(101%);
+  --gitea-color-primary-dark-4: 176, 104, 0;
+  --overseerr-gradient: linear-gradient(rgba(var(--accent-color), 0.3) 0%, #d6d6d6 100%);
+}

@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Space Gray Readable
+ *
+ * Readable copy of 'space-gray', theme.park's official theme -- by tools/readable_copy.py.
+ * Only lightness moved (OKLab; hue and chroma kept), only where a contrast
+ * target was missed (body 7:1, muted and links 4.5:1, button labels 4.5:1).
+ *
+ * Surfaces darkened in 1 step(s) (lightness only): no text colour could reach
+ *   its target on the theme's own.
+ * --text #f5f5f5 (was #bbb): lightness moved to reach 7:1 on the panels.
+ * --text-muted #c7c7c7 (was #999): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --link-color #a7cdde (was #81a6b7): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --button-text #090909 (was #eee): reaches 4.5:1 on the button colours.
+ * --button-text-hover #090909 (was #fff): reaches 4.5:1 on the button
+ *   colours.
+ * --label-text-color #090909 (was #fff): reaches 4.5:1 on the button colours.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center, #42565f 0%, #1a272b 100.2%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #42565f 0%, #1a272b 100.2%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #42565f 0%, #1a272b 100.2%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #42565f 0%, #1a272b 100.2%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #42565f;
+  --button-color: #607D8B;
+  --button-color-hover: #81a6b7;
+  --button-text: #090909;
+  --button-text-hover: #090909;
+  --accent-color: 129, 166, 183;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #a7cdde;
+  --link-color-hover: #9adfff;
+  --label-text-color: #090909;
+  --text: #f5f5f5;
+  --text-hover: #fff;
+  --text-muted: #c7c7c7;
+  --arr-queue-color: #81a6b7;
+  --plex-poster-unwatched: #70aeca;
+  --petio-spinner: invert(50%) sepia(31%) saturate(341%) hue-rotate(155deg) brightness(88%) contrast(85%);
+  --gitea-color-primary-dark-4: 129, 166, 183;
+  --overseerr-gradient: radial-gradient(ellipse at center, rgba(87, 108, 117, .9) 0%, rgba(37, 50, 55, .9) 100.2%) center center/cover no-repeat fixed;
+}

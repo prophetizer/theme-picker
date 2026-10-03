@@ -1,0 +1,40 @@
+/*
+ * theme.park custom theme: Time Readable
+ *
+ * Readable copy of 'time', theme.park's community theme -- by tools/readable_copy.py.
+ * Only lightness moved (OKLab; hue and chroma kept), only where a contrast
+ * target was missed (body 7:1, muted and links 4.5:1, button labels 4.5:1).
+ *
+ * Surfaces darkened in 5 step(s) (lightness only): no text colour could reach
+ *   its target on the theme's own.
+ * --text #dfdfdf (was #ddd): lightness moved to reach 7:1 on the panels.
+ * --text-muted #b4b4b4 (was #999): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --button-text #292929 (was #eee): reaches 4.5:1 on the button colours.
+ * --button-text-hover #292929 (was #FFF): reaches 4.5:1 on the button
+ *   colours.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center bottom, rgba(16, 82, 0, 0.7) 0%, #000201 80%, #000000 100%) center center/cover no-repeat fixed, url(/resources/time.jpg) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(180deg, #001300 0%, #000201 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(180deg, #001300 0%, #000201 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(180deg, #001300 0%, #000201 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: linear-gradient(180deg, #001300 0%, #000201 100%) center center/cover no-repeat fixed;
+  --button-color: rgb(4, 168, 0);
+  --button-color-hover: rgba(4, 168, 0, .8);
+  --button-text: #292929;
+  --button-text-hover: #292929;
+  --accent-color: 109, 247, 81;
+  --accent-color-hover: rgba(var(--accent-color), 0.8);
+  --link-color: rgb(109, 247, 81);
+  --link-color-hover: rgba(109, 247, 81,.8);
+  --label-text-color: #000;
+  --text: #dfdfdf;
+  --text-hover: #fff;
+  --text-muted: #b4b4b4;
+  --arr-queue-color: #6df751cc;
+  --plex-poster-unwatched: rgb(109, 247, 81);
+  --petio-spinner: invert(73%) sepia(74%) saturate(428%) hue-rotate(55deg) brightness(101%) contrast(96%);
+  --gitea-color-primary-dark-4: 109, 247, 81;
+  --overseerr-gradient: linear-gradient(rgba(var(--accent-color), 0.3) 0%, rgba(0, 0, 0) 100%);
+}

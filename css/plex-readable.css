@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Plex Readable
+ *
+ * Readable copy of 'plex', theme.park's official theme -- by tools/readable_copy.py.
+ * Only lightness moved (OKLab; hue and chroma kept), only where a contrast
+ * target was missed (body 7:1, muted and links 4.5:1, button labels 4.5:1).
+ *
+ * --text-muted #a1a1a1 (was #999): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --button-text #272727 (was #eee): reaches 4.5:1 on the button colours.
+ * --button-text-hover #272727 (was #fff): reaches 4.5:1 on the button
+ *   colours.
+ * --label-text-color #272727 (was #333): reaches 4.5:1 on the button colours.
+ */
+:root {
+  --main-bg-color: radial-gradient(circle farthest-side at 0% 100%, rgb(47, 47, 47) 0%, rgba(47, 47, 47, 0) 100%), radial-gradient(circle farthest-side at 100% 100%, rgb(63, 63, 63) 0%, rgba(63, 63, 63, 0) 100%), radial-gradient(circle farthest-side at 100% 0%, rgb(76, 76, 76) 0%, rgba(76, 76, 76, 0) 100%), radial-gradient(circle farthest-side at 0% 0%, rgb(58, 58, 58) 0%, rgba(58, 58, 58, 0) 100%), black center center/cover no-repeat fixed;
+  --modal-bg-color: #282828;
+  --main-bg-color: radial-gradient(circle farthest-side at 0% 100%, rgb(47, 47, 47) 0%, rgba(47, 47, 47, 0) 100%), radial-gradient(circle farthest-side at 100% 100%, rgb(63, 63, 63) 0%, rgba(63, 63, 63, 0) 100%), radial-gradient(circle farthest-side at 100% 0%, rgb(76, 76, 76) 0%, rgba(76, 76, 76, 0) 100%), radial-gradient(circle farthest-side at 0% 0%, rgb(58, 58, 58) 0%, rgba(58, 58, 58, 0) 100%), black center center/cover no-repeat fixed;
+  --main-bg-color: radial-gradient(circle farthest-side at 0% 100%, rgb(47, 47, 47) 0%, rgba(47, 47, 47, 0) 100%), radial-gradient(circle farthest-side at 100% 100%, rgb(63, 63, 63) 0%, rgba(63, 63, 63, 0) 100%), radial-gradient(circle farthest-side at 100% 0%, rgb(76, 76, 76) 0%, rgba(76, 76, 76, 0) 100%), radial-gradient(circle farthest-side at 0% 0%, rgb(58, 58, 58) 0%, rgba(58, 58, 58, 0) 100%), black center center/cover no-repeat fixed;
+  --modal-bg-color: #282828;
+  --modal-header-color: #323232;
+  --modal-footer-color: #323232;
+  --drop-down-menu-bg: #191a1c;
+  --button-color: #cc7b19;
+  --button-color-hover: #e59029;
+  --button-text: #272727;
+  --button-text-hover: #272727;
+  --accent-color: 229, 160, 13;
+  --accent-color-hover: #ffc107;
+  --link-color: #e5a00d;
+  --link-color-hover: #fff;
+  --label-text-color: #272727;
+  --text: #ddd;
+  --text-hover: #fff;
+  --text-muted: #a1a1a1;
+  --arr-queue-color: #27c24c;
+  --plex-poster-unwatched: #e5a00d;
+  --petio-spinner: invert(0%) sepia(0%) saturate(100%) hue-rotate(0deg) brightness(100%) contrast(100%);
+  --gitea-color-primary-dark-4: 255, 193, 7;
+  --overseerr-gradient: radial-gradient(circle farthest-side at 0% 100%, rgb(47, 47, 47) 0%, rgba(47, 47, 47, 0) 100%), radial-gradient(circle farthest-side at 100% 100%, rgb(63, 63, 63) 0%, rgba(63, 63, 63, 0) 100%), radial-gradient(circle farthest-side at 100% 0%, rgb(76, 76, 76) 0%, rgba(76, 76, 76, 0) 100%), radial-gradient(circle farthest-side at 0% 0%, rgb(58, 58, 58) 0%, rgba(58, 58, 58, 0) 100%), rgba(0, 0, 0, 0.5) center center/cover no-repeat fixed;
+}

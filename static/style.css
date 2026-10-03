@@ -258,7 +258,28 @@
                border: 1px solid var(--modal-header-color, #2b3733); }
   .lb-head { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
   .sr-svg { position: absolute; width: 0; height: 0; overflow: hidden; }
-  .sun-row[hidden] { display: none; }               /* .ed-row's flex would override [hidden] */
+  .sun-row[hidden], .rotate-list-box[hidden] { display: none; }
+  #rotate-list { margin: 8px 0; padding-left: 26px; }
+  #rotate-list li { padding: 3px 0; }
+  #rotate-list li span { display: inline-block; min-width: 14em; }
+  #rotate-list button { cursor: pointer; border: 1px solid var(--line); border-radius: 5px; padding: 1px 7px;
+                        margin-left: 4px; background: var(--main-bg-color, #14181a); color: var(--text, #e6ecec); }
+  .groups-box { margin: 0 0 14px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 10px; }
+  .groups-box summary { cursor: pointer; font-weight: 600; }
+  .groups-box .group { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; padding: 6px 0;
+                       border-bottom: 1px solid var(--line); }
+  .groups-box .group .count { flex: 1 1 200px; }
+  .groups-box select, .groups-box input[type=text] { border-radius: 6px; padding: 5px 9px; border: 1px solid var(--line);
+         background: var(--main-bg-color, #14181a); color: var(--text, #e6ecec); }
+  .groups-box button { cursor: pointer; border-radius: 6px; padding: 5px 12px; border: 1px solid var(--accent);
+         background: var(--button-color, #173029); color: var(--button-text, #fff); }
+  .group-form { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 10px; }
+  .grp-apps { display: flex; flex-wrap: wrap; gap: 4px 14px; flex: 1 1 100%; font-size: .9rem; }
+  .lb-head .rate[aria-pressed="true"] { background: var(--button-color, #173029); color: var(--button-text, #fff);
+                                        border-color: var(--accent); }
+  .theme-btn[data-rating="1"] .name::after { content: " \1F44D"; font-size: .8em; }
+  .theme-btn[data-rating="-1"] { opacity: .6; }
+  .theme-btn[data-rating="-1"] .name::after { content: " \1F44E"; font-size: .8em; }               /* .ed-row's flex would override [hidden] */
   .sched input[type=number] { width: 7em; }
   #lb-body.cvd-protan img { filter: url(#cvd-protan); }
   #lb-body.cvd-deutan img { filter: url(#cvd-deutan); }

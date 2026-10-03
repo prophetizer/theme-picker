@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Aquamarine Readable
+ *
+ * Readable copy of 'aquamarine', theme.park's official theme -- by tools/readable_copy.py.
+ * Only lightness moved (OKLab; hue and chroma kept), only where a contrast
+ * target was missed (body 7:1, muted and links 4.5:1, button labels 4.5:1).
+ *
+ * Surfaces darkened in 2 step(s) (lightness only): no text colour could reach
+ *   its target on the theme's own.
+ * --text #f7f7f7 (was #ddd): lightness moved to reach 7:1 on the panels.
+ * --text-muted #93d5cf (was #8dcfc9): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --link-color #32e0cd (was #0ed2bf): lightness moved to reach 4.5:1 on the
+ *   panels.
+ * --button-text #1e1e1e (was #eee): reaches 4.5:1 on the button colours.
+ * --button-text-hover #1e1e1e (was #FFF): reaches 4.5:1 on the button
+ *   colours.
+ * --label-text-color #1e1e1e (was #fff): reaches 4.5:1 on the button colours.
+ */
+:root {
+  --main-bg-color: radial-gradient(ellipse at center, #065f59 0%, #001b42 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #065f59 0%, #001b42 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #065f59 0%, #001b42 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #065f59 0%, #001b42 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #00394e;
+  --button-color: #009688;
+  --button-color-hover: #12afa0;
+  --button-text: #1e1e1e;
+  --button-text-hover: #1e1e1e;
+  --accent-color: 18, 175, 160;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #32e0cd;
+  --link-color-hover: #36e7d6;
+  --label-text-color: #1e1e1e;
+  --text: #f7f7f7;
+  --text-hover: #fff;
+  --text-muted: #93d5cf;
+  --arr-queue-color: #009688;
+  --plex-poster-unwatched: rgb(21, 213, 194);
+  --petio-spinner: invert(39%) sepia(98%) saturate(527%) hue-rotate(129deg) brightness(94%) contrast(101%);
+  --gitea-color-primary-dark-4: 18, 175, 160;
+  --overseerr-gradient: radial-gradient(ellipse at center, rgb(71, 145, 138, .9) 0%, rgb(11, 49, 97, .9) 100%) center center/cover no-repeat fixed;
+}

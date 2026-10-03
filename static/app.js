@@ -285,15 +285,23 @@ const surpriseCandidates = () => surprisePool().filter(b => !b.classList.contain
 function updateSurprise() {
   const n = surprisePool().length, btn = $('#surprise');
   btn.textContent = `Surprise me · ${n}`;
-  btn.disabled = !surpriseCandidates().length;
+  btn.disabled = !surpriseCandidates().some(b => b.dataset.rating !== '-1');
   btn.title = btn.disabled ? 'No other theme matches the filters'
     : `Apply a random theme from the ${n} shown, never the live one (R)`;
 }
 
+// A random tile: liked themes three times as likely, disliked ones never --
+// the same rule as the server's state.pick().
+function weightedPick(pool) {
+  pool = pool.filter(b => b.dataset.rating !== '-1');
+  const w = pool.map(b => b.dataset.rating === '1' ? 3 : 1), total = w.reduce((s, x) => s + x, 0);
+  let r = Math.random() * total;
+  for (let i = 0; i < pool.length; i++) { r -= w[i]; if (r < 0) return pool[i]; }
+  return pool[pool.length - 1];
+}
 function surprise() {
-  const pool = surpriseCandidates();
-  if (!pool.length) return;
-  const b = pool[Math.floor(Math.random() * pool.length)];
+  const b = weightedPick(surpriseCandidates());
+  if (!b) return;
   if (b.offsetParent) {
     b.scrollIntoView({block: 'center', behavior: 'smooth'});
     b.focus({preventScroll: true});
@@ -328,6 +336,7 @@ function openLightbox(btn) {
   if (added) bits.push('added ' + (added.includes('T') ? new Date(added).toLocaleDateString() : added));
   $('#lb-meta').textContent = bits.join(' · ');
   $('#lb-hide').textContent = isHiddenTheme(btn) ? 'Unhide' : 'Hide';
+  showRating(btn);
   $('#lb-readable').hidden = !btn.dataset.warn;            // only for low-contrast themes
   // The five themes that look most like this one (in the forms on show).
   const near = tiles.filter(b => isShownForm(b) && originalOf(b) !== originalOf(btn))
@@ -493,6 +502,20 @@ async function toggleHide(btn) {
   if (lbTile && originalOf(lbTile) === orig) $('#lb-hide').textContent = on ? 'Unhide' : 'Hide';
   refresh();
 }
+function showRating(btn) {
+  $('#lb-like').setAttribute('aria-pressed', String(btn.dataset.rating === '1'));
+  $('#lb-dislike').setAttribute('aria-pressed', String(btn.dataset.rating === '-1'));
+}
+async function rate(btn, value) {
+  const rating = btn.dataset.rating === String(value) ? 0 : value;       // pressing it again clears it
+  const data = await postJSON('/api/rate', {theme: btn.dataset.theme, rating});
+  if (!data.ok) return;
+  btn.dataset.rating = String(rating);
+  if (lbTile === btn) showRating(btn);
+  updateSurprise();
+}
+$('#lb-like').addEventListener('click', () => { if (lbTile) rate(lbTile, 1); });
+$('#lb-dislike').addEventListener('click', () => { if (lbTile) rate(lbTile, -1); });
 async function toggleFav(btn) {
   const on = btn.dataset.fav !== '1';
   const data = await postJSON('/api/favourite', {theme: btn.dataset.theme, on});
@@ -849,7 +872,7 @@ function schSummary(s) {
 }
 function rotateSummary(s) {
   if (!s.rotate_enabled) return 'off';
-  const pool = s.rotate_pool === 'favourites' ? 'favourites' : 'all themes';
+  const pool = s.rotate_mode === 'list' ? 'your list' : s.rotate_pool === 'favourites' ? 'favourites' : 'all themes';
   return `on · every ${s.rotate_every} hour${s.rotate_every === 1 ? '' : 's'} from ${pool} (${s.rotate_pool_size || 0})`
     + (s.rotate_next ? ` · next ${s.rotate_next}` : '');
 }
@@ -895,11 +918,39 @@ $('#daily-save').addEventListener('click', async () => {
   showSchedules(data.schedule);
   if (data.theme !== data.previous) markApplied(data.previous, data.theme, data.css);
 });
+// The playlist: an ordered list built here, sent whole on Save.
+const rotateItem = t => {
+  const li = document.createElement('li');
+  li.dataset.theme = t;
+  li.innerHTML = `<span>${esc(t)}</span><button type="button" data-move="up" aria-label="Move ${esc(t)} up">&uarr;</button>`
+    + `<button type="button" data-move="down" aria-label="Move ${esc(t)} down">&darr;</button>`
+    + `<button type="button" data-move="del" aria-label="Remove ${esc(t)}">&times;</button>`;
+  return li;
+};
+const rotateMode = () => {
+  const list = $('#rotate-mode').value === 'list';
+  $('#rotate-list-box').hidden = !list;
+  $('#rotate-pool').disabled = list;
+};
+$('#rotate-mode').addEventListener('change', rotateMode);
+rotateMode();
+$('#rotate-add-btn').addEventListener('click', () => {
+  const t = $('#rotate-add').value, ol = $('#rotate-list');
+  if (t && ![...ol.children].some(li => li.dataset.theme === t)) ol.appendChild(rotateItem(t));
+});
+$('#rotate-list').addEventListener('click', ev => {
+  const b = ev.target.closest('button[data-move]'); if (!b) return;
+  const li = b.closest('li');
+  if (b.dataset.move === 'del') li.remove();
+  else if (b.dataset.move === 'up' && li.previousElementSibling) li.parentNode.insertBefore(li, li.previousElementSibling);
+  else if (b.dataset.move === 'down' && li.nextElementSibling) li.parentNode.insertBefore(li.nextElementSibling, li);
+});
 $('#rotate-save').addEventListener('click', async () => {
   const st = $('#rotate-status');
   st.textContent = 'Saving...';
   const data = await postJSON('/api/rotate', {
-    enabled: $('#rotate-enabled').checked, every: +$('#rotate-every').value, pool: $('#rotate-pool').value});
+    enabled: $('#rotate-enabled').checked, every: +$('#rotate-every').value, pool: $('#rotate-pool').value,
+    mode: $('#rotate-mode').value, list: [...$('#rotate-list').children].map(li => li.dataset.theme)});
   st.textContent = data.message;
   if (!data.ok) return;
   showSchedules(data.schedule);
@@ -1387,3 +1438,46 @@ $('#lb-export').addEventListener('change', async ev => {
   const out = exportScheme(v, t, t.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase()), fmt);
   if (out) download(out[0], out[1]);
 });
+
+// --- app groups (Apps tab) -------------------------------------------------------
+// After a group pin: every member's own select and card follow, then the
+// coverage check re-runs once Traefik has the new config.
+function showPins(pins) {
+  for (const sel of $$('.pin')) {
+    const v = pins[sel.dataset.app] || '';
+    sel.value = v; sel.dataset.current = v;
+    sel.closest('.app-card').classList.toggle('pinned', !!v);
+  }
+  updateAppsView();
+}
+for (const sel of $$('.group-pin')) {
+  sel.addEventListener('change', async () => {
+    const data = await postJSON('/api/group', {action: 'pin', name: sel.dataset.group, theme: sel.value});
+    const msg = $('#msg'); msg.textContent = data.message; msg.hidden = false;
+    if (!data.ok) return;
+    showPins(data.pins);
+    setTimeout(runCoverage, 3500);
+  });
+}
+$('#grp-save').addEventListener('click', async () => {
+  const apps = $$('.grp-app').filter(c => c.checked).map(c => c.value);
+  const data = await postJSON('/api/group', {action: 'save', name: $('#grp-name').value.trim(), apps});
+  $('#grp-status').textContent = data.message;
+  if (data.ok) setTimeout(() => location.assign('/?g=' + Date.now() + '#apps'), 600);
+});
+for (const b of $$('.group-edit')) {
+  b.addEventListener('click', () => {
+    const row = b.closest('.group'), members = row.dataset.apps.split(' ');
+    $('#grp-name').value = row.dataset.group;
+    for (const c of $$('.grp-app')) c.checked = members.includes(c.value);
+    $('#grp-name').focus();
+  });
+}
+for (const b of $$('.group-del')) {
+  b.addEventListener('click', async () => {
+    if (!confirm(`Delete the group "${b.dataset.group}"? Its apps keep their pins.`)) return;
+    const data = await postJSON('/api/group', {action: 'delete', name: b.dataset.group});
+    if (data.ok) b.closest('.group').remove();
+    $('#grp-status').textContent = data.message;
+  });
+}

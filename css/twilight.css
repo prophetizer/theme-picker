@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Twilight
+ *
+ * Palette source: tinted-theming/schemes base16/twilight.yaml (David Hart; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #c3c3c3 is the palette's #a7a7a7 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #9e9c9f is the palette's #838184 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #ac95ae is the palette's #9b859d with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7587a6'.
+ */
+:root {
+  --main-bg-color: #1e1e1e;
+  --modal-bg-color: #323537;
+  --modal-header-color: #323537;
+  --modal-footer-color: #323537;
+  --drop-down-menu-bg: #323537;
+  --button-color: #7587a6;
+  --button-color-hover: #afc4db;
+  --button-text: #1e1e1e;
+  --button-text-hover: #1e1e1e;
+  --accent-color: 117, 135, 166;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #afc4db;
+  --link-color-hover: #ac95ae;
+  --label-text-color: #1e1e1e;
+  --text: #c3c3c3;
+  --text-hover: #ffffff;
+  --text-muted: #9e9c9f;
+  --arr-queue-color: #8f9d6a;
+  --plex-poster-unwatched: #cda869;
+  --petio-spinner: invert(48%) sepia(11%) saturate(919%) hue-rotate(179deg) brightness(98%) contrast(90%);
+  --gitea-color-primary-dark-4: 117, 135, 166;
+  --overseerr-gradient: linear-gradient(180deg, rgba(30, 30, 30, 0.17) 0%, rgba(30, 30, 30) 100%);
+}
