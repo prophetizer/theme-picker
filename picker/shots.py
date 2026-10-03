@@ -2,6 +2,7 @@
 capture-theme-screenshots.sh: per-app/<app>_<theme>.png full size and
 thumbs/<app>_<theme>.jpg for the lightbox grid. Gitignored, regenerable."""
 
+import os
 import re
 
 from . import config, state
@@ -20,15 +21,40 @@ KINDS = {"thumb": ("thumbs", ".jpg", "image/jpeg"),
          "full": ("per-app", ".png", "image/png")}
 
 
+_INDEX = {}
+
+
+def _names(d, suffix):
+    try:
+        with os.scandir(d) as it:
+            return {e.name[:-len(suffix)] for e in it if e.name.endswith(suffix) and e.is_file()}
+    except OSError:
+        return set()
+
+
 def screenshot_index():
-    """{theme: [apps...]} for every theme that has lightbox thumbnails."""
+    """{theme: [apps...]} for every theme that has lightbox thumbnails.
+    Two directory scans, kept until either directory changes (the capture
+    saves by rename, which updates the directory's mtime): globbing and
+    checking ~4,000 files took 0.4 s of every page render."""
+    thumbs, full = SHOT_DIR / "thumbs", SHOT_DIR / "per-app"
+    apps = tuple(screenshot_apps())
+    try:
+        key = (str(SHOT_DIR), thumbs.stat().st_mtime_ns, full.stat().st_mtime_ns, apps)
+    except OSError:
+        return {}
+    if _INDEX.get("key") == key:
+        return _INDEX["value"]
     idx = {}
-    for p in (SHOT_DIR / "thumbs").glob("*.jpg"):
-        m = SHOT_NAME.match(p.stem)
-        if m and (SHOT_DIR / "per-app" / f"{p.stem}.png").is_file():
+    for stem in _names(thumbs, ".jpg") & _names(full, ".png"):
+        m = SHOT_NAME.match(stem)
+        if m:
             idx.setdefault(m.group(2), []).append(m.group(1))
-    rank = {a: i for i, a in enumerate(screenshot_apps())}
-    return {t: sorted(apps, key=lambda a: (rank.get(a, 99), a)) for t, apps in idx.items()}
+    rank = {a: i for i, a in enumerate(apps)}
+    value = {t: sorted(a, key=lambda x: (rank.get(x, 99), x)) for t, a in idx.items()}
+    _INDEX.clear()
+    _INDEX.update(key=key, value=value)
+    return value
 
 
 def shot_file(path):

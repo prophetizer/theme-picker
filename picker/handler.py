@@ -1,10 +1,11 @@
 """HTTP routes. stdlib http.server, one handler class. Applying a theme goes
 through apply.apply_theme(), which holds the allowlist check."""
 
+import gzip
 import ipaddress
-import sys
 import json
 import re
+import sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlsplit
 
@@ -13,6 +14,9 @@ from .coverage import cached_coverage
 from .prom import render_metrics
 from .render import STATIC, STATIC_TYPES, manifest, render_page
 from .summary import current_summary
+
+# The static text files, gzipped once at start.
+STATIC_GZ = {n: gzip.compress(d, compresslevel=9) for n, d in STATIC.items() if not n.endswith(".png")}
 
 
 # Sent with every response. The picker changes every themed app with one
@@ -126,21 +130,31 @@ class Handler(BaseHTTPRequestHandler):
         hosts = {h.strip().lower() for h in (self.headers.get("Host"), self.headers.get("X-Forwarded-Host")) if h}
         return urlsplit(origin).netloc.lower() in hosts
 
-    def _send_html(self, body, status=200):
-        encoded = body.encode("utf-8")
+    def _gzip_ok(self):
+        return "gzip" in (self.headers.get("Accept-Encoding") or "").lower()
+
+    def _send_text(self, data, ctype, status=200, gzipped=None, headers=None, compress=True):
+        """Send bytes, gzipped when the client accepts it and it's worth it:
+        the page is 1.6 MB of HTML that compresses to under 100 KB. `gzipped`:
+        a precompressed copy (the static files). The responses hold no secret
+        a compression side channel could recover -- no tokens, no CSRF value."""
         self.send_response(status)
-        self.send_header("Content-Type", "text/html; charset=utf-8")
-        self.send_header("Content-Length", str(len(encoded)))
+        self.send_header("Content-Type", ctype)
+        self.send_header("Vary", "Accept-Encoding")
+        for k, v in (headers or {}).items():
+            self.send_header(k, v)
+        if compress and self._gzip_ok() and len(data) > 1024:
+            data = gzipped or gzip.compress(data, compresslevel=6)
+            self.send_header("Content-Encoding", "gzip")
+        self.send_header("Content-Length", str(len(data)))
         self.end_headers()
-        self.wfile.write(encoded)
+        self.wfile.write(data)
+
+    def _send_html(self, body, status=200):
+        self._send_text(body.encode("utf-8"), "text/html; charset=utf-8", status)
 
     def _send_json(self, payload, status=200):
-        encoded = json.dumps(payload).encode("utf-8")
-        self.send_response(status)
-        self.send_header("Content-Type", "application/json")
-        self.send_header("Content-Length", str(len(encoded)))
-        self.end_headers()
-        self.wfile.write(encoded)
+        self._send_text(json.dumps(payload).encode("utf-8"), "application/json", status)
 
     def _wants_json(self):
         return "application/json" in (self.headers.get("Accept") or "")
@@ -172,14 +186,12 @@ class Handler(BaseHTTPRequestHandler):
             self._send_html(render_page(preview=preview))
         elif path.startswith("/static/") and path[len("/static/"):] in STATIC:
             name = path[len("/static/"):]
-            data = STATIC[name]
-            self.send_response(200)
-            self.send_header("Content-Type", STATIC_TYPES[name])
-            self.send_header("Content-Length", str(len(data)))
             # The page links a content-hashed URL, so a long cache is safe.
-            self.send_header("Cache-Control", "public, max-age=31536000, immutable")
-            self.end_headers()
-            self.wfile.write(data)
+            # PNGs are compressed already; the text files go out gzipped.
+            ctype = STATIC_TYPES[name]
+            self._send_text(STATIC[name], ctype, gzipped=STATIC_GZ.get(name),
+                            headers={"Cache-Control": "public, max-age=31536000, immutable"},
+                            compress=not ctype.startswith("image/png"))
         elif path.startswith("/dashboards/") and path[len("/dashboards/"):] in dashboards.STYLESHEETS:
             # Linked from Homepage's custom.css / Glance's custom-css-file:
             # the live theme's colours in that dashboard's own variables.
@@ -353,10 +365,9 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send_json({"ok": ok, "message": msg, "pinned": state.read_overrides()},
                                        status=200 if ok else 400)
             if path == "/api/rate":
-                try:
-                    rating = int(data.get("rating", 0))
-                except (TypeError, ValueError):
-                    rating = 2
+                rating = data.get("rating", 0)
+                if not isinstance(rating, int) or isinstance(rating, bool):
+                    rating = 2                        # not -1, 0 or 1: refused below
                 ok = state.set_rating(str(data.get("theme", "")), rating)
                 return self._send_json({"ok": ok, "ratings": state.read_ratings()}, status=200 if ok else 400)
             if path == "/api/group":

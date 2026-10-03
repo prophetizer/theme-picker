@@ -148,3 +148,69 @@ class Routes(ServerCase):
         page = page if isinstance(page, str) else page.decode()
         self.assertIn('rel="manifest"', page)
         self.assertIn('name="theme-color"', page)
+
+
+class Hardening(ServerCase):
+    def test_rating_must_be_an_integer(self):
+        for bad in (True, 1.0, "1", None, [1]):
+            with self.subTest(rating=bad):
+                self.assertEqual(self.post_json("/api/rate", {"theme": "nord", "rating": bad})[0], 400)
+        self.assertEqual(state.read_ratings(), {})
+
+    def test_state_files_are_written_safely(self):
+        import os
+        target = self.dir / "elsewhere.json"
+        target.write_text("{}")
+        (state.RATINGS_FILE.parent / "theme-ratings.tmp").symlink_to(target)   # the old fixed temp name
+        state.set_rating("nord", 1)
+        self.assertEqual(target.read_text(), "{}")                    # the link was not followed
+        self.assertEqual(json.loads(state.RATINGS_FILE.read_text()), {"nord": 1})
+        self.assertEqual(os.stat(state.RATINGS_FILE).st_mode & 0o777, 0o664)
+
+
+class Compression(ServerCase):
+    def get(self, path, gz):
+        import http.client
+        conn = http.client.HTTPConnection("127.0.0.1", self.server.server_address[1], timeout=20)
+        try:
+            conn.request("GET", path, headers={"Accept-Encoding": "gzip, br"} if gz else {})
+            r = conn.getresponse()
+            return r.getheader("Content-Encoding"), r.getheader("Vary"), r.read()
+        finally:
+            conn.close()
+
+    def test_page_json_and_static_are_gzipped_when_asked(self):
+        import gzip
+        for path in ("/", "/static/app.js?v=1", "/api/schedule"):
+            with self.subTest(path=path):
+                enc, vary, body = self.get(path, True)
+                plain_enc, _, plain = self.get(path, False)
+                self.assertIsNone(plain_enc)
+                if len(plain) > 1024:
+                    self.assertEqual((enc, vary), ("gzip", "Accept-Encoding"))
+                    self.assertEqual(gzip.decompress(body), plain)
+
+    def test_pngs_are_not_recompressed(self):
+        enc, _, body = self.get("/static/icon-512.png", True)
+        self.assertIsNone(enc)
+        self.assertEqual(body[:8], b"\x89PNG\r\n\x1a\n")
+
+
+class RatingStats(SandboxCase):
+    def test_liked_disliked_and_how_random_picks_used_them(self):
+        self.assertIsNone(state.rating_stats())
+        self.assertIn("No ratings yet", render.ratings_html())
+        state.set_rating("nord", 1)
+        state.set_rating("dracula", -1)
+        state.HISTORY_FILE.write_text(json.dumps([
+            {"theme": "nord", "at": "2026-10-01T08:00:00+00:00", "by": "schedule (theme of the day)"},
+            {"theme": "catppuccin-latte", "at": "2026-10-01T09:00:00+00:00", "by": "schedule (rotation)"},
+            {"theme": "nord", "at": "2026-10-01T10:00:00+00:00", "by": "alex"},
+            {"theme": "dracula", "at": "2026-10-01T11:00:00+00:00", "by": "schedule (rotation)"}]))
+        rs = state.rating_stats()
+        self.assertEqual([r[:2] for r in rs["liked"]], [("nord", 2)])
+        self.assertEqual([r[:2] for r in rs["disliked"]], [("dracula", 1)])
+        self.assertEqual(rs["picks"], {"liked": 1, "unrated": 1, "disliked": 1})
+        page = render.ratings_html()
+        self.assertIn("Of 3 random picks", page)
+        self.assertIn("1 were made before their theme was disliked", page)

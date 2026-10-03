@@ -4,6 +4,25 @@ const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAl
 // invariant, not something this code should depend on. Coverage details
 // carry exception text such as "<urlopen error ...>".
 const esc = v => String(v).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'})[c]);
+// Theme selects arrive holding only their current value; the full list is
+// one <template> on the page, copied in when a select is first used (or
+// before code sets its value). See render.current_opt().
+const themeOpts = $('#theme-opts');
+function fillThemes(sel) {
+  if (!sel || sel.dataset.filled || !themeOpts) return;
+  sel.dataset.filled = '1';
+  const keep = sel.value, have = new Set([...sel.options].map(o => o.value));
+  const frag = document.createDocumentFragment();
+  for (const o of themeOpts.content.children) if (!have.has(o.value)) frag.appendChild(o.cloneNode(true));
+  sel.append(frag);
+  // Back into name order: the current option was sent ahead of the rest.
+  [...sel.options].filter(o => o.value && !o.disabled).sort((x, y) => x.value.localeCompare(y.value))
+    .forEach(o => sel.appendChild(o));
+  sel.value = keep;
+}
+for (const sel of $$('select[data-themes]')) {
+  for (const ev of ['pointerdown', 'focus', 'keydown']) sel.addEventListener(ev, () => fillThemes(sel), {once: true});
+}
 const tiles = $$('.theme-btn');
 tiles.forEach((b, i) => b.dataset.idx = i);
 // One grid per section (custom-dark, ..., community, official, all); a tile's
@@ -718,6 +737,8 @@ function edUpdate() {
     link: '--pv-link', link_hover: '--pv-link-hover', button: '--pv-button', button_hover: '--pv-button-hover',
     button_text: '--pv-button-text', queue: '--pv-queue'};
   for (const [k, v] of Object.entries(map)) if (isHex(f[k])) pv.style.setProperty(v, f[k]);
+  // The queue chip's label: whichever of white and near-black reads better.
+  if (isHex(f.queue)) pv.style.setProperty('--pv-queue-text', hexCon(f.queue, '#ffffff') >= hexCon(f.queue, '#11141b') ? '#ffffff' : '#11141b');
   const rows = [['Body text on panel', 'text', 'panel_bg', 4.5], ['Muted text on panel', 'muted', 'panel_bg', 3],
                 ['Button label on button', 'button_text', 'button', 3], ['Link on panel', 'link', 'panel_bg', 3]];
   $('#ed-contrast').innerHTML = rows.map(([lab, a, b, min]) => {
@@ -1225,6 +1246,7 @@ async function openInEditor(btn, readable) {
   // Switch tabs here, synchronously: a hash change shows the tab a tick
   // later, and the tab's own first-open load then landed after this one and
   // overwrote the readable fix with the theme's original colours.
+  fillThemes($('#ed-base'));
   $('#ed-base').value = theme;
   history.pushState(null, '', '#editor');
   showTab('editor');
@@ -1276,8 +1298,49 @@ function showTab(name) {
   }
   if (currentTab === 'editor' && !edGet().page_bg) edLoad();
 }
-window.addEventListener('hashchange', () => { showTab(location.hash.slice(1)); window.scrollTo(0, 0); });
-showTab(location.hash.slice(1));
+// --- share a theme as a link ------------------------------------------------
+// The editor's colours, name and title in the URL's FRAGMENT (#editor:share=),
+// which browsers never send to a server: the link opens them in any Theme
+// Picker's editor, unsaved. Everything read back is checked like the
+// editor's own input (#rrggbb only, a plain name), and the server checks
+// it all again on Save.
+const SHARE = '#editor:share=';
+const b64url = bytes => btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+const unb64url = s => Uint8Array.from(atob(s.replace(/-/g, '+').replace(/_/g, '/')), c => c.charCodeAt(0));
+function shareURL() {
+  const fields = edGet();
+  const data = {v: 1, n: $('#ed-name').value.trim(), t: $('#ed-title').value.trim(), f: fields,
+                g: $('#ed-gradient').checked ? $('#ed-bg2').value : '', a: +$('#ed-angle').value};
+  return location.origin + location.pathname + SHARE + b64url(new TextEncoder().encode(JSON.stringify(data)));
+}
+$('#ed-share').addEventListener('click', async () => {
+  const st = $('#ed-status'), url = shareURL();
+  try { await navigator.clipboard.writeText(url); st.textContent = 'Share link copied. It opens these colours in a Theme Picker\'s editor; nothing is saved until Save & deploy.'; }
+  catch (e) { st.textContent = 'Copy this link: ' + url; }
+});
+function loadShared() {
+  if (!location.hash.startsWith(SHARE)) return false;
+  let d = null;
+  try { d = JSON.parse(new TextDecoder().decode(unb64url(location.hash.slice(SHARE.length)))); } catch (e) {}
+  history.replaceState(null, '', location.pathname + location.search + '#editor');
+  const names = new Set(edInputs.map(el => el.dataset.f));
+  const ok = d && d.v === 1 && d.f && typeof d.f === 'object'
+    && Object.entries(d.f).every(([k, v]) => names.has(k) && isHex(String(v)))
+    && (!d.g || isHex(String(d.g)));
+  if (!ok) { showTab('editor'); $('#ed-status').textContent = 'That share link is damaged or not a Theme Picker theme.'; return true; }
+  edSet(Object.assign({}, d.f, {page_bg2: d.g || ''}));
+  const angle = Number.isInteger(d.a) && d.a >= 0 && d.a < 360 ? d.a : 160;
+  $('#ed-angle').value = angle;
+  $('#ed-name').value = /^[a-z0-9][a-z0-9-]{0,39}$/.test(String(d.n || '')) ? d.n : '';
+  $('#ed-title').value = String(d.t || '').slice(0, 40);
+  edUpdate();
+  showTab('editor');
+  $('#ed-status').textContent = `Loaded a shared theme${d.t ? ` (${String(d.t).slice(0, 40)})` : ''}. `
+    + 'Check it, then Save & deploy to keep it -- it is not saved yet.';
+  return true;
+}
+window.addEventListener('hashchange', () => { if (!loadShared()) showTab(location.hash.slice(1)); window.scrollTo(0, 0); });
+if (!loadShared()) showTab(location.hash.slice(1));
 
 seedPick();
 layout();
@@ -1444,6 +1507,7 @@ $('#lb-export').addEventListener('change', async ev => {
 // coverage check re-runs once Traefik has the new config.
 function showPins(pins) {
   for (const sel of $$('.pin')) {
+    fillThemes(sel);
     const v = pins[sel.dataset.app] || '';
     sel.value = v; sel.dataset.current = v;
     sel.closest('.app-card').classList.toggle('pinned', !!v);
@@ -1480,4 +1544,53 @@ for (const b of $$('.group-del')) {
     if (data.ok) b.closest('.group').remove();
     $('#grp-status').textContent = data.message;
   });
+}
+
+// --- the picker's own small print, readable in every theme ------------------
+// The page wears the live theme, so its muted text is the theme's own --
+// and some themes' muted text is under 4.5:1 (Catppuccin Latte: 4.36:1).
+// Once the theme sheet has loaded, --pk-muted is that colour moved in
+// lightness only to 4.5:1 on the page and panels, --pk-button-text the
+// same for the button label on the button (Dracula's is 2.07:1), and
+// --pk-on-accent the better of white and near-black on the accent.
+function firstColour(v) {
+  v = (v || '').trim();
+  let m = v.match(/#[0-9a-fA-F]{3,8}\b/);
+  if (m) return hex6(m[0]);
+  m = v.match(/rgba?\(\s*([0-9.]+)[,\s]+([0-9.]+)[,\s]+([0-9.]+)/) || v.match(/^\s*([0-9.]+)\s*,\s*([0-9.]+)\s*,\s*([0-9.]+)\s*$/);
+  return m ? rgbHex([+m[1], +m[2], +m[3]]) : null;
+}
+function allColours(v) {
+  return [...String(v || '').matchAll(/#[0-9a-fA-F]{3,8}\b|rgba?\([^)]*\)/g)].map(m => firstColour(m[0])).filter(Boolean);
+}
+function uiColours() {
+  const cs = getComputedStyle(document.documentElement), root = document.documentElement.style;
+  const muted = firstColour(cs.getPropertyValue('--text-muted')), accent = firstColour(cs.getPropertyValue('--accent-color'));
+  const button = firstColour(cs.getPropertyValue('--button-color')), label = firstColour(cs.getPropertyValue('--button-text'));
+  for (const v of ['--pk-text', '--pk-muted', '--pk-on-accent', '--pk-button-text']) root.removeProperty(v);
+  const text = firstColour(cs.getPropertyValue('--text'));
+  // Every colour stop of every surface: a gradient's text crosses all of
+  // them. When no colour reaches the target on all (two-stop gradients
+  // from mid to dark, e.g. Aquamarine), the theme's own colour is kept --
+  // its readable copy is the fix for that.
+  const surfaces = ['--main-bg-color', '--modal-bg-color', '--modal-header-color']
+    .flatMap(v => allColours(cs.getPropertyValue(v)));
+  if (text && surfaces.length) {
+    const fixed = fixLab(text, surfaces, 4.55);
+    if (fixed && fixed !== text) root.setProperty('--pk-text', fixed);
+  }
+  if (button && label && hexCon(label, button) < 4.5) {
+    const fixed = fixLab(label, [button], 4.55);
+    root.setProperty('--pk-button-text', fixed || (hexCon(button, '#ffffff') >= hexCon(button, '#11141b') ? '#ffffff' : '#11141b'));
+  }
+  if (muted && surfaces.length) {
+    const fixed = fixLab(muted, surfaces, 4.55);
+    if (fixed && fixed !== muted) root.setProperty('--pk-muted', fixed);
+  }
+  if (accent) root.setProperty('--pk-on-accent', hexCon(accent, '#ffffff') >= hexCon(accent, '#11141b') ? '#ffffff' : '#11141b');
+}
+{
+  const link = $('#theme-css');
+  if (link) link.addEventListener('load', uiColours);
+  uiColours();
 }

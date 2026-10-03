@@ -63,6 +63,7 @@ class SandboxCase(unittest.TestCase):
             (editor, "QUEUE_DIR", d / "editor-queue"), (editor, "EDITOR_STATUS", d / "editor-status.json"),
             (schedule, "SCHEDULE_FILE", d / "theme-schedule.json"),
             (themes, "_MANIFEST", {}), (themes, "_CSS_CACHE", {}), (themes, "_PALETTE_CACHE", {}),
+            (themes, "_MTIMES", {}), (themes, "SIG_TTL", 0), (shots, "_INDEX", {}),
             (metrics, "_METRICS_CACHE", {}),
             (deploy, "MANIFEST_FILE", d / "custom-deployed.json"), (deploy, "LAST", {}),
         ]:

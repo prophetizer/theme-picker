@@ -7,6 +7,7 @@ filtered through SAFE_NAME, so only plain theme names can ever get through.
 """
 
 import json
+import os
 import re
 import threading
 import time
@@ -251,15 +252,45 @@ def theme_css_url(theme):
     return f"{base}/css/{folder}/{theme}.css"
 
 
+# One scan of the custom themes directory serves every css_signature() for
+# up to SIG_TTL seconds, and a new scan happens at once when the directory
+# itself changes (a file added, removed or atomically replaced). A page
+# render asked for ~7,000 signatures, each a stat(): 0.6 s of a 0.75 s render.
+SIG_TTL = 2.0
+_MTIMES = {}
+
+
+def _custom_mtimes():
+    d = CUSTOM_THEMES_DIR
+    try:
+        dir_mtime = d.stat().st_mtime_ns
+    except OSError:
+        return {}
+    now = time.monotonic()
+    hit = _MTIMES.get(str(d))
+    if hit and hit[0] == dir_mtime and now - hit[1] < SIG_TTL:
+        return hit[2]
+    mt = {}
+    with os.scandir(d) as it:
+        for entry in it:
+            if entry.name.endswith(".css"):
+                try:
+                    mt[entry.name[:-4]] = entry.stat().st_mtime_ns
+                except OSError:
+                    pass
+    _MTIMES[str(d)] = (dir_mtime, now, mt)
+    return mt
+
+
 def css_signature(theme):
     """What a theme's stylesheet -- and so everything derived from it -- depends
     on: a custom theme's file modification time (sync-themes.sh pulls a new
     version into themes-src/), or a theme-park theme's URL, whose ?sha= changes
     with the file's contents."""
-    try:
-        return ("file", (CUSTOM_THEMES_DIR / f"{theme}.css").stat().st_mtime_ns)
-    except OSError:
-        return ("url", theme_css_url(theme))
+    mtime = _custom_mtimes().get(theme)
+    if mtime is not None:
+        return ("file", mtime)
+    return ("url", theme_css_url(theme))
 
 
 def cached(cache, theme, compute):

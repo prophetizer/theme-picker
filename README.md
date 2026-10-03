@@ -174,18 +174,32 @@ role brought to 7:1 (body) or 4.5:1, moving only lightness (and darkening the
 page where no text colour could otherwise reach it).
 
 *Save & deploy* adds it to your custom themes and deploys it to theme.park. See
-[DEPLOY.md](DEPLOY.md#custom-themes).
+[DEPLOY.md](DEPLOY.md#custom-themes). **Copy share link** puts the colours in a
+link (in the part after `#`, which is never sent to a server); whoever opens
+it gets them in their own picker's editor, unsaved.
 
 ![The theme editor with colour fields, a live preview and contrast ratios](docs/screenshots/editor.png)
 
 ### Stats
 
 Which themes spent the most time on screen and which were applied most,
-counted from changes made in the picker.
+counted from changes made in the picker, and your liked and disliked themes
+with how the random picks used them.
 
 ![Usage stats: most time on screen and most applied, over three weeks](docs/screenshots/stats.png)
 
 *Sample three-week history.*
+
+## Accessibility
+
+The picker wears whichever theme is live, and some themes' own colours are
+too faint for small text. So the picker checks the live theme's text, muted
+text and button labels and, where one falls under 4.5:1, moves only its
+lightness until it reads, for the picker's own interface. (The apps keep the
+theme exactly as it is; a theme's *Make a readable copy* is the fix there.)
+Every control has a name for screen readers, and everything works from the
+keyboard: `/` to search, arrow keys between themes, `P` for a preview,
+`Escape` to close it.
 
 ## Install it as an app
 

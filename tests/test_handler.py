@@ -375,7 +375,7 @@ class Template(unittest.TestCase):
                                   "grid_custom_gradient", "grid_custom_editor", "ed_twin_note", "live_swatch", "msg_hidden",
                                   "msg_text", "apps", "stats", "base_opts", "script_v", "undo",
                                   "schedule", "preview_banner", "early_v", "groups",
-                                  "theme_colour", "touch_v"})
+                                  "theme_colour", "touch_v", "theme_opts"})
 
 
 if __name__ == "__main__":

@@ -197,17 +197,16 @@ def groups_html():
     pin its apps share, or "mixed"."""
     e = lambda s: html.escape(str(s), quote=True)
     groups, pins, apps = state.read_groups(), state.read_overrides(), [a["name"] for a in state.load_apps()]
-    names = sorted(themes.allowed_themes())
     rows = []
     for g, members in sorted(groups.items()):
         shared = {pins.get(a, "") for a in members}
         cur = shared.pop() if len(shared) == 1 else None
         opts = ('<option value="" disabled selected>mixed pins</option>' if cur is None else "") + \
             f'<option value=""{" selected" if cur == "" else ""}>follow the live theme</option>' + \
-            "".join(f'<option value="{e(t)}"{" selected" if t == cur else ""}>{e(t)}</option>' for t in names)
+            current_opt(cur or "")
         rows.append(f'<div class="group" data-group="{e(g)}" data-apps="{e(" ".join(members))}"><b>{e(g)}</b>'
                     f'<span class="count">{e(", ".join(members))}</span>'
-                    f'<select class="group-pin" data-group="{e(g)}" aria-label="Theme for the {e(g)} group">{opts}</select>'
+                    f'<select class="group-pin" data-themes data-group="{e(g)}" aria-label="Theme for the {e(g)} group">{opts}</select>'
                     f'<button type="button" class="group-edit" data-group="{e(g)}">Edit</button>'
                     f'<button type="button" class="group-del" data-group="{e(g)}">Delete</button></div>')
     boxes = "".join(f'<label><input type="checkbox" class="grp-app" value="{e(a)}"> {e(a)}</label>' for a in apps)
@@ -222,11 +221,30 @@ def groups_html():
             f'</details>')
 
 
+def theme_label(t):
+    mode = theme_metrics(t)["mode"]
+    return f'{t}{" · " + mode if mode else ""}'
+
+
+def current_opt(t):
+    """The one theme option a select is sent with: its current value. The
+    rest come from the page's <template id="theme-opts"> when the select is
+    first used (app.js fillThemes) -- 29 selects each listing every theme
+    were half of the page (15,000 options, 850 KB)."""
+    if not t or t not in themes.allowed_themes():
+        return ""
+    return f'<option value="{html.escape(t, quote=True)}" selected>{html.escape(theme_label(t))}</option>'
+
+
+def theme_opts_template():
+    return ('<template id="theme-opts">' + "".join(
+        f'<option value="{html.escape(t, quote=True)}">{html.escape(theme_label(t))}</option>'
+        for t in sorted(themes.allowed_themes())) + '</template>')
+
+
 def apps_html(active):
     """One card per themed app: where it is, a pin control, and what it is served."""
     pinned = state.read_overrides()
-    opts = "".join(f'<option value="{html.escape(t)}">{html.escape(t)}</option>'
-                   for t in sorted(themes.allowed_themes()))
     cards = []
     for a in state.load_apps():
         n = html.escape(a["name"])
@@ -235,8 +253,8 @@ def apps_html(active):
             f'<div class="app-card" data-app="{n}">'
             f'<a href="{html.escape(config.app_url(a))}" '
             f'target="_blank" rel="noopener">{n}</a>'
-            f'<select class="pin" data-app="{n}" data-current="{html.escape(cur)}" aria-label="Theme for {n}">'
-            f'<option value="">follows the live theme</option>{opts}</select>'
+            f'<select class="pin" data-themes data-app="{n}" data-current="{html.escape(cur)}" aria-label="Theme for {n}">'
+            f'<option value="">follows the live theme</option>{current_opt(cur)}</select>'
             f'<span class="cov" data-app="{n}"><span class="none">not checked</span></span></div>')
     return "".join(cards)
 
@@ -265,20 +283,16 @@ def schedule_html():
     e = lambda s: html.escape(str(s), quote=True)
 
     def opts(sel):
-        out = ['<option value="">choose a theme...</option>']
-        for t in sorted(themes.allowed_themes()):
-            mode = theme_metrics(t)["mode"]
-            out.append(f'<option value="{e(t)}"{" selected" if t == sel else ""}>'
-                       f'{e(t)}{" · " + mode if mode else ""}</option>')
+        out = ['<option value="">choose a theme...</option>', current_opt(sel)]
         return "".join(out)
     return (
         f'<div class="sched" id="schedule-panel"><h2 class="tab-title">Day/night schedule '
         f'<span id="sch-state" class="count">{e(schedule_summary(st))}</span></h2>'
         f'<div class="ed-row"><label><input type="checkbox" id="sch-enabled"'
         f'{" checked" if st["enabled"] else ""}> Switch themes by time of day</label></div>'
-        f'<div class="ed-row"><label>Day <select id="sch-day">{opts(st["day"])}</select></label>'
+        f'<div class="ed-row"><label>Day <select id="sch-day" data-themes>{opts(st["day"])}</select></label>'
         f'<label>from <input type="time" id="sch-day-at" value="{e(st["day_at"])}"></label></div>'
-        f'<div class="ed-row"><label>Night <select id="sch-night">{opts(st["night"])}</select></label>'
+        f'<div class="ed-row"><label>Night <select id="sch-night" data-themes>{opts(st["night"])}</select></label>'
         f'<label>from <input type="time" id="sch-night-at" value="{e(st["night_at"])}"></label></div>'
         f'<div class="ed-row"><label><input type="checkbox" id="sch-sun"{" checked" if st["sun"] else ""}> '
         f'Follow sunrise and sunset instead</label>'
@@ -327,7 +341,7 @@ def schedule_html():
             f'<button type="button" data-move="down" aria-label="Move {e(t)} down">&darr;</button>'
             f'<button type="button" data-move="del" aria-label="Remove {e(t)}">&times;</button></li>'
             for t in st["rotate_list"]) + '</ol>'
-        f'<div class="ed-row"><select id="rotate-add">{opts("")}</select>'
+        f'<div class="ed-row"><select id="rotate-add" data-themes>{opts("")}</select>'
         f'<button type="button" id="rotate-add-btn">Add to the list</button></div>'
         f'<p class="count">Applied top to bottom, then from the top again. E.g. seven themes every 24 hours '
         f'is one theme per weekday.</p></div>'
@@ -375,14 +389,36 @@ def _dur(sec):
 def stats_html():
     st = state.usage_stats()
     if not st:
-        return "<p class='none'>No history yet -- apply a theme from here and it starts counting.</p>"
+        return "<p class='none'>No history yet -- apply a theme from here and it starts counting.</p>" + ratings_html()
     e = html.escape
     rows_t = "".join(f"<li><b>{e(t)}</b> <span>{_dur(s)}</span></li>" for t, s in st["by_time"])
     rows_c = "".join(f"<li><b>{e(t)}</b> <span>{c}&times;</span></li>" for t, c in st["by_count"])
     return (f"<p class='count'>{st['changes']} changes across {st['distinct']} themes since "
             f"{e(st['since'])}. Only changes made in the picker are counted.</p>"
-            f"<div class='stats'><div><h4>Most time on screen</h4><ol>{rows_t}</ol></div>"
-            f"<div><h4>Most applied</h4><ol>{rows_c}</ol></div></div>")
+            f"<div class='stats'><div><h3>Most time on screen</h3><ol>{rows_t}</ol></div>"
+            f"<div><h3>Most applied</h3><ol>{rows_c}</ol></div></div>" + ratings_html())
+
+
+def ratings_html():
+    """Liked and disliked themes, and how the random picks used them."""
+    rs = state.rating_stats()
+    if not rs:
+        return ("<h3 class='tab-sub'>Ratings</h3><p class='count'>No ratings yet: like or dislike a theme in "
+                "its preview, and random picks favour or skip it.</p>")
+    e = html.escape
+    row = lambda t, n, s: f"<li><b>{e(t)}</b> <span>{n}&times; · {_dur(s) if s else 'never on'}</span></li>"
+    p = rs["picks"]
+    total = sum(p.values())
+    picks = (f"Of {total} random pick{'s' if total != 1 else ''} (theme of the day, rotation), "
+             f"{p.get('liked', 0)} were liked themes and {p.get('unrated', 0)} unrated"
+             + (f"; {p['disliked']} were made before their theme was disliked." if p.get("disliked") else ".")
+             if total else "No random picks yet (theme of the day, rotation).")
+    return (f"<h3 class='tab-sub'>Ratings</h3><p class='count'>{e(picks)} Liked themes come up three "
+            f"times as often; disliked ones never.</p>"
+            f"<div class='stats'><div><h3>&#128077; Liked ({len(rs['liked'])})</h3><ol>"
+            + "".join(row(*r) for r in rs["liked"]) + "</ol></div>"
+            f"<div><h3>&#128078; Disliked ({len(rs['disliked'])})</h3><ol>"
+            + "".join(row(*r) for r in rs["disliked"]) + "</ol></div></div>")
 
 
 def theme_colour(theme):
@@ -396,7 +432,6 @@ def manifest(base="/"):
     """The web app manifest: the picker installs as an app on phones and
     desktops. Colours follow the live theme. `base`: where the picker is
     served ("/" live; "./" in the static demo)."""
-    import json
     bg = theme_colour(themes.current_theme())
     icon = lambda name, size, purpose="any": {"src": f"{base}static/{name}?v={VERSION[name]}", "sizes": size,
                                               "type": "image/png", "purpose": purpose}
@@ -439,8 +474,7 @@ def render_page(message="", preview=""):
     pairs = themes.variant_pairs()
     grid = lambda names, sect: theme_grid(names, sect, active, shot_idx, dates, today, favs, pairs, hidden, ratings)
     app_opts = "".join(f'<option value="{a}">{a} screenshots</option>' for a in shots.screenshot_apps())
-    base_opts = "".join(f'<option value="{html.escape(t)}"{" selected" if t == active else ""}>'
-                        f'{html.escape(t)}</option>' for t in sorted(themes.allowed_themes()))
+    base_opts = current_opt(active)
     fams = "".join(
         f'<button type="button" class="fam" data-family="{n}" title="{n} accents">'
         f'<i style="background:{c}"></i>{n}</button>' for n, c in FAMILIES)
@@ -456,5 +490,5 @@ def render_page(message="", preview=""):
         live_swatch=swatch_html(active),
         msg_hidden=msg_hidden, msg_text=msg_text, preview_banner=preview_banner,
         early_v=VERSION["early.js"], apps=apps_html(active), groups=groups_html(),
-        stats=stats_html(), schedule=schedule_html(), base_opts=base_opts,
+        stats=stats_html(), schedule=schedule_html(), base_opts=base_opts, theme_opts=theme_opts_template(),
         script_v=VERSION["app.js"])

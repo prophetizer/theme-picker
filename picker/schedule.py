@@ -291,13 +291,13 @@ def save_rotate(data, now=None, rng=random):
     if mode not in MODES:
         return False, "Order is random or my list."
     raw = data.get("list") if isinstance(data.get("list"), list) else []
+    if len(raw) > 200:
+        return False, "A playlist holds up to 200 themes."
     allowed = set(themes.allowed_themes())
     playlist = []
     for t in raw:
         if isinstance(t, str) and t in allowed and t not in playlist:
             playlist.append(t)
-    if len(raw) > 200:
-        return False, "A playlist holds up to 200 themes."
     if mode == "list" and len(playlist) < 2:
         return False, "Add at least two themes to the list."
     try:

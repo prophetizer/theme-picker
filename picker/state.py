@@ -51,9 +51,10 @@ def read_json(path, default):
 
 
 def write_json(path, data):
-    tmp = Path(path).with_suffix(".tmp")
-    tmp.write_text(json.dumps(data, indent=1, sort_keys=True) + "\n")
-    tmp.replace(path)
+    """Through backend._atomic_write: a fresh temp file (never a fixed,
+    followable name), its mode set (0664: the renderer and the host's jobs,
+    other users, read these), then os.replace."""
+    backend._atomic_write(path, json.dumps(data, indent=1, sort_keys=True) + "\n")
 
 
 def theme_dates():
@@ -77,9 +78,7 @@ def record_history(theme, by):
         hist = read_history()
         hist.append({"theme": theme, "at": datetime.now().astimezone().isoformat(timespec="seconds"),
                      "by": by})
-        tmp = HISTORY_FILE.with_suffix(".tmp")
-        tmp.write_text(json.dumps(hist[-HISTORY_KEEP:], indent=1) + "\n")
-        tmp.replace(HISTORY_FILE)
+        backend._atomic_write(HISTORY_FILE, json.dumps(hist[-HISTORY_KEEP:], indent=1) + "\n")
 
 
 def recent_themes(active):
@@ -292,4 +291,24 @@ def usage_stats():
         secs[t] += max(0.0, (end - start).total_seconds())
     return {"since": hist[0][1].strftime("%Y-%m-%d %H:%M"), "changes": len(hist),
             "distinct": len(applies), "by_time": secs.most_common(10),
-            "by_count": applies.most_common(10)}
+            "by_count": applies.most_common(10), "applies": applies, "secs": secs}
+
+
+RANDOM_PICKS = ("schedule (theme of the day)", "schedule (rotation)")
+
+
+def rating_stats():
+    """Liked and disliked themes with how often each was applied, and how the
+    random picks (theme of the day, rotation) split between liked and
+    unrated themes since ratings exist."""
+    ratings = read_ratings()
+    if not ratings:
+        return None
+    use = usage_stats() or {"applies": Counter(), "secs": Counter()}
+    rows = lambda r: sorted(((t, use["applies"].get(t, 0), use["secs"].get(t, 0.0))
+                             for t, v in ratings.items() if v == r), key=lambda x: (-x[1], x[0]))
+    picks = Counter()
+    for e in read_history():
+        if e.get("by") in RANDOM_PICKS and isinstance(e.get("theme"), str):
+            picks[{1: "liked", -1: "disliked"}.get(ratings.get(e["theme"]), "unrated")] += 1
+    return {"liked": rows(1), "disliked": rows(-1), "picks": dict(picks)}
