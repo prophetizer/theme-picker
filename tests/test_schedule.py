@@ -151,6 +151,10 @@ class FirstPick:
     def choice(seq):
         return seq[0]
 
+    @staticmethod
+    def choices(seq, weights=None):
+        return [seq[0]]
+
 
 class ThemeOfTheDay(ScheduleCase):
     def setUp(self):

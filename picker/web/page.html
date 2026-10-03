@@ -7,6 +7,11 @@
 {theme_link}
 <script src="/static/early.js?v={early_v}"></script>
 <link rel="icon" type="image/svg+xml" href="/static/icon.svg?v={icon_v}">
+<link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials">
+<link rel="apple-touch-icon" href="/static/apple-touch-icon.png?v={touch_v}">
+<meta name="theme-color" content="{theme_colour}">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Themes">
 <link rel="stylesheet" href="/static/style.css?v={style_v}">
 </head>
 <body>
@@ -91,6 +96,7 @@
     <p class="count">Every themed app, the theme it should get, and whether it actually does. Pin an app to keep it on one theme.</p>
     <button type="button" id="cov-run">Check now</button></div>
   <p class="coverage" id="cov-summary">Checking which apps received the theme...</p>
+  {groups}
   <p class="apps-toggle" id="apps-toggle-row" hidden><button type="button" id="apps-toggle" aria-controls="app-grid" aria-expanded="false"></button></p>
   <div class="app-grid" id="app-grid">{apps}</div>
 </section>
@@ -157,6 +163,8 @@
         <button type="button" id="lb-apply">Apply this theme</button>
         <button type="button" id="lb-share" title="Copy a link that shows the picker in this theme without applying it">Copy link</button>
         <button type="button" id="lb-hide" title="Leave this theme out of the grid, Surprise me and the theme of the day (H)">Hide</button>
+        <button type="button" id="lb-like" class="rate" aria-pressed="false" title="Like: Surprise me, the theme of the day and rotation pick it three times as often">&#128077;</button>
+        <button type="button" id="lb-dislike" class="rate" aria-pressed="false" title="Dislike: random picks never choose it (it stays in the grid)">&#128078;</button>
         <button type="button" id="lb-edit" title="Open this theme's colours in the editor, to save under a new name">Edit a copy</button>
         <button type="button" id="lb-readable" title="Open a copy in the editor with every text role made readable (lightness only)" hidden>Make a readable copy</button>
         <select id="lb-export" title="Download this theme for another app">

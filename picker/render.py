@@ -1,6 +1,7 @@
 """The picker page: theme tiles, panels, and the template they fill."""
 
 import hashlib
+import json
 import html
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime
@@ -31,10 +32,13 @@ NEW_DAYS = 14
 # file's contents, so browsers may cache them and still never run a stale one.
 WEB_DIR = Path(__file__).resolve().parent / "web"
 PAGE_TEMPLATE = (WEB_DIR / "page.html").read_text()
-STATIC = {name: (WEB_DIR / name).read_bytes() for name in ("style.css", "app.js", "early.js", "icon.svg")}
+STATIC = {name: (WEB_DIR / name).read_bytes()
+          for name in ("style.css", "app.js", "early.js", "icon.svg",
+                       "icon-192.png", "icon-512.png", "icon-maskable-512.png", "apple-touch-icon.png")}
 STATIC_TYPES = {"style.css": "text/css; charset=utf-8", "app.js": "text/javascript; charset=utf-8",
                 "early.js": "text/javascript; charset=utf-8",
-                "icon.svg": "image/svg+xml"}
+                "icon.svg": "image/svg+xml", "icon-192.png": "image/png", "icon-512.png": "image/png",
+                "icon-maskable-512.png": "image/png", "apple-touch-icon.png": "image/png"}
 VERSION = {name: hashlib.sha256(data).hexdigest()[:12] for name, data in STATIC.items()}
 
 
@@ -73,7 +77,8 @@ def added_day(added):
     return added[:10]
 
 
-def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin="", twin_of="", hidden=frozenset()):
+def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin="", twin_of="", hidden=frozenset(),
+              ratings=None):
     """One theme tile. A theme with a light/dark twin carries data-twin; the
     twin itself data-twin-of, and sits right after it in the same section.
     The page shows one form of each pair at a time (the sun/moon switch, or
@@ -134,6 +139,7 @@ def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin
         f'data-contrast="{"low" if warn else "ok"}" data-warn="{e(warn)}" '
         f'data-hc="{int(m["high_contrast"])}" '
         f'data-shots="{e(" ".join(apps))}" data-fav="{int(fav)}" data-hidden="{int(t in hidden)}" '
+        f'data-rating="{(ratings or {}).get(t, 0)}" '
         f'data-colors="{e(swatch_colours(t))}"{pair_attrs}>'
         f'<span class="tile-top"><span class="name" title="{e(t)}">{e(t)}</span>{star}</span>'
         f'{swatch_html(t)}'
@@ -141,7 +147,8 @@ def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin
     )
 
 
-def theme_grid(names, section, active, shot_idx, dates, today, favs=frozenset(), pairs=None, hidden=frozenset()):
+def theme_grid(names, section, active, shot_idx, dates, today, favs=frozenset(), pairs=None, hidden=frozenset(),
+               ratings=None):
     """Tiles for a section; with `pairs`, each theme's twin follows it (and a
     twin in `names` is skipped where it stands)."""
     pairs = pairs or {}
@@ -157,7 +164,8 @@ def theme_grid(names, section, active, shot_idx, dates, today, favs=frozenset(),
     themes.warm_palette_cache(every)
     with ThreadPoolExecutor(max_workers=8) as ex:     # metrics read the same cache
         list(ex.map(theme_metrics, every))
-    return "\n".join(tile_html(t, section, active, shot_idx, dates, today, favs, twin=tw, twin_of=of, hidden=hidden)
+    return "\n".join(tile_html(t, section, active, shot_idx, dates, today, favs, twin=tw, twin_of=of, hidden=hidden,
+                               ratings=ratings)
                      for t, tw, of in entries)
 
 
@@ -182,6 +190,36 @@ def custom_groups(pairs):
         else:
             out["custom-dark"].append(t)
     return out
+
+
+def groups_html():
+    """App groups: pin several apps at once. Each group's select shows the
+    pin its apps share, or "mixed"."""
+    e = lambda s: html.escape(str(s), quote=True)
+    groups, pins, apps = state.read_groups(), state.read_overrides(), [a["name"] for a in state.load_apps()]
+    names = sorted(themes.allowed_themes())
+    rows = []
+    for g, members in sorted(groups.items()):
+        shared = {pins.get(a, "") for a in members}
+        cur = shared.pop() if len(shared) == 1 else None
+        opts = ('<option value="" disabled selected>mixed pins</option>' if cur is None else "") + \
+            f'<option value=""{" selected" if cur == "" else ""}>follow the live theme</option>' + \
+            "".join(f'<option value="{e(t)}"{" selected" if t == cur else ""}>{e(t)}</option>' for t in names)
+        rows.append(f'<div class="group" data-group="{e(g)}" data-apps="{e(" ".join(members))}"><b>{e(g)}</b>'
+                    f'<span class="count">{e(", ".join(members))}</span>'
+                    f'<select class="group-pin" data-group="{e(g)}" aria-label="Theme for the {e(g)} group">{opts}</select>'
+                    f'<button type="button" class="group-edit" data-group="{e(g)}">Edit</button>'
+                    f'<button type="button" class="group-del" data-group="{e(g)}">Delete</button></div>')
+    boxes = "".join(f'<label><input type="checkbox" class="grp-app" value="{e(a)}"> {e(a)}</label>' for a in apps)
+    return (f'<details class="groups-box" id="groups"{" open" if groups else ""}><summary>App groups '
+            f'<span class="count">({len(groups)})</span></summary>'
+            f'<p class="count">Pin several apps to one theme at once, e.g. every *arr app. A group only '
+            f'sets its apps\' pins; each app can still be changed on its own below.</p>'
+            + "".join(rows) +
+            f'<div class="group-form"><input type="text" id="grp-name" maxlength="40" placeholder="Group name">'
+            f'<div class="grp-apps">{boxes}</div>'
+            f'<button type="button" id="grp-save">Save group</button><span id="grp-status" class="count"></span></div>'
+            f'</details>')
 
 
 def apps_html(active):
@@ -277,7 +315,22 @@ def schedule_html():
         f'<label><input type="number" id="rotate-every" min="1" max="168" step="1" value="{e(st["rotate_every"])}"> hours</label>'
         f'<label>from <select id="rotate-pool">'
         f'<option value="favourites"{" selected" if st["rotate_pool"] == "favourites" else ""}>my favourites</option>'
-        f'<option value="all"{" selected" if st["rotate_pool"] == "all" else ""}>all themes</option></select></label></div>'
+        f'<option value="all"{" selected" if st["rotate_pool"] == "all" else ""}>all themes</option></select></label>'
+        f'<label>order <select id="rotate-mode">'
+        f'<option value="random"{" selected" if st["rotate_mode"] == "random" else ""}>random</option>'
+        f'<option value="list"{" selected" if st["rotate_mode"] == "list" else ""}>my list, in order</option>'
+        f'</select></label></div>'
+        f'<div class="rotate-list-box" id="rotate-list-box"{" hidden" if st["rotate_mode"] != "list" else ""}>'
+        f'<ol id="rotate-list">' + "".join(
+            f'<li data-theme="{e(t)}"><span>{e(t)}</span>'
+            f'<button type="button" data-move="up" aria-label="Move {e(t)} up">&uarr;</button>'
+            f'<button type="button" data-move="down" aria-label="Move {e(t)} down">&darr;</button>'
+            f'<button type="button" data-move="del" aria-label="Remove {e(t)}">&times;</button></li>'
+            for t in st["rotate_list"]) + '</ol>'
+        f'<div class="ed-row"><select id="rotate-add">{opts("")}</select>'
+        f'<button type="button" id="rotate-add-btn">Add to the list</button></div>'
+        f'<p class="count">Applied top to bottom, then from the top again. E.g. seven themes every 24 hours '
+        f'is one theme per weekday.</p></div>'
         f'<div class="ed-row"><button type="button" id="rotate-save">Save</button>'
         f'<span id="rotate-status" class="count"></span></div>'
         f'<p class="count">A random pick each time, never a hidden theme or the one already live. '
@@ -287,7 +340,8 @@ def schedule_html():
 def rotate_summary(st):
     if not st["rotate_enabled"]:
         return "off"
-    pool = "favourites" if st["rotate_pool"] == "favourites" else "all themes"
+    pool = ("your list" if st.get("rotate_mode") == "list" else
+            "favourites" if st["rotate_pool"] == "favourites" else "all themes")
     every = st["rotate_every"]
     return (f"on · every {every} hour{'s' if every != 1 else ''} from {pool} ({st.get('rotate_pool_size', 0)})"
             + (f" · next {st['rotate_next']}" if st.get("rotate_next") else ""))
@@ -331,6 +385,31 @@ def stats_html():
             f"<div><h4>Most applied</h4><ol>{rows_c}</ol></div></div>")
 
 
+def theme_colour(theme):
+    """The theme's page colour as #rrggbb (a gradient's first stop), for the
+    browser's toolbar and the installed app's splash screen."""
+    st = colour.stops(themes.theme_palette(theme).get("--main-bg-color", ""))
+    return colour.to_hex(st[0]) if st else "#11141b"
+
+
+def manifest(base="/"):
+    """The web app manifest: the picker installs as an app on phones and
+    desktops. Colours follow the live theme. `base`: where the picker is
+    served ("/" live; "./" in the static demo)."""
+    import json
+    bg = theme_colour(themes.current_theme())
+    icon = lambda name, size, purpose="any": {"src": f"{base}static/{name}?v={VERSION[name]}", "sizes": size,
+                                              "type": "image/png", "purpose": purpose}
+    return json.dumps({
+        "name": "Theme Picker", "short_name": "Themes",
+        "description": "Switch the theme.park theme of every app at once.",
+        "start_url": f"{base}#themes", "scope": base, "display": "standalone",
+        "background_color": bg, "theme_color": bg,
+        "icons": [icon("icon-192.png", "192x192"), icon("icon-512.png", "512x512"),
+                  icon("icon-maskable-512.png", "512x512", "maskable")],
+    }, indent=1)
+
+
 def render_page(message="", preview=""):
     """preview: a theme to dress the page in WITHOUT applying it (/?preview=,
     the shareable link). Ignored unless it exactly matches a known theme."""
@@ -356,8 +435,9 @@ def render_page(message="", preview=""):
     shot_idx, dates, today = shots.screenshot_index(), state.theme_dates(), date.today()
     favs = frozenset(state.read_favourites())
     hidden = frozenset(state.read_hidden())
+    ratings = state.read_ratings()
     pairs = themes.variant_pairs()
-    grid = lambda names, sect: theme_grid(names, sect, active, shot_idx, dates, today, favs, pairs, hidden)
+    grid = lambda names, sect: theme_grid(names, sect, active, shot_idx, dates, today, favs, pairs, hidden, ratings)
     app_opts = "".join(f'<option value="{a}">{a} screenshots</option>' for a in shots.screenshot_apps())
     base_opts = "".join(f'<option value="{html.escape(t)}"{" selected" if t == active else ""}>'
                         f'{html.escape(t)}</option>' for t in sorted(themes.allowed_themes()))
@@ -366,6 +446,7 @@ def render_page(message="", preview=""):
         f'<i style="background:{c}"></i>{n}</button>' for n, c in FAMILIES)
     return PAGE_TEMPLATE.format(
         theme_link=theme_link, style_v=VERSION["style.css"], icon_v=VERSION["icon.svg"], active=html.escape(active),
+        theme_colour=theme_colour(preview or active), touch_v=VERSION["apple-touch-icon.png"],
         history=history_html(active), undo=undo_html(active), app_opts=app_opts, fams=fams,
         grid_official=grid(themes.official_themes(), "official"),
         grid_community=grid(themes.community_themes(), "community"),
@@ -374,6 +455,6 @@ def render_page(message="", preview=""):
                       '<span class="count" id="ed-twin-note">A light/dark twin of it is made automatically.</span>'),
         live_swatch=swatch_html(active),
         msg_hidden=msg_hidden, msg_text=msg_text, preview_banner=preview_banner,
-        early_v=VERSION["early.js"], apps=apps_html(active),
+        early_v=VERSION["early.js"], apps=apps_html(active), groups=groups_html(),
         stats=stats_html(), schedule=schedule_html(), base_opts=base_opts,
         script_v=VERSION["app.js"])

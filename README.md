@@ -55,8 +55,10 @@ in [`picker.example.yml`](picker.example.yml).
   that look like it, a colour-vision check, and export to base16 and
   terminal formats
 - Recent-theme history chips and usage stats
-- Per-app theme pins, with a coverage check that every app actually received
-  the theme it should
+- Per-app theme pins, and app groups to pin several at once, with a coverage
+  check that every app actually received the theme it should
+- Like or dislike themes: every random pick favours the liked and skips the
+  disliked
 - In-browser theme editor with live preview and contrast readout; saved themes
   are committed and deployed automatically
 - ntfy notifications (debounced) and a JSON endpoint for dashboard widgets
@@ -65,7 +67,8 @@ in [`picker.example.yml`](picker.example.yml).
 - Start a theme from any image (colours extracted in the browser)
 - A token-protected hook so Home Assistant or any automation can set the theme
 - Schedules: day/night by the clock or by sunrise and sunset, a theme of the
-  day, or a rotation every few hours
+  day, or a rotation every few hours, random or through your own ordered list
+- Installs as an app on phones and desktops (web app manifest)
 - Undo, side-by-side screenshot compare
 
 ## A tour of the tabs
@@ -118,6 +121,9 @@ The ▣ on any tile (or **P**) opens a theme's preview:
   text, or buttons into links or panels
 - **export as** theme.park CSS, base16 YAML, or a Ghostty, Kitty, Alacritty,
   Windows Terminal or Xresources scheme, to take the theme to your terminal
+- **👍 / 👎**: a liked theme comes up three times as often in Surprise me,
+  the theme of the day and rotation; a disliked one never does (it stays in
+  the grid, dimmed)
 - **Edit a copy**, **Hide**, and a link that shows the picker in that theme
 
 ![A theme's preview in deuteranopia: each colour as designed and as seen](docs/screenshots/preview.png)
@@ -131,7 +137,8 @@ stylesheet was injected, so a router that lost its middleware shows up as
 app to keep it on one theme whatever the live theme is. Apps that are fine
 and follow the live theme fold behind one button, so pinned and failing ones
 stand out; here the list is unfolded, Prowlarr is pinned to Nord and Grafana
-is missing its theme.
+is missing its theme. **App groups** pin several apps at once: name a group
+(say, every *arr app) and give it a theme.
 
 ![Apps and coverage: six apps, five themed, one pinned, one missing its theme](docs/screenshots/apps.png)
 
@@ -145,8 +152,10 @@ nothing looked up online), each moved by an offset if you like. A theme picked
 by hand holds until the next switch, then the schedule takes over again.
 
 Or a **theme of the day**: a random pick every morning. Or a **rotation**: a
-new random theme every few hours. Both pick from your favourites or from
-every theme, never a hidden one. One schedule runs at a time.
+new theme every few hours, picked at random from your favourites or every
+theme, or taken **in order from your own list** (seven themes every 24 hours
+is a theme per weekday). Random picks never choose a hidden or disliked
+theme. One schedule runs at a time.
 
 ![Day/night schedule: Catppuccin Latte from 07:00, Catppuccin Mocha from 19:30](docs/screenshots/schedule.png)
 
@@ -177,6 +186,12 @@ counted from changes made in the picker.
 ![Usage stats: most time on screen and most applied, over three weeks](docs/screenshots/stats.png)
 
 *Sample three-week history.*
+
+## Install it as an app
+
+Served over HTTPS, the picker can be installed like an app: *Install* in
+Chrome or Edge's address bar, or *Add to Home Screen* on a phone. It opens in
+its own window, with the live theme's colour as its toolbar.
 
 ## License
 

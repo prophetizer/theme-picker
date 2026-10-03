@@ -44,8 +44,11 @@ DEFAULTS = {"enabled": False, "day": "", "night": "", "day_at": "07:00", "night_
             "daily_enabled": False, "daily_at": "08:00", "daily_pool": "favourites", "daily_handled": "",
             # Day/night at sunrise and sunset instead of day_at/night_at.
             "sun": False, "lat": 0.0, "lon": 0.0, "day_offset": 0, "night_offset": 0,
-            # Rotation: a random pick every rotate_every hours.
-            "rotate_enabled": False, "rotate_every": 6, "rotate_pool": "favourites", "rotate_handled": ""}
+            # Rotation: a pick every rotate_every hours -- random from the pool,
+            # or the next theme of rotate_list in order (rotate_mode "list").
+            "rotate_enabled": False, "rotate_every": 6, "rotate_pool": "favourites", "rotate_handled": "",
+            "rotate_mode": "random", "rotate_list": [], "rotate_pos": -1}
+MODES = ("random", "list")
 POOLS = ("favourites", "all")
 _LOCK = threading.Lock()
 
@@ -58,6 +61,8 @@ def read():
             v = data.get(k)
             if isinstance(DEFAULTS[k], float) and isinstance(v, int) and not isinstance(v, bool):
                 v = float(v)
+            if isinstance(v, list):
+                v = [t for t in v if isinstance(t, str) and config.SAFE_NAME.match(t)][:200]
             if v is not None and type(v) is type(DEFAULTS[k]):
                 out[k] = v
     return out
@@ -197,7 +202,8 @@ def save(data, now=None):
 
 def pool_themes(pool):
     """The themes a random pick chooses from: favourites (or every theme),
-    minus hidden ones and the live one."""
+    minus hidden ones and the live one. (state.pick() then leaves out the
+    disliked ones and favours the liked.)"""
     allowed = set(themes.allowed_themes())
     hidden = set(state.read_hidden())
     base = state.read_favourites() if pool == "favourites" else sorted(allowed)
@@ -257,10 +263,9 @@ def tick_daily(now=None, apply_fn=None, rng=random):
             handled = None
         if handled and handled >= when:
             return None
-        pool = daily_pool(sch)
+        theme = state.pick(daily_pool(sch), rng)
         result = None
-        if pool:
-            theme = rng.choice(pool)
+        if theme:
             ok, message, status = apply_fn(theme, "schedule (theme of the day)")
             result = (theme, ok, message)
             if not ok:
@@ -272,10 +277,29 @@ def tick_daily(now=None, apply_fn=None, rng=random):
         return result
 
 
+def rotate_list(sch):
+    """The playlist's themes that can still be applied (known, not hidden)."""
+    allowed, hidden = set(themes.allowed_themes()), set(state.read_hidden())
+    return [t for t in sch["rotate_list"] if t in allowed and t not in hidden]
+
+
 def save_rotate(data, now=None, rng=random):
     """Validate and store the rotation; enabling it turns the other schedules
     off and picks a theme now. Returns (ok, message)."""
     pool, on = str(data.get("pool", "")), bool(data.get("enabled"))
+    mode = str(data.get("mode") or "random")
+    if mode not in MODES:
+        return False, "Order is random or my list."
+    raw = data.get("list") if isinstance(data.get("list"), list) else []
+    allowed = set(themes.allowed_themes())
+    playlist = []
+    for t in raw:
+        if isinstance(t, str) and t in allowed and t not in playlist:
+            playlist.append(t)
+    if len(raw) > 200:
+        return False, "A playlist holds up to 200 themes."
+    if mode == "list" and len(playlist) < 2:
+        return False, "Add at least two themes to the list."
     try:
         every = int(data.get("every"))
     except (TypeError, ValueError):
@@ -286,18 +310,23 @@ def save_rotate(data, now=None, rng=random):
         return False, "Pick from favourites or all themes."
     with _LOCK:
         sch = read()
-        sch.update(rotate_enabled=on, rotate_every=every, rotate_pool=pool, rotate_handled="")
+        if playlist != sch["rotate_list"]:
+            sch["rotate_pos"] = -1                    # a new list starts from its top
+        sch.update(rotate_enabled=on, rotate_every=every, rotate_pool=pool, rotate_handled="",
+                   rotate_mode=mode, rotate_list=playlist)
         if on:
             sch["enabled"] = sch["daily_enabled"] = False       # one schedule at a time
         state.write_json(SCHEDULE_FILE, sch)
     if not on:
         return True, "Rotation off."
-    src = "your favourites" if pool == "favourites" else "all themes"
-    if not pool_themes(pool):
+    src = ("your list" if mode == "list" else
+           "your favourites" if pool == "favourites" else "all themes")
+    if mode == "random" and not pool_themes(pool):
         return True, ("Rotation on, but there is nothing to pick from yet: "
                       + ("star some favourites." if pool == "favourites" else "every theme is hidden."))
     picked = tick_rotate(now, rng=rng)
-    msg = f"Rotation on: a new theme from {src} every {every} hour{'s' if every != 1 else ''}."
+    msg = (f"Rotation on: {'the next' if mode == 'list' else 'a new'} theme from {src} "
+           f"every {every} hour{'s' if every != 1 else ''}.")
     if picked and picked[1]:
         msg += f" Now: {picked[0]}."
     return True, msg
@@ -322,10 +351,21 @@ def tick_rotate(now=None, apply_fn=None, rng=random):
         sch = read()
         if not sch["rotate_enabled"] or not rotate_due(sch, now):
             return None
-        pool = pool_themes(sch["rotate_pool"])
+        pos = sch["rotate_pos"]
+        if sch["rotate_mode"] == "list":
+            playlist = rotate_list(sch)
+            if playlist:
+                # The theme after the last one applied; by name, so editing
+                # the list doesn't jump around.
+                last = sch["rotate_list"][pos] if 0 <= pos < len(sch["rotate_list"]) else None
+                nxt = (playlist.index(last) + 1) % len(playlist) if last in playlist else 0
+                theme, pos = playlist[nxt], sch["rotate_list"].index(playlist[nxt])
+            else:
+                theme = None
+        else:
+            theme = state.pick(pool_themes(sch["rotate_pool"]), rng)
         result = None
-        if pool:
-            theme = rng.choice(pool)
+        if theme:
             ok, message, status = apply_fn(theme, "schedule (rotation)")
             result = (theme, ok, message)
             if not ok:
@@ -333,6 +373,7 @@ def tick_rotate(now=None, apply_fn=None, rng=random):
                 if status != 400:
                     return result                    # retry next tick
         sch["rotate_handled"] = now.replace(second=0, microsecond=0).isoformat()
+        sch["rotate_pos"] = pos
         state.write_json(SCHEDULE_FILE, sch)
         return result
 
@@ -374,7 +415,8 @@ def status(now=None):
     out = {k: sch[k] for k in ("enabled", "day", "night", "day_at", "night_at",
                                "daily_enabled", "daily_at", "daily_pool",
                                "sun", "lat", "lon", "day_offset", "night_offset",
-                               "rotate_enabled", "rotate_every", "rotate_pool")}
+                               "rotate_enabled", "rotate_every", "rotate_pool",
+                               "rotate_mode", "rotate_list")}
     now_ = now or datetime.now()
     if sch["sun"]:
         st = sun_times(now_.date(), sch["lat"], sch["lon"])
@@ -383,7 +425,8 @@ def status(now=None):
         else:
             out["sun_today"] = f"sunrise {_local(st[0]):%H:%M}, sunset {_local(st[1]):%H:%M} today"
     if sch["rotate_enabled"]:
-        out["rotate_pool_size"] = len(pool_themes(sch["rotate_pool"]))
+        out["rotate_pool_size"] = (len(rotate_list(sch)) if sch["rotate_mode"] == "list"
+                                   else len(pool_themes(sch["rotate_pool"])))
         try:
             last = datetime.fromisoformat(sch["rotate_handled"]) if sch["rotate_handled"] else None
         except ValueError:

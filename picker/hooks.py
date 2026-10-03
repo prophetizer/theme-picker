@@ -15,7 +15,6 @@ theme set this way holds until the schedule's next switch, like a manual pick.
 """
 
 import hmac
-import random
 import re
 from pathlib import Path
 
@@ -53,9 +52,9 @@ def set_theme(data):
     if theme == RANDOM_FAVOURITE:
         live = themes.current_theme()
         pool = [t for t in state.read_favourites() if t != live and t in themes.allowed_themes()]
-        if not pool:
+        theme = state.pick(pool)
+        if not theme:
             return False, "no favourite themes to pick from (star some in the picker)", 400, ""
-        theme = random.choice(pool)
     source = str(data.get("source", "")).strip()
     by = f"automation ({source})" if _SOURCE.match(source) else "automation"
     ok, message, status = apply.apply_theme(theme, by)

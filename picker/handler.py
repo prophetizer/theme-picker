@@ -11,7 +11,7 @@ from urllib.parse import parse_qs, urlsplit
 from . import apply, backend, config, dashboards, deploy, editor, hooks, monitor, ntfy, schedule, shots, state, themes
 from .coverage import cached_coverage
 from .prom import render_metrics
-from .render import STATIC, STATIC_TYPES, render_page
+from .render import STATIC, STATIC_TYPES, manifest, render_page
 from .summary import current_summary
 
 
@@ -233,6 +233,15 @@ class Handler(BaseHTTPRequestHandler):
             if t not in themes.allowed_themes():
                 return self._send_json({"error": "unknown theme"}, status=400)
             self._send_json(editor.theme_vars(t))
+        elif path == "/manifest.webmanifest":
+            # Fetched with the page's credentials (crossorigin="use-credentials"),
+            # so behind an auth proxy it gets through the same as the page.
+            data = manifest().encode("utf-8")
+            self.send_response(200)
+            self.send_header("Content-Type", "application/manifest+json")
+            self.send_header("Content-Length", str(len(data)))
+            self.end_headers()
+            self.wfile.write(data)
         elif path == "/api/theme-css":
             # The stylesheet itself, for the preview's "Export as theme.park
             # CSS": the page can't fetch theme.park cross-origin (CSP).
@@ -343,6 +352,25 @@ class Handler(BaseHTTPRequestHandler):
                 ok, msg = state.set_override(str(data.get("app", "")), str(data.get("theme", "")))
                 return self._send_json({"ok": ok, "message": msg, "pinned": state.read_overrides()},
                                        status=200 if ok else 400)
+            if path == "/api/rate":
+                try:
+                    rating = int(data.get("rating", 0))
+                except (TypeError, ValueError):
+                    rating = 2
+                ok = state.set_rating(str(data.get("theme", "")), rating)
+                return self._send_json({"ok": ok, "ratings": state.read_ratings()}, status=200 if ok else 400)
+            if path == "/api/group":
+                action, name = str(data.get("action", "")), str(data.get("name", ""))
+                if action == "save":
+                    ok, msg = state.save_group(name, data.get("apps"))
+                elif action == "delete":
+                    ok, msg = state.delete_group(name)
+                elif action == "pin":
+                    ok, msg = state.pin_group(name, str(data.get("theme", "")))
+                else:
+                    ok, msg = False, "action is save, delete or pin"
+                return self._send_json({"ok": ok, "message": msg, "groups": state.read_groups(),
+                                        "pins": state.read_overrides()}, status=200 if ok else 400)
             if path == "/api/hide":
                 ok = state.set_hidden(str(data.get("theme", "")), bool(data.get("on")))
                 return self._send_json({"ok": ok, "hidden": state.read_hidden()},

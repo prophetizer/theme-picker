@@ -93,6 +93,7 @@ def main():
         # Stylesheet and assets: relative, so the site works under any path.
         html = re.sub(r'(<link rel="stylesheet" id="theme-css" href=")[^"]*(")', rf'\g<1>css/{LIVE}.css\g<2>', html)
         html = html.replace('"/static/', '"static/')
+        html = html.replace('href="/manifest.webmanifest"', 'href="manifest.webmanifest"')
         html = re.sub(r'data-shots="[^"]*"', 'data-shots=""', html)          # no screenshots in the demo
         coverage = {"ok": 5, "total": 6, "checked": "", "results": [
             {"app": a, "url": f"https://{a}.example.com/", "expected": "nord" if a == "prowlarr" else LIVE,
@@ -117,6 +118,7 @@ def main():
         for name, data in render.STATIC.items():
             (out / "static" / name).write_bytes(data)
         shutil.copy(REPO / "tools" / "demo" / "demo.js", out / "demo.js")
+        (out / "manifest.webmanifest").write_text(render.manifest(base="./"))
         (out / ".nojekyll").write_text("")
         for p in out.rglob("*"):
             if p.is_file() and p.suffix in (".html", ".css", ".js", ".json") and urlhost(tp) in p.read_text():

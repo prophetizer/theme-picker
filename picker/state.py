@@ -2,6 +2,8 @@
 history, per-app pins, favourites, custom-theme dates, and the apps list."""
 
 import json
+import random
+import re
 import threading
 from collections import Counter
 from datetime import datetime, timezone
@@ -18,6 +20,14 @@ FAVS_FILE = config.STATE_DIR / "theme-favourites.json"
 # Themes the viewer never wants offered: left out of the grid (unless "Show
 # hidden" is on), Surprise me and the theme of the day.
 HIDDEN_FILE = config.STATE_DIR / "theme-hidden.json"
+# Thumbs up/down per theme: {theme: 1 | -1}. Random picks (Surprise me, theme
+# of the day, rotation, the hook's random-favourite) take a liked theme three
+# times as often and never a disliked one; the grid still shows both.
+RATINGS_FILE = config.STATE_DIR / "theme-ratings.json"
+LIKE_WEIGHT = 3
+# App groups: {group name: [app, ...]}, to pin several apps at once.
+GROUPS_FILE = config.STATE_DIR / "theme-groups.json"
+GROUP_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9 _-]{0,39}\Z")
 STATE_LOCK = threading.Lock()
 
 # When each custom theme first landed in the themes repo -- written by
@@ -119,22 +129,111 @@ def read_overrides():
 
 
 def set_override(app, theme):
-    if app not in {a["name"] for a in load_apps()}:
-        return False, f"unknown app '{app}'"
+    ok, msg = set_overrides([app], theme)
+    if not ok:
+        return ok, msg
+    return True, (f"{app} pinned to {theme}" if theme else f"{app} follows the main theme again")
+
+
+def set_overrides(apps, theme):
+    """Pin every app in `apps` to `theme` ("" = follow the live theme again),
+    in one write and one proxy update. Returns (ok, message)."""
+    known = {a["name"] for a in load_apps()}
+    unknown = [a for a in apps if a not in known]
+    if unknown or not apps:
+        return False, f"unknown app '{unknown[0]}'" if unknown else "no apps given"
     if theme and theme not in themes.allowed_themes():
         return False, f"unknown theme '{theme}'"
     with STATE_LOCK:
         cur = read_overrides()
-        if theme:
-            cur[app] = theme
-        else:
-            cur.pop(app, None)
+        for app in apps:
+            if theme:
+                cur[app] = theme
+            else:
+                cur.pop(app, None)
         write_json(OVERRIDES_FILE, cur)
         try:
             backend.get().set_pins()
         except backend.ApplyError as e:
             return False, str(e)
-    return True, (f"{app} pinned to {theme}" if theme else f"{app} follows the main theme again")
+    n = len(apps)
+    return True, (f"{n} app{'s' if n != 1 else ''} pinned to {theme}" if theme
+                  else f"{n} app{'s' if n != 1 else ''} follow the main theme again")
+
+
+# --- app groups --------------------------------------------------------------
+def read_groups():
+    """{name: [apps]}: only valid names and apps that still exist."""
+    known = {a["name"] for a in load_apps()}
+    raw = read_json(GROUPS_FILE, {})
+    if not isinstance(raw, dict):
+        return {}
+    return {n: [a for a in v if a in known] for n, v in raw.items()
+            if isinstance(n, str) and GROUP_NAME.match(n) and isinstance(v, list)}
+
+
+def save_group(name, apps):
+    name = str(name).strip()
+    if not GROUP_NAME.match(name):
+        return False, "A group name is 1-40 letters, digits, spaces, - or _."
+    known = {a["name"] for a in load_apps()}
+    apps = sorted({str(a) for a in apps if str(a) in known}) if isinstance(apps, list) else []
+    if not apps:
+        return False, "Pick at least one app for the group."
+    with STATE_LOCK:
+        groups = read_groups()
+        if name not in groups and len(groups) >= 50:
+            return False, "50 groups is the limit."
+        groups[name] = apps
+        write_json(GROUPS_FILE, groups)
+    return True, f"Group '{name}' saved: {', '.join(apps)}."
+
+
+def delete_group(name):
+    with STATE_LOCK:
+        groups = read_groups()
+        if groups.pop(str(name), None) is None:
+            return False, "No such group."
+        write_json(GROUPS_FILE, groups)
+    return True, f"Group '{name}' deleted (its apps keep their pins)."
+
+
+def pin_group(name, theme):
+    apps = read_groups().get(str(name))
+    if not apps:
+        return False, "No such group, or it has no apps left."
+    return set_overrides(apps, theme)
+
+
+# --- ratings -------------------------------------------------------------------
+def read_ratings():
+    raw = read_json(RATINGS_FILE, {})
+    if not isinstance(raw, dict):
+        return {}
+    return {t: r for t, r in raw.items() if isinstance(t, str) and SAFE_NAME.match(t) and r in (1, -1)}
+
+
+def set_rating(theme, rating):
+    if theme not in themes.allowed_themes() or rating not in (-1, 0, 1):
+        return False
+    with STATE_LOCK:
+        cur = read_ratings()
+        if rating:
+            cur[theme] = rating
+        else:
+            cur.pop(theme, None)
+        write_json(RATINGS_FILE, cur)
+    return True
+
+
+def pick(pool, rng=random):
+    """A random theme from `pool`: liked ones LIKE_WEIGHT times as likely,
+    disliked ones never. None if nothing is left."""
+    ratings = read_ratings()
+    pool = [t for t in pool if ratings.get(t) != -1]
+    if not pool:
+        return None
+    return rng.choices(pool, weights=[LIKE_WEIGHT if ratings.get(t) == 1 else 1 for t in pool])[0]
 
 
 def read_favourites():
