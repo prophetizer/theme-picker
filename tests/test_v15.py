@@ -232,3 +232,51 @@ class HiddenPairs(SandboxCase):
         pool = schedule.pool_themes("all")
         self.assertNotIn("mine-dark", pool)
         self.assertNotIn("mine-light", pool)
+
+
+class Digest(SandboxCase):
+    def test_slot_and_due_once_with_catch_up(self):
+        from datetime import datetime
+        from picker import digest
+        mon9 = datetime(2026, 10, 5, 9, 0)                       # a Monday
+        self.assertEqual(digest.slot(datetime(2026, 10, 5, 9, 0), "mon 09:00"), mon9)
+        self.assertEqual(digest.slot(datetime(2026, 10, 5, 8, 59), "mon 09:00"), datetime(2026, 9, 28, 9, 0))
+        self.assertEqual(digest.slot(datetime(2026, 10, 8, 14, 0), "mon 09:00"), mon9)   # Thursday: Monday's
+        self.assertIsNone(digest.slot(mon9, ""))
+        sent = []
+        with mock.patch.dict(config.SETTINGS, {"ntfy.digest": "mon 09:00"}):
+            # switched on mid-week: nothing now, the first goes out Monday
+            self.assertIsNone(digest.tick(datetime(2026, 10, 1, 12, 0), send=lambda *a, **k: sent.append(a)))
+            self.assertEqual(sent, [])
+            self.assertIsNotNone(digest.tick(datetime(2026, 10, 5, 9, 0, 20), send=lambda *a, **k: sent.append(a)))
+            self.assertIsNone(digest.tick(datetime(2026, 10, 5, 12, 0), send=lambda *a, **k: sent.append(a)))
+            # down over the next Monday 09:00, back on Tuesday: sent once then
+            self.assertIsNotNone(digest.tick(datetime(2026, 10, 13, 8, 0), send=lambda *a, **k: sent.append(a)))
+            self.assertIsNone(digest.tick(datetime(2026, 10, 13, 8, 1), send=lambda *a, **k: sent.append(a)))
+        self.assertEqual(len(sent), 2)
+        self.assertEqual(sent[0][0], "Theme picker: your week")
+
+    def test_off_without_a_setting_or_ntfy(self):
+        from datetime import datetime
+        from picker import digest
+        self.assertIsNone(digest.tick(datetime(2026, 10, 5, 9, 1)))      # no digest set, no ntfy
+
+    def test_content(self):
+        from datetime import datetime
+        from picker import digest
+        state.HISTORY_FILE.write_text(json.dumps([
+            {"theme": "nord", "at": "2026-09-20T10:00:00+00:00", "by": "alex"},
+            {"theme": "dracula", "at": "2026-10-03T10:00:00+00:00", "by": "schedule (night)"},
+            {"theme": "catppuccin-latte", "at": "2026-10-04T10:00:00+00:00", "by": "alex"}]))
+        state.DATES_FILE.write_text(json.dumps({"woodland": "2026-10-02T12:00:00Z", "old": "2026-01-01T00:00:00Z"}))
+        title, body = digest.compose(datetime(2026, 10, 5, 9, 0))
+        self.assertIn("2 theme changes this week (1 by the schedule).", body)
+        self.assertIn("Most on screen: nord", body)                  # live from the week's start until Oct 3
+        self.assertIn("1 new theme: woodland.", body)
+        self.assertNotIn("old", body)
+
+    def test_setting_is_validated(self):
+        for bad in ("monday 9:00", "mon 25:00", "fri", 5):
+            with self.subTest(bad=bad), self.assertRaises(config.ConfigError):
+                config.resolve({}, {"ntfy": {"digest": bad}})
+        self.assertEqual(config.resolve({"NTFY_DIGEST": "Fri 17:00"}, {})["ntfy.digest"], "fri 17:00")

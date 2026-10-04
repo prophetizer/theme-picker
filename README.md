@@ -61,7 +61,8 @@ in [`picker.example.yml`](picker.example.yml).
   disliked
 - In-browser theme editor with live preview and contrast readout; saved themes
   are committed and deployed automatically
-- ntfy notifications (debounced) and a JSON endpoint for dashboard widgets
+- ntfy notifications (debounced), a weekly digest, and a JSON endpoint for
+  dashboard widgets
 - Homepage and Glance take on the live theme too, via stylesheets the picker
   serves
 - Start a theme from any image (colours extracted in the browser)

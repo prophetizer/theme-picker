@@ -91,6 +91,10 @@ ntfy:
   url: ""              # Env: NTFY_URL,   e.g. http://ntfy:80
   topic: ""            # Env: NTFY_TOPIC
   token_file: ""       # Env: NTFY_TOKEN_FILE, a file holding the access token
+  # A weekly summary on the same topic: theme changes and what was on
+  # screen most, themes added, coverage, themes missing screenshots.
+  # A day and a local time, e.g. "mon 09:00"; empty = none. Env: NTFY_DIGEST
+  digest: ""
 
 custom_themes:
   # Your own themes, one <name>.css each -- e.g. a checkout of

@@ -451,6 +451,8 @@ def _loop():
             tick()
             tick_daily()
             tick_rotate()
+            from . import digest                 # imports monitor/shots; kept out of module load
+            digest.tick()
         except Exception as e:                   # never let the scheduler die
             print(f"schedule: {e}", file=sys.stderr, flush=True)
         time.sleep(TICK)

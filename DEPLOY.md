@@ -255,6 +255,15 @@ Set `ntfy.url`, `ntfy.topic` and `ntfy.token_file`. You'll get a debounced
 notice on each theme change, and an alert when an app stops receiving its
 theme (checked every `coverage.interval` seconds; 0 disables it).
 
+Set `ntfy.digest` (e.g. `"mon 09:00"`, local time) for a weekly summary:
+- theme changes, and the themes most on screen
+- themes added that week
+- coverage
+- themes still missing screenshots
+
+It starts from the next slot after you set it. A slot missed while the picker
+was down is sent once when it comes back.
+
 ### Automation hook
 
 Put a random token in a file and set `hooks.token_file`. Home Assistant or any

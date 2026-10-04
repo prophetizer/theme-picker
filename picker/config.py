@@ -28,6 +28,7 @@ SAFE_NAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]*\Z")
 _APP = re.compile(r"^[a-z0-9-]+\Z")
 _URL = re.compile(r"^https?://[^\s/]+(/\S*)?\Z")
 _HOST = re.compile(r"^[A-Za-z0-9.-]{1,253}\Z")
+_DIGEST = re.compile(r"^(mon|tue|wed|thu|fri|sat|sun) ([01][0-9]|2[0-3]):([0-5][0-9])\Z")
 
 # Empty: every themed app (shots.screenshot_apps()).
 DEFAULT_SCREENSHOT_APPS = []
@@ -49,6 +50,7 @@ KEYS = {
     ("ntfy", "url"): ("NTFY_URL", ""),
     ("ntfy", "topic"): ("NTFY_TOPIC", ""),
     ("ntfy", "token_file"): ("NTFY_TOKEN_FILE", ""),
+    ("ntfy", "digest"): ("NTFY_DIGEST", ""),
     ("backend", "type"): ("THEME_BACKEND", "traefik-file"),
     ("backend", "output_file"): ("THEME_OUTPUT_FILE", None),
     ("backend", "apps_file"): ("THEME_APPS_FILE", None),
@@ -125,6 +127,10 @@ def resolve(env, data, repo_dir=REPO_DIR):
         if not isinstance(out[name], str):
             fail(name, "expected a string")
     out["ntfy.url"] = out["ntfy.url"].rstrip("/")
+    d = out["ntfy.digest"]
+    if not isinstance(d, str) or (d.strip() and not _DIGEST.match(d.strip().lower())):
+        fail("ntfy.digest", "expected a day and a time, e.g. \"mon 09:00\", or empty for none")
+    out["ntfy.digest"] = d.strip().lower()
     if out["domain"] and not _HOST.match(out["domain"]):
         fail("domain", "expected a bare domain like example.com")
     for name in ("theme_park_url", "picker_url"):
