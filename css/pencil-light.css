@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Pencil Light
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Pencil Light (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #00798a is the palette's #20a5ba with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --button-text #1d1d1d is the palette's #f1f1f1 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#008ec4'.
+ */
+:root {
+  --main-bg-color: #f1f1f1;
+  --modal-bg-color: #f1f1f1;
+  --modal-header-color: #f1f1f1;
+  --modal-footer-color: #f1f1f1;
+  --drop-down-menu-bg: #f1f1f1;
+  --button-color: #008ec4;
+  --button-color-hover: #20a5ba;
+  --button-text: #1d1d1d;
+  --button-text-hover: #1d1d1d;
+  --accent-color: 0, 142, 196;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00798a;
+  --link-color-hover: #523c79;
+  --label-text-color: #1d1d1d;
+  --text: #424242;
+  --text-hover: #424242;
+  --text-muted: #424242;
+  --arr-queue-color: #10a778;
+  --plex-poster-unwatched: #a89c14;
+  --petio-spinner: invert(62%) sepia(69%) saturate(963%) hue-rotate(159deg) brightness(99%) contrast(103%);
+  --gitea-color-primary-dark-4: 0, 142, 196;
+  --overseerr-gradient: linear-gradient(180deg, rgba(241, 241, 241, 0.17) 0%, rgba(241, 241, 241) 100%);
+}

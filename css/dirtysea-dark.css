@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: dirtysea (dark)
+ *
+ * Generated variant: dark of 'dirtysea', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'dirtysea'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#137b10'.
+ */
+:root {
+  --main-bg-color: #141a14;
+  --modal-bg-color: #202020;
+  --modal-header-color: #202020;
+  --modal-footer-color: #202020;
+  --drop-down-menu-bg: #202020;
+  --button-color: #137b10;
+  --button-color-hover: #816716;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 19, 123, 16;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #9f843a;
+  --link-color-hover: #4980ff;
+  --label-text-color: #ffffff;
+  --text: #ffffff;
+  --text-hover: #9baf9b;
+  --text-muted: #b0b0b0;
+  --arr-queue-color: #a540a3;
+  --plex-poster-unwatched: #1f7575;
+  --petio-spinner: invert(74%) sepia(50%) saturate(3130%) hue-rotate(100deg) brightness(92%) contrast(87%);
+  --gitea-color-primary-dark-4: 19, 123, 16;
+  --overseerr-gradient: linear-gradient(180deg, rgba(20, 26, 20, 0.17) 0%, #141a14 100%);
+}

@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Red Planet
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Red Planet (background, foreground, ANSI 0-15; panels are its selection background)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #c9be96 is the palette's #c2b790 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #989898 is the palette's #676767 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #759eab is the palette's #5b8390 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #b18aba is the palette's #896492 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #131313 is the palette's #222222 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#69819e'.
+ */
+:root {
+  --main-bg-color: #222222;
+  --modal-bg-color: #1b324a;
+  --modal-header-color: #1b324a;
+  --modal-footer-color: #1b324a;
+  --drop-down-menu-bg: #1b324a;
+  --button-color: #69819e;
+  --button-color-hover: #5b8390;
+  --button-text: #131313;
+  --button-text-hover: #131313;
+  --accent-color: 105, 129, 158;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #759eab;
+  --link-color-hover: #b18aba;
+  --label-text-color: #131313;
+  --text: #c9be96;
+  --text-hover: #d6bfb8;
+  --text-muted: #989898;
+  --arr-queue-color: #728271;
+  --plex-poster-unwatched: #e8bf6a;
+  --petio-spinner: invert(51%) sepia(18%) saturate(628%) hue-rotate(173deg) brightness(97%) contrast(88%);
+  --gitea-color-primary-dark-4: 105, 129, 158;
+  --overseerr-gradient: linear-gradient(180deg, rgba(34, 34, 34, 0.17) 0%, rgba(34, 34, 34) 100%);
+}

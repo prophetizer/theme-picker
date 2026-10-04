@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Grape
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Grape (background, foreground, ANSI 0-15; panels are its selection background)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #dcdcde is the palette's #9f9fa1 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #ded8ff is the palette's #a288f7 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #b7aeca is the palette's #59516a with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #d09cff is the palette's #8d35c9 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#487df4'.
+ */
+:root {
+  --main-bg-color: #171423;
+  --modal-bg-color: #493d70;
+  --modal-header-color: #493d70;
+  --modal-footer-color: #493d70;
+  --drop-down-menu-bg: #493d70;
+  --button-color: #487df4;
+  --button-color-hover: #3bdeed;
+  --button-text: #171423;
+  --button-text-hover: #171423;
+  --accent-color: 72, 125, 244;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #3bdeed;
+  --link-color-hover: #d09cff;
+  --label-text-color: #171423;
+  --text: #dcdcde;
+  --text-hover: #ded8ff;
+  --text-muted: #b7aeca;
+  --arr-queue-color: #1fa91b;
+  --plex-poster-unwatched: #8ddc20;
+  --petio-spinner: invert(65%) sepia(100%) saturate(1348%) hue-rotate(210deg) brightness(103%) contrast(91%);
+  --gitea-color-primary-dark-4: 72, 125, 244;
+  --overseerr-gradient: linear-gradient(180deg, rgba(23, 20, 35, 0.17) 0%, rgba(23, 20, 35) 100%);
+}

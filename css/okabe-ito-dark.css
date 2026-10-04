@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Okabe-Ito (dark)
+ *
+ * Generated variant: dark of 'okabe-ito', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'okabe-ito'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#56b4e9'.
+ */
+:root {
+  --main-bg-color: #181818;
+  --modal-bg-color: #232323;
+  --modal-header-color: #232323;
+  --modal-footer-color: #232323;
+  --drop-down-menu-bg: #232323;
+  --button-color: #56b4e9;
+  --button-color-hover: #e69f00;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 86, 180, 233;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #338fd1;
+  --link-color-hover: #c16f9c;
+  --label-text-color: #000000;
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-muted: #898989;
+  --arr-queue-color: #009e73;
+  --plex-poster-unwatched: #e69f00;
+  --petio-spinner: invert(33%) sepia(15%) saturate(1722%) hue-rotate(164deg) brightness(95%) contrast(92%);
+  --gitea-color-primary-dark-4: 86, 180, 233;
+  --overseerr-gradient: linear-gradient(180deg, rgba(24, 24, 24, 0.17) 0%, #181818 100%);
+}

@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Man Page
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Man Page (background, foreground, ANSI 0-15; the scheme has one background, so panels share it; macOS Terminal's 'Man Page' profile, black ink on legal-pad yellow)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #007a83 is the palette's #00a6b2 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0000b2'.
+ */
+:root {
+  --main-bg-color: #fef49c;
+  --modal-bg-color: #fef49c;
+  --modal-header-color: #fef49c;
+  --modal-footer-color: #fef49c;
+  --drop-down-menu-bg: #fef49c;
+  --button-color: #0000b2;
+  --button-color-hover: #b200b2;
+  --button-text: #fef49c;
+  --button-text-hover: #fef49c;
+  --accent-color: 0, 0, 178;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007a83;
+  --link-color-hover: #b200b2;
+  --label-text-color: #fef49c;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #666666;
+  --arr-queue-color: #00a600;
+  --plex-poster-unwatched: #999900;
+  --petio-spinner: invert(89%) sepia(76%) saturate(6233%) hue-rotate(243deg) brightness(73%) contrast(136%);
+  --gitea-color-primary-dark-4: 0, 0, 178;
+  --overseerr-gradient: linear-gradient(180deg, rgba(254, 244, 156, 0.17) 0%, rgba(254, 244, 156) 100%);
+}

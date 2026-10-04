@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Chinoiserie (dark)
+ *
+ * Generated variant: dark of 'chinoiserie', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'chinoiserie'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#936da6'.
+ */
+:root {
+  --main-bg-color: #181818;
+  --modal-bg-color: #333333;
+  --modal-header-color: #333333;
+  --modal-footer-color: #333333;
+  --drop-down-menu-bg: #333333;
+  --button-color: #936da6;
+  --button-color-hover: #3980bd;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 147, 109, 166;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #599fde;
+  --link-color-hover: #bd8bac;
+  --label-text-color: #000000;
+  --text: #cbbfb2;
+  --text-hover: #bfbeda;
+  --text-muted: #a99789;
+  --arr-queue-color: #438776;
+  --plex-poster-unwatched: #fb8b05;
+  --petio-spinner: invert(50%) sepia(14%) saturate(1126%) hue-rotate(236deg) brightness(93%) contrast(92%);
+  --gitea-color-primary-dark-4: 147, 109, 166;
+  --overseerr-gradient: linear-gradient(180deg, rgba(24, 24, 24, 0.17) 0%, #181818 100%);
+}

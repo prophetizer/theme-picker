@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Galaxy (light)
+ *
+ * Generated variant: light of 'galaxy', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'galaxy'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#4a8ee6'.
+ */
+:root {
+  --main-bg-color: #ecf4ff;
+  --modal-bg-color: #ecf4ff;
+  --modal-header-color: #ecf4ff;
+  --modal-footer-color: #ecf4ff;
+  --drop-down-menu-bg: #ecf4ff;
+  --button-color: #4a8ee6;
+  --button-color-hover: #0694dd;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 74, 142, 230;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0076b1;
+  --link-color-hover: #9d559e;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #3b3b3b;
+  --arr-queue-color: #00a07b;
+  --plex-poster-unwatched: #999000;
+  --petio-spinner: invert(40%) sepia(25%) saturate(6862%) hue-rotate(192deg) brightness(94%) contrast(91%);
+  --gitea-color-primary-dark-4: 74, 142, 230;
+  --overseerr-gradient: linear-gradient(180deg, rgba(236, 244, 255, 0.17) 0%, #ecf4ff 100%);
+}

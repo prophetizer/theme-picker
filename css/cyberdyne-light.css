@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Cyberdyne (light)
+ *
+ * Generated variant: light of 'cyberdyne', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'cyberdyne'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#00a085'.
+ */
+:root {
+  --main-bg-color: #f1f3ff;
+  --modal-bg-color: #f1f3ff;
+  --modal-header-color: #f1f3ff;
+  --modal-footer-color: #f1f3ff;
+  --drop-down-menu-bg: #f1f3ff;
+  --button-color: #00a085;
+  --button-color-hover: #cf63cf;
+  --button-text: #151144;
+  --button-text-hover: #151144;
+  --accent-color: 0, 160, 133;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007f69;
+  --link-color-hover: #ae43ae;
+  --label-text-color: #151144;
+  --text: #000902;
+  --text-hover: #000000;
+  --text-muted: #474747;
+  --arr-queue-color: #00a25f;
+  --plex-poster-unwatched: #ad8900;
+  --petio-spinner: invert(56%) sepia(86%) saturate(505%) hue-rotate(121deg) brightness(92%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 160, 133;
+  --overseerr-gradient: linear-gradient(180deg, rgba(241, 243, 255, 0.17) 0%, #f1f3ff 100%);
+}

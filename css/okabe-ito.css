@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Okabe-Ito
+ *
+ * Palette source: Okabe & Ito, 'Color Universal Design' (2002/2008), the eight-colour colourblind-safe set: black, orange, sky blue, bluish green, yellow, blue, vermillion, reddish purple; the palette defines accents only, so page, panels and text are neutral greys (pure black/white plus greys), not palette colours
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color-hover #a35481 is the palette's #cc79a7 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#56b4e9'.
+ */
+:root {
+  --main-bg-color: #f2f2f2;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #56b4e9;
+  --button-color-hover: #e69f00;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 86, 180, 233;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0072b2;
+  --link-color-hover: #a35481;
+  --label-text-color: #000000;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #595959;
+  --arr-queue-color: #009e73;
+  --plex-poster-unwatched: #e69f00;
+  --petio-spinner: invert(33%) sepia(15%) saturate(1722%) hue-rotate(164deg) brightness(95%) contrast(92%);
+  --gitea-color-primary-dark-4: 86, 180, 233;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 242, 242, 0.17) 0%, rgba(242, 242, 242) 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Espresso Libre (light)
+ *
+ * Generated variant: light of 'espresso-libre', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'espresso-libre'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#003896'.
+ */
+:root {
+  --main-bg-color: #f9f2ee;
+  --modal-bg-color: #f9f2ee;
+  --modal-header-color: #f9f2ee;
+  --modal-footer-color: #f9f2ee;
+  --drop-down-menu-bg: #f9f2ee;
+  --button-color: #003896;
+  --button-color-hover: #004748;
+  --button-text: #b8a898;
+  --button-text-hover: #b8a898;
+  --accent-color: 0, 56, 150;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007d7e;
+  --link-color-hover: #b05259;
+  --label-text-color: #b8a898;
+  --text: #2b1f12;
+  --text-hover: #000000;
+  --text-muted: #3e403d;
+  --arr-queue-color: #1a921c;
+  --plex-poster-unwatched: #989000;
+  --petio-spinner: invert(87%) sepia(56%) saturate(4901%) hue-rotate(213deg) brightness(99%) contrast(103%);
+  --gitea-color-primary-dark-4: 0, 56, 150;
+  --overseerr-gradient: linear-gradient(180deg, rgba(249, 242, 238, 0.17) 0%, #f9f2ee 100%);
+}

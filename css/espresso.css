@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Espresso
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Espresso (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #999999 is the palette's #606060 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --button-text #2d2d2d is the palette's #323232 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6c99bb'.
+ */
+:root {
+  --main-bg-color: #323232;
+  --modal-bg-color: #323232;
+  --modal-header-color: #323232;
+  --modal-footer-color: #323232;
+  --drop-down-menu-bg: #323232;
+  --button-color: #6c99bb;
+  --button-color-hover: #bed6ff;
+  --button-text: #2d2d2d;
+  --button-text-hover: #2d2d2d;
+  --accent-color: 108, 153, 187;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #bed6ff;
+  --link-color-hover: #d197d9;
+  --label-text-color: #2d2d2d;
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-muted: #999999;
+  --arr-queue-color: #a5c261;
+  --plex-poster-unwatched: #ffc66d;
+  --petio-spinner: invert(44%) sepia(16%) saturate(919%) hue-rotate(163deg) brightness(100%) contrast(85%);
+  --gitea-color-primary-dark-4: 108, 153, 187;
+  --overseerr-gradient: linear-gradient(180deg, rgba(50, 50, 50, 0.17) 0%, rgba(50, 50, 50) 100%);
+}

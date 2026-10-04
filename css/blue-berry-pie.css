@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Blue Berry Pie
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Blue Berry Pie (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-hover #59abbe is the palette's #0a6c7e with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #82789c is the palette's #463c5d with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #ab61b5 is the palette's #9d54a7 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#90a5bd'.
+ */
+:root {
+  --main-bg-color: #1c0c28;
+  --modal-bg-color: #1c0c28;
+  --modal-header-color: #1c0c28;
+  --modal-footer-color: #1c0c28;
+  --drop-down-menu-bg: #1c0c28;
+  --button-color: #90a5bd;
+  --button-color-hover: #7e83cc;
+  --button-text: #1c0c28;
+  --button-text-hover: #1c0c28;
+  --accent-color: 144, 165, 189;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7e83cc;
+  --link-color-hover: #ab61b5;
+  --label-text-color: #1c0c28;
+  --text: #babab9;
+  --text-hover: #59abbe;
+  --text-muted: #82789c;
+  --arr-queue-color: #5cb1b3;
+  --plex-poster-unwatched: #eab9a8;
+  --petio-spinner: invert(28%) sepia(16%) saturate(461%) hue-rotate(171deg) brightness(88%) contrast(87%);
+  --gitea-color-primary-dark-4: 144, 165, 189;
+  --overseerr-gradient: linear-gradient(180deg, rgba(28, 12, 40, 0.17) 0%, rgba(28, 12, 40) 100%);
+}

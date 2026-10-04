@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Red Planet (light)
+ *
+ * Generated variant: light of 'red-planet', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'red-planet'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#69819e'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #fbfdff;
+  --modal-header-color: #fbfdff;
+  --modal-footer-color: #fbfdff;
+  --drop-down-menu-bg: #fbfdff;
+  --button-color: #69819e;
+  --button-color-hover: #5b8390;
+  --button-text: #131313;
+  --button-text-hover: #131313;
+  --accent-color: 105, 129, 158;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4e7582;
+  --link-color-hover: #886290;
+  --label-text-color: #131313;
+  --text: #1c1500;
+  --text-hover: #1c0d08;
+  --text-muted: #333333;
+  --arr-queue-color: #728271;
+  --plex-poster-unwatched: #ae872e;
+  --petio-spinner: invert(51%) sepia(18%) saturate(628%) hue-rotate(173deg) brightness(97%) contrast(88%);
+  --gitea-color-primary-dark-4: 105, 129, 158;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

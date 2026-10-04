@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Tol Bright
+ *
+ * Palette source: Paul Tol, 'Colour Schemes' (SRON/EPS/TN/09-002), the bright qualitative scheme: blue, cyan, green, yellow, red, purple, grey; the palette defines accents only, so page, panels and text are neutral greys (pure black/white plus greys), not palette colours
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #3e70a3 is the palette's #4477aa with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#66ccee'.
+ */
+:root {
+  --main-bg-color: #f0f0f0;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #66ccee;
+  --button-color-hover: #ccbb44;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 102, 204, 238;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #3e70a3;
+  --link-color-hover: #aa3377;
+  --label-text-color: #000000;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #555555;
+  --arr-queue-color: #228833;
+  --plex-poster-unwatched: #ccbb44;
+  --petio-spinner: invert(27%) sepia(12%) saturate(1865%) hue-rotate(160deg) brightness(102%) contrast(87%);
+  --gitea-color-primary-dark-4: 102, 204, 238;
+  --overseerr-gradient: linear-gradient(180deg, rgba(240, 240, 240, 0.17) 0%, rgba(240, 240, 240) 100%);
+}

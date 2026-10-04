@@ -47,6 +47,7 @@
       r ? ratings[data.theme] = r : delete ratings[data.theme];
       return json({ok: true, ratings});
     }
+    if (path === '/api/capture') return json({running: false});   // no capture in the demo
     if (path === '/api/digest/preview') return json({enabled: false, ntfy: false, title: 'Theme picker: your week',
       body: 'Installed, this summarises your week on ntfy: theme changes and what was on screen most, '
           + 'themes added, coverage, and themes missing screenshots.'});

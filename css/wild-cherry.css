@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Wild Cherry
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Wild Cherry (background, foreground, ANSI 0-15; panels are its selection background)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-hover #f5929c is the palette's #e4838d with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --button-color-hover #008231 is the palette's #2ab250 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#883cdc'.
+ */
+:root {
+  --main-bg-color: #1f1726;
+  --modal-bg-color: #002831;
+  --modal-header-color: #002831;
+  --modal-footer-color: #002831;
+  --drop-down-menu-bg: #002831;
+  --button-color: #883cdc;
+  --button-color-hover: #008231;
+  --button-text: #dafaff;
+  --button-text-hover: #dafaff;
+  --accent-color: 136, 60, 220;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #c1b8b7;
+  --link-color-hover: #ececec;
+  --label-text-color: #dafaff;
+  --text: #dafaff;
+  --text-hover: #f5929c;
+  --text-muted: #009cc9;
+  --arr-queue-color: #2ab250;
+  --plex-poster-unwatched: #ffd16f;
+  --petio-spinner: invert(74%) sepia(47%) saturate(4066%) hue-rotate(257deg) brightness(89%) contrast(92%);
+  --gitea-color-primary-dark-4: 136, 60, 220;
+  --overseerr-gradient: linear-gradient(180deg, rgba(31, 23, 38, 0.17) 0%, rgba(31, 23, 38) 100%);
+}

@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Moonlight
+ *
+ * Palette source: tinted-theming/schemes base16/moonlight.yaml (Moonlight; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #ccd4ff is the palette's #a3ace1 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #fec2ff is the palette's #ef43fa with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color-hover #c09af8 is the palette's #b994f1 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#40ffff'.
+ */
+:root {
+  --main-bg-color: #212337;
+  --modal-bg-color: #403c64;
+  --modal-header-color: #403c64;
+  --modal-footer-color: #403c64;
+  --drop-down-menu-bg: #403c64;
+  --button-color: #40ffff;
+  --button-color-hover: #04d1f9;
+  --button-text: #212337;
+  --button-text-hover: #212337;
+  --accent-color: 64, 255, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #04d1f9;
+  --link-color-hover: #c09af8;
+  --label-text-color: #212337;
+  --text: #ccd4ff;
+  --text-hover: #fec2ff;
+  --text-muted: #a1abe0;
+  --arr-queue-color: #2df4c0;
+  --plex-poster-unwatched: #f67f81;
+  --petio-spinner: invert(8%) sepia(60%) saturate(1998%) hue-rotate(138deg) brightness(103%) contrast(104%);
+  --gitea-color-primary-dark-4: 64, 255, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(33, 35, 55, 0.17) 0%, rgba(33, 35, 55) 100%);
+}

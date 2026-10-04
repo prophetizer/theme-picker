@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Espresso Libre
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Espresso Libre (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #bbab9b is the palette's #b8a898 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #888a86 is the palette's #555753 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #08999b is the palette's #06989a with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #ce6d72 is the palette's #c5656b with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #003896 is the palette's #0066ff with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #004748 is the palette's #06989a with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#003896'.
+ */
+:root {
+  --main-bg-color: #2a211c;
+  --modal-bg-color: #2a211c;
+  --modal-header-color: #2a211c;
+  --modal-footer-color: #2a211c;
+  --drop-down-menu-bg: #2a211c;
+  --button-color: #003896;
+  --button-color-hover: #004748;
+  --button-text: #b8a898;
+  --button-text-hover: #b8a898;
+  --accent-color: 0, 56, 150;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #08999b;
+  --link-color-hover: #ce6d72;
+  --label-text-color: #b8a898;
+  --text: #bbab9b;
+  --text-hover: #eeeeec;
+  --text-muted: #888a86;
+  --arr-queue-color: #1a921c;
+  --plex-poster-unwatched: #f0e53a;
+  --petio-spinner: invert(87%) sepia(56%) saturate(4901%) hue-rotate(213deg) brightness(99%) contrast(103%);
+  --gitea-color-primary-dark-4: 0, 56, 150;
+  --overseerr-gradient: linear-gradient(180deg, rgba(42, 33, 28, 0.17) 0%, rgba(42, 33, 28) 100%);
+}

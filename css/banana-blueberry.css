@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Banana Blueberry
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Banana Blueberry (background, foreground, ANSI 0-15; panels are its selection background)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #767f91 is the palette's #495162 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #e3406f is the palette's #dc396a with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#22e8df'.
+ */
+:root {
+  --main-bg-color: #220525;
+  --modal-bg-color: #191323;
+  --modal-header-color: #191323;
+  --modal-footer-color: #191323;
+  --drop-down-menu-bg: #191323;
+  --button-color: #22e8df;
+  --button-color-hover: #56b6c2;
+  --button-text: #220525;
+  --button-text-hover: #220525;
+  --accent-color: 34, 232, 223;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #56b6c2;
+  --link-color-hover: #e3406f;
+  --label-text-color: #220525;
+  --text: #cccccc;
+  --text-hover: #ffffff;
+  --text-muted: #767f91;
+  --arr-queue-color: #00bd9c;
+  --plex-poster-unwatched: #e6c62f;
+  --petio-spinner: invert(32%) sepia(93%) saturate(392%) hue-rotate(120deg) brightness(97%) contrast(93%);
+  --gitea-color-primary-dark-4: 34, 232, 223;
+  --overseerr-gradient: linear-gradient(180deg, rgba(34, 5, 37, 0.17) 0%, rgba(34, 5, 37) 100%);
+}

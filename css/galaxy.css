@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Galaxy
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Galaxy (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #8e8e8e is the palette's #555555 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #bd73be is the palette's #944d95 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#589df6'.
+ */
+:root {
+  --main-bg-color: #1d2837;
+  --modal-bg-color: #1d2837;
+  --modal-header-color: #1d2837;
+  --modal-footer-color: #1d2837;
+  --drop-down-menu-bg: #1d2837;
+  --button-color: #589df6;
+  --button-color-hover: #1f9ee7;
+  --button-text: #1d2837;
+  --button-text-hover: #1d2837;
+  --accent-color: 88, 157, 246;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #1f9ee7;
+  --link-color-hover: #bd73be;
+  --label-text-color: #1d2837;
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-muted: #8e8e8e;
+  --arr-queue-color: #21b089;
+  --plex-poster-unwatched: #fef02a;
+  --petio-spinner: invert(46%) sepia(79%) saturate(1502%) hue-rotate(190deg) brightness(100%) contrast(93%);
+  --gitea-color-primary-dark-4: 88, 157, 246;
+  --overseerr-gradient: linear-gradient(180deg, rgba(29, 40, 55, 0.17) 0%, rgba(29, 40, 55) 100%);
+}

@@ -223,6 +223,8 @@
   }
   .stats { display: flex; gap: 40px; flex-wrap: wrap; }
   .tab-sub { margin: 22px 0 4px; font-size: 1rem; }
+  .capture-banner { margin: 8px 16px 0; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--accent);
+                    background: var(--panel); color: var(--pk-text, var(--text, #e6ecec)); font-size: .9rem; }
   .digest-preview { white-space: pre-wrap; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px;
                     background: var(--panel); font-size: .9rem; max-width: 70ch; }
   #digest-preview-btn { cursor: pointer; border-radius: 6px; padding: 5px 12px; border: 1px solid var(--accent);

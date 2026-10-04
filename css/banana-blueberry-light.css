@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Banana Blueberry (light)
+ *
+ * Generated variant: light of 'banana-blueberry', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'banana-blueberry'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#009d97'.
+ */
+:root {
+  --main-bg-color: #feedff;
+  --modal-bg-color: #f7f3ff;
+  --modal-header-color: #f7f3ff;
+  --modal-footer-color: #f7f3ff;
+  --drop-down-menu-bg: #f7f3ff;
+  --button-color: #009d97;
+  --button-color-hover: #3599a5;
+  --button-text: #220525;
+  --button-text-hover: #220525;
+  --accent-color: 0, 157, 151;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007b86;
+  --link-color-hover: #cf2b5f;
+  --label-text-color: #220525;
+  --text: #0c0c0c;
+  --text-hover: #000000;
+  --text-muted: #414959;
+  --arr-queue-color: #009f83;
+  --plex-poster-unwatched: #a48b00;
+  --petio-spinner: invert(60%) sepia(20%) saturate(4336%) hue-rotate(146deg) brightness(99%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 157, 151;
+  --overseerr-gradient: linear-gradient(180deg, rgba(254, 237, 255, 0.17) 0%, #feedff 100%);
+}

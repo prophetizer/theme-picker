@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Chinoiserie
+ *
+ * Palette source: tinted-theming/schemes base16/chinoiserie.yaml (Chinoiserie; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #716053 is the palette's #918072 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #1d67a2 is the palette's #2b73af with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #835574 is the palette's #c08eaf with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#815c94'.
+ */
+:root {
+  --main-bg-color: #e0e0e0;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #815c94;
+  --button-color-hover: #2b73af;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 129, 92, 148;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #1d67a2;
+  --link-color-hover: #835574;
+  --label-text-color: #ffffff;
+  --text: #4a4035;
+  --text-hover: #131124;
+  --text-muted: #716053;
+  --arr-queue-color: #428675;
+  --plex-poster-unwatched: #fb8b05;
+  --petio-spinner: invert(60%) sepia(15%) saturate(1273%) hue-rotate(236deg) brightness(97%) contrast(90%);
+  --gitea-color-primary-dark-4: 129, 92, 148;
+  --overseerr-gradient: linear-gradient(180deg, rgba(224, 224, 224, 0.17) 0%, rgba(224, 224, 224) 100%);
+}

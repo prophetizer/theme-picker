@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Spacedust
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Spacedust (background, foreground, ANSI 0-15; panels are its selection background)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #b8987b is the palette's #684c31 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #ff752f is the palette's #e35b00 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#06afc7'.
+ */
+:root {
+  --main-bg-color: #0a1e24;
+  --modal-bg-color: #0a385c;
+  --modal-header-color: #0a385c;
+  --modal-footer-color: #0a385c;
+  --drop-down-menu-bg: #0a385c;
+  --button-color: #06afc7;
+  --button-color-hover: #5cab96;
+  --button-text: #0a1e24;
+  --button-text-hover: #0a1e24;
+  --accent-color: 6, 175, 199;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #06afc7;
+  --link-color-hover: #ff752f;
+  --label-text-color: #0a1e24;
+  --text: #ecf0c1;
+  --text-hover: #fefff1;
+  --text-muted: #b8987b;
+  --arr-queue-color: #5cab96;
+  --plex-poster-unwatched: #e3cd7b;
+  --petio-spinner: invert(27%) sepia(66%) saturate(5893%) hue-rotate(151deg) brightness(96%) contrast(95%);
+  --gitea-color-primary-dark-4: 6, 175, 199;
+  --overseerr-gradient: linear-gradient(180deg, rgba(10, 30, 36, 0.17) 0%, rgba(10, 30, 36) 100%);
+}

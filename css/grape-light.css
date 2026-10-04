@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Grape (light)
+ *
+ * Generated variant: light of 'grape', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'grape'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#487df4'.
+ */
+:root {
+  --main-bg-color: #f3f2ff;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #487df4;
+  --button-color-hover: #009ca8;
+  --button-text: #171423;
+  --button-text-hover: #171423;
+  --accent-color: 72, 125, 244;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007c85;
+  --link-color-hover: #8c59b6;
+  --label-text-color: #171423;
+  --text: #040404;
+  --text-hover: #040013;
+  --text-muted: #21192e;
+  --arr-queue-color: #14a410;
+  --plex-poster-unwatched: #619d00;
+  --petio-spinner: invert(65%) sepia(100%) saturate(1348%) hue-rotate(210deg) brightness(103%) contrast(91%);
+  --gitea-color-primary-dark-4: 72, 125, 244;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 242, 255, 0.17) 0%, #f3f2ff 100%);
+}

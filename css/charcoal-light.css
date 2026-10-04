@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Charcoal Light
+ *
+ * Palette source: tinted-theming/schemes base16/charcoal-light.yaml (Charcoal Light; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #2c2310 is the palette's #382e1b with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #2f2204 is the palette's #bcad8c with its lightness nudged to
+ * reach 7:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#251e0f'.
+ */
+:root {
+  --main-bg-color: #bcad8c;
+  --modal-bg-color: #cabda0;
+  --modal-header-color: #cabda0;
+  --modal-footer-color: #cabda0;
+  --drop-down-menu-bg: #cabda0;
+  --button-color: #251e0f;
+  --button-color-hover: #110e06;
+  --button-text: #cabda0;
+  --button-text-hover: #cabda0;
+  --accent-color: 37, 30, 15;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #110e06;
+  --link-color-hover: #382e1b;
+  --label-text-color: #cabda0;
+  --text: #2c2310;
+  --text-hover: #2f2204;
+  --text-muted: #110e06;
+  --arr-queue-color: #110e06;
+  --plex-poster-unwatched: #110e06;
+  --petio-spinner: invert(92%) sepia(18%) saturate(1713%) hue-rotate(3deg) brightness(98%) contrast(90%);
+  --gitea-color-primary-dark-4: 37, 30, 15;
+  --overseerr-gradient: linear-gradient(180deg, rgba(188, 173, 140, 0.17) 0%, rgba(188, 173, 140) 100%);
+}

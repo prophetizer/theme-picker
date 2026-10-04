@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Moonlight (light)
+ *
+ * Generated variant: light of 'moonlight', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'moonlight'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#009d9e'.
+ */
+:root {
+  --main-bg-color: #f1f3ff;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #009d9e;
+  --button-color-hover: #009ab9;
+  --button-text: #212337;
+  --button-text-hover: #212337;
+  --accent-color: 0, 157, 158;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007a93;
+  --link-color-hover: #835db6;
+  --label-text-color: #212337;
+  --text: #03021d;
+  --text-hover: #0e000f;
+  --text-muted: #181b45;
+  --arr-queue-color: #00a07c;
+  --plex-poster-unwatched: #dd696c;
+  --petio-spinner: invert(64%) sepia(96%) saturate(745%) hue-rotate(142deg) brightness(101%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 157, 158;
+  --overseerr-gradient: linear-gradient(180deg, rgba(241, 243, 255, 0.17) 0%, #f1f3ff 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Man Page (dark)
+ *
+ * Generated variant: dark of 'man-page', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'man-page'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#1b54ef'.
+ */
+:root {
+  --main-bg-color: #1c1900;
+  --modal-bg-color: #1c1900;
+  --modal-header-color: #1c1900;
+  --modal-footer-color: #1c1900;
+  --drop-down-menu-bg: #1c1900;
+  --button-color: #1b54ef;
+  --button-color-hover: #b302b3;
+  --button-text: #fef49c;
+  --button-text-hover: #fef49c;
+  --accent-color: 27, 84, 239;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #288d96;
+  --link-color-hover: #d43bd2;
+  --label-text-color: #fef49c;
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-muted: #808080;
+  --arr-queue-color: #00a600;
+  --plex-poster-unwatched: #999900;
+  --petio-spinner: invert(71%) sepia(94%) saturate(6091%) hue-rotate(226deg) brightness(98%) contrast(91%);
+  --gitea-color-primary-dark-4: 27, 84, 239;
+  --overseerr-gradient: linear-gradient(180deg, rgba(28, 25, 0, 0.17) 0%, #1c1900 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Wild Cherry (light)
+ *
+ * Generated variant: light of 'wild-cherry', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'wild-cherry'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#883cdc'.
+ */
+:root {
+  --main-bg-color: #f7f0fd;
+  --modal-bg-color: #effcff;
+  --modal-header-color: #effcff;
+  --modal-footer-color: #effcff;
+  --drop-down-menu-bg: #effcff;
+  --button-color: #883cdc;
+  --button-color-hover: #008231;
+  --button-text: #dafaff;
+  --button-text-hover: #dafaff;
+  --accent-color: 136, 60, 220;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #766d6c;
+  --link-color-hover: #6f6f6f;
+  --label-text-color: #dafaff;
+  --text: #000001;
+  --text-hover: #3f0010;
+  --text-muted: #004257;
+  --arr-queue-color: #07a241;
+  --plex-poster-unwatched: #b18614;
+  --petio-spinner: invert(74%) sepia(47%) saturate(4066%) hue-rotate(257deg) brightness(89%) contrast(92%);
+  --gitea-color-primary-dark-4: 136, 60, 220;
+  --overseerr-gradient: linear-gradient(180deg, rgba(247, 240, 253, 0.17) 0%, #f7f0fd 100%);
+}
