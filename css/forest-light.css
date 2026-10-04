@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Forest (light)
+ *
+ * Generated variant: light of 'forest', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'forest'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#48925c'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fae5df 0%, #f7fff9 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.2) 0%, rgba(209, 209, 209, 0.2) 100%), linear-gradient(-90deg, #fae5df 0%, #f7fff9 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.2) 0%, rgba(209, 209, 209, 0.2) 100%), linear-gradient(-90deg, #fae5df 0%, #f7fff9 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.2) 0%, rgba(209, 209, 209, 0.2) 100%), linear-gradient(-90deg, #fae5df 0%, #f7fff9 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #e4ecdb;
+  --button-color: #48925c;
+  --button-color-hover: #9b7c73;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 72, 146, 92;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #297441;
+  --link-color-hover: #7e6058;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #0a1500;
+  --arr-queue-color: #48925d;
+  --plex-poster-unwatched: #9b7c73;
+  --petio-spinner: invert(50%) sepia(14%) saturate(1270%) hue-rotate(84deg) brightness(95%) contrast(93%);
+  --gitea-color-primary-dark-4: 72, 146, 92;
+  --overseerr-gradient: linear-gradient(180deg, rgba(247, 255, 249, 0.17) 0%, #f7fff9 100%);
+}

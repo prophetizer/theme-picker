@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Penumbra Light Contrast Plus Plus
+ *
+ * Palette source: tinted-theming/schemes base16/penumbra-light-contrast-plus-plus.yaml (Zachary Weiss; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * HIGH CONTRAST: every text role (body, muted, links, button label) is meant
+ * to reach WCAG AAA 7:1 on the panels.
+ * --text #555555 is the palette's #636363 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #555555 is the palette's #aeaeae with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color #005e68 is the palette's #00c4d7 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color-hover #614597 is the palette's #b69cf6 with its lightness
+ * nudged to reach 7:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6eb2fd'.
+ */
+:root {
+  --main-bg-color: #fff7ed;
+  --modal-bg-color: #fffdfb;
+  --modal-header-color: #fffdfb;
+  --modal-footer-color: #fffdfb;
+  --drop-down-menu-bg: #fffdfb;
+  --button-color: #6eb2fd;
+  --button-color-hover: #00c4d7;
+  --button-text: #0d0f13;
+  --button-text-hover: #0d0f13;
+  --accent-color: 110, 178, 253;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #005e68;
+  --link-color-hover: #614597;
+  --label-text-color: #0d0f13;
+  --text: #555555;
+  --text-hover: #0d0f13;
+  --text-muted: #555555;
+  --arr-queue-color: #54c794;
+  --plex-poster-unwatched: #e09f47;
+  --petio-spinner: invert(37%) sepia(32%) saturate(849%) hue-rotate(179deg) brightness(101%) contrast(98%);
+  --gitea-color-primary-dark-4: 110, 178, 253;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 247, 237, 0.17) 0%, rgba(255, 247, 237) 100%);
+}

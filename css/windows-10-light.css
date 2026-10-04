@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Windows 10 Light
+ *
+ * Palette source: tinted-theming/schemes base16/windows-10-light.yaml (Fergus Collins; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #4a4a4a is the palette's #767676 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #666666 is the palette's #ababab with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #006bac is the palette's #3a96dd with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --button-color-hover #0373b8 is the palette's #3a96dd with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0037da'.
+ */
+:root {
+  --main-bg-color: #e5e5e5;
+  --modal-bg-color: #f2f2f2;
+  --modal-header-color: #f2f2f2;
+  --modal-footer-color: #f2f2f2;
+  --drop-down-menu-bg: #f2f2f2;
+  --button-color: #0037da;
+  --button-color-hover: #0373b8;
+  --button-text: #f2f2f2;
+  --button-text-hover: #f2f2f2;
+  --accent-color: 0, 55, 218;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #006bac;
+  --link-color-hover: #881798;
+  --label-text-color: #f2f2f2;
+  --text: #4a4a4a;
+  --text-hover: #0c0c0c;
+  --text-muted: #666666;
+  --arr-queue-color: #13a10e;
+  --plex-poster-unwatched: #f9f1a5;
+  --petio-spinner: invert(89%) sepia(93%) saturate(5792%) hue-rotate(230deg) brightness(91%) contrast(104%);
+  --gitea-color-primary-dark-4: 0, 55, 218;
+  --overseerr-gradient: linear-gradient(180deg, rgba(229, 229, 229, 0.17) 0%, rgba(229, 229, 229) 100%);
+}

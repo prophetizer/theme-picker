@@ -1,0 +1,53 @@
+/*
+ * theme.park custom theme: Precious Light White
+ *
+ * Palette source: tinted-theming/schemes base16/precious-light-white.yaml (4lex4 <4lex49@zoho.com>; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * HIGH CONTRAST: every text role (body, muted, links, button label) is meant
+ * to reach WCAG AAA 7:1 on the panels.
+ * --text #4e4e4e is the palette's #555555 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #4e4e4e is the palette's #555555 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #4e4e4e is the palette's #636363 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color #00594d is the palette's #087767 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color-hover #6231ad is the palette's #7b4ecb with its lightness
+ * nudged to reach 7:1 on the panels.
+ * --button-color #005c96 is the palette's #186daa with its lightness nudged
+ * to reach 7:1 under its label.
+ * --button-color-hover #006557 is the palette's #087767 with its lightness
+ * nudged to reach 7:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#005c96'.
+ */
+:root {
+  --main-bg-color: #ededed;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #005c96;
+  --button-color-hover: #006557;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 0, 92, 150;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00594d;
+  --link-color-hover: #6231ad;
+  --label-text-color: #ffffff;
+  --text: #4e4e4e;
+  --text-hover: #4e4e4e;
+  --text-muted: #4e4e4e;
+  --arr-queue-color: #557301;
+  --plex-poster-unwatched: #a0570d;
+  --petio-spinner: invert(79%) sepia(88%) saturate(2047%) hue-rotate(184deg) brightness(91%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 92, 150;
+  --overseerr-gradient: linear-gradient(180deg, rgba(237, 237, 237, 0.17) 0%, rgba(237, 237, 237) 100%);
+}

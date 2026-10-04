@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Black Metal (Mayhem) (light)
+ *
+ * Generated variant: light of 'black-metal-mayhem', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'black-metal-mayhem'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#aa8920'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #aa8920;
+  --button-color-hover: #aa8920;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 170, 137, 32;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #896c00;
+  --link-color-hover: #896c00;
+  --label-text-color: #000000;
+  --text: #141414;
+  --text-hover: #141414;
+  --text-muted: #323232;
+  --arr-queue-color: #938d77;
+  --plex-poster-unwatched: #8d8d8d;
+  --petio-spinner: invert(56%) sepia(90%) saturate(392%) hue-rotate(8deg) brightness(102%) contrast(87%);
+  --gitea-color-primary-dark-4: 170, 137, 32;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

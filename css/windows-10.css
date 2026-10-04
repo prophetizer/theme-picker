@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Windows 10
+ *
+ * Palette source: tinted-theming/schemes base16/windows-10.yaml (Fergus Collins; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color-hover #f256d7 is the palette's #b4009e with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#3b78ff'.
+ */
+:root {
+  --main-bg-color: #0c0c0c;
+  --modal-bg-color: #2f2f2f;
+  --modal-header-color: #2f2f2f;
+  --modal-footer-color: #2f2f2f;
+  --drop-down-menu-bg: #2f2f2f;
+  --button-color: #3b78ff;
+  --button-color-hover: #61d6d6;
+  --button-text: #0c0c0c;
+  --button-text-hover: #0c0c0c;
+  --accent-color: 59, 120, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #61d6d6;
+  --link-color-hover: #f256d7;
+  --label-text-color: #0c0c0c;
+  --text: #cccccc;
+  --text-hover: #f2f2f2;
+  --text-muted: #b9b9b9;
+  --arr-queue-color: #16c60c;
+  --plex-poster-unwatched: #c19c00;
+  --petio-spinner: invert(48%) sepia(46%) saturate(7499%) hue-rotate(210deg) brightness(102%) contrast(101%);
+  --gitea-color-primary-dark-4: 59, 120, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(12, 12, 12, 0.17) 0%, rgba(12, 12, 12) 100%);
+}

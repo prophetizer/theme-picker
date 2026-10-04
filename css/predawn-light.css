@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Predawn (light)
+ *
+ * Generated variant: light of 'predawn', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'predawn'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#b96242'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #ffffff 0%, #c6ddf3 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #ffffff 0%, #c6ddf3 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #ffffff 0%, #c6ddf3 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #ffffff 0%, #c6ddf3 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #f2e4e4;
+  --button-color: #b96242;
+  --button-color-hover: #5a7e9f;
+  --button-text: #0e0e0e;
+  --button-text-hover: #0e0e0e;
+  --accent-color: 185, 98, 66;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8e4d34;
+  --link-color-hover: #406182;
+  --label-text-color: #0e0e0e;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #240005;
+  --arr-queue-color: #ad694f;
+  --plex-poster-unwatched: #5a7e9f;
+  --petio-spinner: invert(56%) sepia(10%) saturate(2797%) hue-rotate(330deg) brightness(98%) contrast(88%);
+  --gitea-color-primary-dark-4: 185, 98, 66;
+  --overseerr-gradient: linear-gradient(180deg, rgba(198, 221, 243, 0.17) 0%, #c6ddf3 100%);
+}

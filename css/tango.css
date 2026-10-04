@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Tango
+ *
+ * Palette source: tinted-theming/schemes base16/tango.yaml (@Schnouki, based on the Tango Desktop Project; base00, base04, base05, base07 and the accents; panels share its one background -- its base01 is the bright green #8ae234, which can't carry text)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #2fabad is the palette's #06989a with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #b58dbb is the palette's #75507b with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #6a9de0 is the palette's #3465a4 with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #2fabad is the palette's #06989a with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6a9de0'.
+ */
+:root {
+  --main-bg-color: #2e3436;
+  --modal-bg-color: #2e3436;
+  --modal-header-color: #2e3436;
+  --modal-footer-color: #2e3436;
+  --drop-down-menu-bg: #2e3436;
+  --button-color: #6a9de0;
+  --button-color-hover: #2fabad;
+  --button-text: #2e3436;
+  --button-text-hover: #2e3436;
+  --accent-color: 106, 157, 224;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #2fabad;
+  --link-color-hover: #b58dbb;
+  --label-text-color: #2e3436;
+  --text: #d3d7cf;
+  --text-hover: #eeeeec;
+  --text-muted: #729fcf;
+  --arr-queue-color: #4e9a06;
+  --plex-poster-unwatched: #ef2929;
+  --petio-spinner: invert(34%) sepia(6%) saturate(4458%) hue-rotate(182deg) brightness(92%) contrast(91%);
+  --gitea-color-primary-dark-4: 106, 157, 224;
+  --overseerr-gradient: linear-gradient(180deg, rgba(46, 52, 54, 0.17) 0%, rgba(46, 52, 54) 100%);
+}

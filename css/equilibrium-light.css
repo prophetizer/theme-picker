@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Equilibrium Light
+ *
+ * Palette source: tinted-theming/schemes base16/equilibrium-light.yaml (Carlo Abelli; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * HIGH CONTRAST: every text role (body, muted, links, button label) is meant
+ * to reach WCAG AAA 7:1 on the panels.
+ * --text-muted #444950 is the palette's #5a5f66 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color #00524d is the palette's #007a72 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color-hover #2f438f is the palette's #4e66b6 with its lightness
+ * nudged to reach 7:1 on the panels.
+ * --button-color #005487 is the palette's #0073b5 with its lightness nudged
+ * to reach 7:1 under its label.
+ * --button-color-hover #005b55 is the palette's #007a72 with its lightness
+ * nudged to reach 7:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#005487'.
+ */
+:root {
+  --main-bg-color: #e7e2d9;
+  --modal-bg-color: #f5f0e7;
+  --modal-header-color: #f5f0e7;
+  --modal-footer-color: #f5f0e7;
+  --drop-down-menu-bg: #f5f0e7;
+  --button-color: #005487;
+  --button-color-hover: #005b55;
+  --button-text: #f5f0e7;
+  --button-text-hover: #f5f0e7;
+  --accent-color: 0, 84, 135;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00524d;
+  --link-color-hover: #2f438f;
+  --label-text-color: #f5f0e7;
+  --text: #43474e;
+  --text-hover: #181c22;
+  --text-muted: #444950;
+  --arr-queue-color: #637200;
+  --plex-poster-unwatched: #bf3e05;
+  --petio-spinner: invert(86%) sepia(99%) saturate(3104%) hue-rotate(189deg) brightness(96%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 84, 135;
+  --overseerr-gradient: linear-gradient(180deg, rgba(231, 226, 217, 0.17) 0%, rgba(231, 226, 217) 100%);
+}

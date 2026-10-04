@@ -1,0 +1,51 @@
+/*
+ * theme.park custom theme: Harmonic16 Light
+ *
+ * Palette source: tinted-theming/schemes base16/harmonic16-light.yaml (Jannik Siebert; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * HIGH CONTRAST: every text role (body, muted, links, button label) is meant
+ * to reach WCAG AAA 7:1 on the panels.
+ * --text #344f6c is the palette's #405c79 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #354f68 is the palette's #627e99 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color #1a507f is the palette's #568bbf with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color-hover #8a245d is the palette's #bf568b with its lightness
+ * nudged to reach 7:1 on the panels.
+ * --button-color #703ba2 is the palette's #8b56bf with its lightness nudged
+ * to reach 7:1 under its label.
+ * --button-color-hover #235889 is the palette's #568bbf with its lightness
+ * nudged to reach 7:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#703ba2'.
+ */
+:root {
+  --main-bg-color: #e5ebf1;
+  --modal-bg-color: #f7f9fb;
+  --modal-header-color: #f7f9fb;
+  --modal-footer-color: #f7f9fb;
+  --drop-down-menu-bg: #f7f9fb;
+  --button-color: #703ba2;
+  --button-color-hover: #235889;
+  --button-text: #f7f9fb;
+  --button-text-hover: #f7f9fb;
+  --accent-color: 112, 59, 162;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #1a507f;
+  --link-color-hover: #8a245d;
+  --label-text-color: #f7f9fb;
+  --text: #344f6c;
+  --text-hover: #0b1c2c;
+  --text-muted: #354f68;
+  --arr-queue-color: #56bf8b;
+  --plex-poster-unwatched: #bfbf56;
+  --petio-spinner: invert(77%) sepia(96%) saturate(1133%) hue-rotate(247deg) brightness(93%) contrast(89%);
+  --gitea-color-primary-dark-4: 112, 59, 162;
+  --overseerr-gradient: linear-gradient(180deg, rgba(229, 235, 241, 0.17) 0%, rgba(229, 235, 241) 100%);
+}

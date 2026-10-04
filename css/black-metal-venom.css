@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Black Metal (Venom)
+ *
+ * Palette source: tinted-theming/schemes base16/black-metal-venom.yaml (metalelf0; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #bd6258 is the palette's #79241f with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #bd6258 is the palette's #79241f with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#79241f'.
+ */
+:root {
+  --main-bg-color: #000000;
+  --modal-bg-color: #121212;
+  --modal-header-color: #121212;
+  --modal-footer-color: #121212;
+  --drop-down-menu-bg: #121212;
+  --button-color: #79241f;
+  --button-color-hover: #79241f;
+  --button-text: #c1c1c1;
+  --button-text-hover: #c1c1c1;
+  --accent-color: 121, 36, 31;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #bd6258;
+  --link-color-hover: #bd6258;
+  --label-text-color: #c1c1c1;
+  --text: #c1c1c1;
+  --text-hover: #c1c1c1;
+  --text-muted: #999999;
+  --arr-queue-color: #f8f7f2;
+  --plex-poster-unwatched: #aaaaaa;
+  --petio-spinner: invert(88%) sepia(34%) saturate(5929%) hue-rotate(349deg) brightness(97%) contrast(85%);
+  --gitea-color-primary-dark-4: 121, 36, 31;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.17) 0%, rgba(0, 0, 0) 100%);
+}

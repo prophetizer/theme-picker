@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Misty Meadow (light)
+ *
+ * Generated variant: light of 'misty-meadow', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'misty-meadow'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#53923e'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #cff7c3 0%, #fefef7 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #cff7c3 0%, #fefef7 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #cff7c3 0%, #fefef7 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #cff7c3 0%, #fefef7 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #dbead3;
+  --button-color: #53923e;
+  --button-color-hover: #84847a;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 83, 146, 62;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #36741f;
+  --link-color-hover: #67675e;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #061600;
+  --arr-queue-color: #53923f;
+  --plex-poster-unwatched: #84847a;
+  --petio-spinner: invert(54%) sepia(60%) saturate(417%) hue-rotate(60deg) brightness(96%) contrast(90%);
+  --gitea-color-primary-dark-4: 83, 146, 62;
+  --overseerr-gradient: linear-gradient(180deg, rgba(254, 254, 247, 0.17) 0%, #fefef7 100%);
+}

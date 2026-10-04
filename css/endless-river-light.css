@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Endless River (light)
+ *
+ * Generated variant: light of 'endless-river', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'endless-river'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#009671'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #e9fff6 0%, #e2efff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #e9fff6 0%, #e2efff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #e9fff6 0%, #e2efff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #e9fff6 0%, #e2efff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #c5ecf5;
+  --button-color: #009671;
+  --button-color-hover: #4f87c7;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 0, 150, 113;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007658;
+  --link-color-hover: #416a99;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #001619;
+  --arr-queue-color: #009671;
+  --plex-poster-unwatched: #4f87c7;
+  --petio-spinner: invert(58%) sepia(25%) saturate(4209%) hue-rotate(139deg) brightness(85%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 150, 113;
+  --overseerr-gradient: linear-gradient(180deg, rgba(226, 239, 255, 0.17) 0%, #e2efff 100%);
+}

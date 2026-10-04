@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Windows NT
+ *
+ * Palette source: tinted-theming/schemes base16/windows-nt.yaml (Fergus Collins; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --button-color #2d68ff is the palette's #0000ff with its lightness nudged
+ * to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#2d68ff'.
+ */
+:root {
+  --main-bg-color: #000000;
+  --modal-bg-color: #2a2a2a;
+  --modal-header-color: #2a2a2a;
+  --modal-footer-color: #2a2a2a;
+  --drop-down-menu-bg: #2a2a2a;
+  --button-color: #2d68ff;
+  --button-color-hover: #00ffff;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 45, 104, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00ffff;
+  --link-color-hover: #ff00ff;
+  --label-text-color: #000000;
+  --text: #c0c0c0;
+  --text-hover: #ffffff;
+  --text-muted: #a1a1a1;
+  --arr-queue-color: #00ff00;
+  --plex-poster-unwatched: #808000;
+  --petio-spinner: invert(54%) sepia(63%) saturate(7464%) hue-rotate(219deg) brightness(104%) contrast(101%);
+  --gitea-color-primary-dark-4: 45, 104, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.17) 0%, rgba(0, 0, 0) 100%);
+}

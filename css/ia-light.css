@@ -1,0 +1,51 @@
+/*
+ * theme.park custom theme: iA Light
+ *
+ * Palette source: tinted-theming/schemes base16/ia-light.yaml (iA Inc.; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * HIGH CONTRAST: every text role (body, muted, links, button label) is meant
+ * to reach WCAG AAA 7:1 on the panels.
+ * --text-hover #464646 is the palette's #f8f8f8 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #464646 is the palette's #767676 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color #004687 is the palette's #2d6bb1 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --link-color-hover #7d176f is the palette's #a94598 with its lightness
+ * nudged to reach 7:1 on the panels.
+ * --button-color #005d63 is the palette's #48bac2 with its lightness nudged
+ * to reach 7:1 under its label.
+ * --button-color-hover #135498 is the palette's #2d6bb1 with its lightness
+ * nudged to reach 7:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#005d63'.
+ */
+:root {
+  --main-bg-color: #dedede;
+  --modal-bg-color: #f6f6f6;
+  --modal-header-color: #f6f6f6;
+  --modal-footer-color: #f6f6f6;
+  --drop-down-menu-bg: #f6f6f6;
+  --button-color: #005d63;
+  --button-color-hover: #135498;
+  --button-text: #f6f6f6;
+  --button-text-hover: #f6f6f6;
+  --accent-color: 0, 93, 99;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #004687;
+  --link-color-hover: #7d176f;
+  --label-text-color: #f6f6f6;
+  --text: #181818;
+  --text-hover: #464646;
+  --text-muted: #464646;
+  --arr-queue-color: #38781c;
+  --plex-poster-unwatched: #c43e18;
+  --petio-spinner: invert(76%) sepia(27%) saturate(3781%) hue-rotate(155deg) brightness(96%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 93, 99;
+  --overseerr-gradient: linear-gradient(180deg, rgba(222, 222, 222, 0.17) 0%, rgba(222, 222, 222) 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: iA Light (dark)
+ *
+ * Generated variant: dark of 'ia-light', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'ia-light'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#348086'.
+ */
+:root {
+  --main-bg-color: #181818;
+  --modal-bg-color: #2d2d2d;
+  --modal-header-color: #2d2d2d;
+  --modal-footer-color: #2d2d2d;
+  --drop-down-menu-bg: #2d2d2d;
+  --button-color: #348086;
+  --button-color-hover: #3a77be;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 52, 128, 134;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5a96de;
+  --link-color-hover: #d66ec3;
+  --label-text-color: #000000;
+  --text: #bbbbbb;
+  --text-hover: #b9b9b9;
+  --text-muted: #939393;
+  --arr-queue-color: #44842a;
+  --plex-poster-unwatched: #ce4824;
+  --petio-spinner: invert(59%) sepia(88%) saturate(268%) hue-rotate(136deg) brightness(89%) contrast(94%);
+  --gitea-color-primary-dark-4: 52, 128, 134;
+  --overseerr-gradient: linear-gradient(180deg, rgba(24, 24, 24, 0.17) 0%, #181818 100%);
+}

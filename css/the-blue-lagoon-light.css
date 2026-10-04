@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: The Blue Lagoon (light)
+ *
+ * Generated variant: light of 'the-blue-lagoon', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'the-blue-lagoon'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#008b76'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #feffff 0%, #d3daff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #feffff 0%, #d3daff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #feffff 0%, #d3daff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #feffff 0%, #d3daff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #d4edfa;
+  --button-color: #008b76;
+  --button-color-hover: #6d76bc;
+  --button-text: #0d1016;
+  --button-text-hover: #0d1016;
+  --accent-color: 0, 139, 118;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #006c5b;
+  --link-color-hover: #555b8f;
+  --label-text-color: #0d1016;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #00141c;
+  --arr-queue-color: #008b76;
+  --plex-poster-unwatched: #6d76bc;
+  --petio-spinner: invert(64%) sepia(19%) saturate(5607%) hue-rotate(146deg) brightness(90%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 139, 118;
+  --overseerr-gradient: linear-gradient(180deg, rgba(211, 218, 255, 0.17) 0%, #d3daff 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Black Metal (Nile) (light)
+ *
+ * Generated variant: light of 'black-metal-nile', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'black-metal-nile'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5f8787'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #5f8787;
+  --button-color-hover: #5f8787;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 95, 135, 135;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4f7676;
+  --link-color-hover: #4f7676;
+  --label-text-color: #000000;
+  --text: #141414;
+  --text-hover: #141414;
+  --text-muted: #323232;
+  --arr-queue-color: #9b8a79;
+  --plex-poster-unwatched: #8d8d8d;
+  --petio-spinner: invert(53%) sepia(37%) saturate(278%) hue-rotate(131deg) brightness(98%) contrast(88%);
+  --gitea-color-primary-dark-4: 95, 135, 135;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

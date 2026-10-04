@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Windows NT Light
+ *
+ * Palette source: tinted-theming/schemes base16/windows-nt-light.yaml (Fergus Collins; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #4d4d4d is the palette's #808080 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #696969 is the palette's #a0a0a0 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #007676 is the palette's #008080 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#000080'.
+ */
+:root {
+  --main-bg-color: #eaeaea;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #000080;
+  --button-color-hover: #008080;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 0, 0, 128;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007676;
+  --link-color-hover: #800080;
+  --label-text-color: #ffffff;
+  --text: #4d4d4d;
+  --text-hover: #000000;
+  --text-muted: #696969;
+  --arr-queue-color: #008000;
+  --plex-poster-unwatched: #ffff00;
+  --petio-spinner: invert(91%) sepia(66%) saturate(4760%) hue-rotate(237deg) brightness(99%) contrast(129%);
+  --gitea-color-primary-dark-4: 0, 0, 128;
+  --overseerr-gradient: linear-gradient(180deg, rgba(234, 234, 234, 0.17) 0%, rgba(234, 234, 234) 100%);
+}

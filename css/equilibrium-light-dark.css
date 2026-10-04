@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Equilibrium Light (dark)
+ *
+ * Generated variant: dark of 'equilibrium-light', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'equilibrium-light'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#2c72a7'.
+ */
+:root {
+  --main-bg-color: #1b1813;
+  --modal-bg-color: #27241f;
+  --modal-header-color: #27241f;
+  --modal-footer-color: #27241f;
+  --drop-down-menu-bg: #27241f;
+  --button-color: #2c72a7;
+  --button-color-hover: #2e7972;
+  --button-text: #f5f0e7;
+  --button-text-hover: #f5f0e7;
+  --accent-color: 44, 114, 167;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #53968f;
+  --link-color-hover: #6c87da;
+  --label-text-color: #f5f0e7;
+  --text: #aaafb7;
+  --text-hover: #b1b6be;
+  --text-muted: #858b93;
+  --arr-queue-color: #657405;
+  --plex-poster-unwatched: #c2410c;
+  --petio-spinner: invert(60%) sepia(16%) saturate(2020%) hue-rotate(163deg) brightness(95%) contrast(88%);
+  --gitea-color-primary-dark-4: 44, 114, 167;
+  --overseerr-gradient: linear-gradient(180deg, rgba(27, 24, 19, 0.17) 0%, #1b1813 100%);
+}
