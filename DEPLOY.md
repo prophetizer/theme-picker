@@ -205,7 +205,10 @@ picker writes `baseUrl` from `theme_park_url`). If an app sends its own
 
 By default each tile shows colour bands. Real screenshots come from the
 capture, an optional second container. While it runs, it cycles the live
-theme through every theme, so everyone sees it change. It photographs
+theme through every theme, so everyone sees it change; the picker shows a
+banner meanwhile ("theme 509 of 772, about 40 min left"), read from
+`capture-status.json`, which the capture writes to the state directory
+(`GET /api/capture` serves it). It photographs
 `screenshots.apps` from `picker.yml`; pick apps whose themed page shows
 without a login screen.
 

@@ -1691,3 +1691,23 @@ $('#lb-collect').addEventListener('change', async ev => {
   refresh();
 });
 
+// --- the nightly capture's progress ----------------------------------------------
+// While a run cycles the live theme, say so (and how long is left): otherwise
+// the live strip seems to change on its own. Checked every 20 s during a run,
+// every 2 min otherwise.
+async function pollCapture() {
+  let st = {running: false};
+  try { const r = await fetch('/api/capture'); if (r.ok) st = await r.json(); } catch (e) {}
+  const b = $('#capture-banner');
+  if (b) {
+    b.hidden = !st.running;
+    if (st.running) {
+      b.textContent = `Screenshot capture running: theme ${st.index || 0} of ${st.themes || 0}`
+        + (st.theme ? ` (${st.theme})` : '') + (st.minutes_left != null ? `, about ${st.minutes_left} min left` : '')
+        + `. The live theme changes every few seconds until it finishes, then goes back to ${st.restore || 'the one before'}.`;
+    }
+  }
+  setTimeout(pollCapture, st.running ? 20000 : 120000);
+}
+setTimeout(pollCapture, 3000);
+

@@ -51,8 +51,8 @@ in [`picker.example.yml`](picker.example.yml).
 - Contrast audit on every theme: *low contrast* and *high contrast* (WCAG AAA
   for every text role) badges, measured rather than claimed
 - A preview of each theme: real screenshots of your apps (captured nightly by
-  an optional headless-Chromium container, or a host cron job), the themes
-  that look like it, a colour-vision check, and export to base16 and
+  an optional headless-Chromium container, or a host cron job, with a
+  progress banner while it runs), the themes that look like it, a colour-vision check, and export to base16 and
   terminal formats
 - Recent-theme history chips and usage stats
 - Per-app theme pins, and app groups to pin several at once, with a coverage

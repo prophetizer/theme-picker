@@ -4,7 +4,7 @@ manifest (2026-10-03)."""
 import json
 from unittest import mock
 
-from picker import config, render, schedule, state
+from picker import config, render, schedule, shots, state
 from tests.support import SandboxCase
 from tests.test_handler import ServerCase
 from tests.test_schedule import D, FirstPick, ScheduleCase
@@ -366,3 +366,36 @@ class Collections(SandboxCase):
                          schedule.themes.current_theme() == "nord" else ["dracula", "nord"])
         ok, msg = schedule.save_rotate({"enabled": False, "every": 6, "pool": "collection:Work"})
         self.assertTrue(ok, msg)
+
+
+class CaptureStatus(ServerCase):
+    def write(self, **st):
+        shots.STATUS_FILE.write_text(json.dumps(st))
+
+    def test_running_with_an_estimate_and_a_banner(self):
+        from datetime import datetime, timedelta
+        now = datetime.now().astimezone()
+        fmt = lambda t: t.strftime("%Y-%m-%dT%H:%M:%S%z")
+        self.write(running=True, started=fmt(now - timedelta(minutes=30)), updated=fmt(now), themes=80, index=20,
+                   theme="nord", restore="dracula", shots=560, done=140)
+        st = json.loads(self.request("GET", "/api/capture")[2])
+        self.assertTrue(st["running"])
+        self.assertEqual(st["minutes_left"], 90)                  # 140 shots in 30 min, 420 to go
+        page = self.request("GET", "/")[2]
+        page = page.decode() if isinstance(page, bytes) else page
+        self.assertRegex(page, r'id="capture-banner" role="status">Screenshot capture running: theme 20 of 80 \(nord\)')
+
+    def test_stale_and_finished(self):
+        from datetime import datetime, timedelta
+        now = datetime.now().astimezone()
+        fmt = lambda t: t.strftime("%Y-%m-%dT%H:%M:%S%z")
+        self.write(running=True, started=fmt(now - timedelta(hours=2)), updated=fmt(now - timedelta(hours=1)),
+                   themes=5, index=2, shots=10, done=3)
+        st = shots.capture_status()
+        self.assertEqual((st["running"], st.get("stalled")), (False, True))
+        self.write(running=False, started=fmt(now), updated=fmt(now), finished=fmt(now), shots=10, done=10)
+        self.assertFalse(shots.capture_status()["running"])
+        self.assertIn('id="capture-banner" role="status" hidden', render.capture_banner())
+
+    def test_nothing_written_yet(self):
+        self.assertEqual(shots.capture_status(), {"running": False})

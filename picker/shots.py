@@ -76,3 +76,34 @@ def shot_file(path):
     if f.parent != folder or not f.is_file():
         return None
     return f, ctype
+
+
+# --- the screenshot capture's progress ------------------------------------------
+STATUS_FILE = config.STATE_DIR / "capture-status.json"
+STALE_MINUTES = 15
+
+
+def capture_status(now=None):
+    """The capture's last status (written by capture_theme_screenshots.py),
+    with minutes left estimated from its pace. A 'running' status not updated
+    for STALE_MINUTES is reported as stopped: the run died without saying."""
+    from datetime import datetime
+    st = state.read_json(STATUS_FILE, {})
+    if not isinstance(st, dict) or not st:
+        return {"running": False}
+    now = now or datetime.now().astimezone()
+    try:
+        updated = datetime.strptime(st.get("updated", ""), "%Y-%m-%dT%H:%M:%S%z")
+        started = datetime.strptime(st.get("started", ""), "%Y-%m-%dT%H:%M:%S%z")
+    except ValueError:
+        return {"running": False}
+    out = {k: st.get(k) for k in ("running", "themes", "index", "theme", "restore", "shots", "done",
+                                  "finished", "failed", "skipped", "minutes")}
+    if st.get("running") and (now - updated).total_seconds() > STALE_MINUTES * 60:
+        out.update(running=False, stalled=True)
+    if out.get("running"):
+        done, shots = st.get("done") or 0, st.get("shots") or 0
+        elapsed = (now - started).total_seconds()
+        out["minutes_left"] = round(elapsed / done * (shots - done) / 60) if done else None
+    return out
+

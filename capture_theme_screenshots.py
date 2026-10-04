@@ -154,6 +154,19 @@ def alert(title, body, priority=""):
         print(f"    (ntfy alert not sent: {e})", file=sys.stderr)
 
 
+STATUS_FILE = config.STATE_DIR / "capture-status.json"
+
+
+def status(**fields):
+    """The run's progress for the picker (state_dir/capture-status.json): it
+    shows a banner while a run cycles the live theme. Never breaks the run."""
+    try:
+        fields["updated"] = time.strftime("%Y-%m-%dT%H:%M:%S%z")
+        backend._atomic_write(STATUS_FILE, json.dumps(fields) + "\n")
+    except Exception as e:
+        print(f"    (capture status not written: {e})", file=sys.stderr)
+
+
 def summarise(names, n=6):
     return ", ".join(names[:n]) + (f" and {len(names) - n} more" if len(names) > n else "")
 
@@ -199,6 +212,10 @@ def main():
             restore_to["theme"] = live
             restore_to["human"] = True
     started = time.time()
+    to_shoot = [t for t in themes if any(needs_shot(a, t, force) for a in APPS)]
+    progress = {"running": True, "started": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "themes": len(to_shoot),
+                "shots": len(todo), "done": 0, "index": 0, "theme": "", "restore": original}
+    status(**progress)
     try:
         with sync_playwright() as p:
             # The browser's own sandbox on unless screenshots.sandbox is off
@@ -214,6 +231,8 @@ def main():
                     continue
                 elapsed = time.time() - started
                 print(f"==> [{i}/{len(themes)}] {theme}  ({elapsed/60:.0f} min elapsed)", flush=True)
+                progress.update(index=progress["index"] + 1, theme=theme, restore=restore_to["theme"])
+                status(**progress)
                 note_human_change()
                 set_theme(theme)
                 restore_to["last_set"] = theme
@@ -246,6 +265,7 @@ def main():
                             continue
                         save_atomic(out, lambda p: page.screenshot(path=p))
                         make_thumb(out, THUMBS / f"{app}_{theme}.jpg")
+                        progress["done"] += 1
                         print(f"    {app:11} ok")
                     except Exception as e:
                         failed.append(f"{app}_{theme}")
@@ -276,6 +296,9 @@ def main():
         if not jpg.exists():
             make_thumb(png, jpg)
 
+    status(running=False, started=progress["started"], finished=time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+           shots=progress["shots"], done=progress["done"], failed=len(failed), skipped=len(mismatched),
+           minutes=round((time.time() - started) / 60))
     print(f"==> Done in {(time.time() - started)/60:.0f} min. "
           f"{len(list(SHOTS.glob('*.png')))} shots on disk.")
     if failed:

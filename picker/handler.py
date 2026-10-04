@@ -246,6 +246,8 @@ class Handler(BaseHTTPRequestHandler):
             if t not in themes.allowed_themes():
                 return self._send_json({"error": "unknown theme"}, status=400)
             self._send_json(editor.theme_vars(t))
+        elif path == "/api/capture":
+            self._send_json(shots.capture_status())
         elif path == "/api/digest/preview":
             # What this week's digest would say, composed now; nothing is sent.
             from . import digest

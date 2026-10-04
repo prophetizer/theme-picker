@@ -376,7 +376,7 @@ class Template(unittest.TestCase):
                                   "msg_text", "apps", "stats", "base_opts", "script_v", "undo",
                                   "schedule", "preview_banner", "early_v", "groups",
                                   "theme_colour", "touch_v", "theme_opts",
-                                  "collection_opts", "collections_json"})
+                                  "collection_opts", "collections_json", "capture_banner"})
 
 
 if __name__ == "__main__":

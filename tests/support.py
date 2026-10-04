@@ -59,6 +59,7 @@ class SandboxCase(unittest.TestCase):
             (state, "HIDDEN_FORMS_FILE", d / "theme-hidden-forms.json"),
             (digest, "DIGEST_FILE", d / "theme-digest.json"),
             (collections, "COLLECTIONS_FILE", d / "theme-collections.json"),
+            (shots, "STATUS_FILE", d / "capture-status.json"),
             (state, "GROUPS_FILE", d / "theme-groups.json"),
             (state, "DATES_FILE", d / "theme-dates.json"),
             (state, "HISTORY_FILE", d / "theme-history.json"),

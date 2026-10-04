@@ -356,6 +356,24 @@ def pool_opts(cur):
             + '</optgroup>')
 
 
+def capture_banner():
+    """A note while the nightly capture is cycling the live theme."""
+    st = shots.capture_status()
+    hidden = "" if st.get("running") else " hidden"
+    return f'<p class="capture-banner" id="capture-banner" role="status"{hidden}>{html.escape(capture_text(st))}</p>'
+
+
+def capture_text(st):
+    if not st.get("running"):
+        return ""
+    left = st.get("minutes_left")
+    return (f"Screenshot capture running: theme {st.get('index', 0)} of {st.get('themes', 0)}"
+            + (f" ({st['theme']})" if st.get("theme") else "")
+            + (f", about {left} min left" if left is not None else "")
+            + f". The live theme changes every few seconds until it finishes, then goes back to "
+            + f"{st.get('restore') or 'the one before'}.")
+
+
 def collection_opts():
     e = lambda s: html.escape(str(s), quote=True)
     user = collections.read_user()
@@ -524,5 +542,5 @@ def render_page(message="", preview=""):
         msg_hidden=msg_hidden, msg_text=msg_text, preview_banner=preview_banner,
         early_v=VERSION["early.js"], apps=apps_html(active), groups=groups_html(),
         stats=stats_html(), schedule=schedule_html(), base_opts=base_opts, theme_opts=theme_opts_template(),
-        collection_opts=collection_opts(), collections_json=collections_json(),
+        collection_opts=collection_opts(), collections_json=collections_json(), capture_banner=capture_banner(),
         script_v=VERSION["app.js"])
