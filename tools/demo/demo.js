@@ -47,6 +47,9 @@
       r ? ratings[data.theme] = r : delete ratings[data.theme];
       return json({ok: true, ratings});
     }
+    if (path === '/api/digest/preview') return json({enabled: false, ntfy: false, title: 'Theme picker: your week',
+      body: 'Installed, this summarises your week on ntfy: theme changes and what was on screen most, '
+          + 'themes added, coverage, and themes missing screenshots.'});
     if (path === '/api/override') return off('pinning an app');
     if (path === '/api/group') return off('app groups');
     if (path === '/api/schedule' || path === '/api/daily' || path === '/api/rotate') return off('the schedule');
