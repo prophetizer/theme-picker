@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Papel (dark)
+ *
+ * Generated variant: dark of 'papel', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'papel'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#2c6ca0'.
+ */
+:root {
+  --main-bg-color: #1b1811;
+  --modal-bg-color: #1b1811;
+  --modal-header-color: #1b1811;
+  --modal-footer-color: #1b1811;
+  --drop-down-menu-bg: #1b1811;
+  --button-color: #2c6ca0;
+  --button-color-hover: #127b6b;
+  --button-text: #f5efe2;
+  --button-text-hover: #f5efe2;
+  --accent-color: 44, 108, 160;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #308f7e;
+  --link-color-hover: #b464a6;
+  --label-text-color: #f5efe2;
+  --text: #afa190;
+  --text-hover: #a8a393;
+  --text-muted: #8c7e6c;
+  --arr-queue-color: #5e7a28;
+  --plex-poster-unwatched: #c25c1f;
+  --petio-spinner: invert(63%) sepia(11%) saturate(2822%) hue-rotate(165deg) brightness(98%) contrast(91%);
+  --gitea-color-primary-dark-4: 44, 108, 160;
+  --overseerr-gradient: linear-gradient(180deg, rgba(27, 24, 17, 0.17) 0%, #1b1811 100%);
+}

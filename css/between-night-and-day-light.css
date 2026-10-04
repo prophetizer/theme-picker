@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Between Night and Day (light)
+ *
+ * Generated variant: light of 'between-night-and-day', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'between-night-and-day'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#2d86c1'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #d8e6f3 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #d8e6f3 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #d8e6f3 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.25) 0%, rgba(209, 209, 209, 0.25) 100%), linear-gradient(-90deg, #d8e6f3 0%, #ffffff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #d1eaff;
+  --button-color: #2d86c1;
+  --button-color-hover: #6e8296;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 45, 134, 193;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #2a6894;
+  --link-color-hover: #526579;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #001122;
+  --arr-queue-color: #4885b2;
+  --plex-poster-unwatched: #6e8296;
+  --petio-spinner: invert(58%) sepia(52%) saturate(643%) hue-rotate(161deg) brightness(100%) contrast(94%);
+  --gitea-color-primary-dark-4: 45, 134, 193;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.17) 0%, #ffffff 100%);
+}

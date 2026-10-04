@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Sun on the Horizon (light)
+ *
+ * Generated variant: light of 'sun-on-the-horizon', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'sun-on-the-horizon'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#af7f00'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fdf3d7 0%, #fff2da 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #fdf3d7 0%, #fff2da 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #fdf3d7 0%, #fff2da 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #fdf3d7 0%, #fff2da 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #efe1c4;
+  --button-color: #af7f00;
+  --button-color-hover: #96865a;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 175, 127, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8a6300;
+  --link-color-hover: #79693e;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #170e00;
+  --arr-queue-color: #af7f00;
+  --plex-poster-unwatched: #96865a;
+  --petio-spinner: invert(50%) sepia(61%) saturate(3923%) hue-rotate(27deg) brightness(95%) contrast(102%);
+  --gitea-color-primary-dark-4: 175, 127, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 242, 218, 0.17) 0%, #fff2da 100%);
+}

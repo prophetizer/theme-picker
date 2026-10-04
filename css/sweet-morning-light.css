@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Sweet Morning (light)
+ *
+ * Generated variant: light of 'sweet-morning', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'sweet-morning'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#cd676c'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fff1f1 0%, #ffefdb 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #fff1f1 0%, #ffefdb 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #fff1f1 0%, #ffefdb 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #fff1f1 0%, #ffefdb 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffd7cb;
+  --button-color: #cd676c;
+  --button-color-hover: #b37b21;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 205, 103, 108;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #9a5658;
+  --link-color-hover: #915f00;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #210400;
+  --arr-queue-color: #ba7274;
+  --plex-poster-unwatched: #b37b21;
+  --petio-spinner: invert(47%) sepia(37%) saturate(741%) hue-rotate(308deg) brightness(86%) contrast(84%);
+  --gitea-color-primary-dark-4: 205, 103, 108;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 239, 219, 0.17) 0%, #ffefdb 100%);
+}

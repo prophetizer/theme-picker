@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Grapefruit Sunset (light)
+ *
+ * Generated variant: light of 'grapefruit-sunset', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'grapefruit-sunset'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#cb6850'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fff3f0 0%, #ffe8ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #fff3f0 0%, #ffe8ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #fff3f0 0%, #ffe8ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #fff3f0 0%, #ffe8ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffd5de;
+  --button-color: #cb6850;
+  --button-color-hover: #b06cb5;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 203, 104, 80;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #995645;
+  --link-color-hover: #914f96;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #23000a;
+  --arr-queue-color: #b87361;
+  --plex-poster-unwatched: #b06cb5;
+  --petio-spinner: invert(52%) sepia(19%) saturate(1342%) hue-rotate(325deg) brightness(97%) contrast(95%);
+  --gitea-color-primary-dark-4: 203, 104, 80;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 232, 255, 0.17) 0%, #ffe8ff 100%);
+}

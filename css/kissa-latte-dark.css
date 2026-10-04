@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Kissa Latte (dark)
+ *
+ * Generated variant: dark of 'kissa-latte', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'kissa-latte'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#3a6eae'.
+ */
+:root {
+  --main-bg-color: #191816;
+  --modal-bg-color: #242321;
+  --modal-header-color: #242321;
+  --modal-footer-color: #242321;
+  --drop-down-menu-bg: #242321;
+  --button-color: #3a6eae;
+  --button-color-hover: #307777;
+  --button-text: #fefcfa;
+  --button-text-hover: #fefcfa;
+  --accent-color: 58, 110, 174;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4f9494;
+  --link-color-hover: #9d74e1;
+  --label-text-color: #fefcfa;
+  --text: #b8b4ac;
+  --text-hover: #afadab;
+  --text-muted: #90887e;
+  --arr-queue-color: #3f7757;
+  --plex-poster-unwatched: #946127;
+  --petio-spinner: invert(63%) sepia(50%) saturate(673%) hue-rotate(173deg) brightness(96%) contrast(88%);
+  --gitea-color-primary-dark-4: 58, 110, 174;
+  --overseerr-gradient: linear-gradient(180deg, rgba(25, 24, 22, 0.17) 0%, #191816 100%);
+}

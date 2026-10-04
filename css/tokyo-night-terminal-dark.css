@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Tokyo Night Terminal Dark
+ *
+ * Palette source: tinted-theming/schemes base16/tokyo-night-terminal-dark.yaml (Michaël Ball; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #a0a5c3 is the palette's #787c99 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #7e829f is the palette's #787c99 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7aa2f7'.
+ */
+:root {
+  --main-bg-color: #16161e;
+  --modal-bg-color: #1a1b26;
+  --modal-header-color: #1a1b26;
+  --modal-footer-color: #1a1b26;
+  --drop-down-menu-bg: #1a1b26;
+  --button-color: #7aa2f7;
+  --button-color-hover: #7dcfff;
+  --button-text: #16161e;
+  --button-text-hover: #16161e;
+  --accent-color: 122, 162, 247;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #7dcfff;
+  --link-color-hover: #bb9af7;
+  --label-text-color: #16161e;
+  --text: #a0a5c3;
+  --text-hover: #d5d6db;
+  --text-muted: #7e829f;
+  --arr-queue-color: #41a6b5;
+  --plex-poster-unwatched: #ff9e64;
+  --petio-spinner: invert(43%) sepia(73%) saturate(474%) hue-rotate(190deg) brightness(98%) contrast(99%);
+  --gitea-color-primary-dark-4: 122, 162, 247;
+  --overseerr-gradient: linear-gradient(180deg, rgba(22, 22, 30, 0.17) 0%, rgba(22, 22, 30) 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Tokyo Night Terminal Dark (light)
+ *
+ * Generated variant: light of 'tokyo-night-terminal-dark', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'tokyo-night-terminal-dark'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#658bde'.
+ */
+:root {
+  --main-bg-color: #f2f3fa;
+  --modal-bg-color: #f5f6ff;
+  --modal-header-color: #f5f6ff;
+  --modal-footer-color: #f5f6ff;
+  --drop-down-menu-bg: #f5f6ff;
+  --button-color: #658bde;
+  --button-color-hover: #4295c3;
+  --button-text: #16161e;
+  --button-text-hover: #16161e;
+  --accent-color: 101, 139, 222;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #1d77a3;
+  --link-color-hover: #805fb6;
+  --label-text-color: #16161e;
+  --text: #22253c;
+  --text-hover: #060609;
+  --text-muted: #3f425c;
+  --arr-queue-color: #329aa9;
+  --plex-poster-unwatched: #d2753a;
+  --petio-spinner: invert(48%) sepia(65%) saturate(808%) hue-rotate(195deg) brightness(92%) contrast(88%);
+  --gitea-color-primary-dark-4: 101, 139, 222;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 243, 250, 0.17) 0%, #f2f3fa 100%);
+}
