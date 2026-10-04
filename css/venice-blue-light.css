@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Venice Blue (light)
+ *
+ * Generated variant: light of 'venice-blue', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'venice-blue'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#4a88b3'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #d5edff 0%, #f9fffe 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #d5edff 0%, #f9fffe 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #d5edff 0%, #f9fffe 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #d5edff 0%, #f9fffe 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #caecf4;
+  --button-color: #4a88b3;
+  --button-color-hover: #3a8f86;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 74, 136, 179;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #2b6b94;
+  --link-color-hover: #13726a;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #00151b;
+  --arr-queue-color: #4988b3;
+  --plex-poster-unwatched: #3a8f86;
+  --petio-spinner: invert(49%) sepia(8%) saturate(3114%) hue-rotate(162deg) brightness(95%) contrast(78%);
+  --gitea-color-primary-dark-4: 74, 136, 179;
+  --overseerr-gradient: linear-gradient(180deg, rgba(249, 255, 254, 0.17) 0%, #f9fffe 100%);
+}

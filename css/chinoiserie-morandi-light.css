@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Chinoiserie Morandi (light)
+ *
+ * Generated variant: light of 'chinoiserie-morandi', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'chinoiserie-morandi'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#748eb8'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #fbfbfb;
+  --modal-header-color: #fbfbfb;
+  --modal-footer-color: #fbfbfb;
+  --drop-down-menu-bg: #fbfbfb;
+  --button-color: #748eb8;
+  --button-color-hover: #5e8c9b;
+  --button-text: #1d1d1d;
+  --button-text-hover: #1d1d1d;
+  --accent-color: 116, 142, 184;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #497684;
+  --link-color-hover: #656ca0;
+  --label-text-color: #1d1d1d;
+  --text: #0a0e11;
+  --text-hover: #000000;
+  --text-muted: #261b1b;
+  --arr-queue-color: #7f936f;
+  --plex-poster-unwatched: #d76f5c;
+  --petio-spinner: invert(42%) sepia(49%) saturate(287%) hue-rotate(178deg) brightness(86%) contrast(91%);
+  --gitea-color-primary-dark-4: 116, 142, 184;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

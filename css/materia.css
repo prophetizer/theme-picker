@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Materia
+ *
+ * Palette source: tinted-theming/schemes base16/materia.yaml (Materia; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#89ddff'.
+ */
+:root {
+  --main-bg-color: #263238;
+  --modal-bg-color: #2c393f;
+  --modal-header-color: #2c393f;
+  --modal-footer-color: #2c393f;
+  --drop-down-menu-bg: #2c393f;
+  --button-color: #89ddff;
+  --button-color-hover: #80cbc4;
+  --button-text: #263238;
+  --button-text-hover: #263238;
+  --accent-color: 137, 221, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #80cbc4;
+  --link-color-hover: #82aaff;
+  --label-text-color: #263238;
+  --text: #cdd3de;
+  --text-hover: #ffffff;
+  --text-muted: #c9ccd3;
+  --arr-queue-color: #8bd649;
+  --plex-poster-unwatched: #ea9560;
+  --petio-spinner: invert(21%) sepia(10%) saturate(2008%) hue-rotate(169deg) brightness(102%) contrast(101%);
+  --gitea-color-primary-dark-4: 137, 221, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(38, 50, 56, 0.17) 0%, rgba(38, 50, 56) 100%);
+}

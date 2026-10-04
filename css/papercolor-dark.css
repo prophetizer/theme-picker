@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: PaperColor Dark
+ *
+ * Palette source: tinted-theming/schemes base16/papercolor-dark.yaml (PaperColor Dark; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #c5c5c5 is the palette's #9e9e9e with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #9e9e9e is the palette's #808080 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #04b0b0 is the palette's #00afaf with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #b58dde is the palette's #af87d7 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5fafd7'.
+ */
+:root {
+  --main-bg-color: #1c1c1c;
+  --modal-bg-color: #363636;
+  --modal-header-color: #363636;
+  --modal-footer-color: #363636;
+  --drop-down-menu-bg: #363636;
+  --button-color: #5fafd7;
+  --button-color-hover: #00afaf;
+  --button-text: #1c1c1c;
+  --button-text-hover: #1c1c1c;
+  --accent-color: 95, 175, 215;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #04b0b0;
+  --link-color-hover: #b58dde;
+  --label-text-color: #1c1c1c;
+  --text: #c5c5c5;
+  --text-hover: #d0d0d0;
+  --text-muted: #9e9e9e;
+  --arr-queue-color: #5faf5f;
+  --plex-poster-unwatched: #d7af5f;
+  --petio-spinner: invert(32%) sepia(70%) saturate(511%) hue-rotate(170deg) brightness(88%) contrast(91%);
+  --gitea-color-primary-dark-4: 95, 175, 215;
+  --overseerr-gradient: linear-gradient(180deg, rgba(28, 28, 28, 0.17) 0%, rgba(28, 28, 28) 100%);
+}

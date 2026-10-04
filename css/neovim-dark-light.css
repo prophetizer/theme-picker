@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Neovim Dark (light)
+ *
+ * Generated variant: light of 'neovim-dark', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'neovim-dark'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6093b4'.
+ */
+:root {
+  --main-bg-color: #f2f3f8;
+  --modal-bg-color: #fefeff;
+  --modal-header-color: #fefeff;
+  --modal-footer-color: #fefeff;
+  --drop-down-menu-bg: #fefeff;
+  --button-color: #6093b4;
+  --button-color-hover: #239c9c;
+  --button-text: #07080d;
+  --button-text-hover: #07080d;
+  --accent-color: 96, 147, 180;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007d7d;
+  --link-color-hover: #8f5f8f;
+  --label-text-color: #07080d;
+  --text: #020204;
+  --text-hover: #000001;
+  --text-muted: #0f1015;
+  --arr-queue-color: #5b9b69;
+  --plex-poster-unwatched: #c47e00;
+  --petio-spinner: invert(37%) sepia(10%) saturate(1674%) hue-rotate(160deg) brightness(86%) contrast(86%);
+  --gitea-color-primary-dark-4: 96, 147, 180;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 243, 248, 0.17) 0%, #f2f3f8 100%);
+}

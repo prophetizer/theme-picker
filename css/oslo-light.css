@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Oslo (light)
+ *
+ * Generated variant: light of 'oslo', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'oslo'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#3592dc'.
+ */
+:root {
+  --main-bg-color: #eff3fd;
+  --modal-bg-color: #f5f8ff;
+  --modal-header-color: #f5f8ff;
+  --modal-footer-color: #f5f8ff;
+  --drop-down-menu-bg: #f5f8ff;
+  --button-color: #3592dc;
+  --button-color-hover: #209ba9;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 53, 146, 220;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007b88;
+  --link-color-hover: #9755ac;
+  --label-text-color: #11141b;
+  --text: #000104;
+  --text-hover: #000000;
+  --text-muted: #131721;
+  --arr-queue-color: #679b3e;
+  --plex-poster-unwatched: #d67058;
+  --petio-spinner: invert(53%) sepia(87%) saturate(550%) hue-rotate(169deg) brightness(94%) contrast(83%);
+  --gitea-color-primary-dark-4: 53, 146, 220;
+  --overseerr-gradient: linear-gradient(180deg, rgba(239, 243, 253, 0.17) 0%, #eff3fd 100%);
+}

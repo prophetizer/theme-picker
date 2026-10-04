@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Oslo
+ *
+ * Palette source: tinted-theming/schemes base16/oslo.yaml (Oslo; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #e1e9f6 is the palette's #abb2bf with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #b6bccb is the palette's #7a808e with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #5dcbda is the palette's #42b3c2 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #e9a2ff is the palette's #c162de with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #323643 is the palette's #3f4451 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#4aa5f0'.
+ */
+:root {
+  --main-bg-color: #3f4451;
+  --modal-bg-color: #474c59;
+  --modal-header-color: #474c59;
+  --modal-footer-color: #474c59;
+  --drop-down-menu-bg: #474c59;
+  --button-color: #4aa5f0;
+  --button-color-hover: #42b3c2;
+  --button-text: #323643;
+  --button-text-hover: #323643;
+  --accent-color: 74, 165, 240;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5dcbda;
+  --link-color-hover: #e9a2ff;
+  --label-text-color: #323643;
+  --text: #e1e9f6;
+  --text-hover: #ffffff;
+  --text-muted: #b6bccb;
+  --arr-queue-color: #8cc265;
+  --plex-poster-unwatched: #d8725a;
+  --petio-spinner: invert(26%) sepia(47%) saturate(5415%) hue-rotate(181deg) brightness(98%) contrast(92%);
+  --gitea-color-primary-dark-4: 74, 165, 240;
+  --overseerr-gradient: linear-gradient(180deg, rgba(63, 68, 81, 0.17) 0%, rgba(63, 68, 81) 100%);
+}

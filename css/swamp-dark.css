@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Swamp Dark
+ *
+ * Palette source: tinted-theming/schemes base16/swamp-dark.yaml (Swamp Dark; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color-hover #cb85a2 is the palette's #91506c with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #1c180d is the palette's #242015 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#c1666b'.
+ */
+:root {
+  --main-bg-color: #242015;
+  --modal-bg-color: #3a3124;
+  --modal-header-color: #3a3124;
+  --modal-footer-color: #3a3124;
+  --drop-down-menu-bg: #3a3124;
+  --button-color: #c1666b;
+  --button-color-hover: #db930d;
+  --button-text: #1c180d;
+  --button-text-hover: #1c180d;
+  --accent-color: 193, 102, 107;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #db930d;
+  --link-color-hover: #cb85a2;
+  --label-text-color: #1c180d;
+  --text: #d2c3a4;
+  --text-hover: #f1e9d0;
+  --text-muted: #b8a58c;
+  --arr-queue-color: #7a7653;
+  --plex-poster-unwatched: #ebe0bb;
+  --petio-spinner: invert(55%) sepia(17%) saturate(1394%) hue-rotate(308deg) brightness(101%) contrast(85%);
+  --gitea-color-primary-dark-4: 193, 102, 107;
+  --overseerr-gradient: linear-gradient(180deg, rgba(36, 32, 21, 0.17) 0%, rgba(36, 32, 21) 100%);
+}

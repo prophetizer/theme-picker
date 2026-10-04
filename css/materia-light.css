@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Materia (light)
+ *
+ * Generated variant: light of 'materia', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'materia'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#4297b7'.
+ */
+:root {
+  --main-bg-color: #ecf5fa;
+  --modal-bg-color: #f0fafe;
+  --modal-header-color: #f0fafe;
+  --modal-footer-color: #f0fafe;
+  --drop-down-menu-bg: #f0fafe;
+  --button-color: #4297b7;
+  --button-color-hover: #4f9993;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 66, 151, 183;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #2e7b75;
+  --link-color-hover: #496dbd;
+  --label-text-color: #11141b;
+  --text: #05080f;
+  --text-hover: #000000;
+  --text-muted: #0a0c11;
+  --arr-queue-color: #5a9e00;
+  --plex-poster-unwatched: #cb7943;
+  --petio-spinner: invert(43%) sepia(11%) saturate(1941%) hue-rotate(151deg) brightness(92%) contrast(96%);
+  --gitea-color-primary-dark-4: 66, 151, 183;
+  --overseerr-gradient: linear-gradient(180deg, rgba(236, 245, 250, 0.17) 0%, #ecf5fa 100%);
+}

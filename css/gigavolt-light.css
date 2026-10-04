@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Gigavolt (light)
+ *
+ * Generated variant: light of 'gigavolt', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'gigavolt'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0096d2'.
+ */
+:root {
+  --main-bg-color: #f2f3f7;
+  --modal-bg-color: #fdfeff;
+  --modal-header-color: #fdfeff;
+  --modal-footer-color: #fdfeff;
+  --drop-down-menu-bg: #fdfeff;
+  --button-color: #0096d2;
+  --button-color-hover: #e555b7;
+  --button-text: #202126;
+  --button-text-hover: #202126;
+  --accent-color: 0, 150, 210;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #c23298;
+  --link-color-hover: #7a5fbf;
+  --label-text-color: #202126;
+  --text: #020100;
+  --text-hover: #000000;
+  --text-muted: #04021e;
+  --arr-queue-color: #998d53;
+  --plex-poster-unwatched: #00a255;
+  --petio-spinner: invert(57%) sepia(34%) saturate(4593%) hue-rotate(170deg) brightness(94%) contrast(103%);
+  --gitea-color-primary-dark-4: 0, 150, 210;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 243, 247, 0.17) 0%, #f2f3f7 100%);
+}

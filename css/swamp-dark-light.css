@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Swamp Dark (light)
+ *
+ * Generated variant: light of 'swamp-dark', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'swamp-dark'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#c1666b'.
+ */
+:root {
+  --main-bg-color: #f6f3ea;
+  --modal-bg-color: #fffffe;
+  --modal-header-color: #fffffe;
+  --modal-footer-color: #fffffe;
+  --drop-down-menu-bg: #fffffe;
+  --button-color: #c1666b;
+  --button-color-hover: #c08000;
+  --button-text: #1c180d;
+  --button-text-hover: #1c180d;
+  --accent-color: 193, 102, 107;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #996500;
+  --link-color-hover: #9d5b77;
+  --label-text-color: #1c180d;
+  --text: #191000;
+  --text-hover: #020100;
+  --text-muted: #32230d;
+  --arr-queue-color: #7a7653;
+  --plex-poster-unwatched: #978d6a;
+  --petio-spinner: invert(55%) sepia(17%) saturate(1394%) hue-rotate(308deg) brightness(101%) contrast(85%);
+  --gitea-color-primary-dark-4: 193, 102, 107;
+  --overseerr-gradient: linear-gradient(180deg, rgba(246, 243, 234, 0.17) 0%, #f6f3ea 100%);
+}

@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Valua
+ *
+ * Palette source: tinted-theming/schemes base16/valua.yaml (Valua; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #9bc5a6 is the palette's #98c1a3 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #749f7e is the palette's #6d9877 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #b17dea is the palette's #a874e0 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#4ed2d2'.
+ */
+:root {
+  --main-bg-color: #131f1f;
+  --modal-bg-color: #213132;
+  --modal-header-color: #213132;
+  --modal-footer-color: #213132;
+  --drop-down-menu-bg: #213132;
+  --button-color: #4ed2d2;
+  --button-color-hover: #76dbd2;
+  --button-text: #131f1f;
+  --button-text-hover: #131f1f;
+  --accent-color: 78, 210, 210;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #76dbd2;
+  --link-color-hover: #b17dea;
+  --label-text-color: #131f1f;
+  --text: #9bc5a6;
+  --text-hover: #aacbcb;
+  --text-muted: #749f7e;
+  --arr-queue-color: #59d678;
+  --plex-poster-unwatched: #e6b466;
+  --petio-spinner: invert(5%) sepia(66%) saturate(4305%) hue-rotate(143deg) brightness(88%) contrast(86%);
+  --gitea-color-primary-dark-4: 78, 210, 210;
+  --overseerr-gradient: linear-gradient(180deg, rgba(19, 31, 31, 0.17) 0%, rgba(19, 31, 31) 100%);
+}

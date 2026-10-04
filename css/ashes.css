@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Ashes
+ *
+ * Palette source: tinted-theming/schemes base16/ashes.yaml (Ashes; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #ced3d8 is the palette's #c7ccd1 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --link-color-hover #cd9bb4 is the palette's #c795ae with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ae95c7'.
+ */
+:root {
+  --main-bg-color: #1c2023;
+  --modal-bg-color: #393f45;
+  --modal-header-color: #393f45;
+  --modal-footer-color: #393f45;
+  --drop-down-menu-bg: #393f45;
+  --button-color: #ae95c7;
+  --button-color-hover: #95aec7;
+  --button-text: #1c2023;
+  --button-text-hover: #1c2023;
+  --accent-color: 174, 149, 199;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #95aec7;
+  --link-color-hover: #cd9bb4;
+  --label-text-color: #1c2023;
+  --text: #ced3d8;
+  --text-hover: #f3f4f5;
+  --text-muted: #adb3ba;
+  --arr-queue-color: #95c7ae;
+  --plex-poster-unwatched: #c7c795;
+  --petio-spinner: invert(34%) sepia(11%) saturate(1041%) hue-rotate(227deg) brightness(97%) contrast(79%);
+  --gitea-color-primary-dark-4: 174, 149, 199;
+  --overseerr-gradient: linear-gradient(180deg, rgba(28, 32, 35, 0.17) 0%, rgba(28, 32, 35) 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Between The Clouds (light)
+ *
+ * Generated variant: light of 'between-the-clouds', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'between-the-clouds'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#368e71'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #feffff 0%, #e1e4eb 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #feffff 0%, #e1e4eb 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #feffff 0%, #e1e4eb 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #feffff 0%, #e1e4eb 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #d7ebe6;
+  --button-color: #368e71;
+  --button-color-hover: #7b7f8a;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 54, 142, 113;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0d7156;
+  --link-color-hover: #5f636d;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #001712;
+  --arr-queue-color: #368e72;
+  --plex-poster-unwatched: #7b7f8a;
+  --petio-spinner: invert(57%) sepia(79%) saturate(298%) hue-rotate(109deg) brightness(93%) contrast(90%);
+  --gitea-color-primary-dark-4: 54, 142, 113;
+  --overseerr-gradient: linear-gradient(180deg, rgba(225, 228, 235, 0.17) 0%, #e1e4eb 100%);
+}

@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Hopscotch
+ *
+ * Palette source: tinted-theming/schemes base16/hopscotch.yaml (Hopscotch; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #d3cfd2 is the palette's #b9b5b8 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #aaa6aa is the palette's #989498 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #42b9b0 is the palette's #149b93 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #f586a3 is the palette's #c85e7c with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #251d24 is the palette's #322931 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#1290bf'.
+ */
+:root {
+  --main-bg-color: #322931;
+  --modal-bg-color: #433b42;
+  --modal-header-color: #433b42;
+  --modal-footer-color: #433b42;
+  --drop-down-menu-bg: #433b42;
+  --button-color: #1290bf;
+  --button-color-hover: #149b93;
+  --button-text: #251d24;
+  --button-text-hover: #251d24;
+  --accent-color: 18, 144, 191;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #42b9b0;
+  --link-color-hover: #f586a3;
+  --label-text-color: #251d24;
+  --text: #d3cfd2;
+  --text-hover: #ffffff;
+  --text-muted: #aaa6aa;
+  --arr-queue-color: #8fc13e;
+  --plex-poster-unwatched: #fd8b19;
+  --petio-spinner: invert(60%) sepia(100%) saturate(584%) hue-rotate(156deg) brightness(95%) contrast(89%);
+  --gitea-color-primary-dark-4: 18, 144, 191;
+  --overseerr-gradient: linear-gradient(180deg, rgba(50, 41, 49, 0.17) 0%, rgba(50, 41, 49) 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Aztec (light)
+ *
+ * Generated variant: light of 'aztec', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'aztec'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#d27700'.
+ */
+:root {
+  --main-bg-color: #f0f7e3;
+  --modal-bg-color: #f8fde6;
+  --modal-header-color: #f8fde6;
+  --modal-footer-color: #f8fde6;
+  --drop-down-menu-bg: #f8fde6;
+  --button-color: #d27700;
+  --button-color-hover: #af8900;
+  --button-text: #101600;
+  --button-text-hover: #101600;
+  --accent-color: 210, 119, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #2f8100;
+  --link-color-hover: #8b6c00;
+  --label-text-color: #101600;
+  --text: #060300;
+  --text-hover: #030000;
+  --text-muted: #0a0600;
+  --arr-queue-color: #3da200;
+  --plex-poster-unwatched: #d27700;
+  --petio-spinner: invert(19%) sepia(49%) saturate(7499%) hue-rotate(4deg) brightness(86%) contrast(101%);
+  --gitea-color-primary-dark-4: 210, 119, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(240, 247, 227, 0.17) 0%, #f0f7e3 100%);
+}

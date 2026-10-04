@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Aztec
+ *
+ * Palette source: tinted-theming/schemes base16/aztec.yaml (Aztec; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ee8800'.
+ */
+:root {
+  --main-bg-color: #101600;
+  --modal-bg-color: #1a1e01;
+  --modal-header-color: #1a1e01;
+  --modal-footer-color: #1a1e01;
+  --drop-down-menu-bg: #1a1e01;
+  --button-color: #ee8800;
+  --button-color-hover: #eebb00;
+  --button-text: #101600;
+  --button-text-hover: #101600;
+  --accent-color: 238, 136, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #63d932;
+  --link-color-hover: #eebb00;
+  --label-text-color: #101600;
+  --text: #ffda51;
+  --text-hover: #ffeba0;
+  --text-muted: #ffd129;
+  --arr-queue-color: #63d932;
+  --plex-poster-unwatched: #ee8800;
+  --petio-spinner: invert(31%) sepia(39%) saturate(6793%) hue-rotate(6deg) brightness(99%) contrast(102%);
+  --gitea-color-primary-dark-4: 238, 136, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(16, 22, 0, 0.17) 0%, rgba(16, 22, 0) 100%);
+}
