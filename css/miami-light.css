@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Miami (light)
+ *
+ * Generated variant: light of 'miami', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'miami'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#00a168'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #00a168;
+  --button-color-hover: #0099c2;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 0, 161, 104;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #00799b;
+  --link-color-hover: #a63dd0;
+  --label-text-color: #000000;
+  --text: #000001;
+  --text-hover: #000001;
+  --text-muted: #434147;
+  --arr-queue-color: #00a07b;
+  --plex-poster-unwatched: #d86f4a;
+  --petio-spinner: invert(68%) sepia(31%) saturate(7429%) hue-rotate(148deg) brightness(104%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 161, 104;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

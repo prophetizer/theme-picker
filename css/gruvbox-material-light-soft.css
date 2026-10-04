@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Gruvbox Material Light, Soft
+ *
+ * Palette source: tinted-theming/schemes base16/gruvbox-material-light-soft.yaml (Mayush Kumar; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #5c3e2d is the palette's #654735 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --link-color #3d6a4e is the palette's #4c7a5d with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #855072 is the palette's #945e80 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #fff5d3 is the palette's #f2e5bc with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#45707a'.
+ */
+:root {
+  --main-bg-color: #ebdbb2;
+  --modal-bg-color: #f2e5bc;
+  --modal-header-color: #f2e5bc;
+  --modal-footer-color: #f2e5bc;
+  --drop-down-menu-bg: #f2e5bc;
+  --button-color: #45707a;
+  --button-color-hover: #4c7a5d;
+  --button-text: #fff5d3;
+  --button-text-hover: #fff5d3;
+  --accent-color: 69, 112, 122;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #3d6a4e;
+  --link-color-hover: #855072;
+  --label-text-color: #fff5d3;
+  --text: #5c3e2d;
+  --text-hover: #282828;
+  --text-muted: #665c54;
+  --arr-queue-color: #6c782e;
+  --plex-poster-unwatched: #c35e0a;
+  --petio-spinner: invert(58%) sepia(39%) saturate(373%) hue-rotate(144deg) brightness(89%) contrast(93%);
+  --gitea-color-primary-dark-4: 69, 112, 122;
+  --overseerr-gradient: linear-gradient(180deg, rgba(235, 219, 178, 0.17) 0%, rgba(235, 219, 178) 100%);
+}

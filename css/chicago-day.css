@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Chicago Day
+ *
+ * Palette source: tinted-theming/schemes base16/chicago-day.yaml (Wendell, Ryan; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #33493d is the palette's #364c40 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --link-color #006892 is the palette's #00a1de with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #9d4069 is the palette's #e27ea6 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color-hover #0074a1 is the palette's #00a1de with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#522398'.
+ */
+:root {
+  --main-bg-color: #d1e0d7;
+  --modal-bg-color: #e8f0ea;
+  --modal-header-color: #e8f0ea;
+  --modal-footer-color: #e8f0ea;
+  --drop-down-menu-bg: #e8f0ea;
+  --button-color: #522398;
+  --button-color-hover: #0074a1;
+  --button-text: #e8f0ea;
+  --button-text-hover: #e8f0ea;
+  --accent-color: 82, 35, 152;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #006892;
+  --link-color-hover: #9d4069;
+  --label-text-color: #e8f0ea;
+  --text: #33493d;
+  --text-hover: #1e2a24;
+  --text-muted: #4b5a51;
+  --arr-queue-color: #009b3a;
+  --plex-poster-unwatched: #f9461c;
+  --petio-spinner: invert(84%) sepia(68%) saturate(2977%) hue-rotate(255deg) brightness(90%) contrast(100%);
+  --gitea-color-primary-dark-4: 82, 35, 152;
+  --overseerr-gradient: linear-gradient(180deg, rgba(209, 224, 215, 0.17) 0%, rgba(209, 224, 215) 100%);
+}

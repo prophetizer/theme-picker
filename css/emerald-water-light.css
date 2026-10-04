@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Emerald Water (light)
+ *
+ * Generated variant: light of 'emerald-water', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'emerald-water'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#3f9959'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #d6ffde 0%, #e4f8ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #d6ffde 0%, #e4f8ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #d6ffde 0%, #e4f8ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #d6ffde 0%, #e4f8ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #c3ede4;
+  --button-color: #3f9959;
+  --button-color-hover: #2f92b0;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 63, 153, 89;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #1a7b3d;
+  --link-color-hover: #007491;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #001713;
+  --arr-queue-color: #3f9959;
+  --plex-poster-unwatched: #2f92b0;
+  --petio-spinner: invert(53%) sepia(30%) saturate(701%) hue-rotate(85deg) brightness(102%) contrast(97%);
+  --gitea-color-primary-dark-4: 63, 153, 89;
+  --overseerr-gradient: linear-gradient(180deg, rgba(228, 248, 255, 0.17) 0%, #e4f8ff 100%);
+}

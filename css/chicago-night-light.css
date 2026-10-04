@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Chicago Night (light)
+ *
+ * Generated variant: light of 'chicago-night', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'chicago-night'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#9d78f0'.
+ */
+:root {
+  --main-bg-color: #edf6f1;
+  --modal-bg-color: #fafffc;
+  --modal-header-color: #fafffc;
+  --modal-footer-color: #fafffc;
+  --drop-down-menu-bg: #fafffc;
+  --button-color: #9d78f0;
+  --button-color-hover: #0097d1;
+  --button-text: #1e2a24;
+  --button-text-hover: #1e2a24;
+  --accent-color: 157, 120, 240;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0078a7;
+  --link-color-hover: #af5078;
+  --label-text-color: #1e2a24;
+  --text: #07130d;
+  --text-hover: #010302;
+  --text-muted: #233129;
+  --arr-queue-color: #009b3a;
+  --plex-poster-unwatched: #f9461c;
+  --petio-spinner: invert(50%) sepia(11%) saturate(3002%) hue-rotate(216deg) brightness(106%) contrast(88%);
+  --gitea-color-primary-dark-4: 157, 120, 240;
+  --overseerr-gradient: linear-gradient(180deg, rgba(237, 246, 241, 0.17) 0%, #edf6f1 100%);
+}

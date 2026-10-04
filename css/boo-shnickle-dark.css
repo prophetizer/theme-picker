@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Boo Shnickle
+ *
+ * Palette source: tinted-theming/schemes base16/boo-shnickle-dark.yaml (boo-shnickle; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #cdcda6 is the palette's #bdbd97 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #a4a485 is the palette's #9c9c7d with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#bfbfd9'.
+ */
+:root {
+  --main-bg-color: #191914;
+  --modal-bg-color: #3a3a2e;
+  --modal-header-color: #3a3a2e;
+  --modal-footer-color: #3a3a2e;
+  --drop-down-menu-bg: #3a3a2e;
+  --button-color: #bfbfd9;
+  --button-color-hover: #bfffc5;
+  --button-text: #191914;
+  --button-text-hover: #191914;
+  --accent-color: 191, 191, 217;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #bfffc5;
+  --link-color-hover: #f2bfd9;
+  --label-text-color: #191914;
+  --text: #cdcda6;
+  --text-hover: #ffffcc;
+  --text-muted: #a4a485;
+  --arr-queue-color: #e7ff99;
+  --plex-poster-unwatched: #ffdc99;
+  --petio-spinner: invert(15%) sepia(11%) saturate(397%) hue-rotate(202deg) brightness(90%) contrast(90%);
+  --gitea-color-primary-dark-4: 191, 191, 217;
+  --overseerr-gradient: linear-gradient(180deg, rgba(25, 25, 20, 0.17) 0%, rgba(25, 25, 20) 100%);
+}

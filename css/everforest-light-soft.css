@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Everforest Light (Soft)
+ *
+ * Palette source: tinted-theming/schemes base16/everforest-light-soft.yaml (Márcio Sobel; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #3e4b53 is the palette's #5c6a72 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #5b695a is the palette's #829181 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #007451 is the palette's #35a77c with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #aa388a is the palette's #df69ba with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #1e262d is the palette's #333c43 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#3a94c5'.
+ */
+:root {
+  --main-bg-color: #eae4ca;
+  --modal-bg-color: #f3ead3;
+  --modal-header-color: #f3ead3;
+  --modal-footer-color: #f3ead3;
+  --drop-down-menu-bg: #f3ead3;
+  --button-color: #3a94c5;
+  --button-color-hover: #35a77c;
+  --button-text: #1e262d;
+  --button-text-hover: #1e262d;
+  --accent-color: 58, 148, 197;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007451;
+  --link-color-hover: #aa388a;
+  --label-text-color: #1e262d;
+  --text: #3e4b53;
+  --text-hover: #333c43;
+  --text-muted: #5b695a;
+  --arr-queue-color: #8da101;
+  --plex-poster-unwatched: #f57d26;
+  --petio-spinner: invert(51%) sepia(79%) saturate(381%) hue-rotate(157deg) brightness(91%) contrast(93%);
+  --gitea-color-primary-dark-4: 58, 148, 197;
+  --overseerr-gradient: linear-gradient(180deg, rgba(234, 228, 202, 0.17) 0%, rgba(234, 228, 202) 100%);
+}

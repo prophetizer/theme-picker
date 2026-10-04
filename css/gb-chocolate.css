@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: GB Chocolate
+ *
+ * Palette source: Lospec palette 'GB Chocolate' (lospec.com/palette-list/gb-chocolate): its four shades as page, panels, accents and text
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #341c29 is the palette's #422936 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #341c29 is the palette's #422936 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #712d1b is the palette's #a9604c with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #712d1b is the palette's #a9604c with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #712d1b is the palette's #a9604c with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #fffaf3 is the palette's #ffe4c2 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#a9604c'.
+ */
+:root {
+  --main-bg-color: #dca456;
+  --modal-bg-color: #ffe4c2;
+  --modal-header-color: #ffe4c2;
+  --modal-footer-color: #ffe4c2;
+  --drop-down-menu-bg: #ffe4c2;
+  --button-color: #a9604c;
+  --button-color-hover: #a9604c;
+  --button-text: #fffaf3;
+  --button-text-hover: #fffaf3;
+  --accent-color: 169, 96, 76;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #712d1b;
+  --link-color-hover: #712d1b;
+  --label-text-color: #fffaf3;
+  --text: #341c29;
+  --text-hover: #341c29;
+  --text-muted: #712d1b;
+  --arr-queue-color: #a9604c;
+  --plex-poster-unwatched: #a9604c;
+  --petio-spinner: invert(59%) sepia(28%) saturate(834%) hue-rotate(326deg) brightness(97%) contrast(90%);
+  --gitea-color-primary-dark-4: 169, 96, 76;
+  --overseerr-gradient: linear-gradient(180deg, rgba(220, 164, 86, 0.17) 0%, rgba(220, 164, 86) 100%);
+}

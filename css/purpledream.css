@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Purpledream
+ *
+ * Palette source: tinted-theming/schemes base16/purpledream.yaml (malet; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #3493d0 is the palette's #0075b0 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #d847f9 is the palette's #b000d0 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color-hover #177fba is the palette's #0075b0 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#00a0f0'.
+ */
+:root {
+  --main-bg-color: #100510;
+  --modal-bg-color: #302030;
+  --modal-header-color: #302030;
+  --modal-footer-color: #302030;
+  --drop-down-menu-bg: #302030;
+  --button-color: #00a0f0;
+  --button-color-hover: #177fba;
+  --button-text: #100510;
+  --button-text-hover: #100510;
+  --accent-color: 0, 160, 240;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #3493d0;
+  --link-color-hover: #d847f9;
+  --label-text-color: #100510;
+  --text: #ddd0dd;
+  --text-hover: #fff0ff;
+  --text-muted: #bbb0bb;
+  --arr-queue-color: #14cc64;
+  --plex-poster-unwatched: #ccae14;
+  --petio-spinner: invert(59%) sepia(96%) saturate(1438%) hue-rotate(171deg) brightness(98%) contrast(102%);
+  --gitea-color-primary-dark-4: 0, 160, 240;
+  --overseerr-gradient: linear-gradient(180deg, rgba(16, 5, 16, 0.17) 0%, rgba(16, 5, 16) 100%);
+}

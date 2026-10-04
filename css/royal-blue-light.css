@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Royal Blue (light)
+ *
+ * Generated variant: light of 'royal-blue', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'royal-blue'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#777e9d'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #ffffff 0%, #dde2f7 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.19) 0%, rgba(209, 209, 209, 0.19) 100%), linear-gradient(-90deg, #ffffff 0%, #dde2f7 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.19) 0%, rgba(209, 209, 209, 0.19) 100%), linear-gradient(-90deg, #ffffff 0%, #dde2f7 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.19) 0%, rgba(209, 209, 209, 0.19) 100%), linear-gradient(-90deg, #ffffff 0%, #dde2f7 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #e3ecf8;
+  --button-color: #777e9d;
+  --button-color-hover: #6c8391;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 119, 126, 157;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5c6281;
+  --link-color-hover: #516674;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #000e2d;
+  --arr-queue-color: #787e9e;
+  --plex-poster-unwatched: #6c8391;
+  --petio-spinner: invert(45%) sepia(9%) saturate(1039%) hue-rotate(192deg) brightness(89%) contrast(85%);
+  --gitea-color-primary-dark-4: 119, 126, 157;
+  --overseerr-gradient: linear-gradient(180deg, rgba(221, 226, 247, 0.17) 0%, #dde2f7 100%);
+}

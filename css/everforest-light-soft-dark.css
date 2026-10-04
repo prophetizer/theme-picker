@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Everforest Light (Soft) (dark)
+ *
+ * Generated variant: dark of 'everforest-light-soft', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'everforest-light-soft'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#3a94c5'.
+ */
+:root {
+  --main-bg-color: #1c1809;
+  --modal-bg-color: #231e10;
+  --modal-header-color: #231e10;
+  --modal-footer-color: #231e10;
+  --drop-down-menu-bg: #231e10;
+  --button-color: #3a94c5;
+  --button-color-hover: #35a77c;
+  --button-text: #1e262d;
+  --button-text-hover: #1e262d;
+  --accent-color: 58, 148, 197;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #379570;
+  --link-color-hover: #ce5aab;
+  --label-text-color: #1e262d;
+  --text: #9cabb4;
+  --text-hover: #9faab2;
+  --text-muted: #7a8979;
+  --arr-queue-color: #8da101;
+  --plex-poster-unwatched: #f57d26;
+  --petio-spinner: invert(51%) sepia(79%) saturate(381%) hue-rotate(157deg) brightness(91%) contrast(93%);
+  --gitea-color-primary-dark-4: 58, 148, 197;
+  --overseerr-gradient: linear-gradient(180deg, rgba(28, 24, 9, 0.17) 0%, #1c1809 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Mega Drive (light)
+ *
+ * Generated variant: light of 'mega-drive', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'mega-drive'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0c6aff'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #0c6aff;
+  --button-color-hover: #2897c4;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 12, 106, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #0078a0;
+  --link-color-hover: #b834b6;
+  --label-text-color: #000000;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #003200;
+  --arr-queue-color: #00a405;
+  --plex-poster-unwatched: #cf7726;
+  --petio-spinner: invert(49%) sepia(84%) saturate(6528%) hue-rotate(210deg) brightness(99%) contrast(104%);
+  --gitea-color-primary-dark-4: 12, 106, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

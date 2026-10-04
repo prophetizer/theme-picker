@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Dark Violet (light)
+ *
+ * Generated variant: light of 'darkviolet', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'darkviolet'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5b5fff'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #5b5fff;
+  --button-color-hover: #009ab4;
+  --button-text: #000000;
+  --button-text-hover: #000000;
+  --accent-color: 91, 95, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007b8f;
+  --link-color-hover: #7956e0;
+  --label-text-color: #000000;
+  --text: #2e0053;
+  --text-hover: #2c0056;
+  --text-muted: #000c00;
+  --arr-queue-color: #4090e1;
+  --plex-poster-unwatched: #bb66cc;
+  --petio-spinner: invert(60%) sepia(98%) saturate(4654%) hue-rotate(231deg) brightness(108%) contrast(103%);
+  --gitea-color-primary-dark-4: 91, 95, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

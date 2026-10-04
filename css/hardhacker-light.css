@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Hardhacker (light)
+ *
+ * Generated variant: light of 'hardhacker', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'hardhacker'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7989d4'.
+ */
+:root {
+  --main-bg-color: #f4f2fc;
+  --modal-bg-color: #fbf9ff;
+  --modal-header-color: #fbf9ff;
+  --modal-footer-color: #fbf9ff;
+  --drop-down-menu-bg: #fbf9ff;
+  --button-color: #7989d4;
+  --button-color-hover: #599797;
+  --button-text: #211e2a;
+  --button-text-hover: #211e2a;
+  --accent-color: 121, 137, 212;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #3a7979;
+  --link-color-hover: #be3c8c;
+  --label-text-color: #211e2a;
+  --text: #030205;
+  --text-hover: #000000;
+  --text-muted: #3b344c;
+  --arr-queue-color: #5e9b55;
+  --plex-poster-unwatched: #ba8138;
+  --petio-spinner: invert(28%) sepia(42%) saturate(4848%) hue-rotate(199deg) brightness(90%) contrast(83%);
+  --gitea-color-primary-dark-4: 121, 137, 212;
+  --overseerr-gradient: linear-gradient(180deg, rgba(244, 242, 252, 0.17) 0%, #f4f2fc 100%);
+}

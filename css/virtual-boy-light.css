@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Virtual Boy (light)
+ *
+ * Generated variant: light of 'virtual-boy', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'virtual-boy'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#a40000'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #a40000;
+  --button-color-hover: #a40000;
+  --button-text: #c1c1c1;
+  --button-text-hover: #c1c1c1;
+  --accent-color: 164, 0, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #cc3a2d;
+  --link-color-hover: #cc3a2d;
+  --label-text-color: #c1c1c1;
+  --text: #3d0000;
+  --text-hover: #3d0000;
+  --text-muted: #6e0000;
+  --arr-queue-color: #a40000;
+  --plex-poster-unwatched: #a40000;
+  --petio-spinner: invert(88%) sepia(55%) saturate(5940%) hue-rotate(5deg) brightness(93%) contrast(125%);
+  --gitea-color-primary-dark-4: 164, 0, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

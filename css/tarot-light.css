@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: tarot (light)
+ *
+ * Generated variant: light of 'tarot', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'tarot'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#827495'.
+ */
+:root {
+  --main-bg-color: #f3f1ff;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #827495;
+  --button-color-hover: #85907e;
+  --button-text: #0e091d;
+  --button-text-hover: #0e091d;
+  --accent-color: 130, 116, 149;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #687261;
+  --link-color-hover: #a35581;
+  --label-text-color: #0e091d;
+  --text: #45001e;
+  --text-hover: #440a00;
+  --text-muted: #661d4d;
+  --arr-queue-color: #a28a56;
+  --plex-poster-unwatched: #ea4d60;
+  --petio-spinner: invert(48%) sepia(6%) saturate(1385%) hue-rotate(223deg) brightness(89%) contrast(88%);
+  --gitea-color-primary-dark-4: 130, 116, 149;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 241, 255, 0.17) 0%, #f3f1ff 100%);
+}

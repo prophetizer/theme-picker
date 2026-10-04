@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Amethyst (light)
+ *
+ * Generated variant: light of 'amethyst', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'amethyst'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#b065cd'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fdf7ff 0%, #f0e9ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #fdf7ff 0%, #f0e9ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #fdf7ff 0%, #f0e9ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #fdf7ff 0%, #f0e9ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ecdaff;
+  --button-color: #b065cd;
+  --button-color-hover: #9274ca;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 176, 101, 205;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #855399;
+  --link-color-hover: #715c99;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #19002b;
+  --arr-queue-color: #a370b8;
+  --plex-poster-unwatched: #9274ca;
+  --petio-spinner: invert(43%) sepia(43%) saturate(3392%) hue-rotate(237deg) brightness(86%) contrast(84%);
+  --gitea-color-primary-dark-4: 176, 101, 205;
+  --overseerr-gradient: linear-gradient(180deg, rgba(240, 233, 255, 0.17) 0%, #f0e9ff 100%);
+}

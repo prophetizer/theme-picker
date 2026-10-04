@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Marrakesh (light)
+ *
+ * Generated variant: light of 'marrakesh', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'marrakesh'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#477ca1'.
+ */
+:root {
+  --main-bg-color: #fbf3e2;
+  --modal-bg-color: #fffffa;
+  --modal-header-color: #fffffa;
+  --modal-footer-color: #fffffa;
+  --drop-down-menu-bg: #fffffa;
+  --button-color: #477ca1;
+  --button-color-hover: #6a9b2a;
+  --button-text: #0a0500;
+  --button-text-hover: #0a0500;
+  --accent-color: 71, 124, 161;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4f7c00;
+  --link-color-hover: #8161ac;
+  --label-text-color: #0a0500;
+  --text: #1e1b00;
+  --text-hover: #020000;
+  --text-muted: #3d3900;
+  --arr-queue-color: #18974e;
+  --plex-poster-unwatched: #b36144;
+  --petio-spinner: invert(55%) sepia(27%) saturate(767%) hue-rotate(162deg) brightness(94%) contrast(92%);
+  --gitea-color-primary-dark-4: 71, 124, 161;
+  --overseerr-gradient: linear-gradient(180deg, rgba(251, 243, 226, 0.17) 0%, #fbf3e2 100%);
+}

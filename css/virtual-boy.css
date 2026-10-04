@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Virtual Boy
+ *
+ * Palette source: Lospec palette 'Virtual Boy' (lospec.com/palette-list/virtual-boy): its four shades as page, panels, accents and text
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #ff9383 is the palette's #ef0000 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #ff9383 is the palette's #ef0000 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #ef5b4b is the palette's #a40000 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #ef5b4b is the palette's #a40000 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #ef5b4b is the palette's #a40000 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #c1c1c1 is the palette's #000000 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#a40000'.
+ */
+:root {
+  --main-bg-color: #000000;
+  --modal-bg-color: #550000;
+  --modal-header-color: #550000;
+  --modal-footer-color: #550000;
+  --drop-down-menu-bg: #550000;
+  --button-color: #a40000;
+  --button-color-hover: #a40000;
+  --button-text: #c1c1c1;
+  --button-text-hover: #c1c1c1;
+  --accent-color: 164, 0, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #ef5b4b;
+  --link-color-hover: #ef5b4b;
+  --label-text-color: #c1c1c1;
+  --text: #ff9383;
+  --text-hover: #ff9383;
+  --text-muted: #ef5b4b;
+  --arr-queue-color: #a40000;
+  --plex-poster-unwatched: #a40000;
+  --petio-spinner: invert(88%) sepia(55%) saturate(5940%) hue-rotate(5deg) brightness(93%) contrast(125%);
+  --gitea-color-primary-dark-4: 164, 0, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.17) 0%, rgba(0, 0, 0) 100%);
+}

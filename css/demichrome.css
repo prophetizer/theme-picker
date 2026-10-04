@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: 2bit demichrome
+ *
+ * Palette source: Lospec palette '2bit demichrome' (lospec.com/palette-list/2bit-demichrome): its four shades as page, panels, accents and text
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #f6fcf9 is the palette's #e9efec with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #f6fcf9 is the palette's #e9efec with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #cdcdb7 is the palette's #a0a08b with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #cdcdb7 is the palette's #a0a08b with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #cdcdb7 is the palette's #a0a08b with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#a0a08b'.
+ */
+:root {
+  --main-bg-color: #211e20;
+  --modal-bg-color: #555568;
+  --modal-header-color: #555568;
+  --modal-footer-color: #555568;
+  --drop-down-menu-bg: #555568;
+  --button-color: #a0a08b;
+  --button-color-hover: #a0a08b;
+  --button-text: #211e20;
+  --button-text-hover: #211e20;
+  --accent-color: 160, 160, 139;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #cdcdb7;
+  --link-color-hover: #cdcdb7;
+  --label-text-color: #211e20;
+  --text: #f6fcf9;
+  --text-hover: #f6fcf9;
+  --text-muted: #cdcdb7;
+  --arr-queue-color: #a0a08b;
+  --plex-poster-unwatched: #a0a08b;
+  --petio-spinner: invert(30%) sepia(4%) saturate(1106%) hue-rotate(22deg) brightness(92%) contrast(85%);
+  --gitea-color-primary-dark-4: 160, 160, 139;
+  --overseerr-gradient: linear-gradient(180deg, rgba(33, 30, 32, 0.17) 0%, rgba(33, 30, 32) 100%);
+}

@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: Nintendo Gameboy (bgb)
+ *
+ * Palette source: Lospec palette 'Nintendo Gameboy (bgb)' (lospec.com/palette-list/nintendo-gameboy-bgb): its four shades as page, panels, accents and text
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * Nintendo Gameboy (bgb)'s own colours can't carry 7:1 body text, so it aims
+ * for 6:1 (above WCAG AA's 4.5:1).
+ * --text #e6ffd6 is the palette's #e0f8d0 with its lightness nudged to reach
+ * 6:1 on the panels.
+ * --text-hover #e6ffd6 is the palette's #e0f8d0 with its lightness nudged to
+ * reach 6:1 on the panels.
+ * --text-muted #aee896 is the palette's #88c070 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #aee896 is the palette's #88c070 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #aee896 is the palette's #88c070 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#88c070'.
+ */
+:root {
+  --main-bg-color: #081820;
+  --modal-bg-color: #346856;
+  --modal-header-color: #346856;
+  --modal-footer-color: #346856;
+  --drop-down-menu-bg: #346856;
+  --button-color: #88c070;
+  --button-color-hover: #88c070;
+  --button-text: #081820;
+  --button-text-hover: #081820;
+  --accent-color: 136, 192, 112;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #aee896;
+  --link-color-hover: #aee896;
+  --label-text-color: #081820;
+  --text: #e6ffd6;
+  --text-hover: #e6ffd6;
+  --text-muted: #aee896;
+  --arr-queue-color: #88c070;
+  --plex-poster-unwatched: #88c070;
+  --petio-spinner: invert(26%) sepia(6%) saturate(2612%) hue-rotate(58deg) brightness(97%) contrast(81%);
+  --gitea-color-primary-dark-4: 136, 192, 112;
+  --overseerr-gradient: linear-gradient(180deg, rgba(8, 24, 32, 0.17) 0%, rgba(8, 24, 32) 100%);
+}

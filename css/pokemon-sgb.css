@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Pokemon (SGB)
+ *
+ * Palette source: Lospec palette 'Pokemon (SGB)' (lospec.com/palette-list/pokemon-sgb): darkest shade as page and panels (its second shade, #84739c, can't carry text), the third as accents, the lightest as text
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#f7b58c'.
+ */
+:root {
+  --main-bg-color: #181010;
+  --modal-bg-color: #181010;
+  --modal-header-color: #181010;
+  --modal-footer-color: #181010;
+  --drop-down-menu-bg: #181010;
+  --button-color: #f7b58c;
+  --button-color-hover: #f7b58c;
+  --button-text: #181010;
+  --button-text-hover: #181010;
+  --accent-color: 247, 181, 140;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #f7b58c;
+  --link-color-hover: #f7b58c;
+  --label-text-color: #181010;
+  --text: #ffefff;
+  --text-hover: #ffefff;
+  --text-muted: #f7b58c;
+  --arr-queue-color: #f7b58c;
+  --plex-poster-unwatched: #f7b58c;
+  --petio-spinner: invert(20%) sepia(33%) saturate(713%) hue-rotate(320deg) brightness(98%) contrast(98%);
+  --gitea-color-primary-dark-4: 247, 181, 140;
+  --overseerr-gradient: linear-gradient(180deg, rgba(24, 16, 16, 0.17) 0%, rgba(24, 16, 16) 100%);
+}

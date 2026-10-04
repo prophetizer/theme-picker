@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Marrakesh
+ *
+ * Palette source: tinted-theming/schemes base16/marrakesh.yaml (Alexandre Gavioli; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #c1bb74 is the palette's #948e48 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-muted #9a9650 is the palette's #86813b with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #a584d2 is the palette's #8868b3 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #0a0500 is the palette's #201602 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#477ca1'.
+ */
+:root {
+  --main-bg-color: #201602;
+  --modal-bg-color: #302e00;
+  --modal-header-color: #302e00;
+  --modal-footer-color: #302e00;
+  --drop-down-menu-bg: #302e00;
+  --button-color: #477ca1;
+  --button-color-hover: #75a738;
+  --button-text: #0a0500;
+  --button-text-hover: #0a0500;
+  --accent-color: 71, 124, 161;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #75a738;
+  --link-color-hover: #a584d2;
+  --label-text-color: #0a0500;
+  --text: #c1bb74;
+  --text-hover: #faf0a5;
+  --text-muted: #9a9650;
+  --arr-queue-color: #18974e;
+  --plex-poster-unwatched: #b36144;
+  --petio-spinner: invert(55%) sepia(27%) saturate(767%) hue-rotate(162deg) brightness(94%) contrast(92%);
+  --gitea-color-primary-dark-4: 71, 124, 161;
+  --overseerr-gradient: linear-gradient(180deg, rgba(32, 22, 2, 0.17) 0%, rgba(32, 22, 2) 100%);
+}
