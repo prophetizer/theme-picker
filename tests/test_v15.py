@@ -322,3 +322,47 @@ class DigestPreview(ServerCase):
         send.assert_not_called()
         page = self.request("GET", "/")[2]
         self.assertIn(b"digest-preview-btn", page if isinstance(page, bytes) else page.encode())
+
+
+class Collections(SandboxCase):
+    def setUp(self):
+        super().setUp()
+        from picker import collections
+        self.c = collections
+        p = mock.patch.object(collections, "COLLECTIONS_FILE", self.dir / "theme-collections.json")
+        p.start(); self.addCleanup(p.stop)
+
+    def test_yours_toggle_and_delete(self):
+        ok, _ = self.c.toggle("Work", "nord", True)
+        self.assertTrue(ok)
+        self.c.toggle("Work", "dracula", True)
+        self.assertEqual(self.c.members("Work"), ["dracula", "nord"])
+        self.c.toggle("Work", "nord", False)
+        self.assertEqual(self.c.members("Work"), ["dracula"])
+        self.c.toggle("Work", "dracula", False)                     # emptied: it goes
+        self.assertIsNone(self.c.members("Work"))
+        self.c.toggle("Work", "nord", True)
+        self.assertTrue(self.c.delete("Work")[0])
+        self.assertFalse(self.c.delete("Work")[0])
+
+    def test_refusals(self):
+        self.assertFalse(self.c.toggle("Light", "nord", True)[0])          # built in
+        self.assertFalse(self.c.toggle("a/b", "nord", True)[0])
+        self.assertFalse(self.c.toggle("ok", "not-a-theme", True)[0])
+
+    def test_builtins_and_seasons(self):
+        self.assertIn("Winter", self.c.season("frost-snow", {"family": "pink", "mode": "light"}))
+        self.assertIn("Autumn", self.c.season("x", {"family": "orange", "mode": "dark"}))
+        self.assertEqual(self.c.season("plain", {"family": "purple", "mode": "dark"}), [])
+        self.assertIn("Light", self.c.names())
+        self.assertIsNotNone(self.c.members("Dark"))
+
+    def test_a_collection_is_a_pool(self):
+        self.c.toggle("Work", "nord", True)
+        self.c.toggle("Work", "dracula", True)
+        self.assertTrue(schedule.pool_ok("collection:Work"))
+        self.assertFalse(schedule.pool_ok("collection:Nope"))
+        self.assertEqual(sorted(schedule.pool_themes("collection:Work")), ["dracula"] if
+                         schedule.themes.current_theme() == "nord" else ["dracula", "nord"])
+        ok, msg = schedule.save_rotate({"enabled": False, "every": 6, "pool": "collection:Work"})
+        self.assertTrue(ok, msg)

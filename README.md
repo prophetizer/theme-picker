@@ -93,6 +93,9 @@ the list:
 - search
 - readable only, high contrast, gradients, favourites, new
 - accent colour
+- **collection**: Light, Dark, High contrast, the four seasons (suggested
+  from each theme's colours and name), or one of your own, built from a
+  theme's preview with *Add to collection*
 - **closest to a colour**: pick any colour and the themes that use it come first
 - hidden themes: **hide** a theme you never want (in its preview, or **H**) and
   it leaves the grid, Surprise me and the theme of the day; "Show hidden
@@ -158,8 +161,8 @@ by hand holds until the next switch, then the schedule takes over again.
 
 Or a **theme of the day**: a random pick every morning. Or a **rotation**: a
 new theme every few hours, picked at random from your favourites or every
-theme, or taken **in order from your own list** (seven themes every 24 hours
-is a theme per weekday). Random picks never choose a hidden or disliked
+theme, or a **collection** (Winter all winter, say), or taken **in order from
+your own list** (seven themes every 24 hours is a theme per weekday). Random picks never choose a hidden or disliked
 theme. One schedule runs at a time.
 
 ![Day/night schedule: Catppuccin Latte from 07:00, Catppuccin Mocha from 19:30](docs/screenshots/schedule.png)

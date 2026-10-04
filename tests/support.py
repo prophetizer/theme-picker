@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from picker import deploy, backend, config, editor, metrics, schedule, shots, state, themes, digest
+from picker import deploy, backend, collections, config, editor, metrics, schedule, shots, state, themes, digest
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
@@ -58,6 +58,7 @@ class SandboxCase(unittest.TestCase):
             (state, "RATINGS_FILE", d / "theme-ratings.json"),
             (state, "HIDDEN_FORMS_FILE", d / "theme-hidden-forms.json"),
             (digest, "DIGEST_FILE", d / "theme-digest.json"),
+            (collections, "COLLECTIONS_FILE", d / "theme-collections.json"),
             (state, "GROUPS_FILE", d / "theme-groups.json"),
             (state, "DATES_FILE", d / "theme-dates.json"),
             (state, "HISTORY_FILE", d / "theme-history.json"),

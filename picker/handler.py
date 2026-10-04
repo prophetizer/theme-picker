@@ -371,6 +371,15 @@ class Handler(BaseHTTPRequestHandler):
                 ok, msg = state.set_override(str(data.get("app", "")), str(data.get("theme", "")))
                 return self._send_json({"ok": ok, "message": msg, "pinned": state.read_overrides()},
                                        status=200 if ok else 400)
+            if path == "/api/collection":
+                from . import collections
+                if data.get("action") == "delete":
+                    ok, msg = collections.delete(str(data.get("name", "")))
+                else:
+                    ok, msg = collections.toggle(str(data.get("name", "")), str(data.get("theme", "")),
+                                                 bool(data.get("on")))
+                return self._send_json({"ok": ok, "message": msg, "collections": collections.read_user()},
+                                       status=200 if ok else 400)
             if path == "/api/rate":
                 rating = data.get("rating", 0)
                 if not isinstance(rating, int) or isinstance(rating, bool):

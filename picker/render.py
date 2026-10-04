@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime
 from pathlib import Path
 
-from . import config, deploy, schedule, shots, state, themes
+from . import collections, config, deploy, schedule, shots, state, themes
 from . import colour
 from .colour import FAMILIES
 from .editor import EDITOR_MARKER
@@ -137,7 +137,7 @@ def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin
         f'data-lum="{m["lum"]}" data-hue="{m["hue"]}" data-family="{m["family"]}" '
         f'data-added="{e(added)}" data-new="{int(fresh)}" '
         f'data-contrast="{"low" if warn else "ok"}" data-warn="{e(warn)}" '
-        f'data-hc="{int(m["high_contrast"])}" '
+        f'data-hc="{int(m["high_contrast"])}" data-season="{" ".join(collections.season(t, m))}" '
         f'data-shots="{e(" ".join(apps))}" data-fav="{int(fav)}" data-hidden="{int(t in hidden)}" '
         f'data-rating="{(ratings or {}).get(t, 0)}" data-hidden-form="{int(t in hidden_forms)}" '
         f'data-colors="{e(swatch_colours(t))}"{pair_attrs}>'
@@ -316,9 +316,7 @@ def schedule_html():
         f'<div class="ed-row"><label><input type="checkbox" id="daily-enabled"'
         f'{" checked" if st["daily_enabled"] else ""}> Pick a new theme every day</label>'
         f'<label>at <input type="time" id="daily-at" value="{e(st["daily_at"])}"></label>'
-        f'<label>from <select id="daily-pool">'
-        f'<option value="favourites"{" selected" if st["daily_pool"] == "favourites" else ""}>my favourites</option>'
-        f'<option value="all"{" selected" if st["daily_pool"] == "all" else ""}>all themes</option></select></label></div>'
+        f'<label>from <select id="daily-pool">{pool_opts(st["daily_pool"])}</select></label></div>'
         f'<div class="ed-row"><button type="button" id="daily-save">Save</button>'
         f'<span id="daily-status" class="count"></span></div>'
         f'<p class="count">Never picks a hidden theme or the one already live.</p>'
@@ -327,9 +325,7 @@ def schedule_html():
         f'<div class="ed-row"><label><input type="checkbox" id="rotate-enabled"'
         f'{" checked" if st["rotate_enabled"] else ""}> Change theme every</label>'
         f'<label><input type="number" id="rotate-every" min="1" max="168" step="1" value="{e(st["rotate_every"])}"> hours</label>'
-        f'<label>from <select id="rotate-pool">'
-        f'<option value="favourites"{" selected" if st["rotate_pool"] == "favourites" else ""}>my favourites</option>'
-        f'<option value="all"{" selected" if st["rotate_pool"] == "all" else ""}>all themes</option></select></label>'
+        f'<label>from <select id="rotate-pool">{pool_opts(st["rotate_pool"])}</select></label>'
         f'<label>order <select id="rotate-mode">'
         f'<option value="random"{" selected" if st["rotate_mode"] == "random" else ""}>random</option>'
         f'<option value="list"{" selected" if st["rotate_mode"] == "list" else ""}>my list, in order</option>'
@@ -351,11 +347,35 @@ def schedule_html():
         f'Day/night, theme of the day and rotation take turns: turning one on turns the others off.</p></div>')
 
 
+def pool_opts(cur):
+    """The pool choices: favourites, all themes, then every collection."""
+    e = lambda s: html.escape(str(s), quote=True)
+    opt = lambda v, label: f'<option value="{e(v)}"{" selected" if v == cur else ""}>{e(label)}</option>'
+    return (opt("favourites", "my favourites") + opt("all", "all themes")
+            + '<optgroup label="Collections">' + "".join(opt(f"collection:{n}", n) for n in collections.names())
+            + '</optgroup>')
+
+
+def collection_opts():
+    e = lambda s: html.escape(str(s), quote=True)
+    user = collections.read_user()
+    return ('<option value="">All themes</option><optgroup label="Built in">'
+            + "".join(f'<option value="{e(n)}">{e(n)}</option>' for n in collections.BUILTIN) + '</optgroup>'
+            + ('<optgroup label="Yours">' + "".join(f'<option value="{e(n)}">{e(n)} ({len(v)})</option>'
+                                                    for n, v in sorted(user.items())) + '</optgroup>' if user else ""))
+
+
+def collections_json():
+    """Your collections for app.js, as a JSON data block (not a script:
+    the CSP allows no inline script, and this is never executed)."""
+    data = json.dumps(collections.read_user()).replace("</", "<\\/")
+    return f'<script type="application/json" id="collections-data">{data}</script>'
+
+
 def rotate_summary(st):
     if not st["rotate_enabled"]:
         return "off"
-    pool = ("your list" if st.get("rotate_mode") == "list" else
-            "favourites" if st["rotate_pool"] == "favourites" else "all themes")
+    pool = ("your list" if st.get("rotate_mode") == "list" else schedule.pool_label(st["rotate_pool"]))
     every = st["rotate_every"]
     return (f"on · every {every} hour{'s' if every != 1 else ''} from {pool} ({st.get('rotate_pool_size', 0)})"
             + (f" · next {st['rotate_next']}" if st.get("rotate_next") else ""))
@@ -364,7 +384,7 @@ def rotate_summary(st):
 def daily_summary(st):
     if not st["daily_enabled"]:
         return "off"
-    pool = "favourites" if st["daily_pool"] == "favourites" else "all themes"
+    pool = schedule.pool_label(st["daily_pool"])
     return f"on · from {pool} ({st.get('daily_pool_size', 0)}) · next pick {st.get('daily_next', '')}"
 
 
@@ -504,4 +524,5 @@ def render_page(message="", preview=""):
         msg_hidden=msg_hidden, msg_text=msg_text, preview_banner=preview_banner,
         early_v=VERSION["early.js"], apps=apps_html(active), groups=groups_html(),
         stats=stats_html(), schedule=schedule_html(), base_opts=base_opts, theme_opts=theme_opts_template(),
+        collection_opts=collection_opts(), collections_json=collections_json(),
         script_v=VERSION["app.js"])

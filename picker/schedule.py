@@ -49,7 +49,21 @@ DEFAULTS = {"enabled": False, "day": "", "night": "", "day_at": "07:00", "night_
             "rotate_enabled": False, "rotate_every": 6, "rotate_pool": "favourites", "rotate_handled": "",
             "rotate_mode": "random", "rotate_list": [], "rotate_pos": -1}
 MODES = ("random", "list")
-POOLS = ("favourites", "all")
+POOLS = ("favourites", "all")               # or "collection:<name>"
+
+
+def pool_ok(pool):
+    if pool in POOLS:
+        return True
+    if pool.startswith("collection:"):
+        from . import collections
+        return collections.members(pool[len("collection:"):]) is not None
+    return False
+
+
+def pool_label(pool):
+    return ("your favourites" if pool == "favourites" else "all themes" if pool == "all"
+            else f"the {pool[len('collection:'):]} collection")
 _LOCK = threading.Lock()
 
 
@@ -206,7 +220,11 @@ def pool_themes(pool):
     disliked ones and favours the liked.)"""
     allowed = set(themes.allowed_themes())
     hidden = state.hidden_set()
-    base = state.read_favourites() if pool == "favourites" else sorted(allowed)
+    if pool.startswith("collection:"):
+        from . import collections
+        base = collections.members(pool[len("collection:"):]) or []
+    else:
+        base = state.read_favourites() if pool == "favourites" else sorted(allowed)
     live = themes.current_theme()
     return [t for t in base if t in allowed and t not in hidden and t != live]
 
@@ -227,8 +245,8 @@ def save_daily(data, now=None, rng=random):
     at, pool, on = str(data.get("at", "")), str(data.get("pool", "")), bool(data.get("enabled"))
     if not _HHMM.match(at):
         return False, "The time must be HH:MM (24-hour)."
-    if pool not in POOLS:
-        return False, "Pick from favourites or all themes."
+    if not pool_ok(pool):
+        return False, "Pick from favourites, all themes or a collection."
     with _LOCK:
         sch = read()
         sch.update(daily_enabled=on, daily_at=at, daily_pool=pool, daily_handled="")
@@ -239,9 +257,10 @@ def save_daily(data, now=None, rng=random):
         return True, "Theme of the day off."
     if not daily_pool(sch):
         return True, ("Theme of the day on, but there is nothing to pick from yet: "
-                      + ("star some favourites." if pool == "favourites" else "every theme is hidden."))
+                      + ("star some favourites." if pool == "favourites" else
+                         "every theme in it is hidden." if pool != "all" else "every theme is hidden."))
     picked = tick_daily(now, rng=rng)
-    msg = f"Theme of the day on: a new pick from {'your favourites' if pool == 'favourites' else 'all themes'} every day at {at}."
+    msg = f"Theme of the day on: a new pick from {pool_label(pool)} every day at {at}."
     if picked and picked[1]:
         msg += f" Today's: {picked[0]}."
     return True, msg
@@ -306,8 +325,8 @@ def save_rotate(data, now=None, rng=random):
         return False, "Every how many hours? A whole number, 1 to 168."
     if not 1 <= every <= 168:
         return False, "Every 1 to 168 hours (a week)."
-    if pool not in POOLS:
-        return False, "Pick from favourites or all themes."
+    if not pool_ok(pool):
+        return False, "Pick from favourites, all themes or a collection."
     with _LOCK:
         sch = read()
         if playlist != sch["rotate_list"]:
@@ -319,11 +338,11 @@ def save_rotate(data, now=None, rng=random):
         state.write_json(SCHEDULE_FILE, sch)
     if not on:
         return True, "Rotation off."
-    src = ("your list" if mode == "list" else
-           "your favourites" if pool == "favourites" else "all themes")
+    src = "your list" if mode == "list" else pool_label(pool)
     if mode == "random" and not pool_themes(pool):
         return True, ("Rotation on, but there is nothing to pick from yet: "
-                      + ("star some favourites." if pool == "favourites" else "every theme is hidden."))
+                      + ("star some favourites." if pool == "favourites" else
+                         "every theme in it is hidden." if pool != "all" else "every theme is hidden."))
     picked = tick_rotate(now, rng=rng)
     msg = (f"Rotation on: {'the next' if mode == 'list' else 'a new'} theme from {src} "
            f"every {every} hour{'s' if every != 1 else ''}.")
