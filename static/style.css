@@ -223,6 +223,10 @@
   }
   .stats { display: flex; gap: 40px; flex-wrap: wrap; }
   .tab-sub { margin: 22px 0 4px; font-size: 1rem; }
+  .digest-preview { white-space: pre-wrap; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px;
+                    background: var(--panel); font-size: .9rem; max-width: 70ch; }
+  #digest-preview-btn { cursor: pointer; border-radius: 6px; padding: 5px 12px; border: 1px solid var(--accent);
+                        background: var(--button-color, #173029); color: var(--pk-button-text, var(--button-text, #fff)); }
   .stats h3 { margin: 8px 0 4px; font-size: .85rem; color: var(--muted); }
   .stats ol { margin: 0; padding-left: 20px; }
   .stats li span { color: var(--muted); margin-left: 6px; }

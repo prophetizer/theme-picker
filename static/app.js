@@ -40,9 +40,13 @@ const byName = Object.fromEntries(tiles.map(b => [b.dataset.theme, b]));
 for (const b of tiles) if (b.dataset.twinOf && byName[b.dataset.twinOf]) b.dataset.hidden = byName[b.dataset.twinOf].dataset.hidden;
 let pick = {};                                  // original name -> 'orig' | 'twin'
 const originalOf = b => (b.dataset.twinOf && byName[b.dataset.twinOf]) || b;
+// A form hidden on its own (data-hidden-form) leaves the pair as a single
+// theme: the other form always shows, whatever the view or the tile switch.
+const formHidden = b => !!b && b.dataset.hiddenForm === '1' && !state.showHidden;
 function activeForm(orig) {
   const twin = byName[orig.dataset.twin];
   if (!twin) return orig;
+  if (formHidden(orig) !== formHidden(twin)) return formHidden(orig) ? twin : orig;
   const p = pick[orig.dataset.theme];
   if (p) return p === 'twin' ? twin : orig;
   return state.view !== 'designed' && orig.dataset.mode !== state.view && twin.dataset.mode === state.view
@@ -91,7 +95,7 @@ function seedPick() {
 function flipForm(btn, form) {
   const orig = originalOf(btn), twin = byName[orig.dataset.twin];
   const target = [orig, twin].find(b => b && b.dataset.mode === form);
-  if (!target || target === btn) return;
+  if (!target || target === btn || formHidden(target)) return;
   const hadFocus = btn === document.activeElement;     // before refresh() hides it
   pick[orig.dataset.theme] = target === orig ? 'orig' : 'twin';
   refresh();
@@ -107,6 +111,7 @@ function matches(b) {
   const d = b.dataset;
   return isShownForm(b)
       && (state.showHidden || !isHiddenTheme(b))
+      && !formHidden(b)
       && (!state.q || d.theme.toLowerCase().includes(state.q))
       && (!state.grad || d.gradient === '1')
       && (!state.readable || d.contrast === 'ok')
@@ -153,7 +158,8 @@ function refresh() {
   }
   // Counted over the form each pair is showing: one tile per theme.
   const forms = tiles.filter(isShownForm), total = forms.length;
-  const hiddenN = tiles.filter(b => !b.dataset.twinOf && b.dataset.hidden === '1').length;
+  const hiddenN = tiles.filter(b => !b.dataset.twinOf && b.dataset.hidden === '1').length
+    + tiles.filter(b => b.dataset.hiddenForm === '1').length;
   // Every theme should have a light/dark twin; say so only when some don't.
   const single = forms.filter(b => !b.dataset.twin && !b.dataset.twinOf).length;
   const grads = forms.filter(b => b.dataset.gradient === '1').length;
@@ -355,6 +361,9 @@ function openLightbox(btn) {
   if (added) bits.push('added ' + (added.includes('T') ? new Date(added).toLocaleDateString() : added));
   $('#lb-meta').textContent = bits.join(' · ');
   $('#lb-hide').textContent = isHiddenTheme(btn) ? 'Unhide' : 'Hide';
+  const paired = !!(btn.dataset.twin || btn.dataset.twinOf);
+  $('#lb-hide-form').hidden = !paired;
+  $('#lb-hide-form').textContent = btn.dataset.hiddenForm === '1' ? 'Show this form again' : `Hide only this ${btn.dataset.mode || ''} form`;
   showRating(btn);
   $('#lb-readable').hidden = !btn.dataset.warn;            // only for low-contrast themes
   // The five themes that look most like this one (in the forms on show).
@@ -513,6 +522,26 @@ async function postJSON(url, body) {
                                 body: JSON.stringify(body)});
   return res.json();
 }
+async function toggleHideForm(btn) {
+  const on = btn.dataset.hiddenForm !== '1';
+  const data = await postJSON('/api/hide', {theme: btn.dataset.theme, on, form: true});
+  if (!data.ok) return;
+  btn.dataset.hiddenForm = on ? '1' : '0';
+  const other = byName[btn.dataset.twin] || byName[btn.dataset.twinOf];
+  if (on && other) pick[originalOf(btn).dataset.theme] = other === originalOf(btn) ? 'orig' : 'twin';
+  if (lbTile === btn) $('#lb-hide-form').textContent = on ? 'Show this form again' : `Hide only this ${btn.dataset.mode || ''} form`;
+  refresh();
+}
+$('#digest-preview-btn').addEventListener('click', async () => {
+  const box = $('#digest-preview');
+  const r = await fetch('/api/digest/preview');
+  if (!r.ok) { box.textContent = 'Could not compose the digest.'; box.hidden = false; return; }
+  const d = await r.json();
+  box.textContent = `${d.title}\n\n${d.body}` + (d.enabled ? '' : '\n\n(The digest is off, so this is not sent.)')
+    + (d.enabled && !d.ntfy ? '\n\n(ntfy is not configured, so this is not sent.)' : '');
+  box.hidden = false;
+});
+$('#lb-hide-form').addEventListener('click', () => { if (lbTile) toggleHideForm(lbTile); });
 async function toggleHide(btn) {
   const orig = originalOf(btn), on = orig.dataset.hidden !== '1';
   const data = await postJSON('/api/hide', {theme: orig.dataset.theme, on});
