@@ -262,7 +262,8 @@ Set `ntfy.digest` (e.g. `"mon 09:00"`, local time) for a weekly summary:
 - themes still missing screenshots
 
 It starts from the next slot after you set it. A slot missed while the picker
-was down is sent once when it comes back.
+was down is sent once when it comes back. The Stats tab can preview it
+without sending.
 
 ### Automation hook
 

@@ -56,6 +56,7 @@ class SandboxCase(unittest.TestCase):
             (state, "FAVS_FILE", d / "theme-favourites.json"),
             (state, "HIDDEN_FILE", d / "theme-hidden.json"),
             (state, "RATINGS_FILE", d / "theme-ratings.json"),
+            (state, "HIDDEN_FORMS_FILE", d / "theme-hidden-forms.json"),
             (digest, "DIGEST_FILE", d / "theme-digest.json"),
             (state, "GROUPS_FILE", d / "theme-groups.json"),
             (state, "DATES_FILE", d / "theme-dates.json"),

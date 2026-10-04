@@ -78,7 +78,7 @@ def added_day(added):
 
 
 def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin="", twin_of="", hidden=frozenset(),
-              ratings=None):
+              ratings=None, hidden_forms=frozenset()):
     """One theme tile. A theme with a light/dark twin carries data-twin; the
     twin itself data-twin-of, and sits right after it in the same section.
     The page shows one form of each pair at a time (the sun/moon switch, or
@@ -139,7 +139,7 @@ def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin
         f'data-contrast="{"low" if warn else "ok"}" data-warn="{e(warn)}" '
         f'data-hc="{int(m["high_contrast"])}" '
         f'data-shots="{e(" ".join(apps))}" data-fav="{int(fav)}" data-hidden="{int(t in hidden)}" '
-        f'data-rating="{(ratings or {}).get(t, 0)}" '
+        f'data-rating="{(ratings or {}).get(t, 0)}" data-hidden-form="{int(t in hidden_forms)}" '
         f'data-colors="{e(swatch_colours(t))}"{pair_attrs}>'
         f'<span class="tile-top"><span class="name" title="{e(t)}">{e(t)}</span>{star}</span>'
         f'{swatch_html(t)}'
@@ -148,7 +148,7 @@ def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin
 
 
 def theme_grid(names, section, active, shot_idx, dates, today, favs=frozenset(), pairs=None, hidden=frozenset(),
-               ratings=None):
+               ratings=None, hidden_forms=frozenset()):
     """Tiles for a section; with `pairs`, each theme's twin follows it (and a
     twin in `names` is skipped where it stands)."""
     pairs = pairs or {}
@@ -165,7 +165,7 @@ def theme_grid(names, section, active, shot_idx, dates, today, favs=frozenset(),
     with ThreadPoolExecutor(max_workers=8) as ex:     # metrics read the same cache
         list(ex.map(theme_metrics, every))
     return "\n".join(tile_html(t, section, active, shot_idx, dates, today, favs, twin=tw, twin_of=of, hidden=hidden,
-                               ratings=ratings)
+                               ratings=ratings, hidden_forms=hidden_forms)
                      for t, tw, of in entries)
 
 
@@ -389,14 +389,25 @@ def _dur(sec):
 def stats_html():
     st = state.usage_stats()
     if not st:
-        return "<p class='none'>No history yet -- apply a theme from here and it starts counting.</p>" + ratings_html()
+        return ("<p class='none'>No history yet -- apply a theme from here and it starts counting.</p>"
+                + ratings_html() + digest_html())
     e = html.escape
     rows_t = "".join(f"<li><b>{e(t)}</b> <span>{_dur(s)}</span></li>" for t, s in st["by_time"])
     rows_c = "".join(f"<li><b>{e(t)}</b> <span>{c}&times;</span></li>" for t, c in st["by_count"])
     return (f"<p class='count'>{st['changes']} changes across {st['distinct']} themes since "
             f"{e(st['since'])}. Only changes made in the picker are counted.</p>"
             f"<div class='stats'><div><h3>Most time on screen</h3><ol>{rows_t}</ol></div>"
-            f"<div><h3>Most applied</h3><ol>{rows_c}</ol></div></div>" + ratings_html())
+            f"<div><h3>Most applied</h3><ol>{rows_c}</ol></div></div>" + ratings_html() + digest_html())
+
+
+def digest_html():
+    """The weekly digest: when it goes out, and a preview button."""
+    at = config.SETTINGS["ntfy.digest"]
+    when = (f"Sent every {at.split()[0].capitalize()} at {at.split()[1]} on the ntfy topic." if at
+            else "Off: set ntfy.digest (e.g. \"mon 09:00\") to get it on ntfy every week.")
+    return (f"<h3 class='tab-sub'>Weekly digest</h3><p class='count'>{html.escape(when)}</p>"
+            "<p><button type='button' id='digest-preview-btn'>Preview this week's digest</button></p>"
+            "<pre id='digest-preview' class='digest-preview' hidden></pre>")
 
 
 def ratings_html():
@@ -471,8 +482,10 @@ def render_page(message="", preview=""):
     favs = frozenset(state.read_favourites())
     hidden = frozenset(state.read_hidden())
     ratings = state.read_ratings()
+    hidden_forms = frozenset(state.read_hidden_forms())
     pairs = themes.variant_pairs()
-    grid = lambda names, sect: theme_grid(names, sect, active, shot_idx, dates, today, favs, pairs, hidden, ratings)
+    grid = lambda names, sect: theme_grid(names, sect, active, shot_idx, dates, today, favs, pairs, hidden, ratings,
+                                          hidden_forms)
     app_opts = "".join(f'<option value="{a}">{a} screenshots</option>' for a in shots.screenshot_apps())
     base_opts = current_opt(active)
     fams = "".join(

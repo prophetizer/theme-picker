@@ -6,6 +6,7 @@ import ipaddress
 import json
 import re
 import sys
+from datetime import datetime
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.parse import parse_qs, urlsplit
 
@@ -245,6 +246,12 @@ class Handler(BaseHTTPRequestHandler):
             if t not in themes.allowed_themes():
                 return self._send_json({"error": "unknown theme"}, status=400)
             self._send_json(editor.theme_vars(t))
+        elif path == "/api/digest/preview":
+            # What this week's digest would say, composed now; nothing is sent.
+            from . import digest
+            title, body = digest.compose(datetime.now())
+            self._send_json({"enabled": bool(config.SETTINGS["ntfy.digest"]), "at": config.SETTINGS["ntfy.digest"],
+                             "ntfy": ntfy.enabled(), "title": title, "body": body})
         elif path == "/manifest.webmanifest":
             # Fetched with the page's credentials (crossorigin="use-credentials"),
             # so behind an auth proxy it gets through the same as the page.
@@ -383,9 +390,10 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send_json({"ok": ok, "message": msg, "groups": state.read_groups(),
                                         "pins": state.read_overrides()}, status=200 if ok else 400)
             if path == "/api/hide":
-                ok = state.set_hidden(str(data.get("theme", "")), bool(data.get("on")))
-                return self._send_json({"ok": ok, "hidden": state.read_hidden()},
-                                       status=200 if ok else 400)
+                t, on = str(data.get("theme", "")), bool(data.get("on"))
+                ok = state.set_hidden_form(t, on) if data.get("form") is True else state.set_hidden(t, on)
+                return self._send_json({"ok": ok, "hidden": state.read_hidden(),
+                                        "hidden_forms": state.read_hidden_forms()}, status=200 if ok else 400)
             if path == "/api/favourite":
                 ok = state.set_favourite(str(data.get("theme", "")), bool(data.get("on")))
                 return self._send_json({"ok": ok, "favourites": state.read_favourites()},

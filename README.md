@@ -127,7 +127,9 @@ The ▣ on any tile (or **P**) opens a theme's preview:
 - **👍 / 👎**: a liked theme comes up three times as often in Surprise me,
   the theme of the day and rotation; a disliked one never does (it stays in
   the grid, dimmed)
-- **Edit a copy**, **Hide**, and a link that shows the picker in that theme
+- **Edit a copy**, **Hide** (the whole theme, or **only this light or dark
+  form** so the theme stays in its other form), and a link that shows the
+  picker in that theme
 
 ![A theme's preview in deuteranopia: each colour as designed and as seen](docs/screenshots/preview.png)
 

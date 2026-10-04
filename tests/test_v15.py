@@ -280,3 +280,45 @@ class Digest(SandboxCase):
             with self.subTest(bad=bad), self.assertRaises(config.ConfigError):
                 config.resolve({}, {"ntfy": {"digest": bad}})
         self.assertEqual(config.resolve({"NTFY_DIGEST": "Fri 17:00"}, {})["ntfy.digest"], "fri 17:00")
+
+
+class HiddenForms(SandboxCase):
+    def setUp(self):
+        super().setUp()
+        self.add_custom("mine-dark", ":root {\n  --main-bg-color: #101010;\n  --text: #eeeeee;\n}\n")
+        self.add_custom("mine-light", ":root {\n  --main-bg-color: #f5f5f5;\n  --text: #111111;\n}\n")
+        self.add_custom("solo", ":root {\n  --main-bg-color: #202020;\n  --text: #eeeeee;\n}\n")
+
+    def test_one_form_hidden_keeps_the_other(self):
+        self.assertTrue(state.set_hidden_form("mine-dark", True))
+        self.assertEqual(state.read_hidden_forms(), ["mine-dark"])
+        self.assertEqual(state.read_hidden(), [])
+        pool = schedule.pool_themes("all")
+        self.assertNotIn("mine-dark", pool)
+        self.assertIn("mine-light", pool)
+        self.assertTrue(state.set_hidden_form("mine-dark", False))
+        self.assertIn("mine-dark", schedule.pool_themes("all"))
+
+    def test_only_a_paired_theme_has_forms(self):
+        self.assertFalse(state.set_hidden_form("solo", True))
+        self.assertFalse(state.set_hidden_form("not-a-theme", True))
+
+    def test_tiles_carry_the_flag(self):
+        state.set_hidden_form("mine-light", True)
+        page = render.render_page()
+        self.assertRegex(page, r'data-theme="mine-light"[^>]*data-hidden-form="1"')
+        self.assertRegex(page, r'data-theme="mine-dark"[^>]*data-hidden-form="0"')
+
+
+class DigestPreview(ServerCase):
+    def test_preview_composes_without_sending(self):
+        with mock.patch("picker.ntfy.send") as send:
+            status, _, body = self.request("GET", "/api/digest/preview")
+        d = json.loads(body)
+        self.assertEqual(status, 200)
+        self.assertEqual(d["title"], "Theme picker: your week")
+        self.assertIn("themes in all", d["body"])
+        self.assertFalse(d["enabled"])
+        send.assert_not_called()
+        page = self.request("GET", "/")[2]
+        self.assertIn(b"digest-preview-btn", page if isinstance(page, bytes) else page.encode())

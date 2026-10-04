@@ -20,6 +20,9 @@ FAVS_FILE = config.STATE_DIR / "theme-favourites.json"
 # Themes the viewer never wants offered: left out of the grid (unless "Show
 # hidden" is on), Surprise me and the theme of the day.
 HIDDEN_FILE = config.STATE_DIR / "theme-hidden.json"
+# Single forms hidden on their own (one side of a light/dark pair, the
+# other kept): theme names, exact.
+HIDDEN_FORMS_FILE = config.STATE_DIR / "theme-hidden-forms.json"
 # Thumbs up/down per theme: {theme: 1 | -1}. Random picks (Surprise me, theme
 # of the day, rotation, the hook's random-favourite) take a liked theme three
 # times as often and never a disliked one; the grid still shows both.
@@ -268,7 +271,7 @@ def hidden_set():
     the twin too -- they used to skip only the exact name, and could still
     land on dracula-light after Dracula was hidden."""
     pairs = themes.variant_pairs()
-    out = set()
+    out = set(read_hidden_forms())
     for t in read_hidden():
         out.add(t)
         lead = _lead(t)
@@ -276,6 +279,25 @@ def hidden_set():
         if lead in pairs:
             out.add(pairs[lead])
     return out
+
+
+def read_hidden_forms():
+    return [t for t in read_json(HIDDEN_FORMS_FILE, []) if isinstance(t, str) and SAFE_NAME.match(t)]
+
+
+def set_hidden_form(theme, on):
+    """Hide (or show again) one form of a pair only -- e.g. edge-dark, keeping
+    edge-light. Only a theme that is part of a pair can be hidden this way;
+    a single theme is hidden with set_hidden()."""
+    pairs = themes.variant_pairs()
+    if theme not in themes.allowed_themes() or theme not in set(pairs) | set(pairs.values()):
+        return False
+    with STATE_LOCK:
+        forms = [t for t in read_hidden_forms() if t != theme]
+        if on:
+            forms.append(theme)
+        write_json(HIDDEN_FORMS_FILE, sorted(forms))
+    return True
 
 
 def set_hidden(theme, on):
