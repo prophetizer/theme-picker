@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Heetch Dark (light)
+ *
+ * Generated variant: light of 'heetch', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'heetch'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#e0386d'.
+ */
+:root {
+  --main-bg-color: #f5f1ff;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #e0386d;
+  --button-color-hover: #f80059;
+  --button-text: #190134;
+  --button-text-hover: #190134;
+  --accent-color: 224, 56, 109;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #d12c53;
+  --link-color-hover: #ba447b;
+  --label-text-color: #190134;
+  --text: #1a141f;
+  --text-hover: #000000;
+  --text-muted: #383042;
+  --arr-queue-color: #c33678;
+  --plex-poster-unwatched: #4f96aa;
+  --petio-spinner: invert(69%) sepia(84%) saturate(1655%) hue-rotate(317deg) brightness(90%) contrast(94%);
+  --gitea-color-primary-dark-4: 224, 56, 109;
+  --overseerr-gradient: linear-gradient(180deg, rgba(245, 241, 255, 0.17) 0%, #f5f1ff 100%);
+}

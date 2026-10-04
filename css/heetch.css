@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Heetch Dark
+ *
+ * Palette source: tinted-theming/schemes base16/heetch.yaml (Geoffrey Teale; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #c0b9c8 is the palette's #bdb6c5 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --link-color #ff5b78 is the palette's #f80059 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #e66ca1 is the palette's #82034c with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #e0386d is the palette's #bd0152 with its lightness nudged
+ * to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#e0386d'.
+ */
+:root {
+  --main-bg-color: #190134;
+  --modal-bg-color: #392551;
+  --modal-header-color: #392551;
+  --modal-footer-color: #392551;
+  --drop-down-menu-bg: #392551;
+  --button-color: #e0386d;
+  --button-color-hover: #f80059;
+  --button-text: #190134;
+  --button-text-hover: #190134;
+  --accent-color: 224, 56, 109;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #ff5b78;
+  --link-color-hover: #e66ca1;
+  --label-text-color: #190134;
+  --text: #c0b9c8;
+  --text-hover: #feffff;
+  --text-muted: #9c92a8;
+  --arr-queue-color: #c33678;
+  --plex-poster-unwatched: #5ba2b6;
+  --petio-spinner: invert(69%) sepia(84%) saturate(1655%) hue-rotate(317deg) brightness(90%) contrast(94%);
+  --gitea-color-primary-dark-4: 224, 56, 109;
+  --overseerr-gradient: linear-gradient(180deg, rgba(25, 1, 52, 0.17) 0%, rgba(25, 1, 52) 100%);
+}

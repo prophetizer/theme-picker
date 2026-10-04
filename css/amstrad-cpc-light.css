@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Amstrad CPC (light)
+ *
+ * Generated variant: light of 'amstrad-cpc', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'amstrad-cpc'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7f7ffd'.
+ */
+:root {
+  --main-bg-color: #eef4ff;
+  --modal-bg-color: #eef4ff;
+  --modal-header-color: #eef4ff;
+  --modal-footer-color: #eef4ff;
+  --drop-down-menu-bg: #eef4ff;
+  --button-color: #7f7ffd;
+  --button-color-hover: #009d9d;
+  --button-text: #00007f;
+  --button-text-hover: #00007f;
+  --accent-color: 127, 127, 253;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007d7d;
+  --link-color-hover: #c600c6;
+  --label-text-color: #00007f;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000202;
+  --arr-queue-color: #00a400;
+  --plex-poster-unwatched: #de6e00;
+  --petio-spinner: invert(45%) sepia(88%) saturate(3386%) hue-rotate(217deg) brightness(104%) contrast(98%);
+  --gitea-color-primary-dark-4: 127, 127, 253;
+  --overseerr-gradient: linear-gradient(180deg, rgba(238, 244, 255, 0.17) 0%, #eef4ff 100%);
+}

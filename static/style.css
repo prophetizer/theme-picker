@@ -369,3 +369,7 @@
   .ed-twin-label { margin: 14px 0 6px; }
   .ed-twin-label[hidden], .ed-twin[hidden] { display: none; }
   .demo-banner a { color: var(--link-color, #4fbfa2); }
+  .link-btn { background: none; border: none; padding: 2px 0; color: var(--link-color, #4fbfa2); cursor: pointer; font: inherit; font-size: .85rem; text-align: left; }
+  #lb-collect { font: inherit; font-size: .88rem; border-radius: 8px; padding: 6px 10px;
+                border: 1px solid var(--modal-header-color, #2b3733);
+                background: var(--main-bg-color, #14181a); color: var(--pk-text, var(--text, #e6ecec)); }

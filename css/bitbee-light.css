@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Bitbee (light)
+ *
+ * Generated variant: light of 'bitbee', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'bitbee'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ac881f'.
+ */
+:root {
+  --main-bg-color: #f2f3f7;
+  --modal-bg-color: #f2f3f7;
+  --modal-header-color: #f2f3f7;
+  --modal-footer-color: #f2f3f7;
+  --drop-down-menu-bg: #f2f3f7;
+  --button-color: #ac881f;
+  --button-color-hover: #ac881f;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 172, 136, 31;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8a6b00;
+  --link-color-hover: #8a6b00;
+  --label-text-color: #11141b;
+  --text: #241900;
+  --text-hover: #241900;
+  --text-muted: #2a1f00;
+  --arr-queue-color: #ac881f;
+  --plex-poster-unwatched: #ac881f;
+  --petio-spinner: invert(44%) sepia(9%) saturate(4622%) hue-rotate(11deg) brightness(93%) contrast(76%);
+  --gitea-color-primary-dark-4: 172, 136, 31;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 243, 247, 0.17) 0%, #f2f3f7 100%);
+}

@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Paperback-2
+ *
+ * Palette source: Lospec palette 'Paperback-2' by Doph (lospec.com/palette-list/paperback-2): a two-colour palette -- its background and its one ink colour, used for every text, link and button role
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#382b26'.
+ */
+:root {
+  --main-bg-color: #b8c2b9;
+  --modal-bg-color: #b8c2b9;
+  --modal-header-color: #b8c2b9;
+  --modal-footer-color: #b8c2b9;
+  --drop-down-menu-bg: #b8c2b9;
+  --button-color: #382b26;
+  --button-color-hover: #382b26;
+  --button-text: #b8c2b9;
+  --button-text-hover: #b8c2b9;
+  --accent-color: 56, 43, 38;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #382b26;
+  --link-color-hover: #382b26;
+  --label-text-color: #b8c2b9;
+  --text: #382b26;
+  --text-hover: #382b26;
+  --text-muted: #382b26;
+  --arr-queue-color: #382b26;
+  --plex-poster-unwatched: #382b26;
+  --petio-spinner: invert(89%) sepia(7%) saturate(2361%) hue-rotate(331deg) brightness(105%) contrast(85%);
+  --gitea-color-primary-dark-4: 56, 43, 38;
+  --overseerr-gradient: linear-gradient(180deg, rgba(184, 194, 185, 0.17) 0%, rgba(184, 194, 185) 100%);
+}

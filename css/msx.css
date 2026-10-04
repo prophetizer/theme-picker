@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: MSX
+ *
+ * Palette source: Lospec palette 'MSX' (lospec.com/palette-list/msx): the machine's colours, with its blue screen and white text
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * MSX's own background can't carry 7:1 body text, so it aims for 5.5:1 (above
+ * WCAG AA's 4.5:1).
+ * --text-muted #e8e8e8 is the palette's #cacaca with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #aff3ff is the palette's #64daee with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #ffdefd is the palette's #b565b3 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #1e1e1e is the palette's #ffffff with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7e75f0'.
+ */
+:root {
+  --main-bg-color: #5955df;
+  --modal-bg-color: #5955df;
+  --modal-header-color: #5955df;
+  --modal-footer-color: #5955df;
+  --drop-down-menu-bg: #5955df;
+  --button-color: #7e75f0;
+  --button-color-hover: #64daee;
+  --button-text: #1e1e1e;
+  --button-text-hover: #1e1e1e;
+  --accent-color: 126, 117, 240;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #aff3ff;
+  --link-color-hover: #ffdefd;
+  --label-text-color: #1e1e1e;
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-muted: #e8e8e8;
+  --arr-queue-color: #73ce7c;
+  --plex-poster-unwatched: #fe877c;
+  --petio-spinner: invert(58%) sepia(74%) saturate(1225%) hue-rotate(220deg) brightness(99%) contrast(90%);
+  --gitea-color-primary-dark-4: 126, 117, 240;
+  --overseerr-gradient: linear-gradient(180deg, rgba(89, 85, 223, 0.17) 0%, rgba(89, 85, 223) 100%);
+}

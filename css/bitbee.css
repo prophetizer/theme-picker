@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Bitbee
+ *
+ * Palette source: Lospec palette 'Bitbee' by Poltergasm (lospec.com/palette-list/bitbee): a two-colour palette -- its background and its one ink colour, used for every text, link and button role
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #d7b252 is the palette's #cfab4a with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #d7b252 is the palette's #cfab4a with its lightness nudged to
+ * reach 7:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#cfab4a'.
+ */
+:root {
+  --main-bg-color: #292b30;
+  --modal-bg-color: #292b30;
+  --modal-header-color: #292b30;
+  --modal-footer-color: #292b30;
+  --drop-down-menu-bg: #292b30;
+  --button-color: #cfab4a;
+  --button-color-hover: #cfab4a;
+  --button-text: #292b30;
+  --button-text-hover: #292b30;
+  --accent-color: 207, 171, 74;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #cfab4a;
+  --link-color-hover: #cfab4a;
+  --label-text-color: #292b30;
+  --text: #d7b252;
+  --text-hover: #d7b252;
+  --text-muted: #cfab4a;
+  --arr-queue-color: #cfab4a;
+  --plex-poster-unwatched: #cfab4a;
+  --petio-spinner: invert(35%) sepia(41%) saturate(555%) hue-rotate(6deg) brightness(98%) contrast(92%);
+  --gitea-color-primary-dark-4: 207, 171, 74;
+  --overseerr-gradient: linear-gradient(180deg, rgba(41, 43, 48, 0.17) 0%, rgba(41, 43, 48) 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Sage Persuasion (light)
+ *
+ * Generated variant: light of 'sage-persuasion', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'sage-persuasion'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#8b8b35'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #f5f5e5 0%, #f6f8c5 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #f5f5e5 0%, #f6f8c5 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #f5f5e5 0%, #f6f8c5 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #f5f5e5 0%, #f6f8c5 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #e4e5cb;
+  --button-color: #8b8b35;
+  --button-color-hover: #898970;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 139, 139, 53;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #6e6e0e;
+  --link-color-hover: #6c6c54;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #121200;
+  --arr-queue-color: #8b8b35;
+  --plex-poster-unwatched: #898970;
+  --petio-spinner: invert(45%) sepia(6%) saturate(3411%) hue-rotate(22deg) brightness(93%) contrast(102%);
+  --gitea-color-primary-dark-4: 139, 139, 53;
+  --overseerr-gradient: linear-gradient(180deg, rgba(246, 248, 197, 0.17) 0%, #f6f8c5 100%);
+}

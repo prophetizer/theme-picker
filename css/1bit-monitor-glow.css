@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: 1bit Monitor Glow
+ *
+ * Palette source: Lospec palette '1bit Monitor Glow' by Polyducks (lospec.com/palette-list/1bit-monitor-glow): a two-colour palette -- its background and its one ink colour, used for every text, link and button role
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#f0f6f0'.
+ */
+:root {
+  --main-bg-color: #222323;
+  --modal-bg-color: #222323;
+  --modal-header-color: #222323;
+  --modal-footer-color: #222323;
+  --drop-down-menu-bg: #222323;
+  --button-color: #f0f6f0;
+  --button-color-hover: #f0f6f0;
+  --button-text: #222323;
+  --button-text-hover: #222323;
+  --accent-color: 240, 246, 240;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #f0f6f0;
+  --link-color-hover: #f0f6f0;
+  --label-text-color: #222323;
+  --text: #f0f6f0;
+  --text-hover: #f0f6f0;
+  --text-muted: #f0f6f0;
+  --arr-queue-color: #f0f6f0;
+  --plex-poster-unwatched: #f0f6f0;
+  --petio-spinner: invert(4%) sepia(2%) saturate(824%) hue-rotate(71deg) brightness(104%) contrast(93%);
+  --gitea-color-primary-dark-4: 240, 246, 240;
+  --overseerr-gradient: linear-gradient(180deg, rgba(34, 35, 35, 0.17) 0%, rgba(34, 35, 35) 100%);
+}

@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Bespin
+ *
+ * Palette source: tinted-theming/schemes base16/bespin.yaml (Jan T. Sott; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #c1c0bc is the palette's #8a8986 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #cabeae is the palette's #baae9e with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #9a9a97 is the palette's #797977 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #a992ab is the palette's #9b859d with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5ea6ea'.
+ */
+:root {
+  --main-bg-color: #28211c;
+  --modal-bg-color: #36312e;
+  --modal-header-color: #36312e;
+  --modal-footer-color: #36312e;
+  --drop-down-menu-bg: #36312e;
+  --button-color: #5ea6ea;
+  --button-color-hover: #afc4db;
+  --button-text: #28211c;
+  --button-text-hover: #28211c;
+  --accent-color: 94, 166, 234;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #afc4db;
+  --link-color-hover: #a992ab;
+  --label-text-color: #28211c;
+  --text: #c1c0bc;
+  --text-hover: #cabeae;
+  --text-muted: #9a9a97;
+  --arr-queue-color: #54be0d;
+  --plex-poster-unwatched: #cf7d34;
+  --petio-spinner: invert(40%) sepia(96%) saturate(871%) hue-rotate(182deg) brightness(94%) contrast(95%);
+  --gitea-color-primary-dark-4: 94, 166, 234;
+  --overseerr-gradient: linear-gradient(180deg, rgba(40, 33, 28, 0.17) 0%, rgba(40, 33, 28) 100%);
+}

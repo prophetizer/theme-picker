@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Y's Postapocalyptic Sunset (light)
+ *
+ * Generated variant: light of 'ys-postapocalyptic-sunset', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'ys-postapocalyptic-sunset'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#f44e38'.
+ */
+:root {
+  --main-bg-color: #f3f2ff;
+  --modal-bg-color: #f3f2ff;
+  --modal-header-color: #f3f2ff;
+  --modal-footer-color: #f3f2ff;
+  --drop-down-menu-bg: #f3f2ff;
+  --button-color: #f44e38;
+  --button-color-hover: #f44e38;
+  --button-text: #1d0f44;
+  --button-text-hover: #1d0f44;
+  --accent-color: 244, 78, 56;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #d52d19;
+  --link-color-hover: #d52d19;
+  --label-text-color: #1d0f44;
+  --text: #4b0300;
+  --text-hover: #4b0300;
+  --text-muted: #700700;
+  --arr-queue-color: #f44e38;
+  --plex-poster-unwatched: #f44e38;
+  --petio-spinner: invert(63%) sepia(95%) saturate(1834%) hue-rotate(340deg) brightness(98%) contrast(96%);
+  --gitea-color-primary-dark-4: 244, 78, 56;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 242, 255, 0.17) 0%, #f3f2ff 100%);
+}

@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Y's Postapocalyptic Sunset
+ *
+ * Palette source: Lospec palette 'Y's Postapocalyptic Sunset' by Yelta (lospec.com/palette-list/ys-postapocalyptic-sunset): a two-colour palette -- its background and its one ink colour, used for every text, link and button role
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #ff7e69 is the palette's #f44e38 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #ff7e69 is the palette's #f44e38 with its lightness nudged to
+ * reach 7:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#f44e38'.
+ */
+:root {
+  --main-bg-color: #1d0f44;
+  --modal-bg-color: #1d0f44;
+  --modal-header-color: #1d0f44;
+  --modal-footer-color: #1d0f44;
+  --drop-down-menu-bg: #1d0f44;
+  --button-color: #f44e38;
+  --button-color-hover: #f44e38;
+  --button-text: #1d0f44;
+  --button-text-hover: #1d0f44;
+  --accent-color: 244, 78, 56;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #f44e38;
+  --link-color-hover: #f44e38;
+  --label-text-color: #1d0f44;
+  --text: #ff7e69;
+  --text-hover: #ff7e69;
+  --text-muted: #f44e38;
+  --arr-queue-color: #f44e38;
+  --plex-poster-unwatched: #f44e38;
+  --petio-spinner: invert(63%) sepia(95%) saturate(1834%) hue-rotate(340deg) brightness(98%) contrast(96%);
+  --gitea-color-primary-dark-4: 244, 78, 56;
+  --overseerr-gradient: linear-gradient(180deg, rgba(29, 15, 68, 0.17) 0%, rgba(29, 15, 68) 100%);
+}

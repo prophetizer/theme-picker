@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: XCode Dusk (light)
+ *
+ * Generated variant: light of 'xcode-dusk', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'xcode-dusk'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#bd64f7'.
+ */
+:root {
+  --main-bg-color: #f1f3fb;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #bd64f7;
+  --button-color-hover: #009ab7;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 189, 100, 247;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007a91;
+  --link-color-hover: #bb3e94;
+  --label-text-color: #11141b;
+  --text: #060709;
+  --text-hover: #070709;
+  --text-muted: #222328;
+  --arr-queue-color: #df0002;
+  --plex-poster-unwatched: #786dc5;
+  --petio-spinner: invert(47%) sepia(70%) saturate(3474%) hue-rotate(239deg) brightness(97%) contrast(99%);
+  --gitea-color-primary-dark-4: 189, 100, 247;
+  --overseerr-gradient: linear-gradient(180deg, rgba(241, 243, 251, 0.17) 0%, #f1f3fb 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Winter (light)
+ *
+ * Generated variant: light of 'winter', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'winter'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#92a2a6'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #ffffff 0%, #d6e7eb 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #ffffff 0%, #d6e7eb 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #ffffff 0%, #d6e7eb 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #ffffff 0%, #d6e7eb 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #e2e6e8;
+  --button-color: #92a2a6;
+  --button-color-hover: #878181;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 105, 132, 138;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4d676e;
+  --link-color-hover: #6b6161;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #01131a;
+  --arr-queue-color: #69848a;
+  --plex-poster-unwatched: #877d7d;
+  --petio-spinner: invert(28%) sepia(8%) saturate(426%) hue-rotate(145deg) brightness(88%) contrast(83%);
+  --gitea-color-primary-dark-4: 105, 132, 138;
+  --overseerr-gradient: linear-gradient(180deg, rgba(214, 231, 235, 0.17) 0%, #d6e7eb 100%);
+}

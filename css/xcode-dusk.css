@@ -1,0 +1,49 @@
+/*
+ * theme.park custom theme: XCode Dusk
+ *
+ * Palette source: tinted-theming/schemes base16/xcode-dusk.yaml (Elsa Gonsiorowski; base00, base01, base04, base05, base07 and the accents)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #d3d5d9 is the palette's #939599 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #d3d4d8 is the palette's #bebfc2 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #a9abb1 is the palette's #7e8086 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #38bad8 is the palette's #00a0be with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #ff7dd2 is the palette's #b21889 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #c269fd is the palette's #790ead with its lightness nudged
+ * to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#c269fd'.
+ */
+:root {
+  --main-bg-color: #282b35;
+  --modal-bg-color: #3d4048;
+  --modal-header-color: #3d4048;
+  --modal-footer-color: #3d4048;
+  --drop-down-menu-bg: #3d4048;
+  --button-color: #c269fd;
+  --button-color-hover: #00a0be;
+  --button-text: #282b35;
+  --button-text-hover: #282b35;
+  --accent-color: 194, 105, 253;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #38bad8;
+  --link-color-hover: #ff7dd2;
+  --label-text-color: #282b35;
+  --text: #d3d5d9;
+  --text-hover: #d3d4d8;
+  --text-muted: #a9abb1;
+  --arr-queue-color: #df0002;
+  --plex-poster-unwatched: #786dc5;
+  --petio-spinner: invert(47%) sepia(72%) saturate(2748%) hue-rotate(236deg) brightness(97%) contrast(105%);
+  --gitea-color-primary-dark-4: 194, 105, 253;
+  --overseerr-gradient: linear-gradient(180deg, rgba(40, 43, 53, 0.17) 0%, rgba(40, 43, 53) 100%);
+}

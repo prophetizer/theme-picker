@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: ZX Spectrum
+ *
+ * Palette source: Lospec palette 'ZX Spectrum' (lospec.com/palette-list/zx-spectrum): the machine's colours, with its white paper and black ink
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --link-color #006a6a is the palette's #00d8d8 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #a900a9 is the palette's #d800d8 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color-hover #006a6a is the palette's #00d8d8 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0000d8'.
+ */
+:root {
+  --main-bg-color: #d8d8d8;
+  --modal-bg-color: #ffffff;
+  --modal-header-color: #ffffff;
+  --modal-footer-color: #ffffff;
+  --drop-down-menu-bg: #ffffff;
+  --button-color: #0000d8;
+  --button-color-hover: #006a6a;
+  --button-text: #d8d8d8;
+  --button-text-hover: #d8d8d8;
+  --accent-color: 0, 0, 216;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #006a6a;
+  --link-color-hover: #a900a9;
+  --label-text-color: #d8d8d8;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #0000d8;
+  --arr-queue-color: #00d800;
+  --plex-poster-unwatched: #d80000;
+  --petio-spinner: invert(89%) sepia(96%) saturate(6433%) hue-rotate(246deg) brightness(74%) contrast(145%);
+  --gitea-color-primary-dark-4: 0, 0, 216;
+  --overseerr-gradient: linear-gradient(180deg, rgba(216, 216, 216, 0.17) 0%, rgba(216, 216, 216) 100%);
+}

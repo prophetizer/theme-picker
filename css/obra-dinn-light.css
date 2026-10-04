@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Obra Dinn - IBM 8503 (light)
+ *
+ * Generated variant: light of 'obra-dinn', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'obra-dinn'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#757266'.
+ */
+:root {
+  --main-bg-color: #f2f3f9;
+  --modal-bg-color: #f2f3f9;
+  --modal-header-color: #f2f3f9;
+  --modal-footer-color: #f2f3f9;
+  --drop-down-menu-bg: #f2f3f9;
+  --button-color: #757266;
+  --button-color-hover: #757266;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 147, 141, 120;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #75705b;
+  --link-color-hover: #75705b;
+  --label-text-color: #ffffff;
+  --text: #030200;
+  --text-hover: #030200;
+  --text-muted: #030200;
+  --arr-queue-color: #938d78;
+  --plex-poster-unwatched: #938d78;
+  --petio-spinner: invert(52%) sepia(19%) saturate(223%) hue-rotate(11deg) brightness(88%) contrast(87%);
+  --gitea-color-primary-dark-4: 147, 141, 120;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 243, 249, 0.17) 0%, #f2f3f9 100%);
+}

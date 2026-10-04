@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: ZX Spectrum (dark)
+ *
+ * Generated variant: dark of 'zx-spectrum', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'zx-spectrum'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#4078ff'.
+ */
+:root {
+  --main-bg-color: #181818;
+  --modal-bg-color: #383838;
+  --modal-header-color: #383838;
+  --modal-footer-color: #383838;
+  --drop-down-menu-bg: #383838;
+  --button-color: #4078ff;
+  --button-color-hover: #388d8d;
+  --button-text: #050505;
+  --button-text-hover: #050505;
+  --accent-color: 64, 120, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5aaead;
+  --link-color-hover: #f565f3;
+  --label-text-color: #050505;
+  --text: #ffffff;
+  --text-hover: #ffffff;
+  --text-muted: #719eff;
+  --arr-queue-color: #00d800;
+  --plex-poster-unwatched: #f43527;
+  --petio-spinner: invert(54%) sepia(84%) saturate(4125%) hue-rotate(212deg) brightness(103%) contrast(105%);
+  --gitea-color-primary-dark-4: 64, 120, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(24, 24, 24, 0.17) 0%, #181818 100%);
+}

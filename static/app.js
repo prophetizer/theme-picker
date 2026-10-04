@@ -28,7 +28,7 @@ tiles.forEach((b, i) => b.dataset.idx = i);
 // One grid per section (custom-dark, ..., community, official, all); a tile's
 // data-section names the grid it belongs to when sorted by section.
 const grids = Object.fromEntries($$('.grid[data-grid]').map(g => [g.dataset.grid, g]));
-const state = {q: '', near: '', showHidden: false, grad: false, readable: false, fresh: false,
+const state = {q: '', near: '', collection: '', showHidden: false, grad: false, readable: false, fresh: false,
                fav: false, hc: false, family: '', sort: 'section', preview: '', view: 'designed'};
 
 // --- light/dark pairs ---------------------------------------------------------
@@ -40,6 +40,20 @@ const byName = Object.fromEntries(tiles.map(b => [b.dataset.theme, b]));
 for (const b of tiles) if (b.dataset.twinOf && byName[b.dataset.twinOf]) b.dataset.hidden = byName[b.dataset.twinOf].dataset.hidden;
 let pick = {};                                  // original name -> 'orig' | 'twin'
 const originalOf = b => (b.dataset.twinOf && byName[b.dataset.twinOf]) || b;
+// --- collections ----------------------------------------------------------------
+// Built in ones come from what each tile carries (mode, AAA badge, season);
+// yours from the page's #collections-data block. See picker/collections.py.
+let userCols = {};
+try { userCols = JSON.parse($('#collections-data').textContent || '{}'); } catch (e) {}
+const SEASON_NAMES = ['Spring', 'Summer', 'Autumn', 'Winter'];
+function inCollection(b, name) {
+  const d = b.dataset;
+  if (name === 'Light') return d.mode === 'light';
+  if (name === 'Dark') return d.mode === 'dark';
+  if (name === 'High contrast') return d.hc === '1';
+  if (SEASON_NAMES.includes(name)) return (d.season || '').split(' ').includes(name);
+  return (userCols[name] || []).includes(d.theme);
+}
 // A form hidden on its own (data-hidden-form) leaves the pair as a single
 // theme: the other form always shows, whatever the view or the tile switch.
 const formHidden = b => !!b && b.dataset.hiddenForm === '1' && !state.showHidden;
@@ -47,6 +61,8 @@ function activeForm(orig) {
   const twin = byName[orig.dataset.twin];
   if (!twin) return orig;
   if (formHidden(orig) !== formHidden(twin)) return formHidden(orig) ? twin : orig;
+  if (state.collection && inCollection(orig, state.collection) !== inCollection(twin, state.collection))
+    return inCollection(twin, state.collection) ? twin : orig;   // show the form that's in the collection
   const p = pick[orig.dataset.theme];
   if (p) return p === 'twin' ? twin : orig;
   return state.view !== 'designed' && orig.dataset.mode !== state.view && twin.dataset.mode === state.view
@@ -112,6 +128,7 @@ function matches(b) {
   return isShownForm(b)
       && (state.showHidden || !isHiddenTheme(b))
       && !formHidden(b)
+      && (!state.collection || inCollection(b, state.collection))
       && (!state.q || d.theme.toLowerCase().includes(state.q))
       && (!state.grad || d.gradient === '1')
       && (!state.readable || d.contrast === 'ok')
@@ -361,6 +378,7 @@ function openLightbox(btn) {
   if (added) bits.push('added ' + (added.includes('T') ? new Date(added).toLocaleDateString() : added));
   $('#lb-meta').textContent = bits.join(' · ');
   $('#lb-hide').textContent = isHiddenTheme(btn) ? 'Unhide' : 'Hide';
+  if (typeof fillCollect === 'function') fillCollect(btn);
   const paired = !!(btn.dataset.twin || btn.dataset.twinOf);
   $('#lb-hide-form').hidden = !paired;
   $('#lb-hide-form').textContent = btn.dataset.hiddenForm === '1' ? 'Show this form again' : `Hide only this ${btn.dataset.mode || ''} form`;
@@ -922,7 +940,7 @@ function schSummary(s) {
 }
 function rotateSummary(s) {
   if (!s.rotate_enabled) return 'off';
-  const pool = s.rotate_mode === 'list' ? 'your list' : s.rotate_pool === 'favourites' ? 'favourites' : 'all themes';
+  const pool = s.rotate_mode === 'list' ? 'your list' : poolLabel(s.rotate_pool);
   return `on · every ${s.rotate_every} hour${s.rotate_every === 1 ? '' : 's'} from ${pool} (${s.rotate_pool_size || 0})`
     + (s.rotate_next ? ` · next ${s.rotate_next}` : '');
 }
@@ -953,9 +971,12 @@ $('#sch-save').addEventListener('click', async () => {
   showSchedules(data.schedule);
   if (data.theme !== data.previous) markApplied(data.previous, data.theme, data.css);
 });
+function poolLabel(p) {
+  return p === 'favourites' ? 'favourites' : p === 'all' ? 'all themes' : String(p).replace(/^collection:/, '') + ' collection';
+}
 function dailySummary(s) {
   if (!s.daily_enabled) return 'off';
-  const pool = s.daily_pool === 'favourites' ? 'favourites' : 'all themes';
+  const pool = poolLabel(s.daily_pool);
   return `on · from ${pool} (${s.daily_pool_size || 0}) · next pick ${s.daily_next || ''}`;
 }
 $('#daily-save').addEventListener('click', async () => {
@@ -1623,3 +1644,50 @@ function uiColours() {
   if (link) link.addEventListener('load', uiColours);
   uiColours();
 }
+
+// --- collections: the sidebar filter and "Add to collection" -----------------
+const colSel = $('#collection');
+const isUserCol = n => !!n && Object.prototype.hasOwnProperty.call(userCols, n);
+if (state.collection && ![...colSel.options].some(o => o.value === state.collection)) state.collection = '';
+colSel.value = state.collection || '';
+$('#collection-del').hidden = !isUserCol(colSel.value);
+colSel.addEventListener('change', () => {
+  state.collection = colSel.value;
+  $('#collection-del').hidden = !isUserCol(state.collection);
+  refresh();
+});
+$('#collection-del').addEventListener('click', async () => {
+  const name = colSel.value;
+  if (!isUserCol(name) || !confirm(`Delete the collection "${name}"? The themes stay.`)) return;
+  const data = await postJSON('/api/collection', {action: 'delete', name});
+  if (data.ok) { state.collection = ''; save(); location.assign('/?c=' + Date.now() + '#themes'); }
+});
+function fillCollect(btn) {
+  const sel = $('#lb-collect');
+  sel.innerHTML = '<option value="">Add to collection...</option>'
+    + Object.keys(userCols).sort().map(n => `<option value="${esc(n)}">${(userCols[n] || []).includes(btn.dataset.theme) ? '\u2713 ' : ''}${esc(n)}</option>`).join('')
+    + '<option value="__new__">+ New collection...</option>';
+}
+$('#lb-collect').addEventListener('change', async ev => {
+  const sel = ev.target, btn = lbTile;
+  let name = sel.value;
+  sel.value = '';
+  if (!name || !btn) return;
+  if (name === '__new__') {
+    name = (prompt('Name of the new collection (letters, digits, spaces, - and _):') || '').trim();
+    if (!name) return;
+  }
+  const on = !(userCols[name] || []).includes(btn.dataset.theme);
+  const data = await postJSON('/api/collection', {name, theme: btn.dataset.theme, on});
+  const msg = $('#msg'); msg.textContent = data.message; msg.hidden = false;
+  if (!data.ok) return;
+  userCols = data.collections || {};
+  fillCollect(btn);
+  if (![...colSel.options].some(o => o.value === name) && userCols[name]) {
+    let grp = colSel.querySelector('optgroup[label="Yours"]');
+    if (!grp) { grp = document.createElement('optgroup'); grp.label = 'Yours'; colSel.appendChild(grp); }
+    const o = document.createElement('option'); o.value = name; o.textContent = name; grp.appendChild(o);
+  }
+  refresh();
+});
+

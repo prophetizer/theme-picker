@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Commodore 64 (light)
+ *
+ * Generated variant: light of 'c64', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'c64'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#887ecb'.
+ */
+:root {
+  --main-bg-color: #f2f2ff;
+  --modal-bg-color: #f2f2ff;
+  --modal-header-color: #f2f2ff;
+  --modal-footer-color: #f2f2ff;
+  --drop-down-menu-bg: #f2f2ff;
+  --button-color: #887ecb;
+  --button-color-hover: #4299a0;
+  --button-text: #212121;
+  --button-text-hover: #212121;
+  --accent-color: 136, 126, 203;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #1d7b82;
+  --link-color-hover: #9d54a0;
+  --label-text-color: #212121;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #111111;
+  --arr-queue-color: #569c59;
+  --plex-poster-unwatched: #a1683c;
+  --petio-spinner: invert(46%) sepia(13%) saturate(1554%) hue-rotate(208deg) brightness(95%) contrast(86%);
+  --gitea-color-primary-dark-4: 136, 126, 203;
+  --overseerr-gradient: linear-gradient(180deg, rgba(242, 242, 255, 0.17) 0%, #f2f2ff 100%);
+}

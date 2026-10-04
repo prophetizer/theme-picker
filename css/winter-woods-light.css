@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Winter Woods (light)
+ *
+ * Generated variant: light of 'winter-woods', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'winter-woods'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#c15f54'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #dedede 0%, #fffffc 50%, #fff9f8 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #dedede 0%, #fffffc 50%, #fff9f8 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #dedede 0%, #fffffc 50%, #fff9f8 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(209, 209, 209, 0.26) 0%, rgba(209, 209, 209, 0.26) 100%), linear-gradient(-90deg, #dedede 0%, #fffffc 50%, #fff9f8 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #f4e2d3;
+  --button-color: #c15f54;
+  --button-color-hover: #7a822d;
+  --button-text: #0f1219;
+  --button-text-hover: #0f1219;
+  --accent-color: 193, 95, 84;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #8f4e46;
+  --link-color-hover: #5e6503;
+  --label-text-color: #0f1219;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #1a0a00;
+  --arr-queue-color: #ae6a61;
+  --plex-poster-unwatched: #7a822d;
+  --petio-spinner: invert(51%) sepia(10%) saturate(3360%) hue-rotate(318deg) brightness(87%) contrast(78%);
+  --gitea-color-primary-dark-4: 193, 95, 84;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 249, 248, 0.17) 0%, #fff9f8 100%);
+}

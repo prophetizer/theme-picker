@@ -1,0 +1,54 @@
+/*
+ * theme.park custom theme: Summer
+ *
+ * Gradient source: Ghosh/uiGradients gradients.json, 'Summer' (#22c1c3 -> #fdbb2d), MIT.
+ * uiGradients gives only the gradient's colours, so every role below is
+ * one of them (lightness moved where noted), a black veil over them, or a
+ * near-white tinted toward them: text is not taken from anywhere else.
+ *
+ * A GRADIENT theme in the shape of theme.park's own: the gradient on the
+ * page, the same stops at -90deg on panels, and a SOLID drop-down menu.
+ * Page stop #007d7f is uiGradients' #22c1c3 darkened so body text reads at
+ * 4.5:1 on it.
+ * Page stop #946900 is uiGradients' #fdbb2d darkened so body text reads at
+ * 4.5:1 on it.
+ * Panels lay a black veil at 0.26 alpha over the gradient, the least that
+ * brings body text to 7:1.
+ * --button-color-hover #3acfd1 is uiGradients' #22c1c3 lightened so buttons
+ * stand out on the gradient.
+ * --button-text #005557 is the darkest stop, #007d7f, darkened to read at
+ * 4.5:1 on both buttons.
+ * --link-color #febc2f is uiGradients' #fdbb2d with its lightness moved to
+ * read at 4.5:1 on every panel colour.
+ * --link-color-hover #4adbdd is uiGradients' #22c1c3 with its lightness moved
+ * to read at 4.5:1 on every panel colour.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#fdbb2d'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #007d7f 0%, #946900 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 100%), linear-gradient(-90deg, #007d7f 0%, #946900 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 100%), linear-gradient(-90deg, #007d7f 0%, #946900 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 100%), linear-gradient(-90deg, #007d7f 0%, #946900 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #4b573e;
+  --button-color: #fdbb2d;
+  --button-color-hover: #3acfd1;
+  --button-text: #005557;
+  --button-text-hover: #005557;
+  --accent-color: 253, 187, 45;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #febc2f;
+  --link-color-hover: #4adbdd;
+  --label-text-color: #005557;
+  --text: #f0f9e4;
+  --text-hover: #ffffff;
+  --text-muted: #b7d090;
+  --arr-queue-color: #febc2f;
+  --plex-poster-unwatched: #3acfd1;
+  --petio-spinner: invert(23%) sepia(55%) saturate(816%) hue-rotate(335deg) brightness(105%) contrast(98%);
+  --gitea-color-primary-dark-4: 253, 187, 45;
+  --overseerr-gradient: linear-gradient(180deg, rgba(148, 105, 0, 0.17) 0%, rgba(148, 105, 0) 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: NOTE-2C (light)
+ *
+ * Generated variant: light of 'note-2c', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'note-2c'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#70736a'.
+ */
+:root {
+  --main-bg-color: #eef3ff;
+  --modal-bg-color: #eef3ff;
+  --modal-header-color: #eef3ff;
+  --modal-footer-color: #eef3ff;
+  --drop-down-menu-bg: #eef3ff;
+  --button-color: #70736a;
+  --button-color-hover: #70736a;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
+  --accent-color: 138, 143, 128;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #6d7163;
+  --link-color-hover: #6d7163;
+  --label-text-color: #ffffff;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #8a8f80;
+  --plex-poster-unwatched: #8a8f80;
+  --petio-spinner: invert(52%) sepia(8%) saturate(314%) hue-rotate(39deg) brightness(90%) contrast(88%);
+  --gitea-color-primary-dark-4: 138, 143, 128;
+  --overseerr-gradient: linear-gradient(180deg, rgba(238, 243, 255, 0.17) 0%, #eef3ff 100%);
+}
