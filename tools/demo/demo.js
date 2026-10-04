@@ -7,7 +7,7 @@
 (() => {
   const DEMO = JSON.parse(document.getElementById('demo-data').textContent);
   const live = () => document.querySelector('.current b').textContent;
-  const favs = new Set(DEMO.favourites), hidden = new Set(), ratings = {};
+  const favs = new Set(DEMO.favourites), hidden = new Set(), ratings = {}, collections = {};
   const json = (body, status = 200) => new Response(JSON.stringify(body),
     {status, headers: {'Content-Type': 'application/json'}});
   const off = what => json({ok: false, message: `Demo: ${what} is off here. Install Theme Picker to use it.`});
@@ -50,6 +50,16 @@
     if (path === '/api/digest/preview') return json({enabled: false, ntfy: false, title: 'Theme picker: your week',
       body: 'Installed, this summarises your week on ntfy: theme changes and what was on screen most, '
           + 'themes added, coverage, and themes missing screenshots.'});
+    if (path === '/api/collection') {                 // kept in this tab only
+      const name = String(data.name || '').trim();
+      if (data.action === 'delete') { delete collections[name]; return json({ok: true, message: `Collection '${name}' deleted.`, collections}); }
+      if (!/^[A-Za-z0-9][A-Za-z0-9 _-]{0,39}$/.test(name) || !(data.theme in DEMO.css))
+        return json({ok: false, message: 'A collection name is 1-40 letters, digits, spaces, - or _.'}, 400);
+      const cur = new Set(collections[name] || []);
+      data.on ? cur.add(data.theme) : cur.delete(data.theme);
+      if (cur.size) collections[name] = [...cur].sort(); else delete collections[name];
+      return json({ok: true, message: data.on ? `Added ${data.theme} to ${name}.` : `Took ${data.theme} out of ${name}.`, collections});
+    }
     if (path === '/api/override') return off('pinning an app');
     if (path === '/api/group') return off('app groups');
     if (path === '/api/schedule' || path === '/api/daily' || path === '/api/rotate') return off('the schedule');
