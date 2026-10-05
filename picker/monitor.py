@@ -16,7 +16,7 @@ import sys
 import threading
 import time
 
-from . import config, coverage, ntfy, themes
+from . import config, coverage, ntfy, shots, state, themes
 
 INTERVAL = config.SETTINGS["coverage.interval"]   # seconds; 0 = off
 FIRST_DELAY = 60
@@ -66,13 +66,61 @@ def run_once(check=None):
     return alert, recovered
 
 
+# --- a capture that stopped --------------------------------------------------
+# A capture that is killed (OOM, reboot, a hung browser) never reaches its own
+# end-of-run alert, and leaves the live theme wherever it stopped. Its status
+# file then sits at "running" with an old timestamp, which capture_status()
+# reports as stalled. One alert per run: the run's start time is recorded in
+# the state dir, so a picker restart doesn't repeat it, and a run that picks up
+# again gets one "resumed" message. A stalled status over a day old is history,
+# not news, and is left alone.
+CAPTURE_ALERT_FILE = config.STATE_DIR / "capture-alert.json"
+STALL_NEWS_HOURS = 24
+
+
+def check_capture(now=None):
+    """Returns "stalled", "resumed" or None (nothing sent)."""
+    from datetime import datetime
+    now = now or datetime.now().astimezone()
+    st = shots.capture_status(now)
+    run = st.get("started")
+    if not run:
+        return None
+    sent = state.read_json(CAPTURE_ALERT_FILE, {})
+    alerted = isinstance(sent, dict) and sent.get("started") == run
+    if st.get("stalled") and not alerted:
+        try:
+            updated = datetime.strptime(st.get("updated") or "", "%Y-%m-%dT%H:%M:%S%z")
+        except ValueError:
+            return None
+        if (now - updated).total_seconds() > STALL_NEWS_HOURS * 3600:
+            return None
+        state.write_json(CAPTURE_ALERT_FILE, {"started": run})
+        ntfy.send("Screenshot capture stopped",
+                  f"No progress since {updated:%H:%M}: theme {st.get('index') or 0} of {st.get('themes') or 0}"
+                  + (f" ({st['theme']})" if st.get("theme") else "")
+                  + f", {st.get('done') or 0} of {st.get('shots') or 0} shots. The live theme may still be the "
+                  f"capture's; it meant to restore {st.get('restore') or 'the one before'}.",
+                  tags="warning", priority="high")
+        return "stalled"
+    if alerted and st.get("running"):
+        state.write_json(CAPTURE_ALERT_FILE, {"started": run, "resumed": True})
+        if not sent.get("resumed"):
+            ntfy.send("Screenshot capture resumed",
+                      f"Progressing again: theme {st.get('index') or 0} of {st.get('themes') or 0}.",
+                      tags="white_check_mark")
+            return "resumed"
+    return None
+
+
 def _loop():
     time.sleep(FIRST_DELAY)
     while True:
-        try:
-            run_once()
-        except Exception as e:                 # never let the monitor thread die
-            print(f"coverage monitor: {e}", file=sys.stderr, flush=True)
+        for job in (run_once, check_capture):
+            try:
+                job()
+            except Exception as e:             # never let the monitor thread die
+                print(f"coverage monitor: {e}", file=sys.stderr, flush=True)
         time.sleep(INTERVAL)
 
 

@@ -97,7 +97,7 @@ def capture_status(now=None):
         started = datetime.strptime(st.get("started", ""), "%Y-%m-%dT%H:%M:%S%z")
     except ValueError:
         return {"running": False}
-    out = {k: st.get(k) for k in ("running", "themes", "index", "theme", "restore", "shots", "done",
+    out = {k: st.get(k) for k in ("running", "started", "updated", "themes", "index", "theme", "restore", "shots", "done",
                                   "finished", "failed", "skipped", "minutes")}
     if st.get("running") and (now - updated).total_seconds() > STALE_MINUTES * 60:
         out.update(running=False, stalled=True)
@@ -106,4 +106,60 @@ def capture_status(now=None):
         elapsed = (now - started).total_seconds()
         out["minutes_left"] = round(elapsed / done * (shots - done) / 60) if done else None
     return out
+
+
+# --- what the last capture added ---------------------------------------------------
+_NEW = {}
+
+
+def capture_window(now=None):
+    """(start, end, label) of the last capture run, as epoch seconds: from
+    capture-status.json, or the last 24 hours when there is none."""
+    from datetime import datetime
+    now = now or datetime.now().astimezone()
+    st = state.read_json(STATUS_FILE, {})
+    fmt = "%Y-%m-%dT%H:%M:%S%z"
+    try:
+        start = datetime.strptime(st["started"], fmt)
+        end = datetime.strptime(st["finished"], fmt) if st.get("finished") else now
+        label = "the capture running now" if st.get("running") and not st.get("finished") else \
+            f"the last capture ({start:%a %d %b, %H:%M}-{end:%H:%M})"
+        return start.timestamp() - 60, end.timestamp() + 60, label
+    except (KeyError, TypeError, ValueError, AttributeError):
+        return now.timestamp() - 86400, now.timestamp(), "the last 24 hours"
+
+
+def new_shots(now=None):
+    """[(theme, [apps])] whose thumbnails were saved during the last capture
+    run, newest first. Cached on the thumbnail directory's mtime and the
+    window, so a page render doesn't stat ~9,000 files every time."""
+    start, end, label = capture_window(now)
+    thumbs = SHOT_DIR / "thumbs"
+    try:
+        key = (str(thumbs), thumbs.stat().st_mtime_ns, int(start), int(end) // 300)
+    except OSError:
+        return [], label
+    if _NEW.get("key") != key:
+        found = {}
+        try:
+            with os.scandir(thumbs) as it:
+                for e in it:
+                    if not e.name.endswith(".jpg"):
+                        continue
+                    m = SHOT_NAME.match(e.name[:-4])
+                    if not m:
+                        continue
+                    t = e.stat().st_mtime
+                    if start <= t <= end:
+                        apps, last = found.get(m.group(2), ([], 0))
+                        apps.append(m.group(1))
+                        found[m.group(2)] = (apps, max(last, t))
+        except OSError:
+            pass
+        rank = {a: i for i, a in enumerate(screenshot_apps())}
+        value = [(th, sorted(a, key=lambda x: (rank.get(x, 99), x)))
+                 for th, (a, _) in sorted(found.items(), key=lambda kv: -kv[1][1])]
+        _NEW.clear()
+        _NEW.update(key=key, value=value)
+    return _NEW["value"], label
 

@@ -2,6 +2,8 @@
 manifest (2026-10-03)."""
 
 import json
+import re
+import os
 from unittest import mock
 
 from picker import config, render, schedule, shots, state
@@ -399,3 +401,117 @@ class CaptureStatus(ServerCase):
 
     def test_nothing_written_yet(self):
         self.assertEqual(shots.capture_status(), {"running": False})
+
+
+class CaptureStall(SandboxCase):
+    def setUp(self):
+        super().setUp()
+        from datetime import datetime, timedelta
+        from picker import monitor, ntfy
+        self.monitor, self.td = monitor, timedelta
+        self.now = datetime.now().astimezone()
+        p = mock.patch.object(ntfy, "send")
+        self.send = p.start()
+        self.addCleanup(p.stop)
+
+    def write(self, updated_ago, running=True, started="2026-10-04T04:30:00-0500"):
+        t = (self.now - updated_ago).strftime("%Y-%m-%dT%H:%M:%S%z")
+        shots.STATUS_FILE.write_text(json.dumps(dict(running=running, started=started, updated=t, themes=88,
+                                                     index=40, theme="galaxy", restore="nord", shots=900, done=410)))
+
+    def test_alerts_once_per_run_even_across_restarts(self):
+        self.write(self.td(minutes=40))
+        self.assertEqual(self.monitor.check_capture(self.now), "stalled")
+        title, body = self.send.call_args[0][:2]
+        self.assertEqual(title, "Screenshot capture stopped")
+        self.assertIn("theme 40 of 88 (galaxy)", body)
+        self.assertIn("restore nord", body)
+        self.assertIsNone(self.monitor.check_capture(self.now))      # the alert is on disk, not in memory
+        self.assertEqual(self.send.call_count, 1)
+        self.write(self.td(minutes=40), started="2026-10-05T04:30:00-0500")
+        self.assertEqual(self.monitor.check_capture(self.now), "stalled")   # a new run is a new incident
+
+    def test_resumed_once(self):
+        self.write(self.td(minutes=40))
+        self.monitor.check_capture(self.now)
+        self.write(self.td(minutes=1))
+        self.assertEqual(self.monitor.check_capture(self.now), "resumed")
+        self.assertIsNone(self.monitor.check_capture(self.now))
+        self.assertEqual([c[0][0] for c in self.send.call_args_list],
+                         ["Screenshot capture stopped", "Screenshot capture resumed"])
+
+    def test_quiet_cases(self):
+        self.assertIsNone(self.monitor.check_capture(self.now))     # no status at all
+        self.write(self.td(minutes=2))                              # running and progressing
+        self.assertIsNone(self.monitor.check_capture(self.now))
+        self.write(self.td(minutes=40), running=False)              # finished
+        self.assertIsNone(self.monitor.check_capture(self.now))
+        self.write(self.td(days=3))                                 # an old leftover
+        self.assertIsNone(self.monitor.check_capture(self.now))
+        self.send.assert_not_called()
+
+
+class NewShots(SandboxCase):
+    def shoot(self, app, theme, at):
+        for sub, ext in (("thumbs", ".jpg"), ("per-app", ".png")):
+            f = shots.SHOT_DIR / sub / f"{app}_{theme}{ext}"
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_bytes(b"x")
+            os.utime(f, (at, at))
+
+    def test_the_last_runs_shots_newest_first(self):
+        from datetime import datetime
+        now = datetime.now().astimezone()
+        t0 = now.timestamp() - 3 * 3600
+        fmt = lambda ts: datetime.fromtimestamp(ts).astimezone().strftime("%Y-%m-%dT%H:%M:%S%z")
+        shots.STATUS_FILE.write_text(json.dumps(dict(running=False, started=fmt(t0), finished=fmt(t0 + 3600),
+                                                     updated=fmt(t0 + 3600))))
+        self.shoot("sonarr", "galaxy", t0 + 600)
+        self.shoot("radarr", "galaxy", t0 + 610)
+        self.shoot("sonarr", "reef", t0 + 1800)
+        self.shoot("sonarr", "nord", t0 - 86400)            # an older run
+        items, label = shots.new_shots(now)
+        self.assertEqual([t for t, _ in items], ["reef", "galaxy"])
+        self.assertEqual(sorted(dict(items)["galaxy"]), ["radarr", "sonarr"])
+        self.assertIn("the last capture", label)
+        page = render.new_shots_html()
+        self.assertIn("2 themes photographed in the last capture", page)
+        self.assertIn("data-open='reef'", page)
+        self.assertIn("/shots/thumb/sonarr_reef.jpg", page)
+
+    def test_without_a_status_file_the_last_day(self):
+        import time
+        self.shoot("sonarr", "galaxy", time.time() - 3600)
+        self.shoot("sonarr", "reef", time.time() - 3 * 86400)
+        items, label = shots.new_shots()
+        self.assertEqual(([t for t, _ in items], label), (["galaxy"], "the last 24 hours"))
+
+    def test_nothing_new(self):
+        self.assertEqual(render.new_shots_html(), "")            # no capture at all: no section
+        import time
+        self.shoot("sonarr", "galaxy", time.time() - 3 * 86400)
+        self.assertIn("None from the last 24 hours", render.new_shots_html())
+
+
+class NoShotsBadge(ServerCase):
+    def page(self):
+        b = self.request("GET", "/")[2]
+        return b.decode() if isinstance(b, bytes) else b
+
+    def tile(self, page, theme):
+        return re.search(r'<button class="theme-btn[^"]*"[^>]*data-theme="%s".*?</button>' % re.escape(theme),
+                         page, re.S).group(0)
+
+    def test_badge_only_where_a_capture_runs(self):
+        page = self.page()
+        self.assertNotIn('class="tag noshots"', page)          # no screenshots anywhere: no badge
+        names = re.findall(r'class="theme-btn[^"]*"[^>]*data-theme="([^"]+)"', page)
+        shot, other = names[0], names[1]
+        for sub, ext in (("thumbs", ".jpg"), ("per-app", ".png")):
+            f = shots.SHOT_DIR / sub / f"sonarr_{shot}{ext}"
+            f.parent.mkdir(parents=True, exist_ok=True)
+            f.write_bytes(b"x")
+        page = self.page()
+        self.assertNotIn("noshots", self.tile(page, shot))
+        self.assertIn('class="tag noshots"', self.tile(page, other))
+        self.assertIn('id="only-noshots"', page)

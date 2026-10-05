@@ -54,7 +54,8 @@ in [`picker.example.yml`](picker.example.yml).
   an optional headless-Chromium container, or a host cron job, with a
   progress banner while it runs), the themes that look like it, a colour-vision check, and export to base16 and
   terminal formats
-- Recent-theme history chips and usage stats
+- Recent-theme history chips and usage stats, with the themes the last
+  capture photographed
 - Per-app theme pins, and app groups to pin several at once, with a coverage
   check that every app actually received the theme it should
 - Like or dislike themes: every random pick favours the liked and skips the

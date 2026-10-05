@@ -208,7 +208,9 @@ capture, an optional second container. While it runs, it cycles the live
 theme through every theme, so everyone sees it change; the picker shows a
 banner meanwhile ("theme 509 of 772, about 40 min left"), read from
 `capture-status.json`, which the capture writes to the state directory
-(`GET /api/capture` serves it). It photographs
+(`GET /api/capture` serves it). If a run stops updating for 15 minutes (the
+capture was killed, so its own end-of-run alert never comes), the picker's
+scheduled check sends one ntfy alert saying where it stopped. It photographs
 `screenshots.apps` from `picker.yml`; pick apps whose themed page shows
 without a login screen.
 

@@ -115,6 +115,10 @@ def tile_html(t, section, active, shot_idx, dates, today, favs=frozenset(), twin
         tags.append(f'<span class="tag new" title="Added {e(day)}">new</span>')
     if grad:
         tags.append('<span class="tag grad">gradient</span>')
+    # Only where a capture runs at all (some theme has shots): elsewhere every
+    # tile would carry it and say nothing.
+    if shot_idx and not apps:
+        tags.append('<span class="tag noshots" title="No screenshots yet: the next capture takes them">no shots</span>')
     # Every tile: the preview also holds export, colour vision, "looks like"
     # and "edit a copy", not only the screenshots.
     peek = (f'<span class="peek" title="Preview: {len(apps)} screenshot{"s" if len(apps) != 1 else ""}, '
@@ -425,6 +429,10 @@ def _dur(sec):
 
 
 def stats_html():
+    return new_shots_html() + _usage_html()
+
+
+def _usage_html():
     st = state.usage_stats()
     if not st:
         return ("<p class='none'>No history yet -- apply a theme from here and it starts counting.</p>"
@@ -436,6 +444,28 @@ def stats_html():
             f"{e(st['since'])}. Only changes made in the picker are counted.</p>"
             f"<div class='stats'><div><h3>Most time on screen</h3><ol>{rows_t}</ol></div>"
             f"<div><h3>Most applied</h3><ol>{rows_c}</ol></div></div>" + ratings_html() + digest_html())
+
+
+NEW_SHOTS_SHOWN = 300
+
+
+def new_shots_html():
+    """Themes the last capture photographed: a strip of thumbnails at the top
+    of Stats, each opening that theme's preview."""
+    if not shots.screenshot_index():
+        return ""                       # no capture here: nothing to report, not even "none"
+    items, label = shots.new_shots()
+    e = html.escape
+    if not items:
+        return (f"<h3 class='tab-sub'>New screenshots</h3><p class='count'>None from {e(label)}.</p>")
+    cards = "".join(
+        f"<button type='button' class='new-shot' data-open='{e(t)}' title='Preview {e(t)}'>"
+        f"<img src='/shots/thumb/{e(apps[0])}_{e(t)}.jpg' alt='' loading='lazy' width='160' height='100'>"
+        f"<span>{e(t)}</span></button>" for t, apps in items[:NEW_SHOTS_SHOWN])
+    more = (f" Showing the newest {NEW_SHOTS_SHOWN}." if len(items) > NEW_SHOTS_SHOWN else "")
+    return (f"<h3 class='tab-sub'>New screenshots</h3><p class='count'>{len(items)} "
+            f"theme{'s' if len(items) != 1 else ''} photographed in {e(label)}.{more}</p>"
+            f"<div class='new-shots'>{cards}</div>")
 
 
 def digest_html():
