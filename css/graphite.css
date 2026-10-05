@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Graphite
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Graphite (background, foreground, ANSI 0-15; panels are its selection background)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #939ba6 is the palette's #7e8590 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#8db4d0'.
+ */
+:root {
+  --main-bg-color: #1c1e22;
+  --modal-bg-color: #2e333b;
+  --modal-header-color: #2e333b;
+  --modal-footer-color: #2e333b;
+  --drop-down-menu-bg: #2e333b;
+  --button-color: #8db4d0;
+  --button-color-hover: #a8c6d4;
+  --button-text: #1c1e22;
+  --button-text-hover: #1c1e22;
+  --accent-color: 141, 180, 208;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #a8c6d4;
+  --link-color-hover: #baabcb;
+  --label-text-color: #1c1e22;
+  --text: #d2d6dc;
+  --text-hover: #eceff3;
+  --text-muted: #939ba6;
+  --arr-queue-color: #a7c59f;
+  --plex-poster-unwatched: #cec59d;
+  --petio-spinner: invert(28%) sepia(64%) saturate(180%) hue-rotate(165deg) brightness(86%) contrast(89%);
+  --gitea-color-primary-dark-4: 141, 180, 208;
+  --overseerr-gradient: linear-gradient(180deg, rgba(28, 30, 34, 0.17) 0%, rgba(28, 30, 34) 100%);
+}

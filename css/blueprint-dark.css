@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Blueprint (dark)
+ *
+ * Generated variant: dark of 'blueprint', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'blueprint'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#2563eb'.
+ */
+:root {
+  --main-bg-color: #171819;
+  --modal-bg-color: #171819;
+  --modal-header-color: #171819;
+  --modal-footer-color: #171819;
+  --drop-down-menu-bg: #171819;
+  --button-color: #2563eb;
+  --button-color-hover: #7c3aed;
+  --button-text: #f8fafc;
+  --button-text-hover: #f8fafc;
+  --accent-color: 37, 99, 235;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #1f8ba8;
+  --link-color-hover: #9160ff;
+  --label-text-color: #f8fafc;
+  --text: #afbbd6;
+  --text-hover: #afbbd6;
+  --text-muted: #728197;
+  --arr-queue-color: #16a34a;
+  --plex-poster-unwatched: #d97706;
+  --petio-spinner: invert(69%) sepia(38%) saturate(5294%) hue-rotate(216deg) brightness(94%) contrast(96%);
+  --gitea-color-primary-dark-4: 37, 99, 235;
+  --overseerr-gradient: linear-gradient(180deg, rgba(23, 24, 25, 0.17) 0%, #171819 100%);
+}

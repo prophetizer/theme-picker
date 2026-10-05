@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Sugarplum (light)
+ *
+ * Generated variant: light of 'sugarplum', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'sugarplum'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#c76ac9'.
+ */
+:root {
+  --main-bg-color: #f0f3ff;
+  --modal-bg-color: #f0f3ff;
+  --modal-header-color: #f0f3ff;
+  --modal-footer-color: #f0f3ff;
+  --drop-down-menu-bg: #f0f3ff;
+  --button-color: #c76ac9;
+  --button-color-hover: #918b91;
+  --button-text: #111147;
+  --button-text-hover: #111147;
+  --accent-color: 199, 106, 201;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #736e73;
+  --link-color-hover: #796893;
+  --label-text-color: #111147;
+  --text: #400042;
+  --text-hover: #34005b;
+  --text-muted: #3e3e73;
+  --arr-queue-color: #3b9d82;
+  --plex-poster-unwatched: #249a84;
+  --petio-spinner: invert(34%) sepia(91%) saturate(2919%) hue-rotate(246deg) brightness(88%) contrast(75%);
+  --gitea-color-primary-dark-4: 199, 106, 201;
+  --overseerr-gradient: linear-gradient(180deg, rgba(240, 243, 255, 0.17) 0%, #f0f3ff 100%);
+}

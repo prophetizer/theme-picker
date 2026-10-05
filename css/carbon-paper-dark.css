@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Carbon Paper (dark)
+ *
+ * Generated variant: dark of 'carbon-paper', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'carbon-paper'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#3563ac'.
+ */
+:root {
+  --main-bg-color: #191813;
+  --modal-bg-color: #191813;
+  --modal-header-color: #191813;
+  --modal-footer-color: #191813;
+  --drop-down-menu-bg: #191813;
+  --button-color: #3563ac;
+  --button-color-hover: #236d7b;
+  --button-text: #f8f6ed;
+  --button-text-hover: #f8f6ed;
+  --accent-color: 53, 99, 172;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #438a99;
+  --link-color-hover: #9a6bc6;
+  --label-text-color: #f8f6ed;
+  --text: #abb0ba;
+  --text-hover: #abb0ba;
+  --text-muted: #7c8089;
+  --arr-queue-color: #2e704c;
+  --plex-poster-unwatched: #79611e;
+  --petio-spinner: invert(65%) sepia(32%) saturate(1600%) hue-rotate(183deg) brightness(91%) contrast(85%);
+  --gitea-color-primary-dark-4: 53, 99, 172;
+  --overseerr-gradient: linear-gradient(180deg, rgba(25, 24, 19, 0.17) 0%, #191813 100%);
+}

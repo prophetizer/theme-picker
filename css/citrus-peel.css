@@ -1,0 +1,52 @@
+/*
+ * theme.park custom theme: Citrus Peel
+ *
+ * Gradient source: Ghosh/uiGradients gradients.json, 'Citrus Peel' (#fdc830 -> #f37335), MIT.
+ * uiGradients gives only the gradient's colours, so every role below is
+ * one of them (lightness moved where noted), a black veil over them, or a
+ * near-white tinted toward them: text is not taken from anywhere else.
+ *
+ * A GRADIENT theme in the shape of theme.park's own: the gradient on the
+ * page, the same stops at -90deg on panels, and a SOLID drop-down menu.
+ * Page stop #8c6b00 is uiGradients' #fdc830 darkened so body text reads at
+ * 4.5:1 on it.
+ * Page stop #c04b00 is uiGradients' #f37335 darkened so body text reads at
+ * 4.5:1 on it.
+ * Panels lay a black veil at 0.26 alpha over the gradient, the least that
+ * brings body text to 7:1.
+ * --button-color #ff996c is uiGradients' #f37335 lightened so buttons stand
+ * out on the gradient.
+ * --button-text #594200 is the darkest stop, #8c6b00, darkened to read at
+ * 4.5:1 on both buttons.
+ * --link-color #ffb595 is uiGradients' #f37335 with its lightness moved to
+ * read at 4.5:1 on every panel colour.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ff996c'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #8c6b00 0%, #c04b00 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 100%), linear-gradient(-90deg, #8c6b00 0%, #c04b00 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 100%), linear-gradient(-90deg, #8c6b00 0%, #c04b00 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(rgba(0, 0, 0, 0.26) 0%, rgba(0, 0, 0, 0.26) 100%), linear-gradient(-90deg, #8c6b00 0%, #c04b00 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #7c4500;
+  --button-color: #ff996c;
+  --button-color-hover: #fdc830;
+  --button-text: #594200;
+  --button-text-hover: #594200;
+  --accent-color: 255, 153, 108;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #ffb595;
+  --link-color-hover: #fdc830;
+  --label-text-color: #594200;
+  --text: #fff3e7;
+  --text-hover: #ffffff;
+  --text-muted: #f1bc89;
+  --arr-queue-color: #ffb595;
+  --plex-poster-unwatched: #fdc830;
+  --petio-spinner: invert(39%) sepia(78%) saturate(448%) hue-rotate(323deg) brightness(105%) contrast(101%);
+  --gitea-color-primary-dark-4: 255, 153, 108;
+  --overseerr-gradient: linear-gradient(180deg, rgba(192, 75, 0, 0.17) 0%, rgba(192, 75, 0) 100%);
+}

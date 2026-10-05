@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Aardvark Blue (light)
+ *
+ * Generated variant: light of 'aardvark-blue', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'aardvark-blue'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0060bd'.
+ */
+:root {
+  --main-bg-color: #edf4ff;
+  --modal-bg-color: #edf4ff;
+  --modal-header-color: #edf4ff;
+  --modal-footer-color: #edf4ff;
+  --drop-down-menu-bg: #edf4ff;
+  --button-color: #0060bd;
+  --button-color-hover: #006a85;
+  --button-text: #dddddd;
+  --button-text-hover: #dddddd;
+  --accent-color: 0, 96, 189;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007a97;
+  --link-color-hover: #bb2fba;
+  --label-text-color: #dddddd;
+  --text: #040404;
+  --text-hover: #000000;
+  --text-muted: #404040;
+  --arr-queue-color: #4b8c0f;
+  --plex-poster-unwatched: #a58c00;
+  --petio-spinner: invert(73%) sepia(22%) saturate(6749%) hue-rotate(195deg) brightness(95%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 96, 189;
+  --overseerr-gradient: linear-gradient(180deg, rgba(237, 244, 255, 0.17) 0%, #edf4ff 100%);
+}

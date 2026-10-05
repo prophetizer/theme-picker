@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Sugarplum
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Sugarplum (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #e081e2 is the palette's #db7ddd with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #bf8cff is the palette's #b577fd with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #7a7cb7 is the palette's #44447a with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#db7ddd'.
+ */
+:root {
+  --main-bg-color: #111147;
+  --modal-bg-color: #111147;
+  --modal-header-color: #111147;
+  --modal-footer-color: #111147;
+  --drop-down-menu-bg: #111147;
+  --button-color: #db7ddd;
+  --button-color-hover: #f9f3f9;
+  --button-text: #111147;
+  --button-text-hover: #111147;
+  --accent-color: 219, 125, 221;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #f9f3f9;
+  --link-color-hover: #d0beee;
+  --label-text-color: #111147;
+  --text: #e081e2;
+  --text-hover: #bf8cff;
+  --text-muted: #7a7cb7;
+  --arr-queue-color: #53b397;
+  --plex-poster-unwatched: #249a84;
+  --petio-spinner: invert(26%) sepia(57%) saturate(1288%) hue-rotate(241deg) brightness(91%) contrast(89%);
+  --gitea-color-primary-dark-4: 219, 125, 221;
+  --overseerr-gradient: linear-gradient(180deg, rgba(17, 17, 71, 0.17) 0%, rgba(17, 17, 71) 100%);
+}

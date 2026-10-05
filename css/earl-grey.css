@@ -1,0 +1,43 @@
+/*
+ * theme.park custom theme: Earl Grey
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Earl Grey (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #5c564e is the palette's #605a52 with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #5c564e is the palette's #605a52 with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #7b7368 is the palette's #a8a094 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#556995'.
+ */
+:root {
+  --main-bg-color: #fcfbf9;
+  --modal-bg-color: #fcfbf9;
+  --modal-header-color: #fcfbf9;
+  --modal-footer-color: #fcfbf9;
+  --drop-down-menu-bg: #fcfbf9;
+  --button-color: #556995;
+  --button-color-hover: #477a7b;
+  --button-text: #fcfbf9;
+  --button-text-hover: #fcfbf9;
+  --accent-color: 85, 105, 149;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #477a7b;
+  --link-color-hover: #83577d;
+  --label-text-color: #fcfbf9;
+  --text: #5c564e;
+  --text-hover: #5c564e;
+  --text-muted: #7b7368;
+  --arr-queue-color: #747b4d;
+  --plex-poster-unwatched: #897d43;
+  --petio-spinner: invert(58%) sepia(18%) saturate(995%) hue-rotate(183deg) brightness(91%) contrast(91%);
+  --gitea-color-primary-dark-4: 85, 105, 149;
+  --overseerr-gradient: linear-gradient(180deg, rgba(252, 251, 249, 0.17) 0%, rgba(252, 251, 249) 100%);
+}

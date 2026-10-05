@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Japanesque
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Japanesque (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #848684 is the palette's #595b59 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#4c9ad4'.
+ */
+:root {
+  --main-bg-color: #1e1e1e;
+  --modal-bg-color: #1e1e1e;
+  --modal-header-color: #1e1e1e;
+  --modal-footer-color: #1e1e1e;
+  --drop-down-menu-bg: #1e1e1e;
+  --button-color: #4c9ad4;
+  --button-color-hover: #389aad;
+  --button-text: #1e1e1e;
+  --button-text-hover: #1e1e1e;
+  --accent-color: 76, 154, 212;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #389aad;
+  --link-color-hover: #a57fc4;
+  --label-text-color: #1e1e1e;
+  --text: #f7f6ec;
+  --text-hover: #b2b5ae;
+  --text-muted: #848684;
+  --arr-queue-color: #7bb75b;
+  --plex-poster-unwatched: #e9b32a;
+  --petio-spinner: invert(47%) sepia(79%) saturate(469%) hue-rotate(169deg) brightness(93%) contrast(77%);
+  --gitea-color-primary-dark-4: 76, 154, 212;
+  --overseerr-gradient: linear-gradient(180deg, rgba(30, 30, 30, 0.17) 0%, rgba(30, 30, 30) 100%);
+}

@@ -28,7 +28,7 @@ tiles.forEach((b, i) => b.dataset.idx = i);
 // One grid per section (custom-dark, ..., community, official, all); a tile's
 // data-section names the grid it belongs to when sorted by section.
 const grids = Object.fromEntries($$('.grid[data-grid]').map(g => [g.dataset.grid, g]));
-const state = {q: '', near: '', collection: '', showHidden: false, grad: false, readable: false, fresh: false,
+const state = {q: '', near: '', collection: '', showHidden: false, grad: false, readable: false, fresh: false, noshots: false,
                fav: false, hc: false, family: '', sort: 'section', preview: '', view: 'designed'};
 
 // --- light/dark pairs ---------------------------------------------------------
@@ -133,6 +133,7 @@ function matches(b) {
       && (!state.grad || d.gradient === '1')
       && (!state.readable || d.contrast === 'ok')
       && (!state.fresh || d.new === '1')
+      && (!state.noshots || !d.shots)
       && (!state.fav || d.fav === '1')
       && (!state.hc || d.hc === '1')
       && (!state.family || d.family === state.family);
@@ -188,7 +189,7 @@ function refresh() {
     : `${shown} of ${total}`;
   $$('#view [data-view]').forEach(v => v.classList.toggle('on', v.dataset.view === state.view));
   $$('.fam').forEach(f => f.classList.toggle('on', f.dataset.family === state.family));
-  const active = [state.q, state.near, state.grad, state.readable, state.fresh, state.fav, state.hc, state.family]
+  const active = [state.q, state.near, state.grad, state.readable, state.fresh, state.noshots, state.fav, state.hc, state.family]
     .filter(Boolean).length;
   $('#filters-toggle').textContent = active ? `Filters (${active})` : 'Filters';
   updateSurprise();
@@ -206,6 +207,11 @@ ctl.fresh.checked = state.fresh; ctl.fav.checked = state.fav; ctl.hc.checked = s
 ctl.q.addEventListener('input', () => { state.q = ctl.q.value.trim().toLowerCase(); refresh(); });
 ctl.sort.addEventListener('change', () => { state.sort = ctl.sort.value; layout(); refresh(); });
 ctl.preview.addEventListener('change', () => { state.preview = ctl.preview.value; applyPreview(); save(); });
+// "No screenshots yet" means something only where a capture runs.
+ctl.noshots = $('#only-noshots');
+if (!tiles.some(b => b.dataset.shots)) { $('#only-noshots-row').hidden = true; state.noshots = false; }
+ctl.noshots.checked = state.noshots;
+ctl.noshots.addEventListener('change', () => { state.noshots = ctl.noshots.checked; refresh(); });
 ctl.showHidden = $('#show-hidden'); ctl.showHidden.checked = state.showHidden;
 ctl.showHidden.addEventListener('change', () => { state.showHidden = ctl.showHidden.checked; refresh(); });
 const nearIn = $('#near');
@@ -1710,4 +1716,13 @@ async function pollCapture() {
   setTimeout(pollCapture, st.running ? 20000 : 120000);
 }
 setTimeout(pollCapture, 3000);
+
+// --- new screenshots (Stats) --------------------------------------------------------
+// Each card opens its theme's preview, the same lightbox as the grid's tiles.
+document.addEventListener('click', ev => {
+  const card = ev.target.closest('.new-shot');
+  if (!card) return;
+  const tile = tiles.find(x => x.dataset.theme === card.dataset.open);
+  if (tile) openLightbox(tile);
+});
 

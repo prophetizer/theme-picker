@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Afterglow (light)
+ *
+ * Generated variant: light of 'afterglow', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'afterglow'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6592b4'.
+ */
+:root {
+  --main-bg-color: #f3f3f3;
+  --modal-bg-color: #fefefe;
+  --modal-header-color: #fefefe;
+  --modal-footer-color: #fefefe;
+  --drop-down-menu-bg: #fefefe;
+  --button-color: #6592b4;
+  --button-color-hover: #3f9b94;
+  --button-text: #212121;
+  --button-text-hover: #212121;
+  --accent-color: 101, 146, 180;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #177c77;
+  --link-color-hover: #a4538a;
+  --label-text-color: #212121;
+  --text: #0a0a0a;
+  --text-hover: #000000;
+  --text-muted: #343434;
+  --arr-queue-color: #7e8e50;
+  --plex-poster-unwatched: #b38535;
+  --petio-spinner: invert(39%) sepia(7%) saturate(2024%) hue-rotate(163deg) brightness(88%) contrast(88%);
+  --gitea-color-primary-dark-4: 101, 146, 180;
+  --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
+}

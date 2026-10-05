@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Monospace Dark
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Monospace Dark (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#708fff'.
+ */
+:root {
+  --main-bg-color: #10151d;
+  --modal-bg-color: #10151d;
+  --modal-header-color: #10151d;
+  --modal-footer-color: #10151d;
+  --drop-down-menu-bg: #10151d;
+  --button-color: #708fff;
+  --button-color-hover: #25a6e9;
+  --button-text: #10151d;
+  --button-text-hover: #10151d;
+  --accent-color: 112, 143, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #25a6e9;
+  --link-color-hover: #a87ffb;
+  --label-text-color: #10151d;
+  --text: #a4afbd;
+  --text-hover: #fafbfe;
+  --text-muted: #8b98a9;
+  --arr-queue-color: #17b877;
+  --plex-poster-unwatched: #ffa23e;
+  --petio-spinner: invert(34%) sepia(93%) saturate(4006%) hue-rotate(207deg) brightness(105%) contrast(111%);
+  --gitea-color-primary-dark-4: 112, 143, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(16, 21, 29, 0.17) 0%, rgba(16, 21, 29) 100%);
+}

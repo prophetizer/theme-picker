@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Zenwritten Dark
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Zenwritten Dark (background, foreground, ANSI 0-15; panels are its selection background)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text #d5d5d5 is the palette's #bbbbbb with its lightness nudged to reach
+ * 7:1 on the panels.
+ * --text-hover #d5d5d5 is the palette's #8e8e8e with its lightness nudged to
+ * reach 7:1 on the panels.
+ * --text-muted #afaaab is the palette's #4a4546 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #76b5bd is the palette's #66a5ad with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #d498c8 is the palette's #b279a7 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#6099c0'.
+ */
+:root {
+  --main-bg-color: #191919;
+  --modal-bg-color: #404040;
+  --modal-header-color: #404040;
+  --modal-footer-color: #404040;
+  --drop-down-menu-bg: #404040;
+  --button-color: #6099c0;
+  --button-color-hover: #66a5ad;
+  --button-text: #191919;
+  --button-text-hover: #191919;
+  --accent-color: 96, 153, 192;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #76b5bd;
+  --link-color-hover: #d498c8;
+  --label-text-color: #191919;
+  --text: #d5d5d5;
+  --text-hover: #d5d5d5;
+  --text-muted: #afaaab;
+  --arr-queue-color: #819b69;
+  --plex-poster-unwatched: #b77e64;
+  --petio-spinner: invert(43%) sepia(37%) saturate(478%) hue-rotate(161deg) brightness(93%) contrast(92%);
+  --gitea-color-primary-dark-4: 96, 153, 192;
+  --overseerr-gradient: linear-gradient(180deg, rgba(25, 25, 25, 0.17) 0%, rgba(25, 25, 25) 100%);
+}

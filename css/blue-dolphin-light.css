@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Blue Dolphin (light)
+ *
+ * Generated variant: light of 'blue-dolphin', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'blue-dolphin'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#658cde'.
+ */
+:root {
+  --main-bg-color: #e3f7ff;
+  --modal-bg-color: #e3f7ff;
+  --modal-header-color: #e3f7ff;
+  --modal-footer-color: #e3f7ff;
+  --drop-down-menu-bg: #e3f7ff;
+  --button-color: #658cde;
+  --button-color-hover: #319aad;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 101, 140, 222;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #007b8d;
+  --link-color-hover: #816690;
+  --label-text-color: #11141b;
+  --text: #000101;
+  --text-hover: #000000;
+  --text-muted: #03040c;
+  --arr-queue-color: #6a9a42;
+  --plex-poster-unwatched: #a58955;
+  --petio-spinner: invert(40%) sepia(11%) saturate(2176%) hue-rotate(184deg) brightness(89%) contrast(95%);
+  --gitea-color-primary-dark-4: 101, 140, 222;
+  --overseerr-gradient: linear-gradient(180deg, rgba(227, 247, 255, 0.17) 0%, #e3f7ff 100%);
+}

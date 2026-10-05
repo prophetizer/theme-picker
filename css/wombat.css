@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Wombat
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Wombat (background, foreground, ANSI 0-15; panels are its selection background)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #a7a7a7 is the palette's #4a4a4a with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #eb7aff is the palette's #e86aff with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5da9f6'.
+ */
+:root {
+  --main-bg-color: #171717;
+  --modal-bg-color: #453b39;
+  --modal-header-color: #453b39;
+  --modal-footer-color: #453b39;
+  --drop-down-menu-bg: #453b39;
+  --button-color: #5da9f6;
+  --button-color-hover: #82fff7;
+  --button-text: #171717;
+  --button-text-hover: #171717;
+  --accent-color: 93, 169, 246;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #82fff7;
+  --link-color-hover: #eb7aff;
+  --label-text-color: #171717;
+  --text: #dedacf;
+  --text-hover: #ffffff;
+  --text-muted: #a7a7a7;
+  --arr-queue-color: #b1e969;
+  --plex-poster-unwatched: #ebd99c;
+  --petio-spinner: invert(45%) sepia(98%) saturate(481%) hue-rotate(183deg) brightness(98%) contrast(97%);
+  --gitea-color-primary-dark-4: 93, 169, 246;
+  --overseerr-gradient: linear-gradient(180deg, rgba(23, 23, 23, 0.17) 0%, rgba(23, 23, 23) 100%);
+}

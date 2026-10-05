@@ -1,0 +1,47 @@
+/*
+ * theme.park custom theme: Aardvark Blue
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Aardvark Blue (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #888888 is the palette's #525252 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #1193b5 is the palette's #008eb0 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #d64dd4 is the palette's #c43ac3 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-color #0060bd is the palette's #1370d3 with its lightness nudged
+ * to reach 4.5:1 under its label.
+ * --button-color-hover #006a85 is the palette's #008eb0 with its lightness
+ * nudged to reach 4.5:1 under its label.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#0060bd'.
+ */
+:root {
+  --main-bg-color: #102040;
+  --modal-bg-color: #102040;
+  --modal-header-color: #102040;
+  --modal-footer-color: #102040;
+  --drop-down-menu-bg: #102040;
+  --button-color: #0060bd;
+  --button-color-hover: #006a85;
+  --button-text: #dddddd;
+  --button-text-hover: #dddddd;
+  --accent-color: 0, 96, 189;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #1193b5;
+  --link-color-hover: #d64dd4;
+  --label-text-color: #dddddd;
+  --text: #dddddd;
+  --text-hover: #f7f7f7;
+  --text-muted: #888888;
+  --arr-queue-color: #4b8c0f;
+  --plex-poster-unwatched: #dbba00;
+  --petio-spinner: invert(73%) sepia(22%) saturate(6749%) hue-rotate(195deg) brightness(95%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 96, 189;
+  --overseerr-gradient: linear-gradient(180deg, rgba(16, 32, 64, 0.17) 0%, rgba(16, 32, 64) 100%);
+}

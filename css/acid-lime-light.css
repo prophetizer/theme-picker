@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Acid Lime (light)
+ *
+ * Generated variant: light of 'acid-lime', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'acid-lime'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#00a265'.
+ */
+:root {
+  --main-bg-color: #f1f5ee;
+  --modal-bg-color: #fefffe;
+  --modal-header-color: #fefffe;
+  --modal-footer-color: #fefffe;
+  --drop-down-menu-bg: #fefffe;
+  --button-color: #00a265;
+  --button-color-hover: #00a26b;
+  --button-text: #080c05;
+  --button-text-hover: #080c05;
+  --accent-color: 0, 162, 101;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #008054;
+  --link-color-hover: #417e00;
+  --label-text-color: #080c05;
+  --text: #010200;
+  --text-hover: #010200;
+  --text-muted: #2a4914;
+  --arr-queue-color: #609d00;
+  --plex-poster-unwatched: #899500;
+  --petio-spinner: invert(44%) sepia(60%) saturate(7112%) hue-rotate(137deg) brightness(95%) contrast(101%);
+  --gitea-color-primary-dark-4: 0, 162, 101;
+  --overseerr-gradient: linear-gradient(180deg, rgba(241, 245, 238, 0.17) 0%, #f1f5ee 100%);
+}

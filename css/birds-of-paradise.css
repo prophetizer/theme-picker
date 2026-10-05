@@ -1,0 +1,45 @@
+/*
+ * theme.park custom theme: Birds Of Paradise
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Birds Of Paradise (background, foreground, ANSI 0-15; panels are its selection background)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #d5a37f is the palette's #9b6c4a with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color #83b6bd is the palette's #74a6ad with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #cc9fc6 is the palette's #ac80a6 with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #221816 is the palette's #2a1f1d with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5a86ad'.
+ */
+:root {
+  --main-bg-color: #2a1f1d;
+  --modal-bg-color: #563c27;
+  --modal-header-color: #563c27;
+  --modal-footer-color: #563c27;
+  --drop-down-menu-bg: #563c27;
+  --button-color: #5a86ad;
+  --button-color-hover: #74a6ad;
+  --button-text: #221816;
+  --button-text-hover: #221816;
+  --accent-color: 90, 134, 173;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #83b6bd;
+  --link-color-hover: #cc9fc6;
+  --label-text-color: #221816;
+  --text: #e0dbb7;
+  --text-hover: #fff9d5;
+  --text-muted: #d5a37f;
+  --arr-queue-color: #6ba18a;
+  --plex-poster-unwatched: #e99d2a;
+  --petio-spinner: invert(49%) sepia(16%) saturate(1179%) hue-rotate(167deg) brightness(96%) contrast(82%);
+  --gitea-color-primary-dark-4: 90, 134, 173;
+  --overseerr-gradient: linear-gradient(180deg, rgba(42, 31, 29, 0.17) 0%, rgba(42, 31, 29) 100%);
+}

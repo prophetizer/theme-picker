@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Birds Of Paradise (light)
+ *
+ * Generated variant: light of 'birds-of-paradise', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'birds-of-paradise'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5a86ad'.
+ */
+:root {
+  --main-bg-color: #fbf1ef;
+  --modal-bg-color: #fffffe;
+  --modal-header-color: #fffffe;
+  --modal-footer-color: #fffffe;
+  --drop-down-menu-bg: #fffffe;
+  --button-color: #5a86ad;
+  --button-color-hover: #63959c;
+  --button-text: #221816;
+  --button-text-hover: #221816;
+  --accent-color: 90, 134, 173;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #46777e;
+  --link-color-hover: #8c6287;
+  --label-text-color: #221816;
+  --text: #070500;
+  --text-hover: #000000;
+  --text-muted: #361800;
+  --arr-queue-color: #629881;
+  --plex-poster-unwatched: #c37e00;
+  --petio-spinner: invert(49%) sepia(16%) saturate(1179%) hue-rotate(167deg) brightness(96%) contrast(82%);
+  --gitea-color-primary-dark-4: 90, 134, 173;
+  --overseerr-gradient: linear-gradient(180deg, rgba(251, 241, 239, 0.17) 0%, #fbf1ef 100%);
+}

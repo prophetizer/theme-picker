@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Mesa Blue
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Mesa Blue (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * No contrast adjustments were needed: every text role meets its target as
+ * published.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#b7d9f4'.
+ */
+:root {
+  --main-bg-color: #164c72;
+  --modal-bg-color: #164c72;
+  --modal-header-color: #164c72;
+  --modal-footer-color: #164c72;
+  --drop-down-menu-bg: #164c72;
+  --button-color: #b7d9f4;
+  --button-color-hover: #a6e5df;
+  --button-text: #164c72;
+  --button-text-hover: #164c72;
+  --accent-color: 183, 217, 244;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #a6e5df;
+  --link-color-hover: #ecafd4;
+  --label-text-color: #164c72;
+  --text: #fff0d7;
+  --text-hover: #fffaf0;
+  --text-muted: #e1e5e2;
+  --arr-queue-color: #9fdfad;
+  --plex-poster-unwatched: #f6d67a;
+  --petio-spinner: invert(14%) sepia(4%) saturate(3600%) hue-rotate(179deg) brightness(102%) contrast(91%);
+  --gitea-color-primary-dark-4: 183, 217, 244;
+  --overseerr-gradient: linear-gradient(180deg, rgba(22, 76, 114, 0.17) 0%, rgba(22, 76, 114) 100%);
+}

@@ -1,0 +1,48 @@
+/*
+ * theme.park custom theme: Blue Dolphin
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Blue Dolphin (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * Blue Dolphin's page is a mid teal-blue (#006984): even white reaches only
+ * about 6:1 on it, so body text targets 5.5:1 here instead of 7:1. Muted
+ * text, links and button labels keep their 4.5:1.
+ * --text #d6f6ff is the palette's #c5f2ff with its lightness nudged to reach
+ * 5.5:1 on the panels.
+ * --text-muted #d6daec is the palette's #9094a4 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #eed0ff is the palette's #e9c1ff with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ * --button-text #004659 is the palette's #006984 with its lightness nudged to
+ * reach 4.5:1 on the button colours.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#82aaff'.
+ */
+:root {
+  --main-bg-color: #006984;
+  --modal-bg-color: #006984;
+  --modal-header-color: #006984;
+  --modal-footer-color: #006984;
+  --drop-down-menu-bg: #006984;
+  --button-color: #82aaff;
+  --button-color-hover: #89ebff;
+  --button-text: #004659;
+  --button-text-hover: #004659;
+  --accent-color: 130, 170, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #89ebff;
+  --link-color-hover: #eed0ff;
+  --label-text-color: #004659;
+  --text: #d6f6ff;
+  --text-hover: #ffffff;
+  --text-muted: #d6daec;
+  --arr-queue-color: #b4e88d;
+  --plex-poster-unwatched: #f4d69f;
+  --petio-spinner: invert(44%) sepia(79%) saturate(331%) hue-rotate(187deg) brightness(100%) contrast(103%);
+  --gitea-color-primary-dark-4: 130, 170, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 105, 132, 0.17) 0%, rgba(0, 105, 132) 100%);
+}

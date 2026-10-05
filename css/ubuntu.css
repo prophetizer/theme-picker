@@ -1,0 +1,41 @@
+/*
+ * theme.park custom theme: Ubuntu
+ *
+ * Palette source: mbadolato/iTerm2-Color-Schemes ghostty/Ubuntu (background, foreground, ANSI 0-15; the scheme has one background, so panels share it)
+ * Values are the upstream palette's own hexes; roles below map them onto
+ * theme.park's variables.
+ *
+ * --text-muted #80827d is the palette's #555753 with its lightness nudged to
+ * reach 4.5:1 on the panels.
+ * --link-color-hover #9b74a1 is the palette's #75507b with its lightness
+ * nudged to reach 4.5:1 on the panels.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#3465a4'.
+ */
+:root {
+  --main-bg-color: #300a24;
+  --modal-bg-color: #300a24;
+  --modal-header-color: #300a24;
+  --modal-footer-color: #300a24;
+  --drop-down-menu-bg: #300a24;
+  --button-color: #3465a4;
+  --button-color-hover: #75507b;
+  --button-text: #eeeeec;
+  --button-text-hover: #eeeeec;
+  --accent-color: 52, 101, 164;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #06989a;
+  --link-color-hover: #9b74a1;
+  --label-text-color: #eeeeec;
+  --text: #eeeeec;
+  --text-hover: #eeeeec;
+  --text-muted: #80827d;
+  --arr-queue-color: #4e9a06;
+  --plex-poster-unwatched: #c4a000;
+  --petio-spinner: invert(63%) sepia(17%) saturate(1999%) hue-rotate(174deg) brightness(92%) contrast(88%);
+  --gitea-color-primary-dark-4: 52, 101, 164;
+  --overseerr-gradient: linear-gradient(180deg, rgba(48, 10, 36, 0.17) 0%, rgba(48, 10, 36) 100%);
+}

@@ -1,0 +1,37 @@
+/*
+ * theme.park custom theme: Mesa Blue (light)
+ *
+ * Generated variant: light of 'mesa-blue', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'mesa-blue'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7191aa'.
+ */
+:root {
+  --main-bg-color: #e9f5ff;
+  --modal-bg-color: #e9f5ff;
+  --modal-header-color: #e9f5ff;
+  --modal-footer-color: #e9f5ff;
+  --drop-down-menu-bg: #e9f5ff;
+  --button-color: #7191aa;
+  --button-color-hover: #5b9892;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 113, 145, 170;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #3c7a75;
+  --link-color-hover: #955e81;
+  --label-text-color: #11141b;
+  --text: #010000;
+  --text-hover: #000000;
+  --text-muted: #010201;
+  --arr-queue-color: #5d9a6c;
+  --plex-poster-unwatched: #a88a28;
+  --petio-spinner: invert(44%) sepia(34%) saturate(329%) hue-rotate(164deg) brightness(93%) contrast(88%);
+  --gitea-color-primary-dark-4: 113, 145, 170;
+  --overseerr-gradient: linear-gradient(180deg, rgba(233, 245, 255, 0.17) 0%, #e9f5ff 100%);
+}
