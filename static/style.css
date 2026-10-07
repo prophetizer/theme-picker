@@ -224,6 +224,11 @@
     .themes-main { padding: 6px 16px 40px; }
   }
   .stats { display: flex; gap: 40px; flex-wrap: wrap; }
+  .cap-hist { border-collapse: collapse; margin-bottom: 18px; font-size: .85rem; width: 100%; max-width: 720px; }
+  .cap-hist th, .cap-hist td { text-align: left; padding: 4px 10px 4px 0; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  .cap-hist td:nth-child(2) { width: 45%; }
+  .cap-hist .bar { display: inline-block; height: 8px; border-radius: 4px; background: var(--accent); vertical-align: middle; max-width: calc(100% - 60px); }
+  .cap-hist .bad { color: #e5534b; font-weight: 600; }
   .new-shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;
                max-height: 520px; overflow-y: auto; margin-bottom: 18px; }
   .new-shot { display: flex; flex-direction: column; gap: 4px; padding: 4px; text-align: left;
