@@ -102,6 +102,10 @@ the list:
   it leaves the grid, Surprise me and the theme of the day; "Show hidden
   themes" brings them back
 
+Here the **Winter** collection is picked, 145 of the 475 themes:
+
+![The Themes tab narrowed to the built-in Winter collection](docs/screenshots/collections.png)
+
 It also sorts the list by section, name, lightness, accent colour or date
 added. Click a tile to apply it everywhere. The ☀/☾ switch on a tile flips
 that theme between its light and dark form: the author's own where they made
@@ -149,7 +153,7 @@ stand out; here the list is unfolded, Prowlarr is pinned to Nord and Grafana
 is missing its theme. **App groups** pin several apps at once: name a group
 (say, every *arr app) and give it a theme.
 
-![Apps and coverage: six apps, five themed, one pinned, one missing its theme](docs/screenshots/apps.png)
+![Apps and coverage: an app group for the *arr apps, six apps, five themed, one pinned, one missing its theme](docs/screenshots/apps.png)
 
 *Sample apps and sample coverage results.*
 
@@ -193,11 +197,13 @@ it gets them in their own picker's editor, unsaved.
 
 Which themes spent the most time on screen and which were applied most,
 counted from changes made in the picker, and your liked and disliked themes
-with how the random picks used them.
+with how the random picks used them. Where the screenshot capture runs, Stats
+also lists the themes its last run photographed and its last 14 runs: when,
+how long, and any shots that failed.
 
 ![Usage stats: most time on screen and most applied, over three weeks](docs/screenshots/stats.png)
 
-*Sample three-week history.*
+*Sample three-week history and sample capture runs.*
 
 ## Accessibility
 
@@ -214,7 +220,10 @@ keyboard: `/` to search, arrow keys between themes, `P` for a preview,
 
 Served over HTTPS, the picker can be installed like an app: *Install* in
 Chrome or Edge's address bar, or *Add to Home Screen* on a phone. It opens in
-its own window, with the live theme's colour as its toolbar.
+its own window, with the live theme's colour as its toolbar. On a phone the
+filters fold into a drawer and tiles sit two to a row:
+
+<img src="docs/screenshots/phone.png" alt="The picker on a phone: the live theme, Surprise me and Undo at the top, two theme tiles per row" width="300">
 
 ## License
 

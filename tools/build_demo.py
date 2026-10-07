@@ -39,6 +39,20 @@ def sample_state(d, custom):
     (d / "theme-overrides.json").write_text(json.dumps({"prowlarr": "nord"}))
     (d / "theme-favourites.json").write_text(json.dumps(["tokyo-night", "everforest", "cosmic-fusion", "nord"]))
     (d / "current-theme.env").write_text(f"CURRENT_THEME={LIVE}\n")
+    (d / "theme-ratings.json").write_text(json.dumps({"everforest": 1, "nord": 1, "cosmic-fusion": 1,
+                                                        "tokyo-night": 1, "hotline": -1, "dracula": -1}))
+    (d / "theme-groups.json").write_text(json.dumps({"arr apps": ["prowlarr", "radarr", "sonarr"]}))
+    (d / "theme-collections.json").write_text(json.dumps({"Cosy": ["everforest", "gruvbox", "kanagawa",
+                                                                    "catppuccin-mocha", "rose-pine-moon"]}))
+    # Sample capture runs for the Stats tab (the demo has no screenshots of its own).
+    now, runs = datetime.now().astimezone(), []
+    for back, mins, shots, failed in ((6, 128, 1519, 0), (5, 41, 412, 2), (4, 12, 98, 0), (3, 90, 931, 0),
+                                      (2, 31, 322, 0), (1, 18, 140, 1)):
+        start = (now - timedelta(days=back)).replace(hour=4, minute=30, second=2, microsecond=0)
+        runs.append({"started": start.strftime("%Y-%m-%dT%H:%M:%S%z"),
+                     "finished": (start + timedelta(minutes=mins)).strftime("%Y-%m-%dT%H:%M:%S%z"),
+                     "shots": shots, "done": shots - failed, "failed": failed, "skipped": 0, "minutes": mins})
+    (d / "capture-history.json").write_text(json.dumps(runs))
     (d / "theme-schedule.json").write_text(json.dumps({          # shown, never run: no server
         "enabled": True, "day": "catppuccin-latte", "night": "catppuccin-mocha",
         "day_at": "07:00", "night_at": "19:30"}))
