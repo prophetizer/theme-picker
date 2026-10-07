@@ -515,3 +515,108 @@ class NoShotsBadge(ServerCase):
         self.assertNotIn("noshots", self.tile(page, shot))
         self.assertIn('class="tag noshots"', self.tile(page, other))
         self.assertIn('id="only-noshots"', page)
+
+
+def capture_module():
+    """capture_theme_screenshots, importable without Playwright or Pillow
+    (neither is in the picker's image; record_run() needs neither)."""
+    import sys, types
+    stubs = {"playwright": types.ModuleType("playwright"),
+             "playwright.sync_api": types.ModuleType("playwright.sync_api"),
+             "PIL": types.ModuleType("PIL")}
+    stubs["playwright.sync_api"].sync_playwright = None
+    stubs["PIL"].Image = None
+    with mock.patch.dict(sys.modules, stubs), mock.patch.object(config, "DOMAIN", "example.test"), \
+            mock.patch.object(config, "base_url", lambda: "https://theme-park.example.test"):
+        sys.modules.pop("capture_theme_screenshots", None)
+        import capture_theme_screenshots as cap
+    return cap
+
+
+class CaptureHistory(SandboxCase):
+    def test_history_plus_the_last_status_newest_first(self):
+        shots.HISTORY_FILE.write_text(json.dumps([
+            dict(started="2026-10-04T04:30:00-0500", finished="2026-10-04T07:00:00-0500", shots=1500, done=1500,
+                 failed=0, skipped=0, minutes=150),
+            dict(started="2026-10-05T04:30:00-0500", finished="2026-10-05T06:00:00-0500", shots=931, done=920,
+                 failed=3, skipped=8, minutes=90)]))
+        shots.STATUS_FILE.write_text(json.dumps(dict(running=False, started="2026-10-06T04:30:02-0500",
+                                                     finished="2026-10-06T05:01:16-0500", shots=322, done=322,
+                                                     failed=0, skipped=0, minutes=31)))
+        runs = shots.capture_history()
+        self.assertEqual([r["started"][:10] for r in runs], ["2026-10-06", "2026-10-05", "2026-10-04"])
+        page = render.capture_history_html()
+        self.assertIn("Capture runs", page)
+        self.assertIn("style='width:100%'", page)                       # the longest run
+        self.assertIn("<td class='bad'>3 failed, 8 skipped</td>", page)
+        self.assertIn("<td>322 of 322</td>", page)
+
+    def test_a_running_status_is_not_a_finished_run(self):
+        shots.STATUS_FILE.write_text(json.dumps(dict(running=True, started="2026-10-06T04:30:02-0500")))
+        self.assertEqual(shots.capture_history(), [])
+        self.assertEqual(render.capture_history_html(), "")
+
+    def test_the_capture_appends_and_keeps_fourteen(self):
+        cap = capture_module()
+        with mock.patch.object(cap, "HISTORY_FILE", shots.HISTORY_FILE):
+            for i in range(16):
+                cap.record_run(dict(started=f"2026-09-{i + 1:02d}T04:30:00-0500", minutes=i))
+            cap.record_run(dict(started="2026-09-16T04:30:00-0500", minutes=99))   # same run again: replaced
+        runs = json.loads(shots.HISTORY_FILE.read_text())
+        self.assertEqual(len(runs), 14)
+        self.assertEqual((runs[0]["started"][:10], runs[-1]["minutes"]), ("2026-09-03", 99))
+
+    def test_a_planted_link_is_not_followed(self):
+        cap = capture_module()
+        secret = shots.HISTORY_FILE.parent / "secret.txt"
+        secret.write_text('[{"started": "leaked"}]')
+        shots.HISTORY_FILE.symlink_to(secret)
+        with mock.patch.object(cap, "HISTORY_FILE", shots.HISTORY_FILE):
+            cap.record_run(dict(started="2026-10-06T04:30:00-0500"))
+        self.assertFalse(shots.HISTORY_FILE.is_symlink())
+        self.assertNotIn("leaked", shots.HISTORY_FILE.read_text())
+
+
+class PruneOrphans(SandboxCase):
+    def setUp(self):
+        super().setUp()
+        self.cap = capture_module()
+        self.shots, self.thumbs = shots.SHOT_DIR / "per-app", shots.SHOT_DIR / "thumbs"
+        for d in (self.shots, self.thumbs):
+            d.mkdir(parents=True, exist_ok=True)
+        for p in (mock.patch.object(self.cap, "SHOTS", self.shots), mock.patch.object(self.cap, "THUMBS", self.thumbs)):
+            p.start()
+            self.addCleanup(p.stop)
+
+    def shoot(self, theme, apps=("sonarr", "radarr")):
+        for a in apps:
+            (self.shots / f"{a}_{theme}.png").write_bytes(b"x")
+            (self.thumbs / f"{a}_{theme}.jpg").write_bytes(b"x")
+
+    def test_removes_only_themes_that_are_gone(self):
+        live = [f"t{i}" for i in range(40)]
+        for t in live[:3] + ["old-twin-dark"]:
+            self.shoot(t)
+        (self.shots / "notes.txt").write_text("kept")              # not a screenshot name
+        target = shots.SHOT_DIR / "elsewhere.png"
+        target.write_bytes(b"x")
+        (self.shots / "sonarr_linked.png").symlink_to(target)        # never touched
+        gone = self.cap.prune_orphans(live)
+        self.assertEqual(gone, ["old-twin-dark"])
+        self.assertFalse(any("old-twin-dark" in f.name for f in [*self.shots.iterdir(), *self.thumbs.iterdir()]))
+        self.assertTrue((self.shots / "sonarr_t0.png").exists())
+        self.assertTrue((self.shots / "notes.txt").exists())
+        self.assertTrue((self.shots / "sonarr_linked.png").is_symlink())
+        self.assertTrue(target.exists())
+
+    def test_a_list_that_looks_wrong_deletes_nothing(self):
+        for i in range(12):
+            self.shoot(f"real-{i}")
+        gone = self.cap.prune_orphans(["only-one"])                 # e.g. a broken manifest
+        self.assertEqual(len(gone), 12)
+        self.assertEqual(len(list(self.shots.iterdir())), 24)
+
+    def test_dry_run_only_reports(self):
+        self.shoot("old-twin-dark")
+        self.assertEqual(self.cap.prune_orphans(["x"] * 40, dry_run=True), ["old-twin-dark"])
+        self.assertEqual(len(list(self.shots.iterdir())), 2)

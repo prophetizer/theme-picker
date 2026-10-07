@@ -82,6 +82,50 @@ def current_theme():
     return backend.read_current(config.CONFIG_FILE)
 
 
+SHOT_FILE = re.compile(r"^([a-z0-9-]+)_([a-z0-9.-]+)\.(png|jpg)\Z")
+PRUNE_MAX = (10, 0.05)          # never more than this many themes, or this share of all
+
+
+def orphan_shots(themes):
+    """Screenshot files of themes that no longer exist (e.g. a generated twin
+    replaced by a real counterpart), given the FULL live theme list. Only
+    plain files named <app>_<theme>.png/.jpg; a symlink is never touched."""
+    keep = set(themes)
+    found = []
+    for d in (SHOTS, THUMBS):
+        try:
+            with os.scandir(d) as it:
+                for e in it:
+                    m = SHOT_FILE.match(e.name)
+                    if m and m.group(2) not in keep and e.is_file(follow_symlinks=False):
+                        found.append(Path(e.path))
+        except OSError:
+            pass
+    return found
+
+
+def prune_orphans(themes, dry_run=False):
+    """Delete orphan_shots(), unless so many themes would go that the list is
+    more likely wrong than the files (then only report). Returns the theme
+    names it found."""
+    files = orphan_shots(themes)
+    gone = sorted({SHOT_FILE.match(f.name).group(2) for f in files})
+    if not gone:
+        return []
+    limit = max(PRUNE_MAX[0], int(len(themes) * PRUNE_MAX[1]))
+    if dry_run or len(gone) > limit:
+        why = "dry run" if dry_run else f"more than {limit} themes -- check the theme list; nothing deleted"
+        print(f"==> {len(files)} screenshots of {len(gone)} removed themes ({why}): {' '.join(gone)}")
+        return gone
+    for f in files:
+        try:
+            f.unlink()
+        except OSError as e:
+            print(f"    (could not remove {f.name}: {e})", file=sys.stderr)
+    print(f"==> Removed {len(files)} screenshots of {len(gone)} themes that no longer exist: {' '.join(gone)}")
+    return gone
+
+
 def set_theme(name, ignore_overrides=True):
     """Switch the live theme through the picker's configured backend (the
     same one the picker uses). While capturing, per-app pins are ignored so a
@@ -157,6 +201,26 @@ def alert(title, body, priority=""):
 STATUS_FILE = config.STATE_DIR / "capture-status.json"
 
 
+HISTORY_FILE = config.STATE_DIR / "capture-history.json"
+HISTORY_KEEP = 14
+
+
+def record_run(run):
+    """Append a finished run to state_dir/capture-history.json (the last
+    HISTORY_KEEP), for the picker's Stats tab. Read without following a link:
+    the container can write that directory and this runs as the host user."""
+    try:
+        text = backend._read_state(HISTORY_FILE)
+        runs = json.loads(text) if text else []
+        if not isinstance(runs, list):
+            runs = []
+        runs = [r for r in runs if isinstance(r, dict) and r.get("started") != run["started"]]
+        runs = sorted(runs + [run], key=lambda r: str(r.get("started", "")))
+        backend._atomic_write(HISTORY_FILE, json.dumps(runs[-HISTORY_KEEP:]) + "\n")
+    except Exception as e:
+        print(f"    (capture history not written: {e})", file=sys.stderr)
+
+
 def status(**fields):
     """The run's progress for the picker (state_dir/capture-status.json): it
     shows a banner while a run cycles the live theme. Never breaks the run."""
@@ -174,6 +238,8 @@ def summarise(names, n=6):
 def main():
     themes = sys.argv[1:] or all_themes()
     force = os.environ.get("FORCE") == "1"
+    if not sys.argv[1:]:            # only against the full list, never a hand-picked few
+        prune_orphans(themes, dry_run=os.environ.get("DRY_RUN") == "1")
     todo = [(t, a) for t in themes for a in APPS if needs_shot(a, t, force)]
     print(f"==> {len(themes)} themes x {len(APPS)} apps; {len(todo)} shots to take "
           f"({len(themes) * len(APPS) - len(todo)} already exist)")
@@ -296,9 +362,11 @@ def main():
         if not jpg.exists():
             make_thumb(png, jpg)
 
-    status(running=False, started=progress["started"], finished=time.strftime("%Y-%m-%dT%H:%M:%S%z"),
-           shots=progress["shots"], done=progress["done"], failed=len(failed), skipped=len(mismatched),
-           minutes=round((time.time() - started) / 60))
+    final = dict(started=progress["started"], finished=time.strftime("%Y-%m-%dT%H:%M:%S%z"),
+                 themes=progress["themes"], shots=progress["shots"], done=progress["done"],
+                 failed=len(failed), skipped=len(mismatched), minutes=round((time.time() - started) / 60))
+    status(running=False, **final)
+    record_run(final)
     print(f"==> Done in {(time.time() - started)/60:.0f} min. "
           f"{len(list(SHOTS.glob('*.png')))} shots on disk.")
     if failed:

@@ -60,6 +60,7 @@ class SandboxCase(unittest.TestCase):
             (digest, "DIGEST_FILE", d / "theme-digest.json"),
             (collections, "COLLECTIONS_FILE", d / "theme-collections.json"),
             (shots, "STATUS_FILE", d / "capture-status.json"),
+            (shots, "HISTORY_FILE", d / "capture-history.json"),
             (monitor, "CAPTURE_ALERT_FILE", d / "capture-alert.json"),
             (state, "GROUPS_FILE", d / "theme-groups.json"),
             (state, "DATES_FILE", d / "theme-dates.json"),

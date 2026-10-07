@@ -429,7 +429,7 @@ def _dur(sec):
 
 
 def stats_html():
-    return new_shots_html() + _usage_html()
+    return new_shots_html() + capture_history_html() + _usage_html()
 
 
 def _usage_html():
@@ -466,6 +466,31 @@ def new_shots_html():
     return (f"<h3 class='tab-sub'>New screenshots</h3><p class='count'>{len(items)} "
             f"theme{'s' if len(items) != 1 else ''} photographed in {e(label)}.{more}</p>"
             f"<div class='new-shots'>{cards}</div>")
+
+
+def capture_history_html():
+    """The last runs of the capture: when, how long (with a bar), how much."""
+    runs = shots.capture_history()
+    if not runs:
+        return ""
+    e = html.escape
+    longest = max((r.get("minutes") or 0) for r in runs) or 1
+    rows = []
+    for r in runs:
+        try:
+            when = datetime.strptime(r["started"], "%Y-%m-%dT%H:%M:%S%z").strftime("%a %d %b, %H:%M")
+        except (TypeError, ValueError):
+            when = str(r.get("started", ""))
+        mins = r.get("minutes") or 0
+        bad_cls = " class='bad'" if (r.get("failed") or 0) + (r.get("skipped") or 0) else ""
+        rows.append(
+            f"<tr><td>{e(when)}</td>"
+            f"<td><span class='bar' style='width:{max(2, round(100 * mins / longest))}%'></span> {mins} min</td>"
+            f"<td>{r.get('done') or 0} of {r.get('shots') or 0}</td>"
+            f"<td{bad_cls}>{r.get('failed') or 0} failed, {r.get('skipped') or 0} skipped</td></tr>")
+    return ("<h3 class='tab-sub'>Capture runs</h3>"
+            "<table class='cap-hist'><thead><tr><th>Started</th><th>Duration</th><th>Shots</th><th>Problems</th>"
+            "</tr></thead><tbody>" + "".join(rows) + "</tbody></table>")
 
 
 def digest_html():

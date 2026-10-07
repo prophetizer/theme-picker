@@ -210,7 +210,12 @@ banner meanwhile ("theme 509 of 772, about 40 min left"), read from
 `capture-status.json`, which the capture writes to the state directory
 (`GET /api/capture` serves it). If a run stops updating for 15 minutes (the
 capture was killed, so its own end-of-run alert never comes), the picker's
-scheduled check sends one ntfy alert saying where it stopped. It photographs
+scheduled check sends one ntfy alert saying where it stopped. The Stats
+tab lists the last 14 runs (`capture-history.json`, also in the state
+directory): when, how long, how many shots, and any failures. A full run
+also deletes the screenshots of themes that no longer exist (a removed or
+renamed theme), unless so many would go that the theme list looks wrong; then
+it only reports them. `DRY_RUN=1` shows what it would remove. It photographs
 `screenshots.apps` from `picker.yml`; pick apps whose themed page shows
 without a login screen.
 

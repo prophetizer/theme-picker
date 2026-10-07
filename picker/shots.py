@@ -163,3 +163,21 @@ def new_shots(now=None):
         _NEW.update(key=key, value=value)
     return _NEW["value"], label
 
+
+# --- recent capture runs -------------------------------------------------------------
+HISTORY_FILE = config.STATE_DIR / "capture-history.json"
+
+
+def capture_history():
+    """Finished capture runs, newest first: capture-history.json (written by
+    the capture at the end of each run), plus the status file's last run if
+    the history doesn't have it yet (runs from before the history existed)."""
+    runs = state.read_json(HISTORY_FILE, [])
+    runs = [r for r in runs if isinstance(r, dict) and r.get("started")] if isinstance(runs, list) else []
+    st = state.read_json(STATUS_FILE, {})
+    if isinstance(st, dict) and st.get("finished") and not st.get("running") \
+            and st.get("started") not in {r["started"] for r in runs}:
+        runs.append({k: st.get(k) for k in ("started", "finished", "themes", "shots", "done",
+                                             "failed", "skipped", "minutes")})
+    return sorted(runs, key=lambda r: r["started"], reverse=True)
+
