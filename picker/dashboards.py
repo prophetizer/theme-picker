@@ -17,8 +17,10 @@ flattening the theme editor starts from.
 import colorsys
 
 from . import colour as c
+from . import themes
 from .editor import theme_vars
 from .metrics import theme_metrics
+from .variants import fix_contrast
 
 
 def _mix(a, b, t):
@@ -35,13 +37,34 @@ def _vars(theme):
     return {k: c.hex_rgb(h) for k, h in v.items() if h}
 
 
+def _readable_vars(theme):
+    """_vars(), made readable for Homepage and Homarr. Where the theme's text
+    or muted colour is faint on its page colour -- nearly always a gradient
+    whose first stop is a bright glow (74 of 950 themes) -- the page becomes
+    glance_background()'s readable stop, as a solid colour; and text that is
+    faint on the page or panels gets only its lightness moved. The other
+    themes are returned exactly as they were."""
+    v = dict(_vars(theme))
+    page = v["page_bg"]
+    # Only a gradient has another stop to move to; a faint solid theme keeps
+    # its page and gets its text fixed below.
+    if themes.is_gradient(theme) and (c.contrast(v["text"], page) < 4.5 or c.contrast(v["muted"], page) < 3):
+        v["page_bg"] = glance_background(theme, v)
+        v.pop("page_bg2", None)                     # Homarr's body gradient: solid instead
+    bgs = [v["page_bg"]] + ([v["panel_bg"]] if v.get("panel_bg") else [])
+    for k, need in (("text", 4.5), ("text_hover", 4.5), ("muted", 3)):
+        if v.get(k) and min(c.contrast(v[k], b) for b in bgs) < need:
+            v[k] = fix_contrast(v[k], bgs, need + 0.05) or v[k]
+    return v
+
+
 def homepage_ramp(theme):
     """Homepage's ten-step palette (--color-50 lightest ... --color-900
     darkest), built from the theme's own surfaces and text so that every
     Homepage colour -- page, cards, borders, text -- comes from the theme.
     Always ordered light to dark, which is what Homepage's light and dark
     modes both assume; a light theme simply lands at the light end."""
-    v = _vars(theme)
+    v = _readable_vars(theme)
     page, panel, text, muted = v["page_bg"], v["panel_bg"], v["text"], v["muted"]
     white, black = (255, 255, 255), (0, 0, 0)
     if theme_metrics(theme)["mode"] == "light":
@@ -76,15 +99,64 @@ def _hsl(rgb):
     return round(h * 360), round(s * 100), round(l * 100)
 
 
+def glance_background(theme, v=None):
+    """The one solid colour Glance gets for a page that may be a gradient.
+
+    Glance has a single background (--bgh/--bgs/--bgl). The first stop of a
+    gradient is often its glow -- Boreal's is a bright #4f9d69 at the bottom
+    edge, over a page that is mostly dark green -- and Glance on that was
+    unreadable. So: the stop closest to the gradient's average colour among
+    those the theme's text reads on (body 7:1, muted 4.5:1); failing that, the
+    same among the panel's stops; else the stop with the best contrast."""
+    v = v or _vars(theme)
+    pal = themes.theme_palette(theme)
+    readable = lambda x: c.contrast(x, v["text"]) >= 7 and c.contrast(x, v["muted"]) >= 4.5
+    candidates = []
+    # The page first; then the panels, which is where a vivid gradient theme
+    # (bright page, darkened panels) is built for its text to read.
+    for var, flat in (("--main-bg-color", "page_bg"), ("--modal-bg-color", "panel_bg")):
+        st = c.surface(pal.get(var, "")) or ([v[flat]] if v.get(flat) else [])
+        candidates += st
+        ok = [x for x in st if readable(x)]
+        if ok:
+            mean = tuple(sum(x[i] for x in st) / len(st) for i in range(3))
+            return min(ok, key=lambda x: sum((x[i] - mean[i]) ** 2 for i in range(3)))
+    return max(candidates or [v["page_bg"]], key=lambda x: c.contrast(x, v["text"]))
+
+
+def _subdue(muted, bg):
+    """Glance's faintest text (timestamps, captions): the muted colour faded
+    toward the background, but never under 3:1 on it."""
+    for t in (0.45, 0.35, 0.25, 0.15, 0.05, 0.0):
+        x = _mix(muted, bg, t)
+        if c.contrast(x, bg) >= 3.05:          # a margin: #rrggbb rounding loses a hair
+            return x
+    return muted
+
+
 def glance_css(theme):
-    """Glance derives every colour from a background HSL (--bgh/--bgs/--bgl)
-    and a primary colour; light themes also need its light scheme."""
+    """Glance derives its surfaces from a background HSL (--bgh/--bgs/--bgl)
+    and its text from FIXED lightnesses (58% base, 35% subdued, ...) that only
+    suit a dark page -- so the text colours are set from the theme as well,
+    or a mid-light background swallowed them. Light themes also get Glance's
+    light scheme."""
     v = _vars(theme)
-    h, s, l = _hsl(v["page_bg"])
+    bg = glance_background(theme, v)
+    h, s, l = _hsl(bg)
     ph, ps, pl = _hsl(v["link"])
     light = theme_metrics(theme)["mode"] == "light"
+    # A theme whose own text or muted colour is faint (the low-contrast
+    # badge) gets only its lightness moved, as the picker does for its own
+    # interface (app.js uiColours); every other theme's colours are kept.
+    text = fix_contrast(v["text"], [bg], 4.55) or v["text"]
+    muted = fix_contrast(v["muted"], [bg], 4.55) or v["muted"]
     lines = [f"  --bgh: {h} !important;", f"  --bgs: {s}% !important;", f"  --bgl: {l}% !important;",
-             f"  --color-primary: hsl({ph}, {ps}%, {pl}%) !important;"]
+             f"  --color-primary: hsl({ph}, {ps}%, {pl}%) !important;",
+             f"  --color-text-highlight: {c.to_hex(fix_contrast(v.get('text_hover') or text, [bg], 4.55) or text)} !important;",
+             f"  --color-text-paragraph: {c.to_hex(text)} !important;",
+             f"  --color-text-base: {c.to_hex(text)} !important;",
+             f"  --color-text-base-muted: {c.to_hex(muted)} !important;",
+             f"  --color-text-subdue: {c.to_hex(_subdue(muted, bg))} !important;"]
     if light:
         lines.append("  --scheme: 100% - !important;")          # what Glance's light: true sets
     return (f"/* Glance dressed in the theme picker's live theme: {theme} */\n"
@@ -104,7 +176,7 @@ def homarr_css(theme):
     follow the OS -- and !important, because Homarr applies each board's own
     primary colour and opacity too. The body gets the theme's page colour (its
     gradient if it has one) so the translucent tiles have something to show."""
-    v = _vars(theme)
+    v = _readable_vars(theme)
     page, panel, text, muted = v["page_bg"], v["panel_bg"], v["text"], v["muted"]
     button, hover, label, link = v["button"], v["button_hover"], v["button_text"], v["link"]
     black = (0, 0, 0)
