@@ -161,6 +161,27 @@ class Twins(Deploy):
         self.assertTrue((self.www / "css/base/sonarr/mine-light.css").exists())
         self.assertIn("mine-light", themes.variant_themes())
 
+    def test_a_high_contrast_theme_gets_a_high_contrast_twin(self):
+        from picker import metrics
+        from tests.support import fixture
+        hc = fixture("high_contrast.css")
+        self.assertTrue(metrics.css_metrics(hc)["high_contrast"])
+        self.add_custom("bright", hc)
+        twins.sync(self.custom_dir, self.www)
+        css = self.twin("bright-light")
+        self.assertIn("is HIGH CONTRAST", css)
+        m = metrics.css_metrics(css)
+        self.assertEqual((m["mode"], m["high_contrast"], m["warnings"]), ("light", True, []))
+        # An ordinary theme (muted text at about 4.6:1) keeps the ordinary
+        # targets and header.
+        plain = (":root {\n  --main-bg-color: #1e1e2e;\n  --modal-bg-color: #1e1e2e;\n"
+                 "  --button-color: #89b4fa;\n  --button-text: #1e1e2e;\n  --link-color: #89b4fa;\n"
+                 "  --text: #cdd6f4;\n  --text-muted: #7f849c;\n}\n")
+        self.assertFalse(metrics.css_metrics(plain)["high_contrast"])
+        self.add_custom("plain", plain)
+        twins.sync(self.custom_dir, self.www)
+        self.assertIn("muted and links 4.5:1", self.twin("plain-light"))
+
     def test_unchanged_source_is_not_remade_and_a_changed_one_is(self):
         self.add_custom("mine", DARK)
         deploy.deploy()

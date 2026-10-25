@@ -80,8 +80,12 @@ def render(src_name, kind, css, target, decls, new, spin, button_hex):
             f" * Do not edit by hand: it is remade whenever '{src_name}' changes.\n"
             f" * Hues and saturation come from '{src_name}'; surfaces and text have their\n"
             f" * lightness flipped, accents keep their colour and move only as far as\n"
-            f" * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).\n"
-            f" * --petio-spinner computed for '{button_hex}'.\n */\n"
+            + (f" * contrast needs: '{src_name}' is HIGH CONTRAST, so this twin keeps every\n"
+               f" * text role at 7:1 too (body, muted, links on every panel; the button label\n"
+               f" * on the button), and UI at 3:1.\n"
+               if variants.is_high_contrast(dict(variants.declarations(css)))
+               else f" * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).\n")
+            + f" * --petio-spinner computed for '{button_hex}'.\n */\n"
             ":root {\n" + "\n".join(lines) + "\n}\n")
 
 

@@ -245,10 +245,36 @@ def mode_of(decls):
     return "light" if sum(map(lum, page)) / len(page) > 0.35 else "dark"
 
 
+HC = 7.0          # WCAG AAA: a high-contrast source's twin keeps every text role here
+
+
+def is_high_contrast(d):
+    """The theme picker's high-contrast badge, on a {var: value} dict: body,
+    muted and link colours at 7:1 on every panel colour, the button label at
+    7:1 on the button. A source that has it gets a twin that keeps it."""
+    page = surface(d.get("--main-bg-color", ""))
+    panels = surface(d.get("--modal-bg-color", "")) or page
+    first = lambda var: next(iter(stops(d.get(var, ""))), (None,))[0]
+    if not panels:
+        return False
+    for var in ("--text", "--text-muted", "--link-color"):
+        c = first(var)
+        if c is None or min(contrast(c, p) for p in panels) < HC:
+            return False
+    label, buttons = first("--button-text"), surface(d.get("--button-color", ""))
+    return label is not None and bool(buttons) and min(contrast(label, b) for b in buttons) >= HC
+
+
 def build(src_name, css, target):
     """(text of the variant, new button hex) -- spinner filled in later."""
     decls = declarations(css)
     d = dict(decls)
+    hc = is_high_contrast(d)
+    # A hair over 7:1 for a high-contrast twin: #rrggbb rounding otherwise
+    # lands some roles at 6.98, and the badge wants 7 flat.
+    text_need = {v: (HC + 0.05 if hc else n) for v, n in TEXT.items()}
+    link_vars = ("--link-color", "--link-color-hover")
+    label_need = HC if hc else 4.5
     page = surface(d["--main-bg-color"])
     L0 = sum(to_oklab(c)[0] for c in page) / len(page)
 
@@ -297,14 +323,14 @@ def build(src_name, css, target):
     for var, val in decls:
         r = role(var)
         if r == "text":
-            need = TEXT.get(var, 4.5)
+            need = text_need.get(var, 4.5)
 
             def move_text(rgb, _a, need=need):
                 L = to_oklab(rgb)[0]
                 return fix_contrast(rgb, bgs, need, start_L=1 - L) or rgb
             new[var] = recolour(val, move_text)
         elif r == "accent" and not flips(var):
-            need = ACCENT.get(var, 3.0)
+            need = HC + 0.05 if (hc and var in link_vars) else ACCENT.get(var, 3.0)
             if var in BARE and TRIPLE.match(val):
                 rgb = fix_contrast(as_rgb(val), bgs, need) or as_rgb(val)
                 new[var] = ", ".join(str(int(round(x))) for x in rgb)
@@ -312,13 +338,25 @@ def build(src_name, css, target):
                 new[var] = recolour(val, lambda rgb, _a, need=need: fix_contrast(rgb, bgs, need) or rgb)
 
     button = as_rgb(new.get("--button-color", "")) or bgs[0]
+    if hc:
+        # A label can only reach 7:1 on a button that is light or dark
+        # enough: move the button's lightness (its hue kept) away from the
+        # better of the two label extremes until one does.
+        best_label = max(((255, 255, 255), (17, 20, 27)), key=lambda c: contrast(c, button))
+        if contrast(best_label, button) < HC + 0.05:
+            moved = fix_contrast(button, [best_label], HC + 0.05)
+            if moved is not None:
+                for var in ("--button-color", "--button-color-hover"):
+                    if var in new:
+                        new[var] = recolour(new[var], lambda rgb, _a: fix_contrast(rgb, [best_label], HC + 0.05) or rgb)
+                button = moved
     for var, val in decls:
         if role(var) == "label":
             def move_label(rgb, _a):
-                if contrast(rgb, button) >= 4.5:
+                if contrast(rgb, button) >= label_need:
                     return rgb
                 inv = with_lightness(rgb, 1 - to_oklab(rgb)[0])
-                if contrast(inv, button) >= 4.5:
+                if contrast(inv, button) >= label_need:
                     return inv
                 return max(((255, 255, 255), (17, 20, 27)), key=lambda c: contrast(c, button))
             new[var] = recolour(val, move_label)
@@ -342,8 +380,8 @@ def build(src_name, css, target):
     for var, _ in decls:
         if role(var) == "label":
             cur = resolve(new[var])
-            if cur is None or contrast(cur, button) < 4.5:
-                fixed = fix_contrast(cur, [button], 4.5) if cur is not None else None
+            if cur is None or contrast(cur, button) < label_need:
+                fixed = fix_contrast(cur, [button], label_need + (0.05 if hc else 0)) if cur is not None else None
                 new[var] = fmt(fixed or best(), 1.0)
     return decls, new, fmt(button, 1.0)
 
