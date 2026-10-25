@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Timber (light)
+ *
+ * Generated variant: light of 'timber', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'timber'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'timber' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ef6bef'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fff2fe 0%, #cffafa 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #fff2fe 0%, #cffafa 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #fff2fe 0%, #cffafa 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #fff2fe 0%, #cffafa 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #f8efff;
+  --button-color: #ef6bef;
+  --button-color-hover: #30b1b2;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 216, 85, 217;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5a4d5a;
+  --link-color-hover: #20595a;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #000001;
+  --arr-queue-color: #968895;
+  --plex-poster-unwatched: #009c9e;
+  --petio-spinner: invert(35%) sepia(54%) saturate(2485%) hue-rotate(262deg) brightness(96%) contrast(94%);
+  --gitea-color-primary-dark-4: 216, 85, 217;
+  --overseerr-gradient: linear-gradient(180deg, rgba(207, 250, 250, 0.17) 0%, #cffafa 100%);
+}

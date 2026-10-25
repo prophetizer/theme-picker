@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Racker (light)
+ *
+ * Generated variant: light of 'racker', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'racker'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'racker' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#889de8'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #ffefed 0%, #ffedfc 50%, #eff3ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #ffefed 0%, #ffedfc 50%, #eff3ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #ffefed 0%, #ffedfc 50%, #eff3ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #ffefed 0%, #ffedfc 50%, #eff3ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #fceeff;
+  --button-color: #889de8;
+  --button-color-hover: #eb8374;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 117, 137, 210;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4f5159;
+  --link-color-hover: #594f4e;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #898c95;
+  --plex-poster-unwatched: #d46f61;
+  --petio-spinner: invert(35%) sepia(15%) saturate(1215%) hue-rotate(190deg) brightness(93%) contrast(96%);
+  --gitea-color-primary-dark-4: 117, 137, 210;
+  --overseerr-gradient: linear-gradient(180deg, rgba(239, 243, 255, 0.17) 0%, #eff3ff 100%);
+}

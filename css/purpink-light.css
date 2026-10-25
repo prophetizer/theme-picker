@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Purpink (light)
+ *
+ * Generated variant: light of 'purpink', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'purpink'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'purpink' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#dd79ee'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #f4f2ff 0%, #fdedff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #f4f2ff 0%, #fdedff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #f4f2ff 0%, #fdedff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #f4f2ff 0%, #fdedff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #f7f0ff;
+  --button-color: #dd79ee;
+  --button-color-hover: #a893ea;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 199, 100, 216;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #594e5a;
+  --link-color-hover: #525059;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #000001;
+  --arr-queue-color: #948895;
+  --plex-poster-unwatched: #947fd4;
+  --petio-spinner: invert(16%) sepia(49%) saturate(7112%) hue-rotate(235deg) brightness(101%) contrast(87%);
+  --gitea-color-primary-dark-4: 199, 100, 216;
+  --overseerr-gradient: linear-gradient(180deg, rgba(253, 237, 255, 0.17) 0%, #fdedff 100%);
+}

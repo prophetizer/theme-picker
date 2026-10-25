@@ -5,11 +5,13 @@
  * Do not edit by hand: change the generator or the source, then regenerate.
  * Hues and saturation come from 'paperback-2'; surfaces and text have their
  * lightness flipped, accents keep their colour and move only as far as
- * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ * contrast needs: 'paperback-2' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
  *
  * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
  * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
- * --petio-spinner computed with tools/spinner_spsa.py '#6c605c'.
+ * --petio-spinner computed with tools/spinner_spsa.py '#625652'.
  */
 :root {
   --main-bg-color: #141a15;
@@ -17,21 +19,21 @@
   --modal-header-color: #141a15;
   --modal-footer-color: #141a15;
   --drop-down-menu-bg: #141a15;
-  --button-color: #6c605c;
-  --button-color-hover: #6c605c;
+  --button-color: #625652;
+  --button-color-hover: #625652;
   --button-text: #ffffff;
   --button-text-hover: #ffffff;
   --accent-color: 112, 97, 92;
   --accent-color-hover: rgb(var(--accent-color),.8);
-  --link-color: #8d7d77;
-  --link-color-hover: #8d7d77;
+  --link-color: #b1a09a;
+  --link-color-hover: #b1a09a;
   --label-text-color: #ffffff;
-  --text: #b0a099;
-  --text-hover: #b0a099;
-  --text-muted: #aa9a94;
+  --text: #b1a09a;
+  --text-hover: #b1a09a;
+  --text-muted: #b1a09a;
   --arr-queue-color: #70615c;
   --plex-poster-unwatched: #70615c;
-  --petio-spinner: invert(62%) sepia(8%) saturate(572%) hue-rotate(329deg) brightness(97%) contrast(92%);
+  --petio-spinner: invert(66%) sepia(11%) saturate(482%) hue-rotate(329deg) brightness(95%) contrast(88%);
   --gitea-color-primary-dark-4: 112, 97, 92;
   --overseerr-gradient: linear-gradient(180deg, rgba(20, 26, 21, 0.17) 0%, #141a15 100%);
 }

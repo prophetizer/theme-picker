@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Stripe (light)
+ *
+ * Generated variant: light of 'stripe', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'stripe'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'stripe' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5da6e5'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #ecf6ff 0%, #dff9ff 50%, #d2ffe3 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #ecf6ff 0%, #dff9ff 50%, #d2ffe3 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #ecf6ff 0%, #dff9ff 50%, #d2ffe3 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #ecf6ff 0%, #dff9ff 50%, #d2ffe3 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #dbfaff;
+  --button-color: #5da6e5;
+  --button-color-hover: #2eaec9;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 74, 147, 209;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4c545a;
+  --link-color-hover: #43565a;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #000001;
+  --arr-queue-color: #878f96;
+  --plex-poster-unwatched: #009bb5;
+  --petio-spinner: invert(39%) sepia(89%) saturate(526%) hue-rotate(179deg) brightness(90%) contrast(100%);
+  --gitea-color-primary-dark-4: 74, 147, 209;
+  --overseerr-gradient: linear-gradient(180deg, rgba(210, 255, 227, 0.17) 0%, #d2ffe3 100%);
+}

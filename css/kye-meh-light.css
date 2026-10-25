@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Kye Meh (light)
+ *
+ * Generated variant: light of 'kye-meh', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'kye-meh'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'kye-meh' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ad91e9'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #f7f4ff 0%, #d0fde9 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #f7f4ff 0%, #d0fde9 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #f7f4ff 0%, #d0fde9 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #f7f4ff 0%, #d0fde9 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #edf4ff;
+  --button-color: #ad91e9;
+  --button-color-hover: #2fb489;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 154, 126, 212;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #53515a;
+  --link-color-hover: #33594a;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #000001;
+  --arr-queue-color: #8e8b95;
+  --plex-poster-unwatched: #00a076;
+  --petio-spinner: invert(18%) sepia(31%) saturate(6577%) hue-rotate(207deg) brightness(96%) contrast(90%);
+  --gitea-color-primary-dark-4: 154, 126, 212;
+  --overseerr-gradient: linear-gradient(180deg, rgba(208, 253, 233, 0.17) 0%, #d0fde9 100%);
+}

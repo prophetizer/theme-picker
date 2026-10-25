@@ -5,11 +5,13 @@
  * Do not edit by hand: change the generator or the source, then regenerate.
  * Hues and saturation come from 'pokemon-sgb'; surfaces and text have their
  * lightness flipped, accents keep their colour and move only as far as
- * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ * contrast needs: 'pokemon-sgb' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
  *
  * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
  * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
- * --petio-spinner computed with tools/spinner_spsa.py '#bc7e57'.
+ * --petio-spinner computed with tools/spinner_spsa.py '#d1926a'.
  */
 :root {
   --main-bg-color: #f9f1f1;
@@ -17,21 +19,21 @@
   --modal-header-color: #f9f1f1;
   --modal-footer-color: #f9f1f1;
   --drop-down-menu-bg: #f9f1f1;
-  --button-color: #bc7e57;
-  --button-color-hover: #bc7e57;
+  --button-color: #d1926a;
+  --button-color-hover: #d1926a;
   --button-text: #181010;
   --button-text-hover: #181010;
   --accent-color: 188, 126, 87;
   --accent-color-hover: rgb(var(--accent-color),.8);
-  --link-color: #9d613a;
-  --link-color-hover: #9d613a;
+  --link-color: #7c431b;
+  --link-color-hover: #7c431b;
   --label-text-color: #181010;
   --text: #000001;
   --text-hover: #000001;
   --text-muted: #200900;
   --arr-queue-color: #bc7e57;
   --plex-poster-unwatched: #bc7e57;
-  --petio-spinner: invert(45%) sepia(57%) saturate(355%) hue-rotate(340deg) brightness(87%) contrast(93%);
+  --petio-spinner: invert(22%) sepia(7%) saturate(3286%) hue-rotate(327deg) brightness(86%) contrast(88%);
   --gitea-color-primary-dark-4: 188, 126, 87;
   --overseerr-gradient: linear-gradient(180deg, rgba(249, 241, 241, 0.17) 0%, #f9f1f1 100%);
 }

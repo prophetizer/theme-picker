@@ -5,11 +5,13 @@
  * Do not edit by hand: change the generator or the source, then regenerate.
  * Hues and saturation come from 'modus-vivendi'; surfaces and text have their
  * lightness flipped, accents keep their colour and move only as far as
- * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ * contrast needs: 'modus-vivendi' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
  *
  * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
  * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
- * --petio-spinner computed with tools/css_filter_solver.py '#007cbc'.
+ * --petio-spinner computed with tools/spinner_spsa.py '#005d8f'.
  */
 :root {
   --main-bg-color: #f3f3f3;
@@ -17,21 +19,21 @@
   --modal-header-color: #d1d1d1;
   --modal-footer-color: #d1d1d1;
   --drop-down-menu-bg: #d1d1d1;
-  --button-color: #007cbc;
-  --button-color-hover: #a85e80;
-  --button-text: #000000;
-  --button-text-hover: #000000;
+  --button-color: #005d8f;
+  --button-color-hover: #884163;
+  --button-text: #ffffff;
+  --button-text-hover: #ffffff;
   --accent-color: 0, 124, 188;
   --accent-color-hover: rgb(var(--accent-color),.8);
-  --link-color: #2e57a7;
-  --link-color-hover: #006186;
-  --label-text-color: #000000;
+  --link-color: #123986;
+  --link-color-hover: #00435d;
+  --label-text-color: #ffffff;
   --text: #000000;
   --text-hover: #000000;
   --text-muted: #333333;
   --arr-queue-color: #00890f;
   --plex-poster-unwatched: #007cbc;
-  --petio-spinner: invert(50%) sepia(99%) saturate(586%) hue-rotate(154deg) brightness(64%) contrast(167%);
+  --petio-spinner: invert(83%) sepia(73%) saturate(3581%) hue-rotate(185deg) brightness(96%) contrast(102%);
   --gitea-color-primary-dark-4: 0, 124, 188;
   --overseerr-gradient: linear-gradient(180deg, rgba(243, 243, 243, 0.17) 0%, #f3f3f3 100%);
 }

@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Under Blue Green (light)
+ *
+ * Generated variant: light of 'under-blue-green', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'under-blue-green'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'under-blue-green' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#82ae3a'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #cedef7 0%, #f9fdff 50%, #feffff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #cedef7 0%, #f9fdff 50%, #feffff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #cedef7 0%, #f9fdff 50%, #feffff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #cedef7 0%, #f9fdff 50%, #feffff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #e5fffd;
+  --button-color: #82ae3a;
+  --button-color-hover: #41b477;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 97, 138, 0;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #374b16;
+  --link-color-hover: #2c4c38;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #6f854f;
+  --plex-poster-unwatched: #009055;
+  --petio-spinner: invert(47%) sepia(87%) saturate(297%) hue-rotate(41deg) brightness(98%) contrast(96%);
+  --gitea-color-primary-dark-4: 97, 138, 0;
+  --overseerr-gradient: linear-gradient(180deg, rgba(254, 255, 253, 0.17) 0%, #fefffd 100%);
+}

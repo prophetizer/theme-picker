@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: By Design (light)
+ *
+ * Generated variant: light of 'by-design', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'by-design'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'by-design' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#eb8283'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #e6f3ff 0%, #fff2f1 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #e6f3ff 0%, #fff2f1 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #e6f3ff 0%, #fff2f1 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #e6f3ff 0%, #fff2f1 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffeef8;
+  --button-color: #eb8283;
+  --button-color-hover: #5ca6e5;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 212, 109, 111;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5a4e4e;
+  --link-color-hover: #49525a;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #958989;
+  --plex-poster-unwatched: #4791cf;
+  --petio-spinner: invert(40%) sepia(28%) saturate(798%) hue-rotate(309deg) brightness(97%) contrast(90%);
+  --gitea-color-primary-dark-4: 212, 109, 111;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 242, 241, 0.17) 0%, #fff2f1 100%);
+}

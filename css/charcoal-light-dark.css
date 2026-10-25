@@ -5,11 +5,13 @@
  * Do not edit by hand: change the generator or the source, then regenerate.
  * Hues and saturation come from 'charcoal-light'; surfaces and text have their
  * lightness flipped, accents keep their colour and move only as far as
- * contrast needs (text 7:1, muted and links 4.5:1, UI 3:1 on every panel).
+ * contrast needs: 'charcoal-light' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
  *
  * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
  * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
- * --petio-spinner computed with tools/spinner_spsa.py '#696355'.
+ * --petio-spinner computed with tools/spinner_spsa.py '#5e584a'.
  */
 :root {
   --main-bg-color: #201702;
@@ -17,21 +19,21 @@
   --modal-header-color: #2d2512;
   --modal-footer-color: #2d2512;
   --drop-down-menu-bg: #2d2512;
-  --button-color: #696355;
-  --button-color-hover: #66635a;
+  --button-color: #5e584a;
+  --button-color-hover: #5b5950;
   --button-text: #ffffff;
   --button-text-hover: #ffffff;
   --accent-color: 118, 110, 93;
   --accent-color-hover: rgb(var(--accent-color),.8);
-  --link-color: #908c80;
-  --link-color-hover: #968b75;
+  --link-color: #b5b1a5;
+  --link-color-hover: #bcb099;
   --label-text-color: #ffffff;
-  --text: #baaf98;
+  --text: #bbb099;
   --text-hover: #bfaf8e;
   --text-muted: #cdc9bd;
   --arr-queue-color: #726f64;
   --plex-poster-unwatched: #726f64;
-  --petio-spinner: invert(58%) sepia(4%) saturate(1497%) hue-rotate(4deg) brightness(91%) contrast(95%);
+  --petio-spinner: invert(68%) sepia(28%) saturate(264%) hue-rotate(4deg) brightness(95%) contrast(86%);
   --gitea-color-primary-dark-4: 118, 110, 93;
   --overseerr-gradient: linear-gradient(180deg, rgba(32, 23, 2, 0.17) 0%, #201702 100%);
 }

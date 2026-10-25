@@ -1,0 +1,56 @@
+/*
+ * theme.park custom theme: Stripe
+ *
+ * Gradient source: Ghosh/uiGradients gradients.json, 'Stripe' (#1fa2ff -> #12d8fa -> #a6ffcb), MIT.
+ * uiGradients gives only the gradient's colours, so every role below is
+ * one of them (lightness moved where noted), a black veil over them, or a
+ * near-white tinted toward them: text is not taken from anywhere else.
+ *
+ * A GRADIENT theme in the shape of theme.park's own: the gradient on the
+ * page, the same stops at -90deg on panels, and a SOLID drop-down menu.
+ * HIGH CONTRAST: every text role -- body on the page and the panels, muted,
+ * links, and the button label -- reaches WCAG AAA 7:1.
+ * Page stop #00578f is uiGradients' #1fa2ff darkened so body text reads at
+ * 7:1 on it.
+ * Page stop #005c6c is uiGradients' #12d8fa darkened so body text reads at
+ * 7:1 on it.
+ * Page stop #00603a is uiGradients' #a6ffcb darkened so body text reads at
+ * 7:1 on it.
+ * --button-color #75beff is uiGradients' #1fa2ff lightened so buttons stand
+ * out on the gradient.
+ * --button-text #00331d is the darkest stop, #00603a, darkened to read at 7:1
+ * on both buttons.
+ * --link-color #eef7ff is uiGradients' #1fa2ff with its lightness moved to
+ * read at 7:1 on every panel colour.
+ * --link-color-hover #e4faff is uiGradients' #12d8fa with its lightness moved
+ * to read at 7:1 on every panel colour.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#75beff'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #00578f 0%, #005c6c 50%, #00603a 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #00578f 0%, #005c6c 50%, #00603a 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #00578f 0%, #005c6c 50%, #00603a 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #00578f 0%, #005c6c 50%, #00603a 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #005d68;
+  --button-color: #75beff;
+  --button-color-hover: #12d8fa;
+  --button-text: #00331d;
+  --button-text-hover: #00331d;
+  --accent-color: 117, 190, 255;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #eef7ff;
+  --link-color-hover: #e4faff;
+  --label-text-color: #00331d;
+  --text: #e3faff;
+  --text-hover: #ffffff;
+  --text-muted: #e4faff;
+  --arr-queue-color: #eef7ff;
+  --plex-poster-unwatched: #12d8fa;
+  --petio-spinner: invert(35%) sepia(17%) saturate(1364%) hue-rotate(175deg) brightness(106%) contrast(102%);
+  --gitea-color-primary-dark-4: 117, 190, 255;
+  --overseerr-gradient: linear-gradient(180deg, rgba(0, 96, 58, 0.17) 0%, rgba(0, 96, 58) 100%);
+}

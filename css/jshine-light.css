@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: JShine (light)
+ *
+ * Generated variant: light of 'jshine', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'jshine'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'jshine' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#eb8281'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #d9f6ff 0%, #faf2ff 50%, #fff1f0 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #d9f6ff 0%, #faf2ff 50%, #fff1f0 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #d9f6ff 0%, #faf2ff 50%, #fff1f0 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #d9f6ff 0%, #faf2ff 50%, #fff1f0 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffedfb;
+  --button-color: #eb8281;
+  --button-color-hover: #c985ec;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 211, 109, 109;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #594e4e;
+  --link-color-hover: #554e59;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #948988;
+  --plex-poster-unwatched: #b370d5;
+  --petio-spinner: invert(11%) sepia(28%) saturate(6552%) hue-rotate(305deg) brightness(97%) contrast(90%);
+  --gitea-color-primary-dark-4: 211, 109, 109;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 241, 240, 0.17) 0%, #fff1f0 100%);
+}

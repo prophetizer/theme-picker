@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Lensod (light)
+ *
+ * Generated variant: light of 'lensod', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'lensod'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'lensod' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#9a98e8'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #f3f3ff 0%, #ffeeec 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #f3f3ff 0%, #ffeeec 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #f3f3ff 0%, #ffeeec 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #f3f3ff 0%, #ffeeec 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #fdeeff;
+  --button-color: #9a98e8;
+  --button-color-hover: #eb827d;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 134, 132, 210;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #515156;
+  --link-color-hover: #56504f;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #8b8b92;
+  --plex-poster-unwatched: #d46e69;
+  --petio-spinner: invert(35%) sepia(24%) saturate(1036%) hue-rotate(202deg) brightness(94%) contrast(92%);
+  --gitea-color-primary-dark-4: 134, 132, 210;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 238, 236, 0.17) 0%, #ffeeec 100%);
+}

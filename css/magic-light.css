@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Magic (light)
+ *
+ * Generated variant: light of 'magic', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'magic'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'magic' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#a395e9'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #d0ffd7 0%, #f7f3ff 50%, #f4f2ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #d0ffd7 0%, #f7f3ff 50%, #f4f2ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #d0ffd7 0%, #f7f3ff 50%, #f4f2ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #d0ffd7 0%, #f7f3ff 50%, #f4f2ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #f1f3ff;
+  --button-color: #a395e9;
+  --button-color-hover: #4cb467;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 144, 130, 212;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #52515a;
+  --link-color-hover: #375a3e;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #000001;
+  --arr-queue-color: #8d8c96;
+  --plex-poster-unwatched: #35a054;
+  --petio-spinner: invert(34%) sepia(67%) saturate(1808%) hue-rotate(205deg) brightness(99%) contrast(84%);
+  --gitea-color-primary-dark-4: 144, 130, 212;
+  --overseerr-gradient: linear-gradient(180deg, rgba(244, 242, 255, 0.17) 0%, #f4f2ff 100%);
+}

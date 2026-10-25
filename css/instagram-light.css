@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Instagram (light)
+ *
+ * Generated variant: light of 'instagram', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'instagram'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'instagram' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#eb8376'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #f8f1ff 0%, #fff1ee 50%, #ffeeda 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #f8f1ff 0%, #fff1ee 50%, #ffeeda 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #f8f1ff 0%, #fff1ee 50%, #ffeeda 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #f8f1ff 0%, #fff1ee 50%, #ffeeda 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffeff1;
+  --button-color: #eb8376;
+  --button-color-hover: #bf8aec;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 211, 110, 98;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #584e4d;
+  --link-color-hover: #544f58;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #948987;
+  --plex-poster-unwatched: #a974d4;
+  --petio-spinner: invert(50%) sepia(77%) saturate(658%) hue-rotate(318deg) brightness(122%) contrast(84%);
+  --gitea-color-primary-dark-4: 211, 110, 98;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 238, 218, 0.17) 0%, #ffeeda 100%);
+}

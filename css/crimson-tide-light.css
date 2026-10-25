@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Crimson Tide (light)
+ *
+ * Generated variant: light of 'crimson-tide', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'crimson-tide'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'crimson-tide' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#eb7e9d'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fae6ff 0%, #fff6f8 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #fae6ff 0%, #fff6f8 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #fae6ff 0%, #fff6f8 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #fae6ff 0%, #fff6f8 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffeef7;
+  --button-color: #eb7e9d;
+  --button-color-hover: #c78ad8;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 208, 102, 133;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #574b4e;
+  --link-color-hover: #554b57;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #928588;
+  --plex-poster-unwatched: #ae72bf;
+  --petio-spinner: invert(41%) sepia(63%) saturate(515%) hue-rotate(299deg) brightness(99%) contrast(86%);
+  --gitea-color-primary-dark-4: 208, 102, 133;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 246, 248, 0.17) 0%, #fff6f8 100%);
+}

@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Telko (light)
+ *
+ * Generated variant: light of 'telko', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'telko'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'telko' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ea8560'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fff3ee 0%, #d6ffcb 50%, #e9f5ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #fff3ee 0%, #d6ffcb 50%, #e9f5ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #fff3ee 0%, #d6ffcb 50%, #e9f5ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #fff3ee 0%, #d6ffcb 50%, #e9f5ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #f2f6e7;
+  --button-color: #ea8560;
+  --button-color-hover: #5bb442;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 213, 114, 77;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #58514d;
+  --link-color-hover: #42583d;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #948b88;
+  --plex-poster-unwatched: #47a02c;
+  --petio-spinner: invert(19%) sepia(63%) saturate(3534%) hue-rotate(318deg) brightness(97%) contrast(89%);
+  --gitea-color-primary-dark-4: 213, 114, 77;
+  --overseerr-gradient: linear-gradient(180deg, rgba(233, 245, 255, 0.17) 0%, #e9f5ff 100%);
+}

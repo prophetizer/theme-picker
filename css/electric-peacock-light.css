@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Electric Peacock (light)
+ *
+ * Generated variant: light of 'electric-peacock', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'electric-peacock'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'electric-peacock' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#7da0e7'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fcfaff 0%, #e2ecff 50%, #dbffd7 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #fcfaff 0%, #e2ecff 50%, #dbffd7 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #fcfaff 0%, #e2ecff 50%, #dbffd7 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #fcfaff 0%, #e2ecff 50%, #dbffd7 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #edf4ff;
+  --button-color: #7da0e7;
+  --button-color-hover: #b48fea;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 102, 135, 204;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #494e55;
+  --link-color-hover: #504c56;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #000001;
+  --arr-queue-color: #838890;
+  --plex-poster-unwatched: #9b76cf;
+  --petio-spinner: invert(34%) sepia(7%) saturate(2714%) hue-rotate(184deg) brightness(94%) contrast(92%);
+  --gitea-color-primary-dark-4: 102, 135, 204;
+  --overseerr-gradient: linear-gradient(180deg, rgba(236, 252, 205, 0.17) 0%, #ecfccd 100%);
+}

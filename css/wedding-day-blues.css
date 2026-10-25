@@ -1,0 +1,58 @@
+/*
+ * theme.park custom theme: Wedding Day Blues
+ *
+ * Gradient source: Ghosh/uiGradients gradients.json, 'Wedding Day Blues' (#40e0d0 -> #ff8c00 -> #ff0080), MIT.
+ * uiGradients gives only the gradient's colours, so every role below is
+ * one of them (lightness moved where noted), a black veil over them, or a
+ * near-white tinted toward them: text is not taken from anywhere else.
+ *
+ * A GRADIENT theme in the shape of theme.park's own: the gradient on the
+ * page, the same stops at -90deg on panels, and a SOLID drop-down menu.
+ * HIGH CONTRAST: every text role -- body on the page and the panels, muted,
+ * links, and the button label -- reaches WCAG AAA 7:1.
+ * Page stop #005d56 is uiGradients' #40e0d0 darkened so body text reads at
+ * 7:1 on it.
+ * Page stop #804300 is uiGradients' #ff8c00 darkened so body text reads at
+ * 7:1 on it.
+ * Page stop #a50051 is uiGradients' #ff0080 darkened so body text reads at
+ * 7:1 on it.
+ * --button-color #ff90b0 is uiGradients' #ff0080 lightened so buttons stand
+ * out on the gradient.
+ * --button-color-hover #ff9c44 is uiGradients' #ff8c00 lightened so buttons
+ * stand out on the gradient.
+ * --button-text #002c29 is the darkest stop, #005d56, darkened to read at 7:1
+ * on both buttons.
+ * --link-color #fff1f4 is uiGradients' #ff0080 with its lightness moved to
+ * read at 7:1 on every panel colour.
+ * --link-color-hover #fff3e9 is uiGradients' #ff8c00 with its lightness moved
+ * to read at 7:1 on every panel colour.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ff90b0'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #005d56 0%, #804300 50%, #a50051 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #005d56 0%, #804300 50%, #a50051 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #005d56 0%, #804300 50%, #a50051 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #005d56 0%, #804300 50%, #a50051 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #754741;
+  --button-color: #ff90b0;
+  --button-color-hover: #ff9c44;
+  --button-text: #002c29;
+  --button-text-hover: #002c29;
+  --accent-color: 255, 144, 176;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #fff1f4;
+  --link-color-hover: #fff3e9;
+  --label-text-color: #002c29;
+  --text: #fff2ee;
+  --text-hover: #ffffff;
+  --text-muted: #fff2ef;
+  --arr-queue-color: #fff1f4;
+  --plex-poster-unwatched: #ff9c44;
+  --petio-spinner: invert(17%) sepia(14%) saturate(6512%) hue-rotate(295deg) brightness(106%) contrast(101%);
+  --gitea-color-primary-dark-4: 255, 144, 176;
+  --overseerr-gradient: linear-gradient(180deg, rgba(165, 0, 81, 0.17) 0%, rgba(165, 0, 81) 100%);
+}

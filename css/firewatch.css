@@ -1,0 +1,56 @@
+/*
+ * theme.park custom theme: Firewatch
+ *
+ * Gradient source: Ghosh/uiGradients gradients.json, 'Firewatch' (#cb2d3e -> #ef473a), MIT.
+ * uiGradients gives only the gradient's colours, so every role below is
+ * one of them (lightness moved where noted), a black veil over them, or a
+ * near-white tinted toward them: text is not taken from anywhere else.
+ *
+ * A GRADIENT theme in the shape of theme.park's own: the gradient on the
+ * page, the same stops at -90deg on panels, and a SOLID drop-down menu.
+ * HIGH CONTRAST: every text role -- body on the page and the panels, muted,
+ * links, and the button label -- reaches WCAG AAA 7:1.
+ * Page stop #a90027 is uiGradients' #cb2d3e darkened so body text reads at
+ * 7:1 on it.
+ * Page stop #aa0004 is uiGradients' #ef473a darkened so body text reads at
+ * 7:1 on it.
+ * --button-color #ff9687 is uiGradients' #ef473a lightened so buttons stand
+ * out on the gradient.
+ * --button-color-hover #ff9493 is uiGradients' #cb2d3e lightened so buttons
+ * stand out on the gradient.
+ * --button-text #580001 is the darkest stop, #aa0004, darkened to read at 7:1
+ * on both buttons.
+ * --link-color #fff1ef is uiGradients' #ef473a with its lightness moved to
+ * read at 7:1 on every panel colour.
+ * --link-color-hover #fff1f0 is uiGradients' #cb2d3e with its lightness moved
+ * to read at 7:1 on every panel colour.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself, and a
+ * hex here silently kills accents across every app.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ff9687'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #a90027 0%, #aa0004 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #a90027 0%, #aa0004 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #a90027 0%, #aa0004 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #a90027 0%, #aa0004 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #a9001a;
+  --button-color: #ff9687;
+  --button-color-hover: #ff9493;
+  --button-text: #580001;
+  --button-text-hover: #580001;
+  --accent-color: 255, 150, 135;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #fff1ef;
+  --link-color-hover: #fff1f0;
+  --label-text-color: #580001;
+  --text: #fff1f0;
+  --text-hover: #ffffff;
+  --text-muted: #fff1ef;
+  --arr-queue-color: #fff1ef;
+  --plex-poster-unwatched: #ff9493;
+  --petio-spinner: invert(34%) sepia(15%) saturate(1644%) hue-rotate(317deg) brightness(106%) contrast(101%);
+  --gitea-color-primary-dark-4: 255, 150, 135;
+  --overseerr-gradient: linear-gradient(180deg, rgba(170, 0, 4, 0.17) 0%, rgba(170, 0, 4) 100%);
+}

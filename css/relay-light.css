@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Relay (light)
+ *
+ * Generated variant: light of 'relay', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'relay'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'relay' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#a694e9'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #e6e0ff 0%, #fffafa 50%, #fff9f4 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #e6e0ff 0%, #fffafa 50%, #fff9f4 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #e6e0ff 0%, #fffafa 50%, #fff9f4 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #e6e0ff 0%, #fffafa 50%, #fff9f4 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffeef2;
+  --button-color: #a694e9;
+  --button-color-hover: #eb818a;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 137, 118, 200;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4a4852;
+  --link-color-hover: #524747;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #83818c;
+  --plex-poster-unwatched: #c9636d;
+  --petio-spinner: invert(42%) sepia(80%) saturate(454%) hue-rotate(207deg) brightness(98%) contrast(87%);
+  --gitea-color-primary-dark-4: 137, 118, 200;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 249, 244, 0.17) 0%, #fff9f4 100%);
+}

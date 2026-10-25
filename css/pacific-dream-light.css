@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Pacific Dream (light)
+ *
+ * Generated variant: light of 'pacific-dream', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'pacific-dream'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'pacific-dream' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#37b57d'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #fafffc 0%, #d6edf9 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #fafffc 0%, #d6edf9 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #fafffc 0%, #d6edf9 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #fafffc 0%, #d6edf9 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #d9fcf5;
+  --button-color: #37b57d;
+  --button-color-hover: #7fa6b8;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 0, 154, 100;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #2e5440;
+  --link-color-hover: #414f54;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #678f79;
+  --plex-poster-unwatched: #668c9e;
+  --petio-spinner: invert(50%) sepia(76%) saturate(344%) hue-rotate(101deg) brightness(102%) contrast(93%);
+  --gitea-color-primary-dark-4: 0, 154, 100;
+  --overseerr-gradient: linear-gradient(180deg, rgba(214, 237, 249, 0.17) 0%, #d6edf9 100%);
+}

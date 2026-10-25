@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Bluelagoo (light)
+ *
+ * Generated variant: light of 'bluelagoo', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'bluelagoo'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'bluelagoo' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#849ee7'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #edf4ff 0%, #f0f5ff 50%, #e9f3ff 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #edf4ff 0%, #f0f5ff 50%, #e9f3ff 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #edf4ff 0%, #f0f5ff 50%, #e9f3ff 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #edf4ff 0%, #f0f5ff 50%, #e9f3ff 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #edf4ff;
+  --button-color: #849ee7;
+  --button-color-hover: #79a1e6;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 113, 138, 209;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #4e5159;
+  --link-color-hover: #4d525a;
+  --label-text-color: #11141b;
+  --text: #000001;
+  --text-hover: #000000;
+  --text-muted: #000001;
+  --arr-queue-color: #888c95;
+  --plex-poster-unwatched: #658cd0;
+  --petio-spinner: invert(24%) sepia(13%) saturate(6209%) hue-rotate(190deg) brightness(90%) contrast(102%);
+  --gitea-color-primary-dark-4: 113, 138, 209;
+  --overseerr-gradient: linear-gradient(180deg, rgba(233, 243, 255, 0.17) 0%, #e9f3ff 100%);
+}

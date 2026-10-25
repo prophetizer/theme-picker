@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Wedding Day Blues (light)
+ *
+ * Generated variant: light of 'wedding-day-blues', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'wedding-day-blues'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'wedding-day-blues' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#eb7e9f'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #cffbf5 0%, #fff0e6 50%, #fff3f5 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #cffbf5 0%, #fff0e6 50%, #fff3f5 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #cffbf5 0%, #fff0e6 50%, #fff3f5 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #cffbf5 0%, #fff0e6 50%, #fff3f5 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffefed;
+  --button-color: #eb7e9f;
+  --button-color-hover: #e9882b;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 213, 106, 139;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #5a4f51;
+  --link-color-hover: #5a5048;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #96898c;
+  --plex-poster-unwatched: #d37401;
+  --petio-spinner: invert(14%) sepia(20%) saturate(6550%) hue-rotate(294deg) brightness(94%) contrast(97%);
+  --gitea-color-primary-dark-4: 213, 106, 139;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 243, 245, 0.17) 0%, #fff3f5 100%);
+}

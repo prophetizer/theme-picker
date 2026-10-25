@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: Alihossein (light)
+ *
+ * Generated variant: light of 'alihossein', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'alihossein'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'alihossein' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#ed78be'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #f2f5c9 0%, #fff2f9 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #f2f5c9 0%, #fff2f9 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #f2f5c9 0%, #fff2f9 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #f2f5c9 0%, #fff2f9 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffeff0;
+  --button-color: #ed78be;
+  --button-color-hover: #a1a62b;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 214, 100, 169;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #594e54;
+  --link-color-hover: #525500;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #95898f;
+  --plex-poster-unwatched: #8d9200;
+  --petio-spinner: invert(37%) sepia(82%) saturate(818%) hue-rotate(287deg) brightness(99%) contrast(87%);
+  --gitea-color-primary-dark-4: 214, 100, 169;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 242, 249, 0.17) 0%, #fff2f9 100%);
+}

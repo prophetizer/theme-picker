@@ -1,0 +1,39 @@
+/*
+ * theme.park custom theme: King Yna (light)
+ *
+ * Generated variant: light of 'king-yna', this repo's theme -- by tools/make_variants.py.
+ * Do not edit by hand: change the generator or the source, then regenerate.
+ * Hues and saturation come from 'king-yna'; surfaces and text have their
+ * lightness flipped, accents keep their colour and move only as far as
+ * contrast needs: 'king-yna' is HIGH CONTRAST, so this twin keeps every
+ * text role at 7:1 too (body, muted, links on every panel; the button label
+ * on the button), and UI at 3:1.
+ *
+ * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
+ * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
+ * --petio-spinner computed with tools/spinner_spsa.py '#eb8379'.
+ */
+:root {
+  --main-bg-color: linear-gradient(135deg, #d9e4ff 0%, #fffcfb 50%, #fff9ed 100%) center center/cover no-repeat fixed;
+  --modal-bg-color: linear-gradient(-90deg, #d9e4ff 0%, #fffcfb 50%, #fff9ed 100%) center center/cover no-repeat fixed;
+  --modal-header-color: linear-gradient(-90deg, #d9e4ff 0%, #fffcfb 50%, #fff9ed 100%) center center/cover no-repeat fixed;
+  --modal-footer-color: linear-gradient(-90deg, #d9e4ff 0%, #fffcfb 50%, #fff9ed 100%) center center/cover no-repeat fixed;
+  --drop-down-menu-bg: #ffefef;
+  --button-color: #eb8379;
+  --button-color-hover: #c99836;
+  --button-text: #11141b;
+  --button-text-hover: #11141b;
+  --accent-color: 201, 101, 92;
+  --accent-color-hover: rgb(var(--accent-color),.8);
+  --link-color: #524745;
+  --link-color-hover: #524837;
+  --label-text-color: #11141b;
+  --text: #000000;
+  --text-hover: #000000;
+  --text-muted: #000000;
+  --arr-queue-color: #8c807e;
+  --plex-poster-unwatched: #aa7a00;
+  --petio-spinner: invert(43%) sepia(26%) saturate(1072%) hue-rotate(316deg) brightness(108%) contrast(84%);
+  --gitea-color-primary-dark-4: 201, 101, 92;
+  --overseerr-gradient: linear-gradient(180deg, rgba(255, 249, 237, 0.17) 0%, #fff9ed 100%);
+}

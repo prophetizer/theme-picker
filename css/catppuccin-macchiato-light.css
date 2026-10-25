@@ -9,7 +9,7 @@
  *
  * --accent-color and --gitea-color-primary-dark-4 are bare "R, G, B" on
  * purpose: theme.park's base CSS wraps them in rgb()/rgba() itself.
- * --petio-spinner computed with tools/css_filter_solver.py '#dbdfef'.
+ * --petio-spinner computed with tools/spinner_spsa.py '#dbdfef'.
  */
 :root {
   --main-bg-color: #f0f3ff;
@@ -31,7 +31,7 @@
   --text-muted: #1b2036;
   --arr-queue-color: #659655;
   --plex-poster-unwatched: #c0784f;
-  --petio-spinner: invert(100%) sepia(33%) saturate(318%) hue-rotate(252deg) brightness(81%) contrast(127%);
+  --petio-spinner: invert(9%) sepia(20%) saturate(310%) hue-rotate(192deg) brightness(95%) contrast(98%);
   --gitea-color-primary-dark-4: var(--accent-color);
   --overseerr-gradient: linear-gradient( var(--main-bg-color), var(--main-bg-color) );
 }
