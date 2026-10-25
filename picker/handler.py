@@ -13,7 +13,7 @@ from urllib.parse import parse_qs, urlsplit
 from . import apply, backend, config, dashboards, deploy, editor, hooks, monitor, ntfy, schedule, shots, state, themes
 from .coverage import cached_coverage
 from .prom import render_metrics
-from .render import STATIC, STATIC_TYPES, manifest, render_page
+from .render import STATIC, STATIC_TYPES, manifest, page_bytes, render_page
 from .summary import current_summary
 
 # The static text files, gzipped once at start.
@@ -184,7 +184,11 @@ class Handler(BaseHTTPRequestHandler):
         path = urlsplit(self.path).path
         if path in ("/", ""):
             preview = (parse_qs(urlsplit(self.path).query).get("preview") or [""])[0]
-            self._send_html(render_page(preview=preview))
+            if preview:
+                self._send_html(render_page(preview=preview))
+            else:
+                body, gz = page_bytes()
+                self._send_text(body, "text/html; charset=utf-8", gzipped=gz)
         elif path.startswith("/static/") and path[len("/static/"):] in STATIC:
             name = path[len("/static/"):]
             # The page links a content-hashed URL, so a long cache is safe.

@@ -46,7 +46,7 @@ Restart Traefik once so it downloads the plugin. From then on the picker writes
 
 ## 2. Create a data directory
 
-The picker keeps its configuration and state (current theme, history,
+The picker keeps its configuration and state (live theme, history,
 favourites, pins, schedule) in one directory. Create it with two files.
 
 **`apps.yml`**: the apps to theme.

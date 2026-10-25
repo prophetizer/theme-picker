@@ -1,8 +1,12 @@
 """The picker page: theme tiles, panels, and the template they fill."""
 
+import gzip
 import hashlib
 import json
 import html
+import os
+import threading
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime
 from pathlib import Path
@@ -599,3 +603,64 @@ def render_page(message="", preview=""):
         stats=stats_html(), schedule=schedule_html(), base_opts=base_opts, theme_opts=theme_opts_template(),
         collection_opts=collection_opts(), collections_json=collections_json(), capture_banner=capture_banner(),
         script_v=VERSION["app.js"])
+
+
+# --- the rendered page, cached ------------------------------------------------------
+# Building the page takes 1-3 s on the homelab (950 tiles, the app list read
+# from YAML several times, the custom themes listed 19 times), and it is
+# opened many times a day. So the plain page -- no message, no preview -- is
+# kept until anything it reads changes (page_key), and at most PAGE_TTL
+# seconds, for the parts that move with the clock: the schedule's "now
+# night", the new badges, time on screen in Stats.
+PAGE_TTL = 60
+_PAGE = {}
+_PAGE_LOCK = threading.Lock()
+
+
+def _stat(path):
+    try:
+        st = os.stat(path)
+        return st.st_mtime_ns, st.st_size
+    except OSError:
+        return None
+
+
+def _dir_files(d):
+    try:
+        with os.scandir(d) as it:
+            return tuple(sorted((e.name, e.stat().st_mtime_ns, e.stat().st_size)
+                                for e in it if e.is_file(follow_symlinks=False)))
+    except OSError:
+        return ()
+
+
+def page_key():
+    """Everything the page reads that can change while the picker runs."""
+    return (
+        _dir_files(config.STATE_DIR),                    # live theme, history, hidden, favourites, capture...
+        tuple(sorted(themes._custom_mtimes().items())),  # custom themes added, edited, removed
+        id(themes._MANIFEST.get("data")),                # theme.park's list, re-fetched every 10 min
+        _stat(shots.SHOT_DIR / "thumbs"), _stat(shots.SHOT_DIR / "per-app"),
+        _stat(state.DATES_FILE), _stat(state.APPS_FILE), _stat(config.CONFIG_PATH),
+        _stat(config.SETTINGS_FILE),
+        date.today(),
+    )
+
+
+def page_bytes():
+    """(html, gzipped html) of the plain page, from the cache when still good."""
+    if PAGE_TTL <= 0:
+        body = render_page().encode("utf-8")
+        return body, gzip.compress(body, compresslevel=6)
+    key, now = page_key(), time.monotonic()
+    with _PAGE_LOCK:                                     # one build at a time; the rest wait for it
+        hit = _PAGE.get("page")
+        if hit and hit[0] == key and now - hit[1] < PAGE_TTL:
+            return hit[2], hit[3]
+        body = render_page().encode("utf-8")
+        gz = gzip.compress(body, compresslevel=6)
+        # The key from BEFORE the build: a change made while it ran then
+        # shows up as a new key on the next load, not as this stale page.
+        _PAGE["page"] = (key, now, body, gz)
+        return body, gz
+

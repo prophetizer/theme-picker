@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-from picker import deploy, backend, collections, config, editor, metrics, monitor, schedule, shots, state, themes, digest
+from picker import render, deploy, backend, collections, config, editor, metrics, monitor, schedule, shots, state, themes, digest
 
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
@@ -71,6 +71,7 @@ class SandboxCase(unittest.TestCase):
             (themes, "_MANIFEST", {}), (themes, "_CSS_CACHE", {}), (themes, "_PALETTE_CACHE", {}),
             (themes, "_MTIMES", {}), (themes, "SIG_TTL", 0), (shots, "_INDEX", {}),
             (metrics, "_METRICS_CACHE", {}),
+            (render, "PAGE_TTL", 0), (render, "_PAGE", {}),     # the page cache has its own tests
             (deploy, "MANIFEST_FILE", d / "custom-deployed.json"), (deploy, "LAST", {}),
         ]:
             p = mock.patch.object(obj, name, value)

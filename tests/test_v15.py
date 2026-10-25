@@ -620,3 +620,53 @@ class PruneOrphans(SandboxCase):
         self.shoot("old-twin-dark")
         self.assertEqual(self.cap.prune_orphans(["x"] * 40, dry_run=True), ["old-twin-dark"])
         self.assertEqual(len(list(self.shots.iterdir())), 2)
+
+
+class PageCache(ServerCase):
+    def setUp(self):
+        super().setUp()
+        d = state.HIDDEN_FILE.parent
+        for p in (mock.patch.object(render, "PAGE_TTL", 60), mock.patch.object(config, "STATE_DIR", d)):
+            p.start()
+            self.addCleanup(p.stop)
+        self.builds = 0
+        real = render.render_page
+
+        def counting(*a, **k):
+            self.builds += 1
+            return real(*a, **k)
+        from picker import handler
+        for mod in (render, handler):                          # the handler imports it by name
+            p = mock.patch.object(mod, "render_page", counting)
+            p.start()
+            self.addCleanup(p.stop)
+
+    def test_kept_until_something_changes(self):
+        a = render.page_bytes()
+        self.assertIs(render.page_bytes()[0], a[0])           # same bytes object: no rebuild
+        self.assertEqual(self.builds, 1)
+        state.HIDDEN_FILE.write_text('["nord"]')               # a state file changed
+        render.page_bytes()
+        self.assertEqual(self.builds, 2)
+        config.CONFIG_FILE.write_text("CURRENT_THEME=dracula\n")   # the live theme (in the state dir here)
+        render.page_bytes()
+        self.assertEqual(self.builds, 3)
+
+    def test_custom_theme_and_screenshots_and_clock(self):
+        render.page_bytes()
+        self.add_custom("newtheme", ":root { --main-bg-color: #101010; --text: #eeeeee; }\n")
+        render.page_bytes()
+        self.assertEqual(self.builds, 2)
+        (shots.SHOT_DIR / "thumbs").mkdir(parents=True, exist_ok=True)
+        render.page_bytes()
+        self.assertEqual(self.builds, 3)
+        with mock.patch.object(render.time, "monotonic", return_value=render.time.monotonic() + 61):
+            render.page_bytes()                                # past PAGE_TTL
+        self.assertEqual(self.builds, 4)
+
+    def test_the_route_serves_it_and_previews_bypass_it(self):
+        self.request("GET", "/")
+        self.request("GET", "/")
+        self.assertEqual(self.builds, 1)
+        self.request("GET", "/?preview=nord")
+        self.assertEqual(self.builds, 2)                       # a preview is built fresh
